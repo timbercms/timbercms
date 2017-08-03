@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+    <fields type="sql" query="SELECT id, title FROM #__articles_categories WHERE published = '1' ORDER BY title ASC" key="id" keyvalue="title" name="category_id" label="Show Items from category" />
+</settings>

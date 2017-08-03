@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+    <fields type="hidden" name="id" />
+    <fields type="text" length="255" name="title" label="Title" />
+    <fields type="text" length="255" name="alias" label="Alias" />
+    <fields type="textarea" editor="true" name="description" label="Description" />
+    <fields type="select" name="published" label="Published" values="No|0,Yes|1" default="1" />
+</settings>

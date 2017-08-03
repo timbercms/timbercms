@@ -1,0 +1,12 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} test\.com$ [NC]
+RewriteRule ^ http://www.test.com%{REQUEST_URI}  [R=301,L,NE]
+ 
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+ 
+RewriteRule ^.*$ ./index.php
+
+RedirectMatch 404 ^404.php

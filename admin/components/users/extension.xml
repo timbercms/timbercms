@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+    <items value="users" label="Users" icon="users" />
+    <items value="usergroups" label="Usergroups" icon="users" />
+</settings>

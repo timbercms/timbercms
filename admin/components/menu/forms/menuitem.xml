@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+    <fields type="hidden" name="id" />
+    <fields type="text" length="255" name="title" label="Title" />
+    <fields type="text" length="255" name="alias" label="Alias" />
+    <fields type="select" name="published" label="Published" values="No|0,Yes|1" default="1" />
+    <fields type="sql" query="SELECT internal_name, title FROM #__components WHERE is_frontend = '1' ORDER BY title ASC" key="internal_name" keyvalue="title" name="component" label="Component" />
+    <fields type="select" name="is_home" label="Is Home?" values="No|0,Yes|1" default="0" />
+</settings>

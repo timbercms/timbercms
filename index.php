@@ -1,20 +1,14 @@
 <?php
 
-    #=======================================================================================
-    # * Bulletin. CMS
-    # --------------------------------------------------------------------------------------
-    # * GNU General Public License (GPL) (https://opensource.org/licenses/GPL-3.0)
-    # * https://www.github.com/Smith0r
-    #=======================================================================================
-
-?>
-<?php
-
+    session_start();
     ini_set("display_errors", "1");
-    error_reporting(E_ERROR | E_WARNING | E_PARSE);
-    require_once(__DIR__ ."/classes/core.php");
-
+    error_reporting(E_ALL & ~E_NOTICE);
+    ob_start();
+    require_once("core/classes/core.php");
     $core = new Core();
-    $core->database->close();
+    $page = ob_get_contents();
+    ob_clean();
+    $page = $core->finalise($page);
+    ob_end_flush();
 
 ?>

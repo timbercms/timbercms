@@ -1,0 +1,124 @@
+:root {
+    --burgundy-hover: #8C001A;
+    --purple: #231123;
+    --grey: #2A2D34;
+    --dark-grey: #3E4348;
+    --light-grey: #2A2A2A;
+    --off-white: #CEC9C7;
+    
+    --light-burgundy: #DF405A;
+    --burgundy: #87314E;
+    --darker-burgundy: #512645;
+    --even-darker-burgundy: #311E3E;
+}
+body {
+    background: url('../images/pattern.png'); /* https://subtlepatterns.com/ */
+    color: #333;
+    font-family: 'Open Sans', 'Arial', sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+    margin: 0px;
+    padding: 0px;
+}
+a {
+    color: var(--burgundy);
+    text-decoration: underline;
+}
+a:hover {
+    color: var(--light-burgundy);   
+}
+.body-container {
+    background: #FFF;
+    width: 75vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10vh;
+    min-height: 85vh;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    0px 0px 10px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         0px 0px 10px 0px rgba(50, 50, 50, 0.75);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    overflow: hidden;
+}
+.footer-container {
+    background: var(--dark-grey);
+    color: #FFF;
+    min-height: 15vh;
+}
+.footer-content {
+    width: 75vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+.header-container {
+    background: var(--darker-burgundy);
+    color: #FFF;
+}
+.header-content {
+    padding: 10px; 
+}
+.header-content a {
+    color: #FFF;   
+}
+.body-content {
+    padding: 20px;   
+}
+pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;  
+}
+.burgundy-button {
+    border: 1px solid var(--burgundy);
+    padding: 10px 20px;
+    text-decoration: none;
+    background: #FFF;
+    display: inline-block;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    cursor: pointer;
+}
+.burgundy-button:hover {
+    background: var(--light-burgundy);
+    border-color: var(--light-burgundy);
+    color: #FFF;
+    transition: background .25s, color .25s;
+    -moz-transition: background .25s, color .25s;
+    -webkit-transition: background .25s, color .25s;
+}
+input[type="text"],input[type="password"], input[type="email"] {
+    border: 1px solid var(--burgundy);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+.header-login {
+    text-align: right;   
+}
+.system-message {
+    background: #FFF;
+    padding: 20px;
+    border-radius: 3px;
+    color: #333;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    margin-bottom: 20px;
+}
+.system-message.success {
+     background: #b2f2bb;  
+}
+.system-message.danger {
+    background: #ffc9c9;   
+}
+.system-message.warning {
+    background: #ffec99;   
+}
+.system-message.info {
+    background: #a3daff;   
+}
