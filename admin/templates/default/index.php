@@ -73,5 +73,12 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                setTimeout(function() {
+                    $(".sidebar").css("height", $(document).height() + "px");
+                }, 400);
+            });
+        </script>
     </body>
 </html>
