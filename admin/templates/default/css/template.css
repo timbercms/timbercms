@@ -11,6 +11,12 @@
     --darker-burgundy: #512645;
     --even-darker-burgundy: #311E3E;
 }
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 body {
     color: #333;
     font-family: 'Open Sans', 'Arial', sans-serif;
