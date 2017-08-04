@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 04, 2017 at 03:35 PM
+-- Generation Time: Aug 04, 2017 at 04:03 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.6
 
@@ -103,15 +103,17 @@ CREATE TABLE `bgdy_components` (
   `is_locked` int(11) DEFAULT '0',
   `author_name` varchar(500) DEFAULT NULL,
   `author_url` varchar(2000) DEFAULT NULL,
-  `version` int(11) DEFAULT NULL
+  `version` varchar(255) DEFAULT '1.0.0',
+  `params` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `bgdy_components`
 --
 
-INSERT INTO `bgdy_components` (`id`, `title`, `description`, `internal_name`, `is_frontend`, `is_backend`, `is_locked`, `author_name`, `author_url`, `version`) VALUES
-(3, 'Content', NULL, 'content', 1, 0, 0, '', '', 0);
+INSERT INTO `bgdy_components` (`id`, `title`, `description`, `internal_name`, `is_frontend`, `is_backend`, `is_locked`, `author_name`, `author_url`, `version`, `params`) VALUES
+(3, 'Content', 'Article category, and detail view. Includes comments.', 'content', 1, 1, 1, 'Chris Smith', 'https://github.com/Smith0r', '1.0.0-alpha', NULL),
+(4, 'User', 'Provides functions for account management, and profile views.', 'user', 1, 1, 1, 'Chris Smith', 'https://github.com/Smith0r', '1.0.0-alpha', NULL);
 
 -- --------------------------------------------------------
 
@@ -129,8 +131,16 @@ CREATE TABLE `bgdy_components_modules` (
   `is_locked` int(11) DEFAULT '0',
   `author_name` varchar(500) DEFAULT NULL,
   `author_url` varchar(2000) DEFAULT NULL,
-  `version` int(11) DEFAULT NULL
+  `version` varchar(255) DEFAULT '1.0.0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bgdy_components_modules`
+--
+
+INSERT INTO `bgdy_components_modules` (`id`, `title`, `description`, `internal_name`, `is_frontend`, `is_backend`, `is_locked`, `author_name`, `author_url`, `version`) VALUES
+(1, 'Latest News', 'Show the latest news in a list.', 'latestnews', 1, 0, 1, 'Chris Smith', 'https://github.com/Smith0r', '1.0.0-alpha'),
+(2, 'Menu', 'Show menu items in a menu format', 'menu', 1, 0, 1, 'Chris Smith', 'https://github.com/Smith0r', '1.0.0-alpha');
 
 -- --------------------------------------------------------
 
@@ -191,8 +201,16 @@ CREATE TABLE `bgdy_modules` (
   `published` int(11) DEFAULT NULL,
   `position` varchar(255) DEFAULT NULL,
   `params` varchar(10000) DEFAULT NULL,
-  `ordering` int(11) DEFAULT NULL
+  `pages` varchar(255) DEFAULT NULL,
+  `ordering` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bgdy_modules`
+--
+
+INSERT INTO `bgdy_modules` (`id`, `title`, `type`, `show_title`, `published`, `position`, `params`, `pages`, `ordering`) VALUES
+(1, 'Latest News', 'latestnews', 1, 1, 'sidebar', 'a:1:{s:11:"category_id";s:1:"2";}', '6', 0);
 
 -- --------------------------------------------------------
 
@@ -212,7 +230,7 @@ CREATE TABLE `bgdy_sessions` (
 --
 
 INSERT INTO `bgdy_sessions` (`id`, `php_session_id`, `user_id`, `last_action_time`) VALUES
-(1, 'q28r0ia3lp2lvnm16e9653r043', 5, 1501843899);
+(1, 'q28r0ia3lp2lvnm16e9653r043', 5, 1501855367);
 
 -- --------------------------------------------------------
 
@@ -374,12 +392,12 @@ ALTER TABLE `bgdy_articles_comments`
 -- AUTO_INCREMENT for table `bgdy_components`
 --
 ALTER TABLE `bgdy_components`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `bgdy_components_modules`
 --
 ALTER TABLE `bgdy_components_modules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `bgdy_menus`
 --
@@ -394,7 +412,7 @@ ALTER TABLE `bgdy_menus_items`
 -- AUTO_INCREMENT for table `bgdy_modules`
 --
 ALTER TABLE `bgdy_modules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `bgdy_sessions`
 --
