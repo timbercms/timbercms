@@ -52,13 +52,12 @@
                         $value = $field->attributes()->default;
                     }
                 }
-                $string .= '<div class="frame"';
+                $string .= '<div class="form-group"';
                 if ($type == "hidden") {
                     $string .= 'style="display: none;"';
                 }
                 $string .= '>';
-                $string .= '<div class="frame-2">'.$field->attributes()->label.'</div>';
-                $string .= '<div class="frame-10">';
+                $string .= '<label>'.$field->attributes()->label.'</label>';
                 if ($type != "textarea" && $type != "select" && $type != "sql" && $type != "template_position" && $type != "file") {
                     $string .= '<input type="'.$type.'" name="'.$field_name.'" class="form-control';
                     if (strlen($field->attributes()->class) > 0)
@@ -188,7 +187,6 @@
                     }
                     $string .= '">'.$value.'</textarea>';
                 }
-                $string .= '</div>';
                 $string .= '</div>';
             }
             if ($display_submit)
