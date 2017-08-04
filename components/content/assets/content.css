@@ -47,6 +47,7 @@
     border-bottom: 1px solid #DDD;
     padding-bottom: 20px;
     margin-bottom: 20px;
+    padding-top: 20px
 }
 .article-content p:last-of-type {
     margin-bottom: 0px;
