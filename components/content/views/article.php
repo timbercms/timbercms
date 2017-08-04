@@ -4,11 +4,11 @@
         <header>
             <div class="article-image" style="background-image: url('https://unsplash.it/1400/300?random');">
             </div>
-            <div class="frame article-header">
-                <div class="frame-2 article-avatar-container">
+            <div class="row article-header">
+                <div class="col-md-2 article-avatar-container">
                     <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($this->model->author->email))); ?>?s=100" class="article-avatar" />
                 </div>
-                <div class="frame-10">
+                <div class="col-md-10">
                     <h1 class="article-title"><?php echo $this->model->title; ?></h1>
                     <p class="article-publish-date">
                         Lovingly written by <?php echo $this->model->author->username; ?> on the <time pubdate><?php echo date("jS F Y", $this->model->publish_time); ?></time>
@@ -32,13 +32,13 @@
         <h3 class="comments-header"><?php echo count($this->model->comments); ?> <?php echo (count($this->model->comments) > 1 ? "people have" : "person has"); ?> shared their thoughts</h3>
         <section class="comments-container">
             <?php foreach ($this->model->comments as $comment) { ?>
-                <div class="comment frame">
-                    <div class="frame-2">
+                <div class="comment row">
+                    <div class="col-md-2">
                         <div class="article-comment-avatar-container">
                             <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($comment->author->email))); ?>" class="comment-avatar" />
                         </div>
                     </div>
-                    <div class="frame-10">
+                    <div class="col-md-10">
                         <div class="article-comment-info-container">
                             <header class="comment-information">
                                 <h3><time pubdate><?php echo date("jS F Y", $comment->post_time); ?></time><?php echo $comment->author->username; ?> said:</h3>

@@ -19,19 +19,20 @@ body {
     margin: 0px;
     padding: 0px;
     background-image: url('../images/pattern.png');
+    overflow-x: hidden;
 }
 a {
-    color: var(--burgundy);
+    color: #858598;
     text-decoration: underline;
 }
 a:hover {
-    color: var(--light-burgundy);   
+    color: #C9C7EF;  
 }
 .button {
     color: #FFF !important;
-    background: var(--burgundy);
+    background: #F44336;
     padding: 10px 20px;
-    text-decoration: none;
+    text-decoration: none !important;
     display: inline-block;
     border: none;
     border-radius: 3px;
@@ -39,7 +40,7 @@ a:hover {
 }
 input[type="text"] {
     min-width: 230px;
-    border: 1px solid var(--burgundy);
+    border: 1px solid var(--dark-grey);
     border-radius: 3px;
 }
 input, select {
@@ -49,7 +50,7 @@ input, select {
     float: right;   
 }
 .sidebar {
-    background: var(--darker-burgundy);
+    background: #272634;
     height: 100vh;
     color: #FFF;
 }
@@ -59,10 +60,8 @@ input, select {
     font-weight: 700;
     text-align: center;
     padding: 20px;
-    border-bottom: 2px solid var(--burgundy);
-}
-.menu-header i {
-    color: var(--light-burgundy);   
+    background: #1E1E29;
+    border-bottom: 1px solid #C9C7EF;
 }
 .menu-header a {
     color: #FFF;
@@ -86,14 +85,23 @@ input, select {
     margin: 0px;
 }
 .menu-container a {
-    color: #FFF;
+    color: #858598;
     text-decoration: none;
     display: block;
-    padding: 20px;
-    transition: background .25s, color .25s;
+    padding: 10px;
+    transition: color .25s;
+    font-size: 14px;
+    line-height: 14px;
+}
+.menu-container a i {
+    padding: 10px;
+    background: #1E1E29;
+    display: inline-block;
+    margin-right: 10px;
+    border-radius: 5px;
 }
 .menu-container a:hover {
-    background: var(--burgundy);   
+    color: #C9C7EF;
 }
 .action-bar {
     border-top: 1px solid #DDD;
@@ -118,7 +126,7 @@ table {
 }
 table th {
     text-align: left;
-    background: var(--darker-burgundy);
+    background: #272634;
     color: #FFF;
     padding: 10px;
 }
@@ -150,7 +158,7 @@ form > .frame input[type="text"] {
 }
 form > .frame select {
     width: 100%;
-    border: 1px solid var(--burgundy);
+    border: 1px solid var(--dark-grey);
     padding: 5px;
     cursor: pointer;
     border-radius: 3px;

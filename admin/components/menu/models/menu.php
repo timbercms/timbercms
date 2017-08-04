@@ -29,10 +29,13 @@
             $this->id = $temp->id;
             $this->title = $temp->title;
             $ti = $this->database->loadObject("SELECT id FROM #__menus_items WHERE id = ?", array($id));
-            foreach ($ti as $i)
+            if (is_array($ti))
             {
-                $item = new MenuitemModel($i->id, $this->database);
-                $this->items[] = $item;
+                foreach ($ti as $i)
+                {
+                    $item = new MenuitemModel($i->id, $this->database);
+                    $this->items[] = $item;
+                }
             }
         }
         

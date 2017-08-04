@@ -5,7 +5,6 @@
     require_once(__DIR__ ."/../../admin/components/menu/models/menu.php");
     require_once(__DIR__ ."/../../admin/components/menu/models/menuitem.php");
     require_once(__DIR__ ."/../../admin/components/modules/models/module.php");
-    define("BASE_URL", "http://localhost/burgundy-cms/");
 
     class Core
     {
@@ -211,10 +210,10 @@
             $string = $_SERVER["REQUEST_URI"];
             if (!preg_match('/=/', $string))
             {
-                $string = str_replace("/burgundy-cms", "", $string); // Remove after putting live
+                $string = str_replace("/bulletin", "", $string); // Remove after putting live
                 $parts = explode("/", $string);
                 $alias = end($parts);
-                if (strlen($alias) > 0)
+                if (strlen($alias) > 0 && $alias != "index.php")
                 {
                     return $alias;
                 }

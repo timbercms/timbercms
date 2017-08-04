@@ -6,9 +6,9 @@
         </div>
     </div>
     <div class="category-articles">
-        <div class="frame">
+        <div class="row">
             <?php foreach ($this->model->articles as $article) { ?>
-                <div class="frame-4">
+                <div class="col-md-4">
                     <div class="category-article">
                         <div class="category-article-image" style="background-image: url('https://unsplash.it/416/150?random');"></div>
                         <div class="category-time">
