@@ -13,6 +13,7 @@
         public $id;
         public $title;
         public $type;
+        public $show_title;
         public $published;
         public $position;
         public $ordering;
@@ -35,6 +36,7 @@
             $this->id = $temp->id;
             $this->title = $temp->title;
             $this->type = $temp->type;
+            $this->show_title = $temp->show_title;
             $this->published = $temp->published;
             $this->position = $temp->position;
             $this->ordering = $temp->ordering;
@@ -52,6 +54,7 @@
 			$data[] = array("name" => "id", "value" => $this->id);
 			$data[] = array("name" => "title", "value" => $this->title);
             $data[] = array("name" => "type", "value" => $this->type);
+            $data[] = array("name" => "show_title", "value" => $this->show_title);
             $data[] = array("name" => "published", "value" => $this->published);
             $data[] = array("name" => "position", "value" => $this->position);
             $data[] = array("name" => "ordering", "value" => $this->ordering);

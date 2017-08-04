@@ -22,6 +22,7 @@
         private $model;
         public $content_id;
         public static $content_item_id;
+        public static $menu_item_id;
         
         public function __construct()
         {
@@ -74,9 +75,11 @@
             else
             {
                 $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
+                self::$menu_item_id = $item->id;
                 if ($item->id <= 0 && strlen($_GET["component"]) == 0)
                 {
                     $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
+                    self::$menu_item_id = $item->id;
                 }
                 elseif (strlen($_GET["component"]) > 0)
                 {
@@ -243,6 +246,11 @@
         public static function content_item_id()
         {
             return self::$content_item_id;
+        }
+        
+        public static function menu_item_id()
+        {
+            return self::$menu_item_id;
         }
         
         public function cleanSessions()

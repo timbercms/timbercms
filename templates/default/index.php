@@ -48,8 +48,14 @@
                     <?php $this->displaySystemMessages(); ?>
                 </div>
                 <div class="component">
-                    <?php $this->template->displayModules("sidebar"); ?>
-                    <?php $this->view->output(); ?>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <?php $this->view->output(); ?>
+                        </div>
+                        <div class="col-md-4">
+                            <?php $this->template->displayModules("sidebar"); ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

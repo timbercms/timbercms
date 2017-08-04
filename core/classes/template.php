@@ -25,7 +25,7 @@
         {
             if (strlen($position) > 0)
             {
-                $modules = $this->database->loadObjectList("SELECT id FROM #__modules WHERE published = '1' AND position = ? AND (pages = '0' OR find_in_set(?, pages)) ORDER BY ordering ASC", array($position, Core::content_item_id()));
+                $modules = $this->database->loadObjectList("SELECT id FROM #__modules WHERE published = '1' AND position = ? AND (pages = '0' OR find_in_set(?, pages)) ORDER BY ordering ASC", array($position, Core::menu_item_id()));
                 foreach ($modules as $mod)
                 {
                     $module = new ModuleModel($mod->id, $this->database);
