@@ -6,15 +6,17 @@
         </div>
     </div>
     <div class="category-articles">
-        <div class="row">
-            <?php foreach ($this->model->articles as $article) { ?>
-                <div class="col-md-4">
-                    <div class="category-article">
+        <?php foreach ($this->model->articles as $article) { ?>
+            <div class="category-article">
+                <div class="row">
+                    <div class="col-md-4">
                         <div class="category-article-image" style="background-image: url('https://unsplash.it/416/150?random');"></div>
+                    </div>
+                    <div class="col-md-8">
+                        <h3 class="category-article-title"><a href="<?php echo Core::route($article->category->alias."/".$article->alias); ?>"><?php echo $article->title; ?></a></h3>
                         <div class="category-time">
                             <i class="fa fa-clock-o"></i> <?php echo $this->model->relativeTime($article->publish_time); ?>
                         </div>
-                        <h3 class="category-article-title"><?php echo $article->title; ?></h3>
                         <div class="category-article-description">
                             <?php echo substr(strip_tags($article->content), 0, 200); ?><?php echo (strlen($article->content) > 200 ? "..." : ""); ?>
                         </div>
@@ -22,12 +24,12 @@
                             <a href="<?php echo Core::route($article->category->alias."/".$article->alias); ?>" class="burgundy-button">Read More <i class="fa fa-chevron-right"></i></a>
                         </div>
                         <div class="category-article-information">
-                            <i class="fa fa-comments"></i> <?php echo $article->comment_count; ?> <?php echo ($article->comment_count > 1 ? "Comments" : "Comment"); ?>
+                            <i class="fa fa-comments"></i> <?php echo $article->comment_count; ?> <?php echo ($article->comment_count > 1 || $article->comment_count == 0 ? "Comments" : "Comment"); ?>
                         </div>
                     </div>
                 </div>
-            <?php } ?>
-        </div>
+            </div>
+        <?php } ?>
     </div>
 <?php } else { ?>
     Category not found
