@@ -69,7 +69,7 @@
                     </div>
                     <?php $this->view->output(); ?>
                     <div class="card centre-text">
-                        Bulletin. <strong>v<?php echo $version->numerical; ?></strong> '<?php echo $version->name; ?>' - Copyright <?php echo date("Y", time()); ?> Chris Smith (<a href="mailto:smith0r54@gmail.com" target="_blank">smith0r54@gmail.com</a>)
+                        Bulletin. <strong>v<?php echo $version->numerical; ?></strong> '<?php echo $version->name; ?>'
                     </div>
                 </div>
             </div>
