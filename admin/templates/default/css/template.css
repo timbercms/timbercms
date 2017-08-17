@@ -29,7 +29,7 @@ body {
 }
 a {
     color: #858598;
-    text-decoration: underline;
+    text-decoration: none;
 }
 a:hover {
     color: #658598;  
@@ -174,4 +174,10 @@ form label {
 .version-label {
     position: relative;
     top: -2px;
+}
+.new-version-notes {
+    border: 1px solid #DDD;
+    border-radius: 3px;
+    padding: 20px;
+    margin-bottom: 40px;
 }

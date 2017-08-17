@@ -5,6 +5,7 @@
     <packageURL>https://github.com/Smith0r/bulletin/archive/master.zip</packageURL>
     <new>
         <![CDATA[
+            <h4>Version 0.1.0 Changelog</h4>
             <ul>
                 <li>Inital release.</li>
             </ul>
