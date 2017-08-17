@@ -2,6 +2,7 @@
 
     $dirs = scandir(__DIR__ ."/../../components");
     unset($dirs["0"], $dirs["1"]);
+    $version = simplexml_load_file(__DIR__ ."/../../version.xml");
 
 ?>
 <!DOCTYPE html>
@@ -68,7 +69,7 @@
                     </div>
                     <?php $this->view->output(); ?>
                     <div class="card centre-text">
-                        Bulletin. <strong>v0.0.1</strong> - Copyright <?php echo date("Y", time()); ?> Chris Smith (<a href="mailto:smith0r54@gmail.com" target="_blank">smith0r54@gmail.com</a>)
+                        Bulletin. <strong>v<?php echo $version->numerical; ?></strong> '<?php echo $version->name; ?>' - Copyright <?php echo date("Y", time()); ?> Chris Smith (<a href="mailto:smith0r54@gmail.com" target="_blank">smith0r54@gmail.com</a>)
                     </div>
                 </div>
             </div>
