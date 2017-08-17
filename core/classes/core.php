@@ -15,7 +15,7 @@
         public static $user;
         public static $stylesheets = array();
         public static $db;
-        public static $title = "Burgundy CMS";
+        public static $title = "Bulletin CMS";
         public static $description = '<meta name="description" content="Burgundy CMS">';
         private $component;
         private $controller;

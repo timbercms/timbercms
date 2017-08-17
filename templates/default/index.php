@@ -24,36 +24,38 @@
         <!-- HEADER_STYLES -->
     </head>
     <body>
-        <div class="body-container">
-            <div class="header-container">
-                <div class="header-content">
-                    <div class="row">
-                        <div class="col-md-9">
-                            &nbsp;
-                        </div>
-                        <div class="col-md-3">
-                            <div class="header-login">
-                                <?php if ($this->user()->id > 0) { ?>
-                                    <?php echo $this->user()->username; ?> [<a href="<?php echo $this->route("index.php?component=user&controller=user&task=logout"); ?>">Logout</a>]<?php if ($this->user()->usergroup->is_admin == 1) { ?>&nbsp;[<a href="<?php echo BASE_URL; ?>admin">Admin Panel</a>]<?php } ?>
-                                <?php } else { ?>
-                                    <a href="<?php echo $this->route("index.php?component=user&controller=login"); ?>">Login</a>
-                                <?php } ?>
-                            </div>
+        <div class="header-container">
+            <div class="header-content">
+                <div class="row">
+                    <div class="col-md-9">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-3">
+                        <div class="header-login">
+                            <?php if ($this->user()->id > 0) { ?>
+                                <?php echo $this->user()->username; ?> [<a href="<?php echo $this->route("index.php?component=user&controller=user&task=logout"); ?>">Logout</a>]<?php if ($this->user()->usergroup->is_admin == 1) { ?>&nbsp;[<a href="<?php echo BASE_URL; ?>admin">Admin Panel</a>]<?php } ?>
+                            <?php } else { ?>
+                                <a href="<?php echo $this->route("index.php?component=user&controller=login"); ?>">Login</a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="body-container">
             <div class="body-content">
                 <div class="system-messages">
                     <?php $this->displaySystemMessages(); ?>
                 </div>
                 <div class="component">
                     <div class="row">
-                        <div class="col-md-8">
-                            <?php $this->view->output(); ?>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <?php $this->template->displayModules("sidebar"); ?>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="component-container">
+                                <?php $this->view->output(); ?>
+                            </div>
                         </div>
                     </div>
                 </div>
