@@ -3,6 +3,7 @@
     $dirs = scandir(__DIR__ ."/../../components");
     unset($dirs["0"], $dirs["1"]);
     $version = simplexml_load_file(__DIR__ ."/../../version.xml");
+    $web_version = simplexml_load_file("https://raw.githubusercontent.com/Smith0r/bulletin/master/admin/version.xml", null, LIBXML_NOCDATA);
 
 ?>
 <!DOCTYPE html>
@@ -69,7 +70,12 @@
                     </div>
                     <?php $this->view->output(); ?>
                     <div class="card centre-text">
-                        Bulletin. <strong>v<?php echo $version->numerical; ?></strong> '<?php echo $version->name; ?>'
+                        Bulletin. <strong>v<?php echo $version->numerical; ?></strong>
+                        <?php if (version_compare($version->numerical, $web_version->numerical)) { ?>
+                             - <span class="label label-danger version-label">UPDATE (v<?php echo $web_version->numerical; ?> Available)</span>
+                        <?php } else { ?>
+                             - <span class="label label-success version-label">UP TO DATE</span>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

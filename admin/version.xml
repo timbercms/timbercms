@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <version>
     <numerical>0.1.0</numerical>
-    <revision>1</revision>
-    <name>Outline</name>
     <releaseDate>17th August 2017</releaseDate>
     <packageURL>https://github.com/Smith0r/bulletin/archive/master.zip</packageURL>
     <new>
