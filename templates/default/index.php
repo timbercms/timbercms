@@ -8,7 +8,8 @@
         <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/css/font-awesome.min.css">
         <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/css/template.css?v=<?php echo time(); ?>">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
         <script src="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/js/bootstrap.min.js"></script>
         <script src="<?php echo BASE_URL; ?>tinymce/tinymce.min.js"></script>
         <script>tinymce.init({ selector:'textarea',height:350,theme: 'modern',
@@ -33,9 +34,21 @@
                     <div class="col-md-3">
                         <div class="header-login">
                             <?php if ($this->user()->id > 0) { ?>
-                                <?php echo $this->user()->username; ?> [<a href="<?php echo $this->route("index.php?component=user&controller=user&task=logout"); ?>">Logout</a>]<?php if ($this->user()->usergroup->is_admin == 1) { ?>&nbsp;[<a href="<?php echo BASE_URL; ?>admin">Admin Panel</a>]<?php } ?>
+                                <div class="dropdown">
+                                    <button class="user-menu" type="button" data-toggle="dropdown">
+                                        <?php echo $this->user()->username; ?> <i class="fa fa-chevron-down"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="<?php echo $this->route("index.php?component=user&controller=user&task=logout"); ?>">Logout</a>
+                                        <a class="dropdown-item" href="<?php echo $this->route("index.php?component=user&controller=user&task=profile&id=". $this->user()->id); ?>">My Profile</a>
+                                        <?php if ($this->user()->usergroup->is_admin == 1) { ?>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="<?php echo BASE_URL; ?>admin">Admin Panel</a>
+                                        <?php } ?>
+                                    </div>
+                                </div>
                             <?php } else { ?>
-                                <a href="<?php echo $this->route("index.php?component=user&controller=login"); ?>">Login</a>
+                                <a href="<?php echo $this->route("index.php?component=user&controller=login"); ?>" class="user-menu">Login</a>
                             <?php } ?>
                         </div>
                     </div>

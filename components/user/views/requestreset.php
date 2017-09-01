@@ -8,6 +8,6 @@
                 <input type="text" name="email" />
             </div>
         </div>
-        <button type="submit" class="burgundy-button"><i class="fa fa-users"></i> Request Reset</button>
+        <button type="submit" class="button"><i class="fa fa-users"></i> Request Reset</button>
     </form>
 </div>

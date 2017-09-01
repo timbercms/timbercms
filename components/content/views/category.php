@@ -21,7 +21,7 @@
                             <?php echo substr(strip_tags($article->content), 0, 200); ?><?php echo (strlen($article->content) > 200 ? "..." : ""); ?>
                         </div>
                         <div class="category-read-more">
-                            <a href="<?php echo Core::route($article->category->alias."/".$article->alias); ?>" class="burgundy-button">Read More <i class="fa fa-chevron-right"></i></a>
+                            <a href="<?php echo Core::route($article->category->alias."/".$article->alias); ?>" class="button">Read More <i class="fa fa-chevron-right"></i></a>
                         </div>
                         <div class="category-article-information">
                             <i class="fa fa-comments"></i> <?php echo $article->comment_count; ?> <?php echo ($article->comment_count > 1 || $article->comment_count == 0 ? "Comments" : "Comment"); ?>

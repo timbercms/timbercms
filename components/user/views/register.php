@@ -40,6 +40,6 @@
                 <input type="email" name="email" />
             </div>
         </div>
-        <button type="submit" class="burgundy-button"><i class="fa fa-users"></i> Register</button>
+        <button type="submit" class="button"><i class="fa fa-users"></i> Register</button>
     </form>
 </div>

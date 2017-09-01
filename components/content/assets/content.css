@@ -87,6 +87,10 @@
     padding: 20px;
     margin-bottom: 20px;
 }
+.category-article:only-child {
+    border-bottom: none;
+    margin-bottom: 20px;
+}
 .category-article-image {
     height: 150px;
     background-position: center;

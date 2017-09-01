@@ -18,7 +18,7 @@
                 </div>
             </div>
             <input type="hidden" name="token" value="<?php echo $this->model->token; ?>" />
-            <button type="submit" class="burgundy-button"><i class="fa fa-users"></i> Reset Password</button>
+            <button type="submit" class="button"><i class="fa fa-users"></i> Reset Password</button>
         </form>
     <?php } else { ?>
         Sorry, but you have not supplied a reset token.

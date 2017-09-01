@@ -57,7 +57,7 @@
                 <form action="index.php?component=content&controller=article&task=postcomment" method="post">
                     <input type="hidden" name="article_id" value="<?php echo $this->model->id; ?>" />
                     <textarea name="content"></textarea>
-                    <button type="submit" class="pull-right burgundy-button" style="margin: 20px 0px;"><i class="fa fa-envelope"></i> Post Comment</button>
+                    <button type="submit" class="pull-right button" style="margin: 20px 0px;"><i class="fa fa-envelope"></i> Post Comment</button>
                     <div class="clearfix"></div>
                 </form>
             </section>
