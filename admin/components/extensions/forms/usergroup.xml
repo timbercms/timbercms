@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<settings>
-    <fields type="hidden" name="id" />
-    <fields type="text" length="255" name="title" label="Title" />
-    <fields type="text" length="255" name="colour" label="Colour" />
-    <fields type="select" name="is_admin" label="Is Admin?" values="No|0,Yes|1" default="0" />
-</settings>

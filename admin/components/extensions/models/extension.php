@@ -5,7 +5,6 @@
         
         public $template = "extension.php";
         public $database;
-        public $form;
         
         public $id;
         public $title;
@@ -26,7 +25,6 @@
             {
                 $this->load($id);
             }
-            $this->form = new Form(__DIR__ ."/../forms/extension.xml", $this, $this->database);
         }
         
         public function load($id)
