@@ -10,7 +10,7 @@
 		public function __construct($xml, $data, $database)
 		{
             $this->xml = simplexml_load_file($xml);
-            $this->data = $data;
+            $this->data = (object) $data;
             $this->database = $database;
         }
         

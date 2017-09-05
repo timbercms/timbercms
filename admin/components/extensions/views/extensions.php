@@ -1,5 +1,8 @@
 <div class="card">
     <h2>Extension Manager</h2>
+    <div class="action-bar">
+        <a href="index.php?component=settings&controller=settings&extension=extensions"><i class="fa fa-cog"></i> Settings</a>
+    </div>
     <table>
         <tr>
             <th><strong>ID</strong></th>

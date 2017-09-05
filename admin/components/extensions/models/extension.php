@@ -40,7 +40,7 @@
             $this->author_name = $temp->author_name;
             $this->author_url = $temp->author_url;
             $this->version = $temp->version;
-            $this->params = unserialize($this->params);
+            $this->params = unserialize($temp->params);
         }
         
         public function store($table = "", $data = array())
@@ -56,9 +56,18 @@
             $data[] = array("name" => "author_name", "value" => $this->author_name);
             $data[] = array("name" => "author_url", "value" => $this->author_url);
             $data[] = array("name" => "version", "value" => $this->version);
-            $data[] = array("name" => "params", "value" => $this->params);
+            $data[] = array("name" => "params", "value" => serialize($this->params));
 			return parent::store("#__components", $data);
 		}
+        
+        public function loadByName($name)
+        {
+            $temp = $this->database->loadObject("SELECT id FROM #__components WHERE internal_name = ?", array($name));
+            if ($temp->id > 0)
+            {
+                $this->load($temp->id);
+            }
+        }
         
     }
 
