@@ -40,7 +40,7 @@
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="<?php echo $this->route("index.php?component=user&controller=user&task=logout"); ?>">Logout</a>
-                                        <a class="dropdown-item" href="<?php echo $this->route("index.php?component=user&controller=user&task=profile&id=". $this->user()->id); ?>">My Profile</a>
+                                        <a class="dropdown-item" href="<?php echo $this->route("index.php?component=user&controller=profile&id=". $this->user()->id); ?>">My Profile</a>
                                         <?php if ($this->user()->usergroup->is_admin == 1) { ?>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="<?php echo BASE_URL; ?>admin">Admin Panel</a>

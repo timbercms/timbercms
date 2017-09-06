@@ -19,7 +19,6 @@
         public $register_time;
         public $last_action_time;
         public $usergroup;
-        public $twitch_channel;
         public $verify_token;
         
         public function __construct($id = 0, $database)
@@ -49,7 +48,6 @@
             $this->register_time = $temp->register_time;
             $this->last_action_time = $temp->last_action_time;
             $this->usergroup = new UsergroupModel($temp->usergroup_id, $this->database);
-            $this->twitch_channel = $temp->twitch_channel;
             $this->verify_token = $temp->verify_token;
         }
         

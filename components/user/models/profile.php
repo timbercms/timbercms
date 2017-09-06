@@ -1,6 +1,6 @@
 <?php
 
-    class ProfileModel
+    class ProfileModel extends Model
     {
         
         public $template = "profile.php";
