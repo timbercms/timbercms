@@ -1,0 +1,21 @@
+:root {
+    --mist: #90AFC5;
+    --stone: #336B87;
+    --shadow: #2A3132;
+    --foliage: #763626;
+}
+body {
+    background: #F5F8FA;
+    font-family: 'Open Sans', 'Arial', sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+    margin: 0px;
+    padding: 0px;
+}
+a {
+    color: var(--mist);
+    text-decoration: underline;
+}
+a:hover {
+    color: var(--stone);   
+}
