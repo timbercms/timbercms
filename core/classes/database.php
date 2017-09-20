@@ -16,6 +16,7 @@
 		{
 			try {
 				$this->connection = new PDO("mysql:host=". $host .";dbname=". $name, $user, $password, array(PDO::ATTR_PERSISTENT => false));
+                return true;
 			} catch (PDOException $e) {
 				echo "<pre>"; print_r($e->getMessage()); echo "</pre>"; die();
 			}

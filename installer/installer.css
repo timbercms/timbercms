@@ -12,6 +12,11 @@ body {
     margin: 0px;
     padding: 0px;
 }
+h1, h2, h3, h4 {
+    margin-top: 0px;
+    margin-bottom: 40px;
+    font-weight: 300;
+}
 a {
     color: var(--mist);
     text-decoration: underline;
