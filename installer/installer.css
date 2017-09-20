@@ -19,3 +19,26 @@ a {
 a:hover {
     color: var(--stone);   
 }
+.body-container {
+    max-width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    padding: 20px;
+    margin-top: 40px;
+}
+.header-container {
+    background: var(--shadow);
+    padding: 15px 20px;
+    color: #FFF;
+}
+.header-container .title {
+    font-size: 26px;
+    line-height: 26px;
+}
+.header-container .subtitle {
+    font-size: 16px;
+    line-height: 26px;
+    float: right;
+}

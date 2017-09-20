@@ -2,7 +2,7 @@ Options +FollowSymLinks
 RewriteEngine On
 
 RewriteCond %{SERVER_PORT} 80
-RewriteRule ^(.*)$ https://www.example.com/$1 [R,L]
+RewriteRule ^(.*)$ https://localhost/bulletin/$1 [R,L]
  
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f

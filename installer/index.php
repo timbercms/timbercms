@@ -4,7 +4,7 @@
     ini_set("display_errors", "1");
     error_reporting(E_ALL & ~E_NOTICE);
     require_once(__DIR__ ."/../configuration.php");
-    require_once("core/classes/database.php");
+    require_once(__DIR__ ."/../core/classes/database.php");
     $db = new Database();
 
 ?>
@@ -15,6 +15,11 @@
         <link rel="stylesheet" type="text/css" href="installer.css" />
     </head>
     <body>
-        The content of the document......
+        <div class="header-container">
+            <span class="title">Bulletin. Installer</span><span class="subtitle">v1.0.0-alpha</span>
+        </div>
+        <div class="body-container">
+            Body content
+        </div>
     </body>
 </html>
