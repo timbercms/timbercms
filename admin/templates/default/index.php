@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="templates/<?php echo $this->template->name; ?>/css/template.css?v=<?php echo time(); ?>">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="templates/<?php echo $this->template->name; ?>/js/bootstrap.min.js"></script>
+        <script src="templates/<?php echo $this->template->name; ?>/js/template.js?v=<?php echo time(); ?>"></script>
         <script src="../tinymce/tinymce.min.js"></script>
         <script>tinymce.init({ selector:'textarea',height:500,theme: 'modern',
               plugins: [
@@ -33,6 +34,7 @@
               external_plugins: { "filemanager" : "../filemanager/plugin.min.js"},
               extended_valid_elements:"i[class]" });</script>
         <!-- HEADER_STYLES -->
+        <!-- HEADER_SCRIPTS -->
     </head>
     <body>
         <div class="row">

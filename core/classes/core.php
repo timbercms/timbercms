@@ -1,5 +1,6 @@
 <?php
     
+    define("ADMIN", false);
     require_once(__DIR__ ."/model.php");
     require_once(__DIR__ ."/../../components/user/models/user.php");
     require_once(__DIR__ ."/../../admin/components/menu/models/menu.php");
@@ -14,6 +15,7 @@
         public $database;
         public static $user;
         public static $stylesheets = array();
+        public static $scripts = array();
         public static $db;
         public static $title = "Bulletin CMS";
         public static $description = '<meta name="description" content="Burgundy CMS">';
@@ -26,92 +28,131 @@
         
         public function __construct()
         {
-            $this->setDatabase();
-            $this->cleanSessions();
-            require_once(__DIR__ ."/template.php");
-            $template = new Template($this->database);
-            $this->template = $template;
-            self::$user = new UserModel(0, $this->database);
-            if ($alias = $this->unroute())
+            if (ADMIN)
             {
-                // Check if menu item exists
-                $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
-                if ($item->id > 0)
+                $this->component = (strlen($_GET["component"]) > 0 ? $_GET["component"] : "dashboard");
+                $this->controller = (strlen($_GET["controller"]) > 0 ? $_GET["controller"] : "dashboard");
+                $this->content_id = (strlen($_GET["id"]) > 0 ? $_GET["id"] : "0");
+                $this->setDatabase();
+                require_once(__DIR__ ."/template.php");
+                $template = new Template($this->database);
+                $this->template = $template;
+                self::$user = new UserModel(0, $this->database);
+                if (self::$user->usergroup->is_admin != 1)
                 {
+                    header("Location: ../index.php?component=user&controller=login");
+                }
+                $modelname = $this->controller ."Model";
+                $controllername = $this->controller ."Controller";
+                require_once(__DIR__ ."/../../admin/components/". $this->component ."/models/". $this->controller .".php");
+                require_once(__DIR__ ."/../../admin/components/". $this->component ."/controllers/". $this->controller .".php");
+                require_once(__DIR__ ."/../../admin/components/". $this->component ."/view.php");
+                $model = new $modelname($this->content_id, $this->database);
+                $controller = new $controllername($model, $this);
+                if (strlen($_GET["task"]) > 0)
+                {
+                    $task = $_GET["task"];
+                    $controller->$task();
+                }
+                else
+                {
+                    $view = new View($controller, $model, $this);
+                    $this->view = $view;
+                    require_once(__DIR__ ."/../../admin/templates/". $this->template->name ."/index.php");
+                    $this->template->addComponentStylesheet($this->component);
+                    $this->template->addComponentScript($this->component);
+                    $this->database->close();
+                }
+            }
+            else
+            {
+                $this->setDatabase();
+                $this->cleanSessions();
+                require_once(__DIR__ ."/template.php");
+                $template = new Template($this->database);
+                $this->template = $template;
+                self::$user = new UserModel(0, $this->database);
+                if ($alias = $this->unroute())
+                {
+                    // Check if menu item exists
+                    $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
+                    if ($item->id > 0)
+                    {
+                        $this->component = $item->component;
+                        $this->controller = $item->controller;
+                        $this->content_id = $item->content_id;
+                    }
+                    else
+                    {
+                        // See if any articles exist that have this alias
+                        $article = $this->database->loadObject("SELECT * fROM #__articles WHERE alias = ? AND published = 1", array($alias));
+                        if ($article->id > 0)
+                        {
+                            // We have a match!
+                            $this->component = "content";
+                            $this->controller = "article";
+                            $this->content_id = $article->id;
+                        }
+                        else
+                        {
+                            // Maybe a category matches?
+                            $category = $this->database->loadObject("SELECT * FROM #__articles_categories WHERE alias = ? AND published = 1", array($alias));
+                            if ($category->id > 0)
+                            {
+                                $this->component = "content";
+                                $this->controller = "category";
+                                $this->content_id = $category->id;
+                            }
+                            else
+                            {
+                                // Nothing. Default to 404.
+                                header("HTTP/1.0 404 Not Found");
+                                require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
+                    self::$menu_item_id = $item->id;
+                    if ($item->id <= 0 && strlen($_GET["component"]) == 0)
+                    {
+                        $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
+                        self::$menu_item_id = $item->id;
+                    }
+                    elseif (strlen($_GET["component"]) > 0)
+                    {
+                        $item = new stdClass();
+                        $item->component = $_GET["component"];
+                        $item->controller = $_GET["controller"];
+                        $item->content_id = $_GET["id"];
+                    }
                     $this->component = $item->component;
                     $this->controller = $item->controller;
                     $this->content_id = $item->content_id;
                 }
+                self::$content_item_id = $this->content_id;
+                $modelname = $this->controller ."Model";
+                $controllername = $this->controller ."Controller";
+                require_once(__DIR__ ."/../../components/". $this->component ."/models/". $this->controller .".php");
+                require_once(__DIR__ ."/../../components/". $this->component ."/controllers/". $this->controller .".php");
+                require_once(__DIR__ ."/../../components/". $this->component ."/view.php");
+                $model = new $modelname($this->content_id, $this->database);
+                $controller = new $controllername($model);
+                if (strlen($_GET["task"]) > 0)
+                {
+                    $task = $_GET["task"];
+                    $controller->$task();
+                }
                 else
                 {
-                    // See if any articles exist that have this alias
-                    $article = $this->database->loadObject("SELECT * fROM #__articles WHERE alias = ? AND published = 1", array($alias));
-                    if ($article->id > 0)
-                    {
-                        // We have a match!
-                        $this->component = "content";
-                        $this->controller = "article";
-                        $this->content_id = $article->id;
-                    }
-                    else
-                    {
-                        // Maybe a category matches?
-                        $category = $this->database->loadObject("SELECT * FROM #__articles_categories WHERE alias = ? AND published = 1", array($alias));
-                        if ($category->id > 0)
-                        {
-                            $this->component = "content";
-                            $this->controller = "category";
-                            $this->content_id = $category->id;
-                        }
-                        else
-                        {
-                            // Nothing. Default to 404.
-                            header("HTTP/1.0 404 Not Found");
-                            require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
-                        }
-                    }
+                    $view = new View($controller, $model, $this);
+                    $this->view = $view;
+                    require_once(__DIR__ ."/../../templates/". $this->template->name ."/index.php");
+                    $this->template->addComponentStylesheet($this->component);
+                    $this->database->close();
                 }
-            }
-            else
-            {
-                $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
-                self::$menu_item_id = $item->id;
-                if ($item->id <= 0 && strlen($_GET["component"]) == 0)
-                {
-                    $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
-                    self::$menu_item_id = $item->id;
-                }
-                elseif (strlen($_GET["component"]) > 0)
-                {
-                    $item = new stdClass();
-                    $item->component = $_GET["component"];
-                    $item->controller = $_GET["controller"];
-                    $item->content_id = $_GET["id"];
-                }
-                $this->component = $item->component;
-                $this->controller = $item->controller;
-                $this->content_id = $item->content_id;
-            }
-            self::$content_item_id = $this->content_id;
-            $modelname = $this->controller ."Model";
-            $controllername = $this->controller ."Controller";
-            require_once(__DIR__ ."/../../components/". $this->component ."/models/". $this->controller .".php");
-            require_once(__DIR__ ."/../../components/". $this->component ."/controllers/". $this->controller .".php");
-            require_once(__DIR__ ."/../../components/". $this->component ."/view.php");
-            $model = new $modelname($this->content_id, $this->database);
-            $controller = new $controllername($model);
-            if (strlen($_GET["task"]) > 0)
-            {
-                $task = $_GET["task"];
-                $controller->$task();
-            }
-            else
-            {
-                $view = new View($controller, $model, $this);
-                $this->view = $view;
-                require_once(__DIR__ ."/../../templates/". $this->template->name ."/index.php");
-                $this->template->addComponentStylesheet($this->component);
-                $this->database->close();
             }
         }
         
@@ -141,6 +182,11 @@
             self::$stylesheets[] = '<link rel="stylesheet" href="'. BASE_URL.$link .'?v='. time() .'">';
         }
         
+        public static function addScript($link)
+        {
+            self::$scripts[] = '<script src="'. BASE_URL.$link .'?v='. time() .'"></script>';
+        }
+        
         public static function changeTitle($title)
         {
             self::$title = $title;
@@ -154,6 +200,7 @@
         public function finalise($page)
         {
             $page = str_replace("<!-- HEADER_STYLES -->", implode("", self::$stylesheets), $page);
+            $page = str_replace("<!-- HEADER_SCRIPTS -->", implode("", self::$scripts), $page);
             $page = str_replace("<!-- PAGE_TITLE -->", self::$title, $page);
             $page = str_replace("<!-- META_DESCRIPTION -->", self::$description, $page);
             echo $page;

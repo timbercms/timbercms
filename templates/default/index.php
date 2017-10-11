@@ -25,11 +25,11 @@
         <!-- HEADER_STYLES -->
     </head>
     <body>
-        <div class="header-container">
+        <div class="menu-container">
             <div class="header-content">
                 <div class="row">
                     <div class="col-md-9">
-                        &nbsp;
+                        <?php $this->template->displayModules("main-menu"); ?>
                     </div>
                     <div class="col-md-3">
                         <div class="header-login">

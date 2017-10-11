@@ -13,7 +13,7 @@
                         <div class="category-article-image" style="background-image: url('https://unsplash.it/416/150?random');"></div>
                     </div>
                     <div class="col-md-8">
-                        <h3 class="category-article-title"><a href="<?php echo Core::route($article->category->alias."/".$article->alias); ?>"><?php echo $article->title; ?></a></h3>
+                        <h3 class="category-article-title"><a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>"><?php echo $article->title; ?></a></h3>
                         <div class="category-time">
                             <i class="fa fa-clock-o"></i> <?php echo $this->model->relativeTime($article->publish_time); ?>
                         </div>
@@ -21,7 +21,7 @@
                             <?php echo substr(strip_tags($article->content), 0, 200); ?><?php echo (strlen($article->content) > 200 ? "..." : ""); ?>
                         </div>
                         <div class="category-read-more">
-                            <a href="<?php echo Core::route($article->category->alias."/".$article->alias); ?>" class="button">Read More <i class="fa fa-chevron-right"></i></a>
+                            <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>" class="button">Read More <i class="fa fa-chevron-right"></i></a>
                         </div>
                         <div class="category-article-information">
                             <i class="fa fa-comments"></i> <?php echo $article->comment_count; ?> <?php echo ($article->comment_count > 1 || $article->comment_count == 0 ? "Comments" : "Comment"); ?>

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
-    <fields type="sql" query="SELECT id, title FROM #__menusORDER BY title ASC" key="id" keyvalue="title" name="menu_id" label="Menu" />
+    <fields type="sql" query="SELECT id, title FROM #__menus ORDER BY title ASC" key="id" keyvalue="title" name="menu_id" label="Menu" />
 </settings>

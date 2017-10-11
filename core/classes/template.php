@@ -14,11 +14,36 @@
         
         public function addComponentStylesheet($component = "")
         {
+            $admin = "";
+            if (ADMIN)
+            {
+                $admin = "admin/";
+            }
             if (strlen($component) == 0)
             {
                 $component = $_GET["component"];
             }
-            Core::addStylesheet("components/". $component ."/assets/". $component .".css");
+            if (file_exists(__DIR__ ."/../../". $admin ."components/". $component ."/assets/css/". $component .".css"))
+            {
+                Core::addStylesheet($admin. "components/". $component ."/assets/css/". $component .".css");
+            }
+        }
+        
+        public function addComponentScript($component = "")
+        {
+            $admin = "";
+            if (ADMIN)
+            {
+                $admin = "admin/";
+            }
+            if (strlen($component) == 0)
+            {
+                $component = $_GET["component"];
+            }
+            if (file_exists(__DIR__ ."/../../". $admin ."components/". $component ."/assets/js/". $component .".js"))
+            {
+                Core::addScript($admin. "components/". $component ."/assets/js/". $component .".js");
+            }
         }
         
         public function displayModules($position)
@@ -33,7 +58,10 @@
                     $worker_string = $module->type."Worker";
                     $worker = new $worker_string($module, $this->database);
                     echo '<div class="module module-'. $module->id .'">';
-                        echo '<h3 class="module-title">'. $module->title .'</h3>';
+                        if ($module->show_title)
+                        {
+                            echo '<h3 class="module-title">'. $module->title .'</h3>';
+                        }
                         echo '<div class="module-inner">';
                             require_once(__DIR__ ."/../../modules/". $module->type ."/template.php");
                         echo '</div>';

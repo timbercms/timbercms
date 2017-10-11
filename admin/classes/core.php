@@ -72,6 +72,20 @@
         {
         }
         
+        // Added for compatibility
+        public static function addScript()
+        {
+        }
+        
+        public function finalise($page)
+        {
+            $page = str_replace("<!-- HEADER_STYLES -->", implode("", self::$stylesheets), $page);
+            $page = str_replace("<!-- HEADER_SCRIPTS -->", implode("", self::$scripts), $page);
+            $page = str_replace("<!-- PAGE_TITLE -->", self::$title, $page);
+            $page = str_replace("<!-- META_DESCRIPTION -->", self::$description, $page);
+            echo $page;
+        }
+        
         public function displaySystemMessages()
         {
             if (count($_SESSION["MESSAGES"]) > 0 && strlen($_GET["task"]) == 0)
