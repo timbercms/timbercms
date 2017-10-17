@@ -24,6 +24,7 @@
         public $tags;
         public $comments = array();
         public $comment_count;
+        public $image;
         
         public function __construct($id = 0, $database)
         {
@@ -52,6 +53,9 @@
             $this->author = new UserModel($temp->author_id, $this->database);
             $comments = $this->database->loadObject("SELECT COUNT(id) AS count FROM #__articles_comments WHERE article_id = ?", array($this->id));
             $this->comment_count = $comments->count;
+            preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $this->content, $image);
+            $this->image = $image["src"];
+            $this->content = preg_replace('/<img(.*)>/i', '', $this->content, 1);
         }
         
         public function loadComments()

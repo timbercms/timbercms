@@ -60,7 +60,7 @@ $config = array(
 	*/
 	//'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
     
-    'base_url' => "http://localhost/burgundy-cms",
+    'base_url' => "https://localhost/bulletin",
 
 	/*
 	|--------------------------------------------------------------------------

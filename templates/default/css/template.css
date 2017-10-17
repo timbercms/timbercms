@@ -19,7 +19,7 @@ body {
     font-family: "Open Sans", "Arial", sans-serif !important;
     font-weight: 500;
     letter-spacing: -1px !important;
-    background: url('../images/pattern.png');
+    background: var(--charcoal);
 }
 html {
   box-sizing: border-box;
@@ -36,11 +36,7 @@ a:hover {
     color: var(--rust-hover);
 }
 .body-container {
-    max-width: var(--site-width);
-    margin-left: auto;
-    margin-right: auto;
-    background: #FFF;
-    padding: 40px;
+    background: url('../images/pattern.png');
 }
 .footer-container {
     background: var(--charcoal);
@@ -61,7 +57,11 @@ a:hover {
     margin-right: 0px !important;   
 }
 .body-content {
-    padding: 20px;   
+    max-width: var(--site-width);
+    margin-left: auto;
+    margin-right: auto;
+    background: #FFF;
+    padding: 40px;  
 }
 pre {
     white-space: pre-wrap;
@@ -79,6 +79,7 @@ pre {
     display: inline-block;
     margin-bottom: 5px;
     transition: background .25s;
+    border: none;
 }
 .button:hover {
     text-decoration: none;
@@ -163,4 +164,7 @@ ul.menu-list > li > a:hover, ul.menu-list > li.active > a {
     max-width: var(--site-width);
     margin-left: auto;
     margin-right: auto;
+}
+.login-options {
+    margin-top: 20px;   
 }

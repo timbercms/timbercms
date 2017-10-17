@@ -2,7 +2,14 @@
     
     define("ADMIN", false);
     require_once(__DIR__ ."/model.php");
-    require_once(__DIR__ ."/../../components/user/models/user.php");
+    if (ADMIN)
+    {
+        require_once(__DIR__ ."/../../admin/components/users/models/user.php");
+    }
+    else
+    {
+        require_once(__DIR__ ."/../../components/user/models/user.php");
+    }
     require_once(__DIR__ ."/../../admin/components/menu/models/menu.php");
     require_once(__DIR__ ."/../../admin/components/menu/models/menuitem.php");
     require_once(__DIR__ ."/../../admin/components/modules/models/module.php");
@@ -151,6 +158,7 @@
                     $this->view = $view;
                     require_once(__DIR__ ."/../../templates/". $this->template->name ."/index.php");
                     $this->template->addComponentStylesheet($this->component);
+                    $this->template->addComponentScript($this->component);
                     $this->database->close();
                 }
             }

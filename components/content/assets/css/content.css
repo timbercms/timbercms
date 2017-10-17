@@ -92,8 +92,9 @@
     margin-bottom: 20px;
 }
 .category-article-image {
-    height: 150px;
+    height: 173px;
     background-position: center;
+    background-size: cover;
 }
 .category-read-more {
     margin: 10px 0px;   
@@ -105,7 +106,7 @@
     font-size: 28px;
     display: inline-block;
     text-align: center;
-    height: 39px;
+    height: 50px;
     width: 50px;
     border-radius: 3px;
     color: #FFF !important;

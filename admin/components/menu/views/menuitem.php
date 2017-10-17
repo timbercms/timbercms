@@ -12,7 +12,7 @@
             <?php $this->model->form->displaySql($this->model->controller_query, "content_id", $this->model->content_id, $this->model->database); ?>
         <?php } ?>
         <input type="hidden" name="menu_id" value="<?php echo ($this->model->menu_id > 0 ? $this->model->menu_id : $_GET["menu_id"]); ?>" />
-        <button type="submit" class="button float-right no-margin"><i class="fa fa-save"></i> Save</button>
+        <button type="submit" class="button float-right no-margin" style="margin-top: 20px;"><i class="fa fa-save"></i> Save</button>
         <div class="clearfix"></div>
     </form>
 </div>

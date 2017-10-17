@@ -62,14 +62,16 @@
                 </div>
                 <div class="component">
                     <div class="row">
-                        <div class="col-md-3">
-                            <?php $this->template->displayModules("sidebar"); ?>
-                        </div>
-                        <div class="col-md-9">
+                        <div class="<?php echo ($this->template->hasModules("sidebar") ? "col-md-9" : "col-md-12"); ?>">
                             <div class="component-container">
                                 <?php $this->view->output(); ?>
                             </div>
                         </div>
+                        <?php if ($this->template->hasModules("sidebar")) { ?>
+                            <div class="col-md-3">
+                                <?php $this->template->displayModules("sidebar"); ?>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

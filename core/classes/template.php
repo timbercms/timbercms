@@ -70,6 +70,12 @@
             }
         }
         
+        public function hasModules($position)
+        {
+            $results = $this->database->loadObjectList("SELECT id FROM #__modules WHERE (pages = '0' OR FIND_IN_SET(?, pages)) AND position = ?", array(Core::menu_item_id(), $position));
+            return (count($results) > 0 ? true : false);
+        }
+        
     }
 
 ?>

@@ -10,7 +10,9 @@
             <div class="category-article">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="category-article-image" style="background-image: url('https://unsplash.it/416/150?random');"></div>
+                        <?php if ($article->image) { ?>
+                            <div class="category-article-image" style="background-image: url('<?php echo $article->image; ?>');"></div>
+                        <?php } ?>
                     </div>
                     <div class="col-md-8">
                         <h3 class="category-article-title"><a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>"><?php echo $article->title; ?></a></h3>

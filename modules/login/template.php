@@ -1,4 +1,4 @@
-<div class="login-container">
+<div class="login-module">
     <form action="index.php?component=user&controller=user&task=login" method="post">
         <div class="row">
             <div class="col-md-3">
