@@ -6,17 +6,10 @@
                 <div class="article-image" style="background-image: url('<?php echo $this->model->image; ?>');">
                 </div>
             <?php } ?>
-            <div class="row article-header">
-                <div class="col-md-2 article-avatar-container">
-                    <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($this->model->author->email))); ?>?s=100" class="article-avatar" />
-                </div>
-                <div class="col-md-10">
-                    <h1 class="article-title"><?php echo $this->model->title; ?></h1>
-                    <p class="article-publish-date">
-                        Written by <?php echo $this->model->author->username; ?> on the <time pubdate><?php echo date("jS F Y", $this->model->publish_time); ?></time>
-                    </p>
-                </div>
-            </div>
+            <h1 class="article-title"><?php echo $this->model->title; ?></h1>
+            <p class="article-publish-date">
+                Written by <?php echo $this->model->author->username; ?> on the <time pubdate><?php echo date("jS F Y", $this->model->publish_time); ?></time>
+            </p>
         </header>
         <div class="article-content">
             <?php echo $this->model->content; ?>

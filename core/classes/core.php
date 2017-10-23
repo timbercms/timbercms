@@ -20,6 +20,7 @@
         public $template;
         public $view;
         public $database;
+        public static $router;
         public static $user;
         public static $stylesheets = array();
         public static $scripts = array();
@@ -79,65 +80,43 @@
                 $template = new Template($this->database);
                 $this->template = $template;
                 self::$user = new UserModel(0, $this->database);
-                if ($alias = $this->unroute())
+                if (strlen($_GET["task"]) > 0)
                 {
-                    // Check if menu item exists
-                    $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
-                    if ($item->id > 0)
+                    // Quickly load info from URL
+                    if (strpos($link, "index.php?") !== false)
                     {
-                        $this->component = $item->component;
-                        $this->controller = $item->controller;
-                        $this->content_id = $item->content_id;
+                        $link = str_replace("index.php?", "", $_SERVER["REQUEST_URI"]);
+                        $link = str_replace("/bulletin/", "", $link); // Remove after putting live
+                        $parts = explode("&", $link);
+                        foreach ($parts as $part)
+                        {
+                            $part = explode("=", $part);
+                            switch ($part["0"])
+                            {
+                                case "component":
+                                    $this->component = $part["1"];
+                                    break;
+                                case "controller":
+                                    $this->controller = $part["1"];
+                                    break;
+                                case "id":
+                                    $this->content_id = $part["1"];
+                                    break;
+                            }
+                        }
                     }
                     else
                     {
-                        // See if any articles exist that have this alias
-                        $article = $this->database->loadObject("SELECT * fROM #__articles WHERE alias = ? AND published = 1", array($alias));
-                        if ($article->id > 0)
-                        {
-                            // We have a match!
-                            $this->component = "content";
-                            $this->controller = "article";
-                            $this->content_id = $article->id;
-                        }
-                        else
-                        {
-                            // Maybe a category matches?
-                            $category = $this->database->loadObject("SELECT * FROM #__articles_categories WHERE alias = ? AND published = 1", array($alias));
-                            if ($category->id > 0)
-                            {
-                                $this->component = "content";
-                                $this->controller = "category";
-                                $this->content_id = $category->id;
-                            }
-                            else
-                            {
-                                // Nothing. Default to 404.
-                                header("HTTP/1.0 404 Not Found");
-                                require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
-                            }
-                        }
+                        $link = str_replace("/bulletin/", "", $_SERVER["REQUEST_URI"]);
+                        $parts = explode("/", $link);
+                        $this->component = $parts["0"];
+                        $this->controller = $parts["1"];
+                        $this->content_id = 0;
                     }
                 }
                 else
                 {
-                    $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
-                    self::$menu_item_id = $item->id;
-                    if ($item->id <= 0 && strlen($_GET["component"]) == 0)
-                    {
-                        $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
-                        self::$menu_item_id = $item->id;
-                    }
-                    elseif (strlen($_GET["component"]) > 0)
-                    {
-                        $item = new stdClass();
-                        $item->component = $_GET["component"];
-                        $item->controller = $_GET["controller"];
-                        $item->content_id = $_GET["id"];
-                    }
-                    $this->component = $item->component;
-                    $this->controller = $item->controller;
-                    $this->content_id = $item->content_id;
+                    $this->unroute();
                 }
                 self::$content_item_id = $this->content_id;
                 $modelname = $this->controller ."Model";
@@ -216,7 +195,12 @@
         
         public static function route($link)
         {
-            if (!preg_match('/=/', $link))
+            if ($link == "index.php")
+            {
+                $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
+                return BASE_URL.$item->alias;
+            }
+            else if (!preg_match('/=/', $link))
             {
                 $request = $_SERVER["REQUEST_URI"];
                 $parts = explode("/", $link);
@@ -259,7 +243,18 @@
                     }
                     else
                     {
-                        return BASE_URL."index.php?". $link;
+                        $routername = $component ."Router";
+                        require_once(__DIR__ ."/../../components/". $component ."/router.php");
+                        self::$router = new $routername(self::$db);
+                        $custom = self::router()->route($link);
+                        if (strlen($custom) > 0)
+                        {
+                            return $custom;
+                        }
+                        else
+                        {
+                            return BASE_URL."index.php?". $link;
+                        }
                     }
                 }
             }
@@ -268,23 +263,84 @@
         public function unroute()
         {
             $string = $_SERVER["REQUEST_URI"];
-            if (!preg_match('/=/', $string))
+            $string = str_replace("/bulletin/", "", $string); // Remove after putting live
+            if ($string == "index.php")
             {
-                $string = str_replace("/bulletin", "", $string); // Remove after putting live
-                $parts = explode("/", $string);
-                $alias = end($parts);
-                if (strlen($alias) > 0 && $alias != "index.php")
+                // If no rule from router found, find homepage
+                $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
+                $this->component = $item->component;
+                $this->controller = $item->controller;
+                $this->content_id = $item->content_id;
+                return;
+            }
+            if (strpos($string, "index.php?") !== false)
+            {
+                $string = str_replace("index.php?", "", $string);
+                $ps = explode("=", $string);
+                $parts = array();
+                foreach ($ps as $part)
                 {
-                    return $alias;
+                    $string = explode("=", $part);
+                    $parts[] = $string["1"];
                 }
-                else
-                {
-                    return false;
-                }
+                $item = new stdClass();
             }
             else
             {
-                return false;
+                $parts = explode("/", $string);
+                $alias = end($parts);
+                $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
+            }
+            if ($item->id > 0)
+            {
+                $this->component = $item->component;
+                $this->controller = $item->controller;
+                $this->content_id = $item->content_id;
+            }
+            else
+            {
+                // Use Custom Router
+                if (strlen($parts["0"]) > 0)
+                {
+                    $routername = $parts["0"] ."Router";
+                    require_once(__DIR__ ."/../../components/". $parts["0"] ."/router.php");
+                    self::$router = new $routername($this->database);
+                    if (strlen(self::router()->component) > 0)
+                    {
+                        // We have a router!
+                        $new_parts = self::router()->unroute($parts);
+                        $this->component = $new_parts["0"];
+                        $this->controller = $new_parts["1"];
+                        $this->content_id = $new_parts["2"];
+                    }
+                    else
+                    {
+                        // Nothing. Default to 404.
+                        header("HTTP/1.0 404 Not Found");
+                        require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                    }
+                }
+                else
+                {
+                    // If no rule from router found, find homepage
+                    $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
+                    self::$menu_item_id = $item->id;
+                    if ($item->id <= 0 && strlen($_GET["component"]) == 0)
+                    {
+                        $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
+                        self::$menu_item_id = $item->id;
+                    }
+                    elseif (strlen($_GET["component"]) > 0)
+                    {
+                        $item = new stdClass();
+                        $item->component = $_GET["component"];
+                        $item->controller = $_GET["controller"];
+                        $item->content_id = $_GET["id"];
+                    }
+                    $this->component = $item->component;
+                    $this->controller = $item->controller;
+                    $this->content_id = $item->content_id;
+                }
             }
         }
         
@@ -296,6 +352,11 @@
         public static function user()
         {
             return self::$user;
+        }
+        
+        public static function router()
+        {
+            return self::$router;
         }
         
         public static function content_item_id()

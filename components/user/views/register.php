@@ -1,5 +1,5 @@
 <div class="register-container">
-    <form action="index.php?component=user&controller=user&task=register" method="post">
+    <form action="<?php echo $this->route("index.php?component=user&controller=user&task=register"); ?>" method="post">
         <div class="frame">
             <div class="frame-3">
                 <strong>Username:</strong>

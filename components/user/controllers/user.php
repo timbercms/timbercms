@@ -24,26 +24,26 @@
                         $this->model->setMessage("success", "Welcome back, ". $username);
                         // Login as details are correct
                         $this->model->login($temp->id);
-                        header("Location: index.php");
+                        header("Location: ". Core::route("index.php?component=user&controller=profile&id=". $temp->id));
                     }
                     else
                     {
                         $this->model->setMessage("danger", "Sorry, but those details do not match an account in our system.");
                         // Password is incorrect
-                        header("Location: index.php");
+                        header("Location: ". Core::route("index.php"));
                     }
                 }
                 else
                 {
                     $this->model->setMessage("danger", "Sorry, but it looks like you haven't activated your account. We sent an email to ". $temp->email ." which contains an activation link.");
-                    header("Location: index.php");
+                    header("Location: ". Core::route("index.php"));
                 }
             }
             else
             {
                 $this->model->setMessage("danger", "Sorry, but those details do not match an account in our system.");
                 // No User with that username found
-                header("Location: index.php");
+                header("Location: ". Core::route("index.php"));
             }
         }
         
@@ -51,7 +51,7 @@
         {
             $this->model->setMessage("success", "Come back soon!");
             $this->model->logout();
-            header("Location: index.php");
+            header("Location: ". Core::route("index.php"));
         }
         
         public function register()
@@ -73,12 +73,12 @@
                 if ($this->model->register($username, $real_name, $password, $email))
                 {
                     $this->model->setMessage("success", "Thank you for registering an account. We've sent an email to ". $email ." to confirm it's really you. You won't be able to login until you've activated your account.");
-                    header("Location: index.php");
+                    header("Location: ". Core::route("index.php"));
                 }
                 else
                 {
                     $this->model->setMessage("danger", "Sorry, something went wrong during registration.");
-                    header("Location: index.php");
+                    header("Location: ". Core::route("index.php"));
                 }
             }
         }
@@ -90,12 +90,12 @@
             {
                 $this->model->database->query("UPDATE #__users SET activated = ?, verify_token = ? WHERE id = ?", array(1, '', $user->id));
                 $this->model->setMessage("danger", "Thank you for activating your account, you may now log in.");
-                header("Location: index.php?component=user&controller=login");
+                header("Location: ". Core::route("index.php?component=user&controller=login"));
             }
             else
             {
                 $this->model->setMessage("danger", "Sorry, but you did not supply a valid verification token");
-                header("Location: index.php");
+                header("Location: ". Core::route("index.php"));
             }
         }
         

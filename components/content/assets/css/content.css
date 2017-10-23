@@ -62,29 +62,22 @@
     background-size: cover;
 }
 .article-title {
-    margin-top: 7px;
-    background: #FFF;
-    padding: 10px 20px;
-    width: auto;
-    display: inline-block;
+    margin-top: 40px;
 }
 .article-avatar-container {
     text-align: center;   
 }
 .article-publish-date {
-    padding-left: 20px;
     font-style: italic;
 }
 .category-article-title {
     margin-top: 0px;
 }
 .category-article-title a {
-    color: #000;
     text-decoration: none;
 }
 .category-article {
     border-bottom: 1px solid #DDD;
-    padding: 20px;
     margin-bottom: 20px;
 }
 .category-article:only-child {

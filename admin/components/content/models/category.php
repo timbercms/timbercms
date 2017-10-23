@@ -42,6 +42,10 @@
 			$data = array();
 			$data[] = array("name" => "id", "value" => $this->id);
 			$data[] = array("name" => "title", "value" => $this->title);
+            if (strlen($this->alias) == 0)
+            {
+                $this->alias = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->title)));
+            }
             $data[] = array("name" => "alias", "value" => $this->alias);
             $data[] = array("name" => "description", "value" => $this->description);
             $data[] = array("name" => "published", "value" => $this->published);

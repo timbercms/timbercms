@@ -1,10 +1,12 @@
 <?php if ($this->model->id > 0) { ?>
-    <div class="category-container">
-        <h1 class="category-title"><?php echo $this->model->title; ?></h1>
-        <div class="category-description">
-            <?php echo $this->model->description; ?>
+    <?php if ($this->model->params->show_title) { ?>
+        <div class="category-container">
+            <h1 class="category-title"><?php echo $this->model->title; ?></h1>
+            <div class="category-description">
+                <?php echo $this->model->description; ?>
+            </div>
         </div>
-    </div>
+    <?php } ?>
     <div class="category-articles">
         <?php foreach ($this->model->articles as $article) { ?>
             <div class="category-article">

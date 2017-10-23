@@ -1,5 +1,5 @@
 <div class="login-container">
-    <form action="index.php?component=user&controller=user&task=login" method="post">
+    <form action="<?php echo $this->route("index.php?component=user&controller=user&task=login"); ?>" method="post">
         <div class="row">
             <div class="col-md-3">
                 <strong>Username:</strong>

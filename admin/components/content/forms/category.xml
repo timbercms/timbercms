@@ -4,5 +4,6 @@
     <fields type="text" length="255" name="title" label="Title" />
     <fields type="text" length="255" name="alias" label="Alias" />
     <fields type="textarea" editor="true" name="description" label="Description" />
+    <fields type="select" name="params[show_title]" label="Show title in listings?" values="No|0,Yes|1" default="1" />
     <fields type="select" name="published" label="Published" values="No|0,Yes|1" default="1" />
 </settings>

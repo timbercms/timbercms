@@ -39,12 +39,12 @@
                                         <?php echo $this->user()->username; ?> <i class="fa fa-chevron-down"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="<?php echo $this->route("index.php?component=user&controller=user&task=logout"); ?>">Logout</a>
                                         <a class="dropdown-item" href="<?php echo $this->route("index.php?component=user&controller=profile&id=". $this->user()->id); ?>">My Profile</a>
                                         <?php if ($this->user()->usergroup->is_admin == 1) { ?>
-                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="<?php echo BASE_URL; ?>admin">Admin Panel</a>
                                         <?php } ?>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="<?php echo $this->route("index.php?component=user&controller=user&task=logout"); ?>">Logout</a>
                                     </div>
                                 </div>
                             <?php } else { ?>
@@ -60,19 +60,17 @@
                 <div class="system-messages">
                     <?php $this->displaySystemMessages(); ?>
                 </div>
-                <div class="component">
-                    <div class="row">
-                        <div class="<?php echo ($this->template->hasModules("sidebar") ? "col-md-9" : "col-md-12"); ?>">
-                            <div class="component-container">
-                                <?php $this->view->output(); ?>
-                            </div>
+                <div class="row">
+                    <div class="<?php echo ($this->template->hasModules("sidebar") ? "col-md-9" : "col-md-12"); ?>">
+                        <div class="component-container">
+                            <?php $this->view->output(); ?>
                         </div>
-                        <?php if ($this->template->hasModules("sidebar")) { ?>
-                            <div class="col-md-3">
-                                <?php $this->template->displayModules("sidebar"); ?>
-                            </div>
-                        <?php } ?>
                     </div>
+                    <?php if ($this->template->hasModules("sidebar")) { ?>
+                        <div class="col-md-3">
+                            <?php $this->template->displayModules("sidebar"); ?>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

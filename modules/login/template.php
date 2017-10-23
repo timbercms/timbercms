@@ -1,25 +1,40 @@
 <div class="login-module">
-    <form action="index.php?component=user&controller=user&task=login" method="post">
-        <div class="row">
-            <div class="col-md-3">
-                <strong>Username:</strong>
+    <?php if (Core::user()->id > 0) { ?>
+        <div class="logged-in-user">
+            <div class="login-username">
+                <?php echo Core::user()->username; ?>
             </div>
-            <div class="col-md-9">
-                <input type="text" name="username" />
-            </div>
+            <ul class="login-options">
+                <li><a href="<?php echo $this->route("index.php?component=user&controller=profile&id=". Core::user()->id); ?>">My Profile</a></li>
+                <?php if (Core::user()->usergroup->is_admin == 1) { ?>
+                    <li><a href="<?php echo BASE_URL; ?>admin">Admin Panel</a></li>
+                <?php } ?>
+                <li><a href="<?php echo $this->route("index.php?component=user&controller=user&task=logout"); ?>">Logout</a></li>
+            </ul>
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                <strong>Password:</strong>
+    <?php } else { ?>
+        <form action="<?php echo $this->route("index.php?component=user&controller=user&task=login"); ?>" method="post">
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Username:</strong>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="username" />
+                </div>
             </div>
-            <div class="col-md-9">
-                <input type="password" name="password" />
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Password:</strong>
+                </div>
+                <div class="col-md-9">
+                    <input type="password" name="password" />
+                </div>
             </div>
-        </div>
-        <button type="submit" class="button"><i class="fa fa-key"></i> Login</button><br />
-        <ul class="login-options">
-            <li><a href="<?php echo $this->route("index.php?component=user&controller=register"); ?>"><i class="fa fa-users"></i> Register</a></li>
-            <li><a href="<?php echo $this->route("index.php?component=user&controller=requestreset"); ?>"><i class="fa fa-key"></i> Reset Password</a></li>
-        </ul>
-    </form>
+            <button type="submit" class="button"><i class="fa fa-key"></i> Login</button><br />
+            <ul class="login-options">
+                <li><a href="<?php echo $this->route("index.php?component=user&controller=register"); ?>"><i class="fa fa-users"></i> Register</a></li>
+                <li><a href="<?php echo $this->route("index.php?component=user&controller=requestreset"); ?>"><i class="fa fa-key"></i> Reset Password</a></li>
+            </ul>
+        </form>
+    <?php } ?>
 </div>

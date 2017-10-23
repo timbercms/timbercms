@@ -33,7 +33,7 @@
             $this->alias = $temp->alias;
             $this->description = $temp->description;
             $this->published = $temp->published;
-            $this->params = unserialize($temp->params);
+            $this->params = (object) unserialize($temp->params);
             if ($load_articles)
             {
                 $ta = $this->database->loadObjectList("SELECT id FROM #__articles WHERE category_id = ?", array($id));

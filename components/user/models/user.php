@@ -59,6 +59,7 @@
             {
                 $this->load($session->user_id);
                 $this->database->query("UPDATE #__sessions SET last_action_time = ? WHERE user_id = ?", array(time(), $this->id));
+                $this->database->query("UPDATE #__users SET last_action_time = ? WHERE id = ?", array(time(), $session->user_id));
             }
         }
         

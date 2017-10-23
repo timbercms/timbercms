@@ -114,11 +114,6 @@ input[type="text"],input[type="password"], input[type="email"] {
 .system-message.info {
     background: #a3daff;   
 }
-.component-container {
-    padding: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.25rem;
-}
 .module-title {
     margin-top: 0px;
     margin-bottom: 20px;
