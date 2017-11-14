@@ -28,7 +28,7 @@
             $temp = $this->database->loadObject("SELECT * FROM #__menus WHERE id = ?", array($id));
             $this->id = $temp->id;
             $this->title = $temp->title;
-            $ti = $this->database->loadObject("SELECT id FROM #__menus_items WHERE id = ?", array($id));
+            $ti = $this->database->loadObjectList("SELECT id FROM #__menus_items WHERE menu_id = ?", array($id));
             if (is_array($ti))
             {
                 foreach ($ti as $i)

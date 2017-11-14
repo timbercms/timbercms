@@ -5,8 +5,9 @@
         public $database;
         public $template = "menuitem.php";
         
-        public $id;
+        public $id = 0;
         public $menu_id;
+        public $parent_id;
         public $title;
         public $alias;
         public $published;
@@ -37,6 +38,7 @@
             $temp = $this->database->loadObject("SELECT * FROM #__menus_items WHERE id = ?", array($id));
             $this->id = $temp->id;
             $this->menu_id = $temp->menu_id;
+            $this->parent_id = $temp->parent_id;
             $this->title = $temp->title;
             $this->alias = $temp->alias;
             $this->published = $temp->published;
@@ -51,10 +53,14 @@
         
         public function store($table = "", $data = array())
 		{
-            $this->clearHome($this->menu_id);
+            if ($this->is_home == 1)
+            {
+                $this->clearHome();
+            }
 			$data = array();
 			$data[] = array("name" => "id", "value" => $this->id);
             $data[] = array("name" => "menu_id", "value" => $this->menu_id);
+            $data[] = array("name" => "parent_id", "value" => $this->parent_id);
 			$data[] = array("name" => "title", "value" => $this->title);
             if (strlen($this->alias) == 0)
             {
@@ -93,7 +99,22 @@
         
         public function clearHome()
         {
-            $this->database->query("UPDATE #__menus_items SET is_home = 0 WHERE menu_id = ?", array($this->menu_id));
+            $this->database->query("UPDATE #__menus_items SET is_home = 0");
+        }
+        
+        public function getSiblings()
+        {
+            $array = array();
+            $default = new stdClass();
+            $default->value = 0;
+            $default->name = "-- NO PARENT --";
+            $array[] = $default;
+            $results = $this->database->loadObjectList("SELECT id AS value, title AS name FROM #__menus_items WHERE menu_id = ? AND id != ? ORDER BY id ASC", array($_GET["menu_id"], $this->id));
+            foreach ($results as $result)
+            {
+                $array[] = $result;
+            }
+            return $array;
         }
         
     }

@@ -5,12 +5,14 @@
         
         public $xml;
         public $data;
+        public $raw_data;
         public $database;
         
 		public function __construct($xml, $data, $database)
 		{
             $this->xml = simplexml_load_file($xml);
             $this->data = (object) $data;
+            $this->raw_data = $data;
             $this->database = $database;
         }
         
@@ -197,9 +199,9 @@
             echo $string;
         }
         
-        public function displaySelect($items, $field_name, $current = "", $multiple = false, $class = "")
+        public function displaySelect($items, $field_name, $current = "", $multiple = false, $class = "", $label = "")
         {
-            $string = '<div class="frame"><div class="frame-2">'. $field_name .'</div><div class="frame-10">';
+            $string = '<div class="form-group"><label>'. (strlen($label) > 0 ? $label : $field_name) .'</label><div class="frame-10">';
             $string .= '<select name="'.$field_name;
             if ($multiple == "true")
             {
@@ -227,9 +229,9 @@
             echo $string;
         }
         
-        public function displaySql($controller, $name, $current, $db)
+        public function displaySql($controller, $name, $current, $db, $label = "")
         {
-            $string = '<div class="frame"><div class="frame-2">'. $controller->attributes()->label .'</div><div class="frame-10">';
+            $string = '<div class="form-group"><label>'. (strlen($label) > 0 ? $label : $controller->attributes()->label) .'</label><div class="frame-10">';
             $string .= '<select name="'.$name.'" class="form-control">';
             $options = $db->loadObjectList($controller->attributes()->query);
             foreach ($options as $option) {

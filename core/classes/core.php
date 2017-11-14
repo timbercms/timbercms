@@ -271,6 +271,7 @@
                 $this->component = $item->component;
                 $this->controller = $item->controller;
                 $this->content_id = $item->content_id;
+                self::$menu_item_id = $item->id;
                 return;
             }
             if (strpos($string, "index.php?") !== false)
@@ -296,6 +297,7 @@
                 $this->component = $item->component;
                 $this->controller = $item->controller;
                 $this->content_id = $item->content_id;
+                self::$menu_item_id = $item->id;
             }
             else
             {

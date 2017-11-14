@@ -1,6 +1,3 @@
-function createAlias(string)
-{
-    string = string.replace(/ /g, '-');
-    string = encodeURI(string).toLowerCase();
-    $("input[name='alias']").val(string);
-}
+$(document).on('change', 'select[name="component"], select[name="controller"]', function() {
+    $(".admin-form").submit();
+});

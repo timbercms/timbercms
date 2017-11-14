@@ -49,8 +49,8 @@
         
         public function logout()
         {
-            $this->model->setMessage("success", "Come back soon!");
             $this->model->logout();
+            $this->model->setMessage("success", "Come back soon!");
             header("Location: ". Core::route("index.php"));
         }
         

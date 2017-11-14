@@ -85,8 +85,8 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 setTimeout(function() {
-                    $(".sidebar").css("height", $(document).height() + "px");
-                }, 400);
+                    $(".sidebar").css("height", $("html").height() + "px");
+                }, 750);
             });
         </script>
     </body>

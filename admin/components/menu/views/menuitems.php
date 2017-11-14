@@ -17,10 +17,10 @@
                 <tr>
                     <td class="frame-1" style="text-align: center;"><input type="checkbox" name="ids[]" value="<?php echo $item->id; ?>" /></td>
                     <td class="frame-1"><?php echo $item->id; ?></td>
-                    <td class="frame-4"><a href="index.php?component=menu&controller=menuitem&id=<?php echo $item->id; ?>"><?php echo $item->title; ?></a></td>
+                    <td class="frame-4"><a href="index.php?component=menu&controller=menuitem&id=<?php echo $item->id; ?>&menu_id=<?php echo $item->menu_id; ?>"><?php echo $item->title; ?></a></td>
                     <td class="frame-3"><?php echo $item->component; ?> - <?php echo $item->controller; ?></td>
                     <td class="frame-1"><i class="fa fa-<?php echo ($item->published == 1 ? "check" : "close"); ?>"></i></td>
-                    <td class="frame-2"><a href="index.php?component=menu&controller=menuitem&id=<?php echo $item->id; ?>" class="button"><i class="fa fa-pencil"></i> Edit Item</a></td>
+                    <td class="frame-2"><a href="index.php?component=menu&controller=menuitem&id=<?php echo $item->id; ?>&menu_id=<?php echo $item->menu_id; ?>" class="button"><i class="fa fa-pencil"></i> Edit Item</a></td>
                 </tr>
             <?php } ?>
         </table>

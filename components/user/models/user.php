@@ -88,6 +88,7 @@
                 setcookie("bgdy_session_id", "", time() - (86400 * 30), "/");
                 unset($_COOKIE["bgdy_session_id"]);
                 session_destroy();
+                session_start();
             }
         }
         
