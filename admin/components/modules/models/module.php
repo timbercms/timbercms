@@ -68,6 +68,11 @@
             $this->params_form = new Form(__DIR__ ."/../../../../modules/". $this->type ."/module.xml", $this, $this->database);
         }
         
+        public function delete($id)
+        {
+            $this->database->query("DELETE FROM #__modules WHERE id = ?", array($id));
+        }
+        
     }
 
 ?>

@@ -75,6 +75,11 @@
 			return parent::store("#__articles", $data);
 		}
         
+        public function delete($id)
+        {
+            $this->database->query("DELETE FROM #__articles WHERE id = ?", array($id));
+        }
+        
     }
 
 ?>

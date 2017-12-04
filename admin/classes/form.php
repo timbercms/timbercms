@@ -54,13 +54,14 @@
                         $value = $field->attributes()->default;
                     }
                 }
-                $string .= '<div class="form-group"';
+                $string .= '<div class="row form-group"';
                 if ($type == "hidden") {
                     $string .= 'style="display: none;"';
                 }
                 $string .= '>';
-                $string .= '<label>'.$field->attributes()->label.'</label>';
-                if ($type != "textarea" && $type != "select" && $type != "sql" && $type != "template_position" && $type != "file") {
+                $string .= '<label class="col-md-2 col-form-label">'.$field->attributes()->label.'</label>';
+                $string .= '<div class="col-md-10">';
+                if ($type != "textarea" && $type != "select" && $type != "sql" && $type != "template_position" && $type != "file" && $type != "date") {
                     $string .= '<input type="'.$type.'" name="'.$field_name.'" class="form-control';
                     if (strlen($field->attributes()->class) > 0)
                     {
@@ -178,6 +179,18 @@
                     }
                     $string .= '" name="'. $field_name .'" />';
                     $string .= '<input type="hidden" name="'. $folder_name .'" value="'. $field->attributes()->folder .'" />';
+                } elseif ($type == "date") {
+                    $string .= '<input type="date" name="'.$field_name.'" class="form-control';
+                    if (strlen($field->attributes()->class) > 0)
+                    {
+                        $string .= ' '. $field->attributes()->class;
+                    }
+                    if ($value == 0 && $value != $field->attributes()->default)
+                    {
+                        $value = date("Y-m-d", time());
+                    }
+                    $string .= '" value="'.$value.'"';
+                    $string .= '/>';
                 } else {
                     $string .= '<textarea name="'.$field_name.'" class="form-control';
                     if ($field->attributes()->editor == "true") {
@@ -190,6 +203,7 @@
                     $string .= '">'.$value.'</textarea>';
                 }
                 $string .= '</div>';
+                $string .= '</div>';
             }
             if ($display_submit)
             {
@@ -201,7 +215,7 @@
         
         public function displaySelect($items, $field_name, $current = "", $multiple = false, $class = "", $label = "")
         {
-            $string = '<div class="form-group"><label>'. (strlen($label) > 0 ? $label : $field_name) .'</label><div class="frame-10">';
+            $string = '<div class="row form-group"><label class="col-md-2 col-form-label">'. (strlen($label) > 0 ? $label : $field_name) .'</label><div class="col-md-10">';
             $string .= '<select name="'.$field_name;
             if ($multiple == "true")
             {
@@ -231,7 +245,7 @@
         
         public function displaySql($controller, $name, $current, $db, $label = "")
         {
-            $string = '<div class="form-group"><label>'. (strlen($label) > 0 ? $label : $controller->attributes()->label) .'</label><div class="frame-10">';
+            $string = '<div class="row form-group"><label class="col-md-2 col-form-label">'. (strlen($label) > 0 ? $label : $controller->attributes()->label) .'</label><div class="col-md-10">';
             $string .= '<select name="'.$name.'" class="form-control">';
             $options = $db->loadObjectList($controller->attributes()->query);
             foreach ($options as $option) {

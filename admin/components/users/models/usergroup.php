@@ -43,6 +43,11 @@
 			return parent::store("#__usergroups", $data);
 		}
         
+        public function delete($id)
+        {
+            $this->database->query("DELETE FROM #__usergroups WHERE id = ?", array($id));
+        }
+        
     }
 
 ?>

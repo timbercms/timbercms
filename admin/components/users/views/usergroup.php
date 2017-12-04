@@ -1,4 +1,4 @@
-<div class="card">
+<div class="white-card">
     <h2>Usergroups Manager</h2>
     <div class="action-bar">
         <a href="index.php?component=users&controller=usergroups"><i class="fa fa-chevron-left"></i> Back to List</a>

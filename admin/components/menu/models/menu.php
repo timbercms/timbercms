@@ -47,6 +47,12 @@
 			return parent::store("#__menus", $data);
 		}
         
+        public function delete($id)
+        {
+            $this->database->query("DELETE FROM #__menus WHERE id = ?", array($id));
+            $this->database->query("DELETE FROM #__menus_items WHERE menu_id = ?", array($id));
+        }
+        
     }
 
 ?>

@@ -1,4 +1,4 @@
-<div class="card">
+<div class="white-card">
     <h2>Module Manager</h2>
     <div class="action-bar">
         <a href="index.php?component=settings&controller=settings&extension=modules"><i class="fa fa-cog"></i> Settings</a><a href="index.php?component=modules&controller=module"><i class="fa fa-plus"></i> New Module</a><a class="delete-by-ids"><i class="fa fa-trash"></i> Delete</a>

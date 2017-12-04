@@ -1,4 +1,4 @@
-<div class="card">
+<div class="white-card">
     <h2>User Manager</h2>
     <div class="action-bar">
         <a href="index.php?component=settings&controller=settings&extension=users"><i class="fa fa-cog"></i> Settings</a><a href="index.php?component=users&controller=user"><i class="fa fa-plus"></i> New User</a><a class="delete-by-ids"><i class="fa fa-trash"></i> Delete</a>

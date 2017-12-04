@@ -80,6 +80,15 @@ pre {
     margin-bottom: 5px;
     transition: background .25s;
     border: none;
+    cursor: pointer;
+}
+.button.hollow {
+    background: transparent;
+    color: #AA4B41;
+}
+.button.hollow:hover {
+    background: transparent;
+    color: #853B34;
 }
 .button:hover {
     text-decoration: none;
@@ -114,10 +123,6 @@ input[type="text"],input[type="password"], input[type="email"] {
 .system-message.info {
     background: #a3daff;   
 }
-.module-title {
-    margin-top: 0px;
-    margin-bottom: 20px;
-}
 .header-login .dropdown {
     float: right;   
 }
@@ -140,6 +145,14 @@ input[type="text"],input[type="password"], input[type="email"] {
 .menu-container {
     background: var(--charcoal);
 }
+.menu-container .module {
+    margin-bottom: 0px;
+    border: none;
+    border-radius: 0px;
+}
+.menu-container .module-inner {
+    padding: 0px;   
+}
 .menu-container ul {
     list-style-type: none;
     margin: 0px;
@@ -151,6 +164,7 @@ ul.menu-list > li > a {
     color: #FFF;
     text-decoration: none;
     transition: background .25s;
+    height: 57px;
 }
 ul.menu-list > li > a:hover, ul.menu-list > li.active > a {
     background: var(--rust);   
@@ -162,4 +176,22 @@ ul.menu-list > li > a:hover, ul.menu-list > li.active > a {
 }
 .login-options {
     margin-top: 20px;   
+}
+.module {
+    border: 1px solid #2D3033;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.module-title {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    background: #2D3033;
+    padding: 10px 15px;
+    color: #FFF;
+    font-size: 22px;
+    line-height: 22px;
+}
+.module-inner {
+    padding: 20px;   
 }

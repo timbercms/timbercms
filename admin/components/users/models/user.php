@@ -23,7 +23,7 @@
         public $usergroup_id;
         public $usergroup;
         
-        public function __construct($id = 0, $database)
+        public function __construct($id = 0, $database, $load_session = true)
         {
             $this->database = $database;
             if ($id > 0)
@@ -32,7 +32,10 @@
             }
             else
             {
-                $this->loadSession();
+                if ($load_session)
+                {
+                    $this->loadSession();
+                }
             }
             $this->form = new Form(__DIR__ ."/../forms/user.xml", $this, $this->database);
         }
@@ -77,6 +80,11 @@
                 $this->load($session->user_id);
                 $this->database->query("UPDATE #__sessions SET last_action_time = ? WHERE user_id = ?", array(time(), $this->id));
             }
+        }
+        
+        public function delete($id)
+        {
+            $this->database->query("DELETE FROM #__users WHERE id = ?", array($id));
         }
         
     }

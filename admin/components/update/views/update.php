@@ -14,7 +14,7 @@
     $web_version = $web_version["0"];
 
 ?>
-<div class="card">
+<div class="white-card">
     <h2>Update your Bulletin installation</h2>
     <div class="action-bar">
         <a href="index.php?component=settings&controller=settings&extension=update"><i class="fa fa-cog"></i> Settings</a>
@@ -25,7 +25,13 @@
         <div class="new-version-notes">
             <?php echo $web_version->body; ?>
         </div>
-        <p style="text-align: center;"><a href="index.php?component=update&controller=update&task=update" class="btn btn-success btn-lg">UPDATE TO VERSION <?php echo $web_version->name; ?></a></p>
+        <h4>Update steps</h4>
+        <ol>
+            <li>Download the v<?php echo $web_version->tag_name; ?> update package <a href="<?php echo $web_version->assets["0"]->browser_download_url; ?>">here</a>.</li>
+            <li>Extract the files using a program like Winrar</li>
+            <li>Upload the contents of the UPLOAD folder to the root directory of your website</li>
+            <li>Run the database updater tool <a href="index.php?component=update&controller=database">here</a>.</li>
+        </ol>
     <?php } else { ?>
         <p>&nbsp;</p>
         <p>Looks like your Bulletin installation (v<?php echo $version->numerical; ?>) is up to date. You don't need to do anything!</p>

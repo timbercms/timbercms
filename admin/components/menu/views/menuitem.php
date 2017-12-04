@@ -1,4 +1,4 @@
-<div class="card">
+<div class="white-card">
     <h2>Menuitem Manager</h2>
     <div class="action-bar">
         <a href="index.php?component=menu&controller=menuitems&id=<?php echo $_GET["menu_id"]; ?>"><i class="fa fa-chevron-left"></i> Back to List</a>

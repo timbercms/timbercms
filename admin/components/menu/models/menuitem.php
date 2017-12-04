@@ -117,6 +117,11 @@
             return $array;
         }
         
+        public function delete($id)
+        {
+            $this->database->query("DELETE FROM #__menus_items WHERE id = ?", array($id));
+        }
+        
     }
 
 ?>

@@ -25,7 +25,7 @@
         public static $stylesheets = array();
         public static $scripts = array();
         public static $db;
-        public static $title = "Bulletin CMS";
+        public static $title = "";
         public static $description = '<meta name="description" content="Burgundy CMS">';
         private $component;
         private $controller;
@@ -33,6 +33,7 @@
         public $content_id;
         public static $content_item_id;
         public static $menu_item_id;
+        public static $config = array();
         
         public function __construct()
         {
@@ -45,6 +46,8 @@
                 require_once(__DIR__ ."/template.php");
                 $template = new Template($this->database);
                 $this->template = $template;
+                $config = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = 'settings' LIMIT 1");
+                self::$config = unserialize($config->params);
                 self::$user = new UserModel(0, $this->database);
                 if (self::$user->usergroup->is_admin != 1)
                 {
@@ -55,7 +58,14 @@
                 require_once(__DIR__ ."/../../admin/components/". $this->component ."/models/". $this->controller .".php");
                 require_once(__DIR__ ."/../../admin/components/". $this->component ."/controllers/". $this->controller .".php");
                 require_once(__DIR__ ."/../../admin/components/". $this->component ."/view.php");
-                $model = new $modelname($this->content_id, $this->database);
+                if (strtolower($modelname) == "usermodel")
+                {
+                    $model = new $modelname($this->content_id, $this->database, false);
+                }
+                else
+                {
+                    $model = new $modelname($this->content_id, $this->database);
+                }
                 $controller = new $controllername($model, $this);
                 if (strlen($_GET["task"]) > 0)
                 {
@@ -79,6 +89,8 @@
                 require_once(__DIR__ ."/template.php");
                 $template = new Template($this->database);
                 $this->template = $template;
+                $config = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = 'settings' LIMIT 1");
+                self::$config = (object) unserialize($config->params);
                 self::$user = new UserModel(0, $this->database);
                 if (strlen($_GET["task"]) > 0)
                 {
@@ -176,7 +188,7 @@
         
         public static function changeTitle($title)
         {
-            self::$title = $title;
+            self::$title = $title." - ".self::$config->site_title;
         }
         
         public static function changeMetaDescription($string)
@@ -264,10 +276,11 @@
         {
             $string = $_SERVER["REQUEST_URI"];
             $string = str_replace("/bulletin/", "", $string); // Remove after putting live
-            if ($string == "index.php")
+            if ($string == "index.php" || $string == "")
             {
                 // If no rule from router found, find homepage
                 $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
+                self::changeTitle($item->title);
                 $this->component = $item->component;
                 $this->controller = $item->controller;
                 $this->content_id = $item->content_id;
@@ -294,6 +307,7 @@
             }
             if ($item->id > 0)
             {
+                self::changeTitle($item->title);
                 $this->component = $item->component;
                 $this->controller = $item->controller;
                 $this->content_id = $item->content_id;

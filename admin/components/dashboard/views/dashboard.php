@@ -1,3 +1,3 @@
-<div class="card">
+<div class="white-card">
     Dashboard Content
 </div>

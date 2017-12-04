@@ -53,6 +53,11 @@
 			return parent::store("#__articles_categories", $data);
 		}
         
+        public function delete($id)
+        {
+            $this->database->query("DELETE FROM #__articles_categories WHERE id = ?", array($id));
+        }
+        
     }
 
 ?>

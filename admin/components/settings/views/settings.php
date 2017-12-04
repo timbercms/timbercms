@@ -1,4 +1,6 @@
-<div class="card">
+<div class="action-bar">
+</div>
+<div class="white-card">
     <h2>Settings</h2>
     <?php if (is_array($this->model->form->raw_data)) { ?>
         <form action="index.php?component=settings&controller=settings&task=save&extension=<?php echo $this->model->extension->internal_name; ?>" method="post" class="admin-form">
