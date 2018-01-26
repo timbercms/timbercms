@@ -1,7 +1,6 @@
 <?php
 
     require_once(__DIR__ ."/category.php");
-    require_once(__DIR__ ."/comment.php");
 
     class ArticleModel extends Model
     {
@@ -22,8 +21,6 @@
         public $hits;
         public $meta_description;
         public $tags;
-        public $comments = array();
-        public $comment_count;
         public $image;
         
         public function __construct($id = 0, $database)
@@ -51,21 +48,9 @@
             $this->tags = $temp->tags;
             $this->category = new CategoryModel($temp->category_id, $this->database, false);
             $this->author = new UserModel($temp->author_id, $this->database);
-            $comments = $this->database->loadObject("SELECT COUNT(id) AS count FROM #__articles_comments WHERE article_id = ?", array($this->id));
-            $this->comment_count = $comments->count;
             preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $this->content, $image);
             $this->image = $image["src"];
             $this->content = preg_replace('/<img(.*)>/i', '', $this->content, 1);
-        }
-        
-        public function loadComments()
-        {
-            $temp = $this->database->loadObjectList("SELECT id FROM #__articles_comments WHERE article_id = ? ORDER BY post_time DESC", array($this->id));
-            foreach ($temp as $t)
-            {
-                $comment = new CommentModel($t->id, $this->database);
-                $this->comments[] = $comment;
-            }
         }
         
         public function addHit()

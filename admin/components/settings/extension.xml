@@ -2,4 +2,5 @@
 <settings>
     <items value="settings" label="Settings" icon="cog" />
     <fields type="text" name="site_title" label="Site Title" />
+    <fields type="select" name="default_template" label="Default Template" values="Default|default" default="default" />
 </settings>

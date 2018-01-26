@@ -2,6 +2,7 @@
     
     define("ADMIN", false);
     require_once(__DIR__ ."/model.php");
+    require_once(__DIR__ ."/pagination.php");
     if (ADMIN)
     {
         require_once(__DIR__ ."/../../admin/components/users/models/user.php");
@@ -12,6 +13,7 @@
     }
     require_once(__DIR__ ."/../../admin/components/menu/models/menu.php");
     require_once(__DIR__ ."/../../admin/components/menu/models/menuitem.php");
+    require_once(__DIR__ ."/../../admin/components/modules/models/module.php");
     require_once(__DIR__ ."/../../admin/components/modules/models/module.php");
 
     class Core
@@ -43,11 +45,11 @@
                 $this->controller = (strlen($_GET["controller"]) > 0 ? $_GET["controller"] : "dashboard");
                 $this->content_id = (strlen($_GET["id"]) > 0 ? $_GET["id"] : "0");
                 $this->setDatabase();
-                require_once(__DIR__ ."/template.php");
-                $template = new Template($this->database);
-                $this->template = $template;
                 $config = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = 'settings' LIMIT 1");
-                self::$config = unserialize($config->params);
+                self::$config = (object) unserialize($config->params);
+                require_once(__DIR__ ."/template.php");
+                $template = new Template($this->database, self::$config);
+                $this->template = $template;
                 self::$user = new UserModel(0, $this->database);
                 if (self::$user->usergroup->is_admin != 1)
                 {
@@ -86,11 +88,11 @@
             {
                 $this->setDatabase();
                 $this->cleanSessions();
-                require_once(__DIR__ ."/template.php");
-                $template = new Template($this->database);
-                $this->template = $template;
                 $config = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = 'settings' LIMIT 1");
                 self::$config = (object) unserialize($config->params);
+                require_once(__DIR__ ."/template.php");
+                $template = new Template($this->database, self::$config);
+                $this->template = $template;
                 self::$user = new UserModel(0, $this->database);
                 if (strlen($_GET["task"]) > 0)
                 {
@@ -302,60 +304,94 @@
             else
             {
                 $parts = explode("/", $string);
-                $alias = end($parts);
-                $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
-            }
-            if ($item->id > 0)
-            {
-                self::changeTitle($item->title);
-                $this->component = $item->component;
-                $this->controller = $item->controller;
-                $this->content_id = $item->content_id;
-                self::$menu_item_id = $item->id;
-            }
-            else
-            {
-                // Use Custom Router
-                if (strlen($parts["0"]) > 0)
+                $first = $this->database->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($parts["0"]));
+                if ($first->id > 0)
                 {
-                    $routername = $parts["0"] ."Router";
-                    require_once(__DIR__ ."/../../components/". $parts["0"] ."/router.php");
-                    self::$router = new $routername($this->database);
-                    if (strlen(self::router()->component) > 0)
+                    $alias = end($parts);
+                    $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
+                    if ($item->id <= 0)
                     {
-                        // We have a router!
-                        $new_parts = self::router()->unroute($parts);
-                        $this->component = $new_parts["0"];
-                        $this->controller = $new_parts["1"];
-                        $this->content_id = $new_parts["2"];
-                    }
-                    else
-                    {
-                        // Nothing. Default to 404.
-                        header("HTTP/1.0 404 Not Found");
-                        require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                        // Use Custom Router
+                        $routername = $first->component ."Router";
+                        require_once(__DIR__ ."/../../components/". $first->component ."/router.php");
+                        self::$router = new $routername($this->database);
+                        if (strlen(self::router()->component) > 0)
+                        {
+                            // We have a router!
+                            $new_parts = self::router()->unroute($parts);
+                            $this->component = $new_parts["0"];
+                            $this->controller = $new_parts["1"];
+                            $this->content_id = $new_parts["2"];
+                            $router_set = true;
+                        }
+                        else
+                        {
+                            // Nothing. Default to 404.
+                            header("HTTP/1.0 404 Not Found");
+                            require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                        }
                     }
                 }
                 else
                 {
-                    // If no rule from router found, find homepage
-                    $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
-                    self::$menu_item_id = $item->id;
-                    if ($item->id <= 0 && strlen($_GET["component"]) == 0)
-                    {
-                        $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
-                        self::$menu_item_id = $item->id;
-                    }
-                    elseif (strlen($_GET["component"]) > 0)
-                    {
-                        $item = new stdClass();
-                        $item->component = $_GET["component"];
-                        $item->controller = $_GET["controller"];
-                        $item->content_id = $_GET["id"];
-                    }
+                    $alias = end($parts);
+                    $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
+                }
+            }
+            if (!$router_set)
+            {
+                if ($item->id > 0)
+                {
+                    self::changeTitle($item->title);
                     $this->component = $item->component;
                     $this->controller = $item->controller;
                     $this->content_id = $item->content_id;
+                    self::$menu_item_id = $item->id;
+                }
+                else
+                {
+                    // Use Custom Router
+                    if (strlen($parts["0"]) > 0)
+                    {
+                        $routername = $parts["0"] ."Router";
+                        require_once(__DIR__ ."/../../components/". $parts["0"] ."/router.php");
+                        self::$router = new $routername($this->database);
+                        if (strlen(self::router()->component) > 0)
+                        {
+                            // We have a router!
+                            $new_parts = self::router()->unroute($parts);
+                            $this->component = $new_parts["0"];
+                            $this->controller = $new_parts["1"];
+                            $this->content_id = $new_parts["2"];
+                        }
+                        else
+                        {
+                            // Nothing. Default to 404.
+                            header("HTTP/1.0 404 Not Found");
+                            require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                        }
+                    }
+                    else
+                    {
+                        // If no rule from router found, find homepage
+                        $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
+                        self::$menu_item_id = $item->id;
+                        if ($item->id <= 0 && strlen($_GET["component"]) == 0)
+                        {
+                            $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
+                            self::$menu_item_id = $item->id;
+                        }
+                        elseif (strlen($_GET["component"]) > 0)
+                        {
+                            $item = new stdClass();
+                            $item->component = $_GET["component"];
+                            $item->controller = $_GET["controller"];
+                            $item->content_id = $_GET["id"];
+                        }
+                        $this->component = $item->component;
+                        $this->controller = $item->controller;
+                        $this->content_id = $item->content_id;
+                    }
                 }
             }
         }

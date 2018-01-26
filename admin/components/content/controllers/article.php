@@ -21,8 +21,8 @@
             $this->model->content = $_POST["content"];
             $this->model->published = $_POST["published"];
             $this->model->publish_time = ($_POST["publish_time"] > 0 ? $_POST["publish_time"] : time());
-            $this->model->start_publishing = $_POST["start_publishing"];
-            $this->model->stop_publishing = $_POST["stop_publishing"];
+            $this->model->start_publishing = strtotime($_POST["start_publishing"]);
+            $this->model->stop_publishing = strtotime($_POST["stop_publishing"]);
             $this->model->author_id = ($_POST["author_id"] > 0 ? $_POST["author_id"] : $this->core->user()->id);
             $this->model->hits = $_POST["hits"];
             $this->model->meta_description = $_POST["meta_description"];

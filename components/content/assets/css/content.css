@@ -47,7 +47,11 @@
     border-bottom: 1px solid #DDD;
     padding-bottom: 20px;
     margin-bottom: 20px;
-    padding-top: 20px
+    padding-top: 20px;
+}
+.article-content p {
+    letter-spacing: 0.5px;
+    line-height: 1.6;
 }
 .article-content p:last-of-type {
     margin-bottom: 0px;
@@ -66,9 +70,6 @@
 }
 .article-avatar-container {
     text-align: center;   
-}
-.article-publish-date {
-    font-style: italic;
 }
 .category-article-title {
     margin-top: 0px;
@@ -135,4 +136,11 @@
 }
 .article-comment-avatar-container, article-comment-info-container {
     padding: 20px;   
+}
+.category-container {
+    margin-bottom: 40px;   
+}
+.category-publish-time i {
+    display: inline-block;
+    margin-right: 5px;
 }

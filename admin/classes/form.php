@@ -189,6 +189,10 @@
                     {
                         $value = date("Y-m-d", time());
                     }
+                    else if ($value > 0)
+                    {
+                        $value = date("Y-m-d", $value);
+                    }
                     $string .= '" value="'.$value.'"';
                     $string .= '/>';
                 } else {
