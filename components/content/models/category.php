@@ -42,7 +42,7 @@
                 }
                 else
                 {
-                    $ta = $this->database->loadObjectList("SELECT a.id FROM #__articles a WHERE a.category_id = ? AND ((a.published = '1') AND ((a.start_publishing > UNIX_TIMESTAMP() AND a.stop_publishing < UNIX_TIMESTAMP()) OR (a.start_publishing > UNIX_TIMESTAMP() AND a.stop_publishing = 0) OR (a.stop_publishing < UNIX_TIMESTAMP() AND a.stop_publishing > 0)))", array($id));
+                    $ta = $this->database->loadObjectList("SELECT id FROM #__articles WHERE category_id = ? AND published = '1'", array($id));
                 }
                 foreach ($ta as $a)
                 {

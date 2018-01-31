@@ -36,6 +36,10 @@
         public static $content_item_id;
         public static $menu_item_id;
         public static $config = array();
+        public static $meta_properties = array();
+        public static $meta_itemprops = array();
+        public static $meta_names = array();
+        public static $meta_author = "";
         
         public function __construct()
         {
@@ -198,12 +202,36 @@
             self::$description = '<meta name="description" content="' .$string .'">';
         }
         
+        public static function addMetaProperty($name, $content)
+        {
+            self::$meta_properties[] = '<meta property="'. $name .'" content="'. $content .'" />';
+        }
+        
+        public static function addMetaItemProp($name, $content)
+        {
+            self::$meta_itemprops[] = '<meta itemprop="'. $name .'" content="'. $content .'" />';
+        }
+        
+        public static function addMetaName($name, $content)
+        {
+            self::$meta_names[] = '<meta name="'. $name .'" content="'. $content .'" />';
+        }
+        
+        public static function setMetaAuthor($string)
+        {
+            self::$meta_author = '<meta name="author" content="'. $string .'">';
+        }
+        
         public function finalise($page)
         {
             $page = str_replace("<!-- HEADER_STYLES -->", implode("", self::$stylesheets), $page);
             $page = str_replace("<!-- HEADER_SCRIPTS -->", implode("", self::$scripts), $page);
             $page = str_replace("<!-- PAGE_TITLE -->", self::$title, $page);
             $page = str_replace("<!-- META_DESCRIPTION -->", self::$description, $page);
+            $page = str_replace("<!-- META_AUTHOR -->", self::$meta_author, $page);
+            $page = str_replace("<!-- META_PROPERTIES -->", implode("", self::$meta_properties), $page);
+            $page = str_replace("<!-- META_ITEMPROPS -->", implode("", self::$meta_itemprops), $page);
+            $page = str_replace("<!-- META_NAMES -->", implode("", self::$meta_names), $page);
             echo $page;
         }
         
@@ -409,6 +437,11 @@
         public static function router()
         {
             return self::$router;
+        }
+        
+        public static function config()
+        {
+            return self::$config;
         }
         
         public static function content_item_id()

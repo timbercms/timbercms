@@ -15,8 +15,6 @@
         public $content;
         public $published;
         public $publish_time;
-        public $start_publishing;
-        public $stop_publishing;
         public $author;
         public $hits;
         public $meta_description;
@@ -41,8 +39,6 @@
             $this->content = $temp->content;
             $this->published = $temp->published;
             $this->publish_time = $temp->publish_time;
-            $this->start_publishing = $temp->start_publishing;
-            $this->stop_publishing = $temp->stop_publishing;
             $this->hits = $temp->hits;
             $this->meta_description = $temp->meta_description;
             $this->tags = $temp->tags;

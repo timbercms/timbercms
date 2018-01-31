@@ -4,6 +4,10 @@
         <title><!-- PAGE_TITLE --></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- META_DESCRIPTION -->
+        <!-- META_AUTHOR -->
+        <!-- META_PROPERTIES -->
+        <!-- META_ITEMPROPS -->
+        <!-- META_NAMES -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
         <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/css/font-awesome.min.css">
         <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/css/bootstrap.min.css">
