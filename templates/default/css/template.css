@@ -53,9 +53,6 @@ a:hover {
     background: var(--shadow);
     color: #FFF;
 }
-.header-content .row {
-    margin-right: 0px !important;   
-}
 .body-content {
     max-width: var(--site-width);
     margin-left: auto;
