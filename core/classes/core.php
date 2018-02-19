@@ -104,7 +104,7 @@
                     if (strpos($link, "index.php?") !== false)
                     {
                         $link = str_replace("index.php?", "", $_SERVER["REQUEST_URI"]);
-                        $link = str_replace("/bulletin/", "", $link); // Remove after putting live
+                        $link = str_replace(SUBFOLDER, "", $link); // Remove after putting live
                         $parts = explode("&", $link);
                         foreach ($parts as $part)
                         {
@@ -125,7 +125,7 @@
                     }
                     else
                     {
-                        $link = str_replace("/bulletin/", "", $_SERVER["REQUEST_URI"]);
+                        $link = str_replace(SUBFOLDER, "", $_SERVER["REQUEST_URI"]);
                         $parts = explode("/", $link);
                         $this->component = $parts["0"];
                         $this->controller = $parts["1"];
@@ -305,7 +305,7 @@
         public function unroute()
         {
             $string = $_SERVER["REQUEST_URI"];
-            $string = str_replace("/bulletin/", "", $string); // Remove after putting live
+            $string = str_replace(SUBFOLDER, "", $string); // Remove after putting live
             if ($string == "index.php" || $string == "")
             {
                 // If no rule from router found, find homepage

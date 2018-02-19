@@ -6,5 +6,7 @@
     define("DATABASE_NAME", "bulletin");
     define("DATABASE_PREFIX", "bgdy_");
     define("BASE_URL", "https://localhost/bulletin/");
+    define("SUBFOLDER", "/bulletin/");
+    define("LAUNCH_TIME", 1512657671);
 
 ?>
