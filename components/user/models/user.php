@@ -20,6 +20,7 @@
         public $last_action_time;
         public $usergroup;
         public $verify_token;
+        public $avatar;
         
         public function __construct($id = 0, $database)
         {
@@ -49,6 +50,7 @@
             $this->last_action_time = $temp->last_action_time;
             $this->usergroup = new UsergroupModel($temp->usergroup_id, $this->database);
             $this->verify_token = $temp->verify_token;
+            $this->avatar = "https://www.gravatar.com/avatar/" .md5(strtolower(trim($this->email))) ."?s=38";
         }
         
         public function loadSession()
