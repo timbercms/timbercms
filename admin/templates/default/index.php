@@ -46,7 +46,7 @@
                     <img src="<?php echo $this->user()->avatar; ?>" /><span class="user-username"><?php echo $this->user()->username; ?><i class="fa fa-chevron-down"></i></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="adminUserMenu">
-                    <a class="dropdown-item" href="../index.php?component=user&controller=user&task=logout">Logout</a>
+                    <a class="dropdown-item" href="../user/user/?task=logout">Logout</a>
                 </div>
             </div>
         </div>

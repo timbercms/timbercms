@@ -1,5 +1,3 @@
-<div class="action-bar">
-</div>
 <div class="white-card">
     <h2>Website Statistics</h2>
     <p><strong><?php echo $this->model->article_count; ?></strong> Articles</p>
