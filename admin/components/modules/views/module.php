@@ -1,6 +1,6 @@
 <div class="white-card">
     <h2>Module Manager</h2>
-    <div class="action-bar">
+    <div class="component-action-bar">
         <a href="index.php?component=modules&controller=modules"><i class="fa fa-chevron-left"></i> Back to List</a>
     </div>
     <form action="index.php?component=modules&controller=module&task=save" method="post">

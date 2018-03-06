@@ -1,6 +1,6 @@
 <div class="white-card">
     <h2>Menuitem Manager</h2>
-    <div class="action-bar">
+    <div class="component-action-bar">
         <a href="index.php?component=menu&controller=menuitem&menu_id=<?php echo $_GET["id"]; ?>"><i class="fa fa-plus"></i> New Menuitem</a><a class="delete-by-ids"><i class="fa fa-trash"></i> Delete</a>
     </div>
     <form action="index.php?component=menu&controller=menuitems&task=delete&id=<?php echo $_GET["id"]; ?>" method="post" class="admin-form">

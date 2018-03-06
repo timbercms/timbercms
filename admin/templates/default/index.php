@@ -40,6 +40,8 @@
         <!-- HEADER_SCRIPTS -->
     </head>
     <body>
+        <div class="action-bar">
+        </div>
         <div class="row" style="margin-right: 0px !important;">
             <div class="col-md-2" style="padding-right: 0px !important;">
                 <div class="sidebar">

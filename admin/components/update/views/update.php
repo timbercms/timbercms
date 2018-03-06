@@ -16,7 +16,7 @@
 ?>
 <div class="white-card">
     <h2>Update your Bulletin installation</h2>
-    <div class="action-bar">
+    <div class="component-action-bar">
         <a href="index.php?component=settings&controller=settings&extension=update"><i class="fa fa-cog"></i> Settings</a>
     </div>
     <?php if (version_compare($version->numerical, $web_version->tag_name)) { ?>

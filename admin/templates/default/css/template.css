@@ -74,7 +74,6 @@ a:hover {
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .white-card > h2 {
-    margin-bottom: 30px;
     border-bottom: 1px solid #333;
     padding-bottom: 10px;
 }
@@ -203,4 +202,18 @@ form label {
     padding: 20px;
     margin-bottom: 40px;
     margin-top: 40px;
+}
+.component-action-bar {
+    border-bottom: 1px solid #DDD;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+    text-align: right;
+}
+.component-action-bar a, .component-action-bar button {
+    display: inline-block;
+    margin-right: 20px;
+}
+.component-action-bar *:last-of-type {
+    margin-right: 0px;   
 }

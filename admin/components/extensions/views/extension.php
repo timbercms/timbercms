@@ -1,6 +1,6 @@
 <div class="white-card">
     <h2><?php echo $this->model->title; ?> Extension</h2>
-    <div class="action-bar">
+    <div class="component-action-bar">
         <a href="index.php?component=extensions&controller=extensions"><i class="fa fa-chevron-left"></i> Back to List</a>
     </div>
     <?php if ($this->model->is_locked) { ?>

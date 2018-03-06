@@ -1,6 +1,6 @@
 <div class="white-card">
     <h2>Menuitem Manager</h2>
-    <div class="action-bar">
+    <div class="component-action-bar">
         <a href="index.php?component=menu&controller=menuitems&id=<?php echo $_GET["menu_id"]; ?>"><i class="fa fa-chevron-left"></i> Back to List</a>
     </div>
     <form action="index.php?component=menu&controller=menuitem&task=save" method="post" class="admin-form">

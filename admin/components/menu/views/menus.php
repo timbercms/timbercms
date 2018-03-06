@@ -1,6 +1,6 @@
 <div class="white-card">
     <h2>Menu Manager</h2>
-    <div class="action-bar">
+    <div class="component-action-bar">
         <a href="index.php?component=settings&controller=settings&extension=menu"><i class="fa fa-cog"></i> Settings</a><a href="index.php?component=menu&controller=menu"><i class="fa fa-plus"></i> New Menu</a><a class="delete-by-ids"><i class="fa fa-trash"></i> Delete</a>
     </div>
     <form action="index.php?component=menu&controller=menus&task=delete" method="post" class="admin-form">
