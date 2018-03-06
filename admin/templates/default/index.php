@@ -41,6 +41,14 @@
     </head>
     <body>
         <div class="action-bar">
+            <div class="dropdown">
+                <a class="dropdown-toggle" href="#" type="button" role="button" id="adminUserMenu" data-toggle="dropdown">
+                    <img src="<?php echo $this->user()->avatar; ?>" /><span class="user-username"><?php echo $this->user()->username; ?><i class="fa fa-chevron-down"></i></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="adminUserMenu">
+                    <a class="dropdown-item" href="../index.php?component=user&controller=user&task=logout">Logout</a>
+                </div>
+            </div>
         </div>
         <div class="row" style="margin-right: 0px !important;">
             <div class="col-md-2" style="padding-right: 0px !important;">

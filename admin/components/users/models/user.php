@@ -22,6 +22,7 @@
         public $last_action_time;
         public $usergroup_id;
         public $usergroup;
+        public $avatar;
         
         public function __construct($id = 0, $database, $load_session = true)
         {
@@ -54,6 +55,7 @@
             $this->register_time = $temp->register_time;
             $this->last_action_time = $temp->last_action_time;
             $this->usergroup = new UsergroupModel($temp->usergroup_id, $this->database);
+            $this->avatar = "https://www.gravatar.com/avatar/" .md5(strtolower(trim($this->email))) ."?s=38";
         }
         
         public function store($table = "", $data = array())

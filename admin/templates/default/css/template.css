@@ -51,6 +51,8 @@ a:hover {
     background: #272634;
     min-height: 100vh;
     color: #FFF;
+    position: relative;
+    z-index: 15;
 }
 .menu-header {
     font-size: 26px;
@@ -119,25 +121,14 @@ a:hover {
     text-align: right;
     border-bottom: 1px solid #C9C7EF;
     height: 68px;
+    z-index: 10;
 }
-.action-bar a {
-    color: var(--light-grey) !important;
-    padding: 10px 20px;
-    transition: background .25s, .color .25s;
+.action-bar .dropdown-toggle::after {
+    display: none;   
+}
+#adminUserMenu {
     display: inline-block;
-    margin-right: 10px;
-    text-decoration: none;
-    cursor: pointer;
-    border-radius: 5px;
-    background: #FFF;
-    transition: all .25s;
-}
-.action-bar a:last-of-type {
-    margin-right: 0px;   
-}
-.action-bar a:hover {
-    background: #8EBA43;
-    color: #FFF !important;
+    height: 38px;
 }
 table {
     width: 100%;
@@ -216,4 +207,13 @@ form label {
 }
 .component-action-bar *:last-of-type {
     margin-right: 0px;   
+}
+.user-username {
+    color: #FFF;
+    display: inline-block;
+    margin-left: 20px;
+}
+.user-username i {
+    display: inline-block;
+    margin-left: 20px;
 }
