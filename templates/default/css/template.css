@@ -155,7 +155,7 @@ input[type="text"],input[type="password"], input[type="email"] {
     margin: 0px;
     padding: 0px;
 }
-ul.menu-list > li > a {
+.menu-container ul.menu-list > li > a {
     display: inline-block;
     padding: 20px 30px;
     color: #FFF;
@@ -163,7 +163,7 @@ ul.menu-list > li > a {
     transition: background .25s;
     height: 57px;
 }
-ul.menu-list > li > a:hover, ul.menu-list > li.active > a {
+.menu-container ul.menu-list > li > a:hover, ul.menu-list > li.active > a {
     background: var(--rust);   
 }
 .header-content {

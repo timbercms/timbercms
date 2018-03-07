@@ -80,7 +80,7 @@
         </div>
         <div class="footer-container">
             <div class="footer-content">
-                Footer Content
+                <?php $this->template->displayModules("footer"); ?>
             </div>
         </div>
     </body>

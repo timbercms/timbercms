@@ -63,7 +63,7 @@
                             echo '<h3 class="module-title">'. $module->title .'</h3>';
                         }
                         echo '<div class="module-inner">';
-                            require_once(__DIR__ ."/../../modules/". $module->type ."/template.php");
+                            require(__DIR__ ."/../../modules/". $module->type ."/template.php");
                         echo '</div>';
                     echo '</div>';
                 }
