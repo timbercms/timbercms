@@ -24,6 +24,18 @@
             header("Location: index.php?component=content&controller=categories");
         }
         
+        public function publish()
+        {
+            $this->model->database->query("UPDATE #__articles_categories SET published = '1' WHERE id = ?", array($_GET["id"]));
+            header("Location: index.php?component=content&controller=categories");
+        }
+        
+        public function unpublish()
+        {
+            $this->model->database->query("UPDATE #__articles_categories SET published = '0' WHERE id = ?", array($_GET["id"]));
+            header("Location: index.php?component=content&controller=categories");
+        }
+        
     }
 
 ?>

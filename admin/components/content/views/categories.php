@@ -9,15 +9,17 @@
                 <th class="frame-1">&nbsp;</th>
                 <th class="frame-1"><strong>ID</strong></th>
                 <th class="frame-9"><strong>Title</strong></th>
-                <th class="frame-1"><strong>Published</strong></th>
+                <th class="frame-1" style="text-align: center;"><strong>Published</strong></th>
             </tr>
             <?php foreach ($this->model->categories as $category) { ?>
                 <tr>
                     <td class="frame-1" style="text-align: center;"><input type="checkbox" name="ids[]" value="<?php echo $category->id; ?>" /></td>
                     <td class="frame-1"><?php echo $category->id; ?></td>
                     <td class="frame-9"><a href="index.php?component=content&controller=category&id=<?php echo $category->id; ?>"><?php echo $category->title; ?></a></td>
-                    <td class="frame-1">
-                        <i class="fa fa-<?php echo ($category->published == 1 ? "check" : "times"); ?>"></i>
+                    <td class="frame-1" style="text-align: center;">
+                        <a href="index.php?component=content&controller=category&task=<?php echo ($category->published == 1 ? "unpublish" : "publish"); ?>&id=<?php echo $category->id; ?>" class="btn btn-<?php echo ($category->published == 1 ? "success" : "danger"); ?>">
+                            <i class="fa fa-<?php echo ($category->published == 1 ? "check" : "times"); ?>"></i>
+                        </a>
                     </td>
                 </tr>
             <?php } ?>

@@ -10,7 +10,7 @@
                 <th class="frame-1"><strong>ID</strong></th>
                 <th class="frame-3"><strong>Title</strong></th>
                 <th class="frame-2"><strong>Category</strong></th>
-                <th class="frame-1"><strong>Published</strong></th>
+                <th class="frame-1" style="text-align: center;"><strong>Published</strong></th>
                 <th class="frame-2"><strong>Publish Date</strong></th>
                 <th class="frame-1"><strong>Author</strong></th>
                 <th class="frame-1"><strong>Hits</strong></th>
@@ -21,8 +21,10 @@
                     <td class="frame-1"><?php echo $article->id; ?></td>
                     <td class="frame-3"><a href="index.php?component=content&controller=article&id=<?php echo $article->id; ?>"><?php echo $article->title; ?></a></td>
                     <td class="frame-2"><?php echo $article->category->title; ?></td>
-                    <td class="frame-1">
-                        <i class="fa fa-<?php echo ($article->published == 1 ? "check" : "times"); ?>"></i>
+                    <td class="frame-1" style="text-align: center;">
+                        <a href="index.php?component=content&controller=article&task=<?php echo ($article->published == 1 ? "unpublish" : "publish"); ?>&id=<?php echo $article->id; ?>" class="btn btn-<?php echo ($article->published == 1 ? "success" : "danger"); ?>">
+                            <i class="fa fa-<?php echo ($article->published == 1 ? "check" : "times"); ?>"></i>
+                        </a>
                     </td>
                     <td class="frame-2"><?php echo date("jS M Y", $article->publish_time); ?></td>
                     <td class="frame-1">

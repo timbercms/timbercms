@@ -63,16 +63,18 @@
                                 {
                                     if (file_exists(__DIR__ ."/../../components/". $dir ."/extension.xml")) {
                                         $xml = simplexml_load_file(__DIR__ ."/../../components/". $dir ."/extension.xml");
-                                        echo '<div class="admin-menu-category"><i class="fa fa-'. $xml->name->attributes()->icon .'"></i> '. $xml->name->attributes()->value .'</div>';
-                                        echo '<div class="admin-menu-subitems">';
-                                            foreach ($xml->items as $item)
-                                            {
-                                                ?>
-                                                <li>
-                                                    <a href="index.php?component=<?php echo $dir; ?>&controller=<?php echo $item->attributes()->value; ?>"><?php echo $item->attributes()->label; ?></a>
-                                                </li>
-                                                <?php
-                                            }
+                                        echo '<div class="admin-menu-container">';
+                                            echo '<div class="admin-menu-category"><i class="fa fa-'. $xml->name->attributes()->icon .'"></i> '. $xml->name->attributes()->value .'</div>';
+                                            echo '<div class="admin-menu-subitems">';
+                                                foreach ($xml->items as $item)
+                                                {
+                                                    ?>
+                                                    <li>
+                                                        <a href="index.php?component=<?php echo $dir; ?>&controller=<?php echo $item->attributes()->value; ?>"><?php echo $item->attributes()->label; ?></a>
+                                                    </li>
+                                                    <?php
+                                                }
+                                            echo '</div>';
                                         echo '</div>';
                                     }
                                 } 

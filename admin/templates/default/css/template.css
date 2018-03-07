@@ -88,6 +88,9 @@ a:hover {
     margin-left: 0px;
     padding-top: 80px;
 }
+.menu-container {
+    padding: 10px;   
+}
 .menu-container ul {
     list-style-type: none;
     padding: 0px;
@@ -121,6 +124,12 @@ a:hover {
     width: 38px;
     text-align: center;
     color: #FFF;
+}
+.admin-menu-container {
+    border-left: 1px solid #FFF;
+    border-right: 1px solid #FFF;
+    border-bottom: 1px solid #FFF;
+    margin-bottom: 20px;
 }
 .admin-menu-subitems {
     padding: 10px 0px;
