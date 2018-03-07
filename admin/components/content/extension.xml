@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
-    <items value="articles" label="Articles" icon="newspaper-o" />
-    <items value="categories" label="Categories" icon="newspaper-o" />
+    <name value="Content" icon="newspaper-o" />
+    <items value="articles" label="Articles" />
+    <items value="categories" label="Categories" />
     <controller label="Category View" internal_name="category" query="SELECT id, title FROM #__articles_categories ORDER BY id ASC" key="id" keyvalue="title" />
     <controller label="Single Article" internal_name="article" query="SELECT id, title FROM #__articles ORDER BY publish_time DESC" key="id" keyvalue="title" />
 </settings>

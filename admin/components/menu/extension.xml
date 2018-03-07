@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
-    <items value="menus" label="Menus" icon="navicon" />
+    <name value="Menu Manager" icon="navicon" />
+    <items value="menus" label="Manage" />
 </settings>

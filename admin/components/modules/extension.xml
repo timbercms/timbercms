@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
-    <items value="modules" label="Modules" icon="cubes" />
+    <name value="Module Manager" icon="cubes" />
+    <items value="modules" label="Manage" />
 </settings>

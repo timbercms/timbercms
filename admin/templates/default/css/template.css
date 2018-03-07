@@ -53,6 +53,10 @@ a:hover {
     color: #FFF;
     position: relative;
     z-index: 15;
+    overflow-y: auto;
+    -webkit-box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.4);
+    box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.4);
 }
 .menu-header {
     font-size: 26px;
@@ -90,7 +94,7 @@ a:hover {
     margin: 0px;
 }
 .menu-container a {
-    color: #858598;
+    color: #FFF;
     text-decoration: none;
     display: block;
     padding: 10px;
@@ -98,7 +102,17 @@ a:hover {
     font-size: 14px;
     line-height: 14px;
 }
-.menu-container a i {
+.admin-menu-category:first-of-type {
+    border-top: none;   
+}
+.admin-menu-category {
+    padding: 10px;
+    border-top: 1px solid #FFF;
+    border-bottom: 1px solid #FFF;
+    background: #FFF;
+    color: #333;
+}
+.admin-menu-category i {
     padding: 10px;
     background: #1E1E29;
     display: inline-block;
@@ -106,6 +120,10 @@ a:hover {
     border-radius: 5px;
     width: 38px;
     text-align: center;
+    color: #FFF;
+}
+.admin-menu-subitems {
+    padding: 10px 0px;
 }
 .menu-container a:hover {
     color: #C9C7EF;
