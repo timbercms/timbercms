@@ -17,6 +17,7 @@
         public $author_url;
         public $version;
         public $params;
+        public $enabled;
         
         public function __construct($id = 0, $database)
         {
@@ -41,6 +42,7 @@
             $this->author_url = $temp->author_url;
             $this->version = $temp->version;
             $this->params = unserialize($temp->params);
+            $this->enabled = $temp->enabled;
         }
         
         public function store($table = "", $data = array())
@@ -57,6 +59,7 @@
             $data[] = array("name" => "author_url", "value" => $this->author_url);
             $data[] = array("name" => "version", "value" => $this->version);
             $data[] = array("name" => "params", "value" => serialize($this->params));
+            $data[] = array("name" => "enabled", "value" => $this->enabled);
 			return parent::store("#__components", $data);
 		}
         

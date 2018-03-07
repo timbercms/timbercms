@@ -137,6 +137,14 @@
                     $this->unroute();
                 }
                 self::$content_item_id = $this->content_id;
+                // Check if component is disabled
+                $test_comp = $this->database->loadObject("SELECT id, enabled FROM #__components WHERE internal_name = ?", array($this->component));
+                if (!$test_comp->enabled)
+                {
+                    // Abort! Component is disabled!
+                    header("HTTP/1.0 404 Not Found");
+                    require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                }
                 $modelname = $this->controller ."Model";
                 $controllername = $this->controller ."Controller";
                 require_once(__DIR__ ."/../../components/". $this->component ."/models/". $this->controller .".php");
