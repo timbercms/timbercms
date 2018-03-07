@@ -11,7 +11,6 @@
         
         public $id;
         public $title;
-        public $colour;
         public $is_admin;
         
         public function __construct($id = 0, $database)
@@ -29,7 +28,6 @@
             $temp = $this->database->loadObject("SELECT * FROM #__usergroups WHERE id = ?", array($id));
             $this->id = $temp->id;
             $this->title = $temp->title;
-            $this->colour = $temp->colour;
             $this->is_admin = $temp->is_admin;
         }
         
@@ -38,7 +36,6 @@
 			$data = array();
 			$data[] = array("name" => "id", "value" => $this->id);
 			$data[] = array("name" => "title", "value" => $this->title);
-            $data[] = array("name" => "colour", "value" => $this->colour);
             $data[] = array("name" => "is_admin", "value" => $this->is_admin);
 			return parent::store("#__usergroups", $data);
 		}
