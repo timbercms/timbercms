@@ -27,6 +27,18 @@
             header("Location: index.php?component=modules&controller=modules");
         }
         
+        public function publish()
+        {
+            $this->model->database->query("UPDATE #__modules SET published = '1' WHERE id = ?", array($_GET["id"]));
+            header("Location: index.php?component=modules&controller=modules");
+        }
+        
+        public function unpublish()
+        {
+            $this->model->database->query("UPDATE #__modules SET published = '0' WHERE id = ?", array($_GET["id"]));
+            header("Location: index.php?component=modules&controller=modules");
+        }
+        
     }
 
 ?>

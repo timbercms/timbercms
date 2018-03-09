@@ -10,7 +10,7 @@
                 <th class="frame-1"><strong>ID</strong></th>
                 <th class="frame-5"><strong>Title</strong></th>
                 <th class="frame-4"><strong>Type</strong></th>
-                <th class="frame-1"><strong>Published</strong></th>
+                <th class="frame-1" style="text-align: center;"><strong>Published</strong></th>
             </tr>
             <?php foreach ($this->model->modules as $module) { ?>
                 <tr>
@@ -20,8 +20,10 @@
                     <td class="frame-4">
                         <?php echo $module->type; ?>
                     </td>
-                    <td class="frame-1">
-                        <i class="fa fa-<?php echo ($module->published == 1 ? "check" : "times"); ?>"></i>
+                    <td class="frame-1" style="text-align: center;">
+                        <a href="index.php?component=modules&controller=module&task=<?php echo ($module->published == 1 ? "unpublish" : "publish"); ?>&id=<?php echo $module->id; ?>" class="btn btn-<?php echo ($module->published == 1 ? "success" : "danger"); ?>">
+                            <i class="fa fa-<?php echo ($module->published == 1 ? "check" : "times"); ?>"></i>
+                        </a>
                     </td>
                 </tr>
             <?php } ?>
