@@ -18,7 +18,7 @@
         
         public function fetchItems()
         {
-            $temp = $this->database->loadObjectList("SELECT id FROM #__menus_items WHERE menu_id = ? ORDER BY id", array($this->module->params["menu_id"]));
+            $temp = $this->database->loadObjectList("SELECT id FROM #__menus_items WHERE menu_id = ? ORDER BY id", array($this->module->params->menu_id));
             foreach ($temp as $m)
             {
                 $this->items[] = new MenuitemModel($m->id, $this->database);

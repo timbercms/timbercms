@@ -35,7 +35,7 @@
               external_filemanager_path:"https://localhost/bulletin/filemanager/",
               filemanager_title:"Responsive Filemanager" ,
               external_plugins: { "filemanager" : "../filemanager/plugin.min.js"},
-              extended_valid_elements:"i[class]" });</script>
+              extended_valid_elements : 'i[class]' });</script>
         <!-- HEADER_STYLES -->
         <!-- HEADER_SCRIPTS -->
     </head>

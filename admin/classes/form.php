@@ -29,7 +29,6 @@
                 {
                     $field_name = $field->attributes()->name;
                 }
-                $name = $field->attributes()->name;
                 $type = $field->attributes()->type;
                 $length = $field->attributes()->length;
                 if (is_array($this->data->$name))
@@ -197,9 +196,6 @@
                     $string .= '/>';
                 } else {
                     $string .= '<textarea name="'.$field_name.'" class="form-control';
-                    if ($field->attributes()->editor == "true") {
-                        $string .= ' ckeditor';
-                    }
                     if (strlen($field->attributes()->class) > 0)
                     {
                         $string .= ' '. $field->attributes()->class;

@@ -20,8 +20,8 @@
             <a href="whatsapp://send?text=<?php echo $_SERVER["REQUEST_SCHEME"]; ?>://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" data-action="share/whatsapp/share" data-href="<?php echo $_SERVER["REQUEST_SCHEME"]; ?>://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" class="whatsapp-button"><i class="fa fa-whatsapp"></i></a>
         </div>
         <footer class="article-information">
-            <strong>Category:</strong> <?php echo $this->model->category->title; ?><br />
-            <strong>Views:</strong> <?php echo $this->model->hits; ?> times
+            <p><strong>Category:</strong> <?php echo $this->model->category->title; ?></p>
+            <p><strong>Views:</strong> <?php echo $this->model->hits; ?> times</p>
         </footer>
     </article>
 <?php } else { ?>

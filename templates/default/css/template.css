@@ -35,8 +35,8 @@ a:hover {
     text-decoration: none;
     color: var(--rust-hover);
 }
-.body-container {
-    background: url('../images/pattern.png');
+p {
+    line-height: 1.3rem;   
 }
 .footer-container {
     background: var(--charcoal);
@@ -48,17 +48,47 @@ a:hover {
     margin-right: auto;
     padding-top: 40px;
     padding-bottom: 40px;
+    color: #FFF;
+}
+.footer-content pre {
+    color: #FFF;   
+}
+.footer-content a {
+    color: #FFF;
+    text-decoration: underline;
+}
+.footer-content ul {
+    list-style-type: none;
+    padding: 0px;
+}
+.footer-content li {
+    display: block;
+    margin-bottom: 10px;
+}
+.footer-content li:last-of-type {
+    margin-bottom: 0px;   
+}
+.footer-content .module-title, .footer-content .module-inner {
+    padding: 0px;   
+}
+.footer-content .module-title {
+    border-bottom: 1px solid #FFF;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 .header-container {
     background: var(--shadow);
     color: #FFF;
+}
+.body-container {
+    background: url('../images/pattern.png');   
 }
 .body-content {
     max-width: var(--site-width);
     margin-left: auto;
     margin-right: auto;
     background: #FFF;
-    padding: 40px;  
+    padding: 30px;  
 }
 pre {
     white-space: pre-wrap;
@@ -141,6 +171,9 @@ input[type="text"],input[type="password"], input[type="email"] {
 }
 .menu-container {
     background: var(--charcoal);
+    max-width: var(--site-width);
+    margin-left: auto;
+    margin-right: auto;
 }
 .menu-container .module {
     margin-bottom: 0px;
@@ -177,12 +210,13 @@ input[type="text"],input[type="password"], input[type="email"] {
 .module {
     border: 1px solid #2D3033;
     margin-bottom: 20px;
-    border-radius: 5px;
     overflow: hidden;
+}
+.module:last-of-type {
+    margin-bottom: 0px;   
 }
 .module-title {
     margin-top: 0px;
-    margin-bottom: 20px;
     background: #2D3033;
     padding: 10px 15px;
     color: #FFF;
@@ -190,5 +224,18 @@ input[type="text"],input[type="password"], input[type="email"] {
     line-height: 22px;
 }
 .module-inner {
-    padding: 20px;   
+    padding: 15px;   
+}
+.latestnews-article-image {
+    width: 100%;   
+}
+.latest-news-item {
+    border-bottom: #2D3033;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+.latest-news-item:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
 }

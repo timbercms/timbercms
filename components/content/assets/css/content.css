@@ -80,8 +80,9 @@
 .category-article {
     border-bottom: 1px solid #DDD;
     margin-bottom: 20px;
+    padding-bottom: 20px;
 }
-.category-article:only-child {
+.category-article:last-of-type {
     border-bottom: none;
     margin-bottom: 20px;
 }
@@ -143,4 +144,7 @@
 .category-publish-time i {
     display: inline-block;
     margin-right: 5px;
+}
+.category-article-image {
+    width: 100%;
 }
