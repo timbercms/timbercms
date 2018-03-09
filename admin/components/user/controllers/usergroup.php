@@ -18,7 +18,7 @@
             $this->model->title = $_POST["title"];
             $this->model->is_admin = $_POST["is_admin"];
             $this->model->store();
-            header("Location: index.php?component=users&controller=usergroups");
+            header("Location: index.php?component=user&controller=usergroups");
         }
         
     }

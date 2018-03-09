@@ -1,6 +1,9 @@
 <div class="login-module">
     <?php if (Core::user()->id > 0) { ?>
         <div class="logged-in-user">
+            <div class="login-avatar">
+                <img src="<?php echo Core::user()->avatar; ?>" />
+            </div>
             <div class="login-username">
                 <?php echo Core::user()->username; ?>
             </div>

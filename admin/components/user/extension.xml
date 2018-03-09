@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
-    <name value="User Manager" icon="users" />
+    <name value="User Manager" icon="user" />
     <items value="users" label="Users" />
     <items value="usergroups" label="Usergroups" />
 </settings>

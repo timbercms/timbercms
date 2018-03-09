@@ -5,7 +5,7 @@
     require_once(__DIR__ ."/pagination.php");
     if (ADMIN)
     {
-        require_once(__DIR__ ."/../../admin/components/users/models/user.php");
+        require_once(__DIR__ ."/../../admin/components/user/models/user.php");
     }
     else
     {

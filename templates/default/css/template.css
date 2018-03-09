@@ -211,6 +211,7 @@ input[type="text"],input[type="password"], input[type="email"] {
     border: 1px solid #2D3033;
     margin-bottom: 20px;
     overflow: hidden;
+    border-radius: 3px;
 }
 .module:last-of-type {
     margin-bottom: 0px;   
@@ -238,4 +239,35 @@ input[type="text"],input[type="password"], input[type="email"] {
     border-bottom: none;
     margin-bottom: 0px;
     padding-bottom: 0px;
+}
+
+.login-options {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 40px;
+}
+.login-options li {
+    display: block;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #DDD;
+}
+.login-options li:last-of-type {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    border-bottom: none;
+}
+.login-username, .login-avatar {
+    text-align: center;   
+}
+.login-username {
+    font-size: 20px;   
+}
+.login-avatar {
+    margin-bottom: 20px;
+}
+.login-avatar img {
+    border: 5px solid #DDD;
+    border-radius: 100px;
 }
