@@ -5,9 +5,8 @@
     </div>
     <form action="index.php?component=modules&controller=module&task=save" method="post">
         <?php $this->model->form->display(false); ?>
-        <?php if (strlen($this->model->type) > 0) {
-            $this->model->params_form->display(false, true);
-        } ?>
+        <?php $this->model->params_form->display(false, true); ?>
+        <input type="hidden" name="type" value="<?php echo (strlen($this->model->type) > 0 ? $this->model->type : $_GET["type"]); ?>" />
         <button type="submit" class="button float-right no-margin"><i class="fa fa-save"></i> Save</button>
         <div class="clearfix"></div>
     </form>

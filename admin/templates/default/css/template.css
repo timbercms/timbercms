@@ -244,3 +244,12 @@ form label {
     display: inline-block;
     margin-left: 20px;
 }
+.module-type {
+    border: 1px solid #DDD;
+    border-radius: 3px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+.module-type:last-of-type {
+    margin-bottom: 0px;   
+}

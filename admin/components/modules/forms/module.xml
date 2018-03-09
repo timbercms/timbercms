@@ -2,7 +2,6 @@
 <settings>
     <fields type="hidden" name="id" />
     <fields type="text" length="255" name="title" label="Title" />
-    <fields type="sql" query="SELECT internal_name, title FROM #__components_modules ORDER BY title ASC" key="internal_name" keyvalue="title" name="type" label="Module Type" />
     <fields type="select" name="show_title" label="Show Title" values="No|0,Yes|1" default="1" />
     <fields type="select" name="published" label="Published" values="No|0,Yes|1" default="1" />
     <fields type="text" length="255" name="position" label="Template Position" />

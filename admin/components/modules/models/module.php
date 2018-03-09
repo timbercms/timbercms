@@ -17,7 +17,7 @@
         public $published;
         public $position;
         public $ordering;
-        public $params;
+        public $params = array();
         public $pages;
         
         public function __construct($id = 0, $database)
@@ -28,6 +28,7 @@
                 $this->load($id);
             }
             $this->form = new Form(__DIR__ ."/../forms/module.xml", $this, $this->database);
+            $this->getParams();
         }
         
         public function load($id)
@@ -42,10 +43,6 @@
             $this->ordering = $temp->ordering;
             $this->params = (object) unserialize($temp->params);
             $this->pages = explode(",", $temp->pages);
-            if (strlen($this->type) > 0)
-            {
-                $this->getParams();
-            }
         }
         
         public function store($table = "", $data = array())
@@ -65,7 +62,7 @@
         
         public function getParams()
         {
-            $this->params_form = new Form(__DIR__ ."/../../../../modules/". $this->type ."/module.xml", $this->params, $this->database);
+            $this->params_form = new Form(__DIR__ ."/../../../../modules/". (strlen($this->type) > 0 ? $this->type : $_GET["type"]) ."/module.xml", $this->params, $this->database);
         }
         
         public function delete($id)
