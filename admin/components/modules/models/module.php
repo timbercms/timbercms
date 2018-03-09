@@ -40,7 +40,7 @@
             $this->published = $temp->published;
             $this->position = $temp->position;
             $this->ordering = $temp->ordering;
-            $this->params = unserialize($temp->params);
+            $this->params = (object) unserialize($temp->params);
             $this->pages = explode(",", $temp->pages);
             if (strlen($this->type) > 0)
             {
@@ -65,7 +65,7 @@
         
         public function getParams()
         {
-            $this->params_form = new Form(__DIR__ ."/../../../../modules/". $this->type ."/module.xml", $this, $this->database);
+            $this->params_form = new Form(__DIR__ ."/../../../../modules/". $this->type ."/module.xml", $this->params, $this->database);
         }
         
         public function delete($id)
