@@ -1,7 +1,7 @@
 <div class="white-card">
     <h2>Usergroups Manager</h2>
     <div class="component-action-bar">
-        <a href="index.php?component=settings&controller=settings&extension=users"><i class="fa fa-cog"></i> Settings</a><a href="index.php?component=user&controller=usergroup"><i class="fa fa-plus"></i> New Usergroup</a><a class="delete-by-ids"><i class="fa fa-trash"></i> Delete</a>
+        <a href="index.php?component=settings&controller=settings&extension=user"><i class="fa fa-cog"></i> Settings</a><a href="index.php?component=user&controller=usergroup"><i class="fa fa-plus"></i> New Usergroup</a><a class="delete-by-ids"><i class="fa fa-trash"></i> Delete</a>
     </div>
     <form action="index.php?component=user&controller=usergroups&task=delete" method="post" class="admin-form">
         <table>

@@ -240,7 +240,6 @@ input[type="text"],input[type="password"], input[type="email"] {
     margin-bottom: 0px;
     padding-bottom: 0px;
 }
-
 .login-options {
     list-style-type: none;
     padding: 0px;
@@ -270,4 +269,5 @@ input[type="text"],input[type="password"], input[type="email"] {
 .login-avatar img {
     border: 5px solid #DDD;
     border-radius: 100px;
+    width: 130px;
 }
