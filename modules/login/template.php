@@ -28,11 +28,12 @@
                 <div class="col-md-9">
                     <input type="password" name="password" class="form-control" />
                     <p style="text-align: right;">
-                        <a href="<?php echo $this->route("index.php?component=user&controller=requestreset"); ?>">Forgotten?</a>
+                        <a href="<?php echo $this->route("index.php?component=user&controller=requestreset"); ?>">Forgotten password?</a>
                     </p>
                 </div>
             </div>
-            <button type="submit" class="button"><i class="fa fa-key"></i> Login</button> <a href="<?php echo $this->route("index.php?component=user&controller=register"); ?>" class="button hollow">Don't have an account?</a>
+            <button type="submit" class="button pull-right"><i class="fa fa-key"></i> Login</button> <a href="<?php echo $this->route("index.php?component=user&controller=register"); ?>" class="button hollow pull-right">Don't have an account?</a>
+            <div class="clearfix"></div>
         </form>
     <?php } ?>
 </div>
