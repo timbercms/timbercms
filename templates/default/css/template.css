@@ -230,7 +230,7 @@ input[type="text"],input[type="password"], input[type="email"] {
     width: 100%;   
 }
 .latest-news-item {
-    border-bottom: #2D3033;
+    border-bottom: #DDD;
     margin-bottom: 20px;
     padding-bottom: 20px;
 }

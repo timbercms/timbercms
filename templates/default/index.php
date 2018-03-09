@@ -27,6 +27,7 @@
               ],
               toolbar1: 'undo redo | bold italic | bullist numlist outdent indent | link | preview media<?php if ($this->user()->usergroup->is_admin == 1) { ?> | code<?php } ?>', });</script>
         <!-- HEADER_STYLES -->
+        <!-- HEADER_SCRIPTS -->
     </head>
     <body>
         <div class="body-container">
