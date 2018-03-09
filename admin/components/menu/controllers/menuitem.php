@@ -39,6 +39,18 @@
             header("Location: index.php?component=menu&controller=menuitem&id=". $id ."&menu_id=". $_POST["menu_id"]);
         }
         
+        public function publish()
+        {
+            $this->model->database->query("UPDATE #__menus_items SET published = '1' WHERE id = ?", array($_GET["id"]));
+            header("Location: index.php?component=menu&controller=menuitems&id=". $_GET["menu_id"]);
+        }
+        
+        public function unpublish()
+        {
+            $this->model->database->query("UPDATE #__menus_items SET published = '0' WHERE id = ?", array($_GET["id"]));
+            header("Location: index.php?component=menu&controller=menuitems&id=". $_GET["menu_id"]);
+        }
+        
     }
 
 ?>
