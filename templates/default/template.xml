@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+    <name>Default Template</name>
+    <version>v1.0.0-Beta</version>
+    <author>Chris Smith</author>
+    <author_url>https://github.com/Smith0r/bulletin</author_url>
+    <position>sidebar</position>
+    <position>main-menu</position>
+    <position>footer-col-1</position>
+    <position>footer-col-2</position>
+    <position>footer-col-3</position>
+    <position>footer-col-4</position>
+</template>

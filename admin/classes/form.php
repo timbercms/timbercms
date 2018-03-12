@@ -143,9 +143,8 @@
                     }
                     $string .= '</select>';
                 } elseif ($type == "template_position") {
-                    $extension = new ExtensionModel();
-                    $extension->load("configuration");
-                    $xml = simplexml_load_file(BASE_DIR ."/../templates/". $extension->config->default_template ."/configuration.xml");
+                    $config = Core::config();
+                    $xml = simplexml_load_file(BASE_DIR ."/../templates/". $config->default_template ."/template.xml");
                     $string .= '<select name="position" class="form-control';
                     if (strlen($field->attributes()->class) > 0)
                     {
