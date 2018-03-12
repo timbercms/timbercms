@@ -3,4 +3,9 @@
     <name value="User Manager" icon="user" />
     <items value="users" label="Users" />
     <items value="usergroups" label="Usergroups" />
+    <controller label="Login Form" internal_name="login" description="Display the Login form." />
+    <controller label="Registration Form" internal_name="register" description="Display the Registration form." />
+    <controller label="Request Reset Password" internal_name="requestreset" description="Show the form for requesting a password reset." />
+    <controller label="Reset Password Form" internal_name="requestreset" description="Show the form for resetting a password." />
+    <controller label="Profile View" internal_name="profile" query="SELECT id, username FROM #__users ORDER BY id ASC" key="id" keyvalue="username" description="Show a specific user profile." />
 </settings>

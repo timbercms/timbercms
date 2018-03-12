@@ -3,6 +3,6 @@
     <name value="Content" icon="newspaper-o" />
     <items value="articles" label="Articles" />
     <items value="categories" label="Categories" />
-    <controller label="Category View" internal_name="category" query="SELECT id, title FROM #__articles_categories ORDER BY id ASC" key="id" keyvalue="title" />
-    <controller label="Single Article" internal_name="article" query="SELECT id, title FROM #__articles ORDER BY publish_time DESC" key="id" keyvalue="title" />
+    <controller label="Category View" internal_name="category" query="SELECT id, title FROM #__articles_categories ORDER BY id ASC" key="id" keyvalue="title" description="View a list of articles from a specific category." />
+    <controller label="Single Article" internal_name="article" query="SELECT id, title FROM #__articles ORDER BY publish_time DESC" key="id" keyvalue="title" description="Show a specific article." />
 </settings>

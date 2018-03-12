@@ -30,6 +30,7 @@
             {
                 $this->load($id);
             }
+            $this->getControllers();
             $this->form = new Form(__DIR__ ."/../forms/menuitem.xml", $this, $this->database);
         }
         
@@ -48,7 +49,6 @@
             $this->content_id = $temp->content_id;
             $this->params = unserialize($temp->params);
             $this->is_home = $temp->is_home;
-            $this->getControllers();
         }
         
         public function store($table = "", $data = array())
@@ -79,6 +79,8 @@
         
         public function getControllers()
         {
+            $this->component = (strlen($this->component) > 0 && $_GET["overwrite"] != 1 ? $this->component : $_GET["comp"]);
+            $this->controller = (strlen($this->controller) > 0 && $_GET["overwrite"] != 1 ? $this->controller : $_GET["cont"]);
             $xml = simplexml_load_file(__DIR__ ."/../../". $this->component ."/extension.xml");
             foreach ($xml->controller as $control)
             {
