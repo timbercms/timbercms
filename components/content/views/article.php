@@ -2,7 +2,7 @@
     <article class="article-container">
         <header>
             <?php if ($this->model->image) { ?>
-                <div class="article-image" style="background-image: url('<?php echo $this->model->image; ?>');">
+                <div class="article-image" style="background-image: url('<?php echo (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/"); ?><?php echo $this->model->image; ?>');">
                 </div>
             <?php } ?>
             <h1 class="article-title"><?php echo $this->model->title; ?></h1>

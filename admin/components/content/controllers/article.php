@@ -25,6 +25,11 @@
             $this->model->hits = $_POST["hits"];
             $this->model->meta_description = $_POST["meta_description"];
             $this->model->tags = $_POST["tags"];
+            $this->model->image = $_POST["image"];
+            if (strlen($_FILES["image"]["name"]) > 0)
+            {
+                $this->model->image = $this->uploadFile();
+            }
             $this->model->store();
             header("Location: index.php?component=content&controller=articles");
         }
@@ -39,6 +44,32 @@
         {
             $this->model->database->query("UPDATE #__articles SET published = '0' WHERE id = ?", array($_GET["id"]));
             header("Location: index.php?component=content&controller=articles");
+        }
+        
+        public function uploadFile()
+        {
+            if (strlen($_FILES["image"]["name"]) > 0)
+            {
+                foreach ($_FILES as $key => $file)
+                {
+                    if (strlen($file["name"]) > 0)
+                    {
+                        $name = $file["name"];
+                        $tmp = $file["tmp_name"];
+                        move_uploaded_file($tmp, __DIR__ ."/../../../../images/articles/". $name);
+                        return "images/articles/". $name;
+                        break;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
         
     }

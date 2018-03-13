@@ -87,7 +87,7 @@
     margin-bottom: 20px;
 }
 .category-article-image {
-    height: 173px;
+    height: auto;
     background-position: center;
     background-size: cover;
 }

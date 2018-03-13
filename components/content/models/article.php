@@ -44,8 +44,7 @@
             $this->tags = $temp->tags;
             $this->category = new CategoryModel($temp->category_id, $this->database, false);
             $this->author = new UserModel($temp->author_id, $this->database);
-            preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $this->content, $image);
-            $this->image = $image["src"];
+            $this->image = $temp->image;
             $this->content = preg_replace('/<img(.*)>/i', '', $this->content, 1);
         }
         

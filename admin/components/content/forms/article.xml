@@ -4,6 +4,8 @@
     <fields type="text" length="255" name="title" label="Title" />
     <fields type="text" length="500" name="alias" label="Alias" />
     <fields type="sql" query="SELECT id, title FROM #__articles_categories ORDER BY title ASC" key="id" keyvalue="title" name="category_id" label="Category" />
+    <fields type="file" folder="articles" name="image" label="Article Image" image="true" />
+    <fields type="hidden" name="image" />
     <fields type="textarea" editor="true" name="content" label="Content" />
     <fields type="select" name="published" label="Published" values="No|0,Yes|1" default="1" />
     <fields type="text" name="meta_description" label="Meta Description" />

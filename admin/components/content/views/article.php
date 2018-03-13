@@ -3,7 +3,7 @@
     <div class="component-action-bar">
         <a href="index.php?component=content&controller=articles"><i class="fa fa-chevron-left"></i> Back to List</a>
     </div>
-    <form action="index.php?component=content&controller=article&task=save" method="post">
+    <form action="index.php?component=content&controller=article&task=save" method="post" enctype="multipart/form-data">
         <?php $this->model->form->display(); ?>
     </form>
 </div>

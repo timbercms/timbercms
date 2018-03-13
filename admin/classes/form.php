@@ -170,6 +170,10 @@
                     {
                         $folder_name = $name;
                     }
+                    if (strlen($field->attributes()->image) > 0)
+                    {
+                        $string .= '<img src="../'. $value .'" style="max-width: 50%; margin-bottom: 20px;" />';
+                    }
                     $string .= '<input type="file" class="form-control';
                     if (strlen($field->attributes()->class) > 0)
                     {
