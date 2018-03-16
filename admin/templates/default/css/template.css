@@ -1,15 +1,13 @@
 :root {
-    --burgundy-hover: #8C001A;
-    --purple: #231123;
-    --grey: #2A2D34;
-    --dark-grey: #3E4348;
-    --light-grey: #7D8699;
-    --off-white: #CEC9C7;
+    --orange: #F74F10;
+    --orange-light: #FD7136;
+    --orange-dark: #DA3902;
+    --orange-darker: #BB2D01;
     
-    --light-burgundy: #DF405A;
-    --burgundy: #87314E;
-    --darker-burgundy: #512645;
-    --even-darker-burgundy: #311E3E;
+    --grey: #3E4140;
+    --grey-light: #515453;
+    --grey-lighter: #6B6F6E;
+    --grey-dark: #323534;
 }
 html {
   box-sizing: border-box;
@@ -28,35 +26,50 @@ body {
     overflow-x: hidden;
 }
 a {
-    color: #858598;
+    color: var(--orange);
     text-decoration: none;
 }
 a:hover {
-    color: #658598;  
+    color: var(--orange-light);  
 }
 .button {
     color: #FFF !important;
-    background: #F44336;
+    background: var(--orange);
     padding: 10px 20px;
     text-decoration: none !important;
     display: inline-block;
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    transition: all .25s;
+    -moz-transition: all .25s;
+    -webkit-transition: all .25s;
+}
+.button:hover {
+    background: var(--orange-light);
+}
+.green-button {
+    background: #0BAB62;   
+}
+.green-button:hover {
+    background: #53C390;   
+}
+.red-button {
+    background: #F72610;   
+}
+.red-button:hover {
+    background: #FF7A6C;   
 }
 .float-right {
     float: right;   
 }
 .sidebar {
-    background: #272634;
+    background: var(--grey-light);
     min-height: 100vh;
     color: #FFF;
     position: relative;
     z-index: 15;
     overflow-y: auto;
-    -webkit-box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.4);
-    -moz-box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.4);
-    box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.4);
 }
 .menu-header {
     font-size: 26px;
@@ -64,8 +77,8 @@ a:hover {
     font-weight: 700;
     text-align: center;
     padding: 20px;
-    background: #1E1E29;
-    border-bottom: 1px solid #C9C7EF;
+    background: var(--grey-dark);
+    border-bottom: 1px solid var(--grey-lighter);
 }
 .menu-header a {
     color: #FFF;
@@ -116,14 +129,10 @@ a:hover {
     color: #333;
 }
 .admin-menu-category i {
-    padding: 10px;
-    background: #1E1E29;
+    color: var(--grey-light);
     display: inline-block;
     margin-right: 10px;
-    border-radius: 5px;
-    width: 38px;
     text-align: center;
-    color: #FFF;
 }
 .admin-menu-container {
     border-left: 1px solid #FFF;
@@ -142,11 +151,11 @@ a:hover {
     top: 0px;
     left: 0px;
     width: 100%;
-    background: #1E1E29;
+    background: var(--grey-dark);
     padding: 15px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     text-align: right;
-    border-bottom: 1px solid #C9C7EF;
+    border-bottom: 1px solid var(--grey-lighter);
     height: 68px;
     z-index: 10;
 }
@@ -163,7 +172,7 @@ table {
 }
 table th {
     text-align: left;
-    background: #272634;
+    background: var(--grey-light);
     color: #FFF;
     padding: 10px;
 }
@@ -279,4 +288,9 @@ form label {
 .component-controller:last-of-type {
     border-bottom: none;
     margin-bottom: 0px;
+}
+#adminUserMenu img {
+    border-radius: 100px;
+    border: 5px solid #FFF;
+    margin-top: -5px;
 }

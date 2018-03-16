@@ -24,6 +24,17 @@
             header('Location: index.php?component=modules&controller=modules');
         }
         
+        public function order()
+        {
+            $swap = Session::getVar("swap");
+            $with = Session::getVar("with");
+            $position = Session::getVar("position");
+            $this->database->query("UPDATE #__modules SET ordering = ? WHERE ordering = ? AND position = ?", array($swap ."-". $with, $swap, $position));
+            $this->database->query("UPDATE #__modules SET ordering = ? WHERE ordering = ? AND position = ?", array($swap, $with, $position));
+            $this->database->query("UPDATE #__modules SET ordering = ? WHERE ordering = ? AND position = ?", array($with, $swap ."-". $with, $position));
+            header('Location: index.php?app=modules&controller=modules&position='. $position);
+        }
+        
     }
 
 ?>
