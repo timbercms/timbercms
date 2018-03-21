@@ -1,13 +1,8 @@
 :root {
-    --orange: #F74F10;
-    --orange-light: #FD7136;
-    --orange-dark: #DA3902;
-    --orange-darker: #BB2D01;
-    
-    --grey: #3E4140;
-    --grey-light: #515453;
-    --grey-lighter: #6B6F6E;
-    --grey-dark: #323534;
+    --link: #283655;
+    --link-accent: #4D648D;
+    --base: #1E1F26;
+    --accent: #4D648D;
 }
 html {
   box-sizing: border-box;
@@ -26,15 +21,15 @@ body {
     overflow-x: hidden;
 }
 a {
-    color: var(--orange);
+    color: var(--link);
     text-decoration: none;
 }
 a:hover {
-    color: var(--orange-light);  
+    color: var(--link-accent);  
 }
 .button {
     color: #FFF !important;
-    background: var(--orange);
+    background: var(--link);
     padding: 10px 20px;
     text-decoration: none !important;
     display: inline-block;
@@ -46,7 +41,7 @@ a:hover {
     -webkit-transition: all .25s;
 }
 .button:hover {
-    background: var(--orange-light);
+    background: var(--link-accent);
 }
 .green-button {
     background: #0BAB62;   
@@ -64,12 +59,13 @@ a:hover {
     float: right;   
 }
 .sidebar {
-    background: var(--grey-light);
+    background: var(--base);
     min-height: 100vh;
     color: #FFF;
     position: relative;
     z-index: 15;
     overflow-y: auto;
+    transition: height .25s;
 }
 .menu-header {
     font-size: 26px;
@@ -77,8 +73,7 @@ a:hover {
     font-weight: 700;
     text-align: center;
     padding: 20px;
-    background: var(--grey-dark);
-    border-bottom: 1px solid var(--grey-lighter);
+    background: var(--accent);
 }
 .menu-header a {
     color: #FFF;
@@ -129,7 +124,6 @@ a:hover {
     color: #333;
 }
 .admin-menu-category i {
-    color: var(--grey-light);
     display: inline-block;
     margin-right: 10px;
     text-align: center;
@@ -144,18 +138,17 @@ a:hover {
     padding: 10px 0px;
 }
 .menu-container a:hover {
-    color: #C9C7EF;
+    color: #DDD;
 }
 .action-bar {
     position: absolute;
     top: 0px;
     left: 0px;
     width: 100%;
-    background: var(--grey-dark);
+    background: var(--accent);
     padding: 15px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     text-align: right;
-    border-bottom: 1px solid var(--grey-lighter);
     height: 68px;
     z-index: 10;
 }
@@ -167,7 +160,7 @@ a:hover {
     height: 38px;
 }
 .admin-header {
-    background: var(--grey-light);
+    background: var(--base);
     color: #FFF;
     padding: 10px;
 }

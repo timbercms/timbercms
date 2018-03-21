@@ -105,6 +105,9 @@
                 setTimeout(function() {
                     $(".sidebar").css("height", $("html").height() + "px");
                 }, 750);
+                setInterval(function() {
+                    $(".sidebar").css("height", $("html").height() + "px");
+                }, 5000);
             });
         </script>
     </body>
