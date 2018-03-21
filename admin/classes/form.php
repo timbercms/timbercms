@@ -67,6 +67,10 @@
                         $string .= ' '. $field->attributes()->class;
                     }
                     $string .= '" value="'.$value.'"';
+                    if (strlen($field->attributes()->placeholder) > 0)
+                    {
+                        $string .= ' placeholder="'. $field->attributes()->placeholder .'"';
+                    }
                     if ($length > 0) {
                         $string .= 'maxlength="'.$length.'"';
                     }
