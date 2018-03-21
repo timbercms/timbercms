@@ -166,23 +166,16 @@ a:hover {
     display: inline-block;
     height: 38px;
 }
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-table th {
-    text-align: left;
+.admin-header {
     background: var(--grey-light);
     color: #FFF;
     padding: 10px;
 }
-table tr {
+.admin-list {
     border-bottom: 1px solid #CCC;
-}
-table tr td {
     padding: 10px;
 }
-table tr:nth-of-type(even) {
+.admin-list:nth-of-type(even) {
     background: #E0E0E0;
 }
 .clearfix {
