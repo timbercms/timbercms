@@ -294,3 +294,7 @@ form label {
     border: 5px solid #FFF;
     margin-top: -5px;
 }
+.module-ordering {
+    margin-top: -20px;
+    margin-bottom: 20px;
+}

@@ -54,6 +54,14 @@
             $data[] = array("name" => "show_title", "value" => $this->show_title);
             $data[] = array("name" => "published", "value" => $this->published);
             $data[] = array("name" => "position", "value" => $this->position);
+            if ($this->id <= 0)
+            {
+                $module = $this->database->loadObject("SELECT id, ordering FROM #__modules WHERE position = ? ORDER BY ordering DESC LIMIT 1", array($this->position));
+                if ($module->id > 0)
+                {
+                    $this->ordering = $module->ordering + 1;
+                }
+            }
             $data[] = array("name" => "ordering", "value" => $this->ordering);
             $data[] = array("name" => "params", "value" => serialize($this->params));
             $data[] = array("name" => "pages", "value" => implode(",", $this->pages));

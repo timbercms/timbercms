@@ -26,13 +26,13 @@
         
         public function order()
         {
-            $swap = Session::getVar("swap");
-            $with = Session::getVar("with");
-            $position = Session::getVar("position");
-            $this->database->query("UPDATE #__modules SET ordering = ? WHERE ordering = ? AND position = ?", array($swap ."-". $with, $swap, $position));
-            $this->database->query("UPDATE #__modules SET ordering = ? WHERE ordering = ? AND position = ?", array($swap, $with, $position));
-            $this->database->query("UPDATE #__modules SET ordering = ? WHERE ordering = ? AND position = ?", array($with, $swap ."-". $with, $position));
-            header('Location: index.php?app=modules&controller=modules&position='. $position);
+            $swap = $_GET["swap"];
+            $with = $_GET["with"];
+            $position = $_GET["position"];
+            $this->model->database->query("UPDATE #__modules SET ordering = ? WHERE ordering = ? AND position = ?", array($swap ."-". $with, $swap, $position));
+            $this->model->database->query("UPDATE #__modules SET ordering = ? WHERE ordering = ? AND position = ?", array($swap, $with, $position));
+            $this->model->database->query("UPDATE #__modules SET ordering = ? WHERE ordering = ? AND position = ?", array($with, $swap ."-". $with, $position));
+            header('Location: index.php?component=modules&controller=modules&position='. $position);
         }
         
     }
