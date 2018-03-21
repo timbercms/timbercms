@@ -1,7 +1,7 @@
 <div class="white-card">
     <h2>Extension Manager</h2>
     <div class="component-action-bar">
-        <a href="index.php?component=settings&controller=settings&extension=extensions"><i class="fa fa-cog"></i> Settings</a>
+        <a href="index.php?component=settings&controller=settings&extension=extensions" class="button"><i class="fa fa-cog"></i> Settings</a>
     </div>
     <div class="d-flex admin-header">
         <div class="col-md-1"><strong>ID</strong></div>

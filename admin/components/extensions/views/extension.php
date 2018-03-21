@@ -1,7 +1,7 @@
 <div class="white-card">
     <h2><?php echo $this->model->title; ?> Extension</h2>
     <div class="component-action-bar">
-        <a href="index.php?component=extensions&controller=extensions"><i class="fa fa-chevron-left"></i> Back to List</a>
+        <a href="index.php?component=extensions&controller=extensions" class="button"><i class="fa fa-chevron-left"></i> Back to List</a>
     </div>
     <?php if ($this->model->is_locked) { ?>
         <div class="alert alert-warning">

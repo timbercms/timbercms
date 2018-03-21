@@ -1,7 +1,7 @@
 <div class="white-card">
     <h2>User Manager</h2>
     <div class="component-action-bar">
-        <a href="index.php?component=settings&controller=settings&extension=user"><i class="fa fa-cog"></i> Settings</a><a href="index.php?component=user&controller=user"><i class="fa fa-plus"></i> New User</a><a class="delete-by-ids"><i class="fa fa-trash"></i> Delete</a>
+        <a href="index.php?component=settings&controller=settings&extension=user" class="button"><i class="fa fa-cog"></i> Settings</a><a href="index.php?component=user&controller=user" class="button green-button"><i class="fa fa-plus"></i> New User</a><a class="delete-by-ids button red-button"><i class="fa fa-trash"></i> Delete</a>
     </div>
     <form action="index.php?component=user&controller=users&task=delete" method="post" class="admin-form">
         <div class="d-flex admin-header">

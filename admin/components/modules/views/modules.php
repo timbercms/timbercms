@@ -1,7 +1,7 @@
 <div class="white-card">
     <h2>Module Manager</h2>
     <div class="component-action-bar">
-        <a href="index.php?component=settings&controller=settings&extension=modules"><i class="fa fa-cog"></i> Settings</a><a href="index.php?component=modules&controller=newmodule"><i class="fa fa-plus"></i> New Module</a><a class="delete-by-ids"><i class="fa fa-trash"></i> Delete</a>
+        <a href="index.php?component=settings&controller=settings&extension=modules" class="button"><i class="fa fa-cog"></i> Settings</a><a href="index.php?component=modules&controller=newmodule" class="button green-button"><i class="fa fa-plus"></i> New Module</a><a class="delete-by-ids button red-button"><i class="fa fa-trash"></i> Delete</a>
     </div>
     <div class="module-ordering">
         <form action="index.php" method="get">

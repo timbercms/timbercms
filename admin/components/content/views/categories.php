@@ -1,7 +1,7 @@
 <div class="white-card">
     <h2>Category Manager</h2>
     <div class="component-action-bar">
-        <a href="index.php?component=settings&controller=settings&extension=content"><i class="fa fa-cog"></i> Settings</a><a href="index.php?component=content&controller=category"><i class="fa fa-plus"></i> New Category</a><a class="delete-by-ids"><i class="fa fa-trash"></i> Delete</a>
+        <a href="index.php?component=settings&controller=settings&extension=content" class="button"><i class="fa fa-cog"></i> Settings</a><a href="index.php?component=content&controller=category" class="button green-button"><i class="fa fa-plus"></i> New Category</a><a class="delete-by-ids button red-button"><i class="fa fa-trash"></i> Delete</a>
     </div>
     <form action="index.php?component=content&controller=categories&task=delete" method="post" class="admin-form">
         <div class="d-flex admin-header">

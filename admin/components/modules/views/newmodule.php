@@ -1,7 +1,7 @@
 <div class="white-card">
     <h2>New Module</h2>
     <div class="component-action-bar">
-        <a href="index.php?component=modules&controller=modules"><i class="fa fa-chevron-left"></i> Back to List</a>
+        <a href="index.php?component=modules&controller=modules" class="button"><i class="fa fa-chevron-left"></i> Back to List</a>
     </div>
     <div class="module-type" style="border: none;">
         <div class="row">
