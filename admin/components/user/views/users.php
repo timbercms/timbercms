@@ -9,8 +9,8 @@
             <div class="col-md-1"><strong>ID</strong></div>
             <div class="col-md-4"><strong>Username</strong></div>
             <div class="col-md-4"><strong>Email</strong></div>
-            <div class="col-md-1"><strong>Activated</strong></div>
-            <div class="col-md-1"><strong>Blocked</strong></div>
+            <div class="col-md-1" style="text-align: center;"><strong>Activated</strong></div>
+            <div class="col-md-1" style="text-align: center;"><strong>Blocked</strong></div>
         </div>
         <?php foreach ($this->model->users as $user) { ?>
             <div class="d-flex admin-list align-items-center">
@@ -26,11 +26,15 @@
                 <div class="col-md-4">
                     <?php echo $user->email; ?>
                 </div>
-                <div class="col-md-1">
-                    <i class="fa fa-<?php echo ($user->activated == 1 ? "check" : "times"); ?>"></i>
+                <div class="col-md-1" style="text-align: center;">
+                    <a href="index.php?component=user&controller=user&task=<?php echo ($user->activated == 1 ? "deactivate" : "activate"); ?>&id=<?php echo $user->id; ?>" class="btn btn-<?php echo ($user->activated == 1 ? "success" : "danger"); ?>">
+                        <i class="fa fa-<?php echo ($user->activated == 1 ? "check" : "times"); ?>"></i>
+                    </a>
                 </div>
-                <div class="col-md-1">
-                    <i class="fa fa-<?php echo ($user->blocked == 1 ? "check" : "times"); ?>"></i>
+                <div class="col-md-1" style="text-align: center;">
+                    <a href="index.php?component=user&controller=user&task=<?php echo ($user->blocked == 1 ? "unblock" : "block"); ?>&id=<?php echo $user->id; ?>" class="btn btn-<?php echo ($user->blocked == 1 ? "danger" : "success"); ?>">
+                        <i class="fa fa-<?php echo ($user->blocked == 0 ? "check" : "times"); ?>"></i>
+                    </a>
                 </div>
             </div>
         <?php } ?>

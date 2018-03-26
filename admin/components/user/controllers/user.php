@@ -34,6 +34,34 @@
             header("Location: index.php?component=user&controller=users");
         }
         
+        public function activate()
+        {
+            $this->model->database->query("UPDATE #__users SET activated = '1' WHERE id = ?", array($_GET["id"]));
+            $this->model->setMessage("success", "User activated");
+            header("Location: index.php?component=user&controller=users");
+        }
+        
+        public function deactivate()
+        {
+            $this->model->database->query("UPDATE #__users SET activated = '0' WHERE id = ?", array($_GET["id"]));
+            $this->model->setMessage("success", "User deactivated");
+            header("Location: index.php?component=user&controller=users");
+        }
+        
+        public function block()
+        {
+            $this->model->database->query("UPDATE #__users SET blocked = '1' WHERE id = ?", array($_GET["id"]));
+            $this->model->setMessage("success", "User blocked");
+            header("Location: index.php?component=user&controller=users");
+        }
+        
+        public function unblock()
+        {
+            $this->model->database->query("UPDATE #__users SET blocked = '0' WHERE id = ?", array($_GET["id"]));
+            $this->model->setMessage("success", "User unblocked");
+            header("Location: index.php?component=user&controller=users");
+        }
+        
     }
 
 ?>
