@@ -12,7 +12,6 @@
         <title>Bulletin. Admin</title>
         <!-- META_DESCRIPTION -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-        <link rel="stylesheet" href="templates/<?php echo $this->template->name; ?>/css/font-awesome.min.css">
         <link rel="stylesheet" href="templates/<?php echo $this->template->name; ?>/css/bootstrap.min.css">
         <link rel="stylesheet" href="templates/<?php echo $this->template->name; ?>/css/template.css?v=<?php echo time(); ?>">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -21,6 +20,7 @@
         <script src="templates/<?php echo $this->template->name; ?>/js/sweetalert.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
         <script src="templates/<?php echo $this->template->name; ?>/js/template.js?v=<?php echo time(); ?>"></script>
+        <script src="templates/<?php echo $this->template->name; ?>/js/fontawesome-all.min.js?v=<?php echo time(); ?>"></script>
         <script src="../tinymce/tinymce.min.js"></script>
         <script>tinymce.init({ selector:'textarea',height:500,theme: 'modern',
               plugins: [
@@ -43,7 +43,7 @@
         <div class="action-bar">
             <div class="dropdown">
                 <a class="dropdown-toggle" href="#" type="button" role="button" id="adminUserMenu" data-toggle="dropdown">
-                    <img src="<?php echo $this->user()->avatar; ?>" /><span class="user-username"><?php echo $this->user()->username; ?><i class="fa fa-chevron-down"></i></span>
+                    <img src="<?php echo $this->user()->avatar; ?>" /><span class="user-username"><?php echo $this->user()->username; ?><i class="fas fa-chevron-down"></i></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="adminUserMenu">
                     <a class="dropdown-item" href="../user/user/?task=logout">Logout</a>
@@ -54,7 +54,7 @@
             <div class="col-md-2" style="padding-right: 0px !important;">
                 <div class="sidebar">
                     <div class="menu-header">
-                        <a href="index.php"><i class="fa fa-circle-o"></i> Bulletin.</a>
+                        <a href="index.php"><i class="far fa-circle"></i> Bulletin.</a>
                     </div>
                     <div class="menu-container">
                         <ul>
@@ -63,19 +63,23 @@
                                 {
                                     if (file_exists(__DIR__ ."/../../components/". $dir ."/extension.xml")) {
                                         $xml = simplexml_load_file(__DIR__ ."/../../components/". $dir ."/extension.xml");
-                                        echo '<div class="admin-menu-container">';
-                                            echo '<div class="admin-menu-category"><i class="fa fa-'. $xml->name->attributes()->icon .'"></i> '. $xml->name->attributes()->value .'</div>';
-                                            echo '<div class="admin-menu-subitems">';
-                                                foreach ($xml->items as $item)
-                                                {
-                                                    ?>
-                                                    <li>
-                                                        <a href="index.php?component=<?php echo $dir; ?>&controller=<?php echo $item->attributes()->value; ?>"><?php echo $item->attributes()->label; ?></a>
-                                                    </li>
-                                                    <?php
-                                                }
+                                        $comp = Core::db()->loadObject("SELECT * FROM #__components WHERE internal_name = ?", array($dir));
+                                        if ($comp->enabled)
+                                        {
+                                            echo '<div class="admin-menu-container">';
+                                                echo '<div class="admin-menu-category"><i class="fas fa-'. $xml->name->attributes()->icon .'"></i> '. $xml->name->attributes()->value .'</div>';
+                                                echo '<div class="admin-menu-subitems">';
+                                                    foreach ($xml->items as $item)
+                                                    {
+                                                        ?>
+                                                        <li>
+                                                            <a href="index.php?component=<?php echo $dir; ?>&controller=<?php echo $item->attributes()->value; ?>"><?php echo $item->attributes()->label; ?></a>
+                                                        </li>
+                                                        <?php
+                                                    }
+                                                echo '</div>';
                                             echo '</div>';
-                                        echo '</div>';
+                                        }
                                     }
                                 } 
                             ?>

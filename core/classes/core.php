@@ -32,10 +32,12 @@
         private $component;
         private $controller;
         private $model;
+        private $task;
         public $content_id;
         public static $content_item_id;
         public static $menu_item_id;
         public static $config = array();
+        public static $componentconfig = array();
         public static $meta_properties = array();
         public static $meta_itemprops = array();
         public static $meta_names = array();
@@ -120,16 +122,15 @@
                                 case "id":
                                     $this->content_id = $part["1"];
                                     break;
+                                case "task":
+                                    $this->task = $part["1"];
+                                    break;
                             }
                         }
                     }
                     else
                     {
-                        $link = str_replace(SUBFOLDER, "", $_SERVER["REQUEST_URI"]);
-                        $parts = explode("/", $link);
-                        $this->component = $parts["0"];
-                        $this->controller = $parts["1"];
-                        $this->content_id = 0;
+                        $this->unroute();
                     }
                 }
                 else
@@ -152,6 +153,8 @@
                 require_once(__DIR__ ."/../../components/". $this->component ."/view.php");
                 $model = new $modelname($this->content_id, $this->database);
                 $controller = new $controllername($model);
+                $componentconfig = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = ? LIMIT 1", array($this->component));
+                self::$componentconfig = (object) unserialize($componentconfig->params);
                 if (strlen($_GET["task"]) > 0)
                 {
                     $task = $_GET["task"];
@@ -339,7 +342,8 @@
             }
             else
             {
-                $parts = explode("/", $string);
+                $task_split = explode("?", $string);
+                $parts = explode("/", $task_split["0"]);
                 $first = $this->database->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($parts["0"]));
                 if ($first->id > 0)
                 {
@@ -450,6 +454,11 @@
         public static function config()
         {
             return self::$config;
+        }
+        
+        public static function componentconfig()
+        {
+            return self::$componentconfig;
         }
         
         public static function content_item_id()

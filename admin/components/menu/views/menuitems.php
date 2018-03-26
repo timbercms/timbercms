@@ -32,7 +32,7 @@
                     </a>
                 </div>
                 <div class="col-md-2" style="text-align: right;">
-                    <a href="index.php?component=menu&controller=menuitem&id=<?php echo $item->id; ?>&menu_id=<?php echo $item->menu_id; ?>" class="button"><i class="fa fa-pencil"></i> Edit Item</a>
+                    <a href="index.php?component=menu&controller=menuitem&id=<?php echo $item->id; ?>&menu_id=<?php echo $item->menu_id; ?>" class="button"><i class="fa fa-edit"></i> Edit Item</a>
                 </div>
             </div>
         <?php } ?>

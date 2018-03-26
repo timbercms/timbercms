@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
-    <name value="Update Manager" icon="cloud-download" />
+    <name value="Update Manager" icon="download" />
     <items value="update" label="Manage Updates" />
 </settings>

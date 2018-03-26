@@ -274,3 +274,6 @@ input[type="text"],input[type="password"], input[type="email"] {
     border-radius: 100px;
     width: 130px;
 }
+.component-title {
+    margin-bottom: 40px;   
+}

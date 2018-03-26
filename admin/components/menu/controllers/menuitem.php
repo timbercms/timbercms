@@ -26,7 +26,14 @@
             $this->model->content_id = $_POST["content_id"];
             $this->model->params = $_POST["params"];
             $this->model->is_home = $_POST["is_home"];
-            $this->model->store();
+            if ($this->model->store())
+            {
+                $this->model->setMessage("success", "Menu item saved");
+            }
+            else
+            {
+                $this->model->setMessage("danger", "Something went wrong during saving");
+            }
             if ($_POST["id"] > 0)
             {
                 $id = $_POST["id"];
@@ -35,19 +42,20 @@
             {
                 $id = $this->model->database->lastInsertId();
             }
-            $this->model->setMessage("success", "Menu Item saved Successfully");
             header("Location: index.php?component=menu&controller=menuitem&id=". $id ."&menu_id=". $_POST["menu_id"]);
         }
         
         public function publish()
         {
             $this->model->database->query("UPDATE #__menus_items SET published = '1' WHERE id = ?", array($_GET["id"]));
+            $this->model->setMessage("success", "Menu item published");
             header("Location: index.php?component=menu&controller=menuitems&id=". $_GET["menu_id"]);
         }
         
         public function unpublish()
         {
             $this->model->database->query("UPDATE #__menus_items SET published = '0' WHERE id = ?", array($_GET["id"]));
+            $this->model->setMessage("success", "Menu item unpublished");
             header("Location: index.php?component=menu&controller=menuitems&id=". $_GET["menu_id"]);
         }
         

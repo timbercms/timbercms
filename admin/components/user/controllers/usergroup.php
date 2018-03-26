@@ -17,7 +17,14 @@
             $this->model->id = $_POST["id"];
             $this->model->title = $_POST["title"];
             $this->model->is_admin = $_POST["is_admin"];
-            $this->model->store();
+            if ($this->model->store())
+            {
+                $this->model->setMessage("success", "Usergroup saved");
+            }
+            else
+            {
+                $this->model->setMessage("danger", "Something went wrong during saving");
+            }
             header("Location: index.php?component=user&controller=usergroups");
         }
         

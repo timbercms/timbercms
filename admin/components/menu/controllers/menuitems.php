@@ -20,7 +20,7 @@
             {
                 $mod->delete($delete);
             }
-            $mod->setMessage("success", (count($deletes) > 1 ? "Menuitems" : "Menuitem") ." deleted successfully!");
+            $this->model->setMessage("success", (count($deletes) > 1 ? "Menuitems" : "Menuitem") ." deleted successfully!");
             header('Location: index.php?component=menu&controller=menuitems&id='. $_GET["id"]);
         }
         

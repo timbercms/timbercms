@@ -20,7 +20,7 @@
             {
                 $mod->delete($delete);
             }
-            $mod->setMessage("success", (count($deletes) > 1 ? "Articles" : "Article") ." deleted successfully!");
+            $this->model->setMessage("success", (count($deletes) > 1 ? "Articles" : "Article") ." deleted successfully!");
             header('Location: index.php?component=content&controller=articles');
         }
         

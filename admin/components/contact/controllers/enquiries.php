@@ -1,6 +1,6 @@
 <?php
 
-    class MenusController
+    class EnquiriesController
     {
         
         private $model;
@@ -15,13 +15,13 @@
         public function delete()
         {
             $deletes = $_POST["ids"];
-            $mod = new MenuModel(0, $this->model->database);
+            $mod = new EnquiryModel(0, $this->model->database);
             foreach ($deletes as $delete)
             {
                 $mod->delete($delete);
             }
-            $this->model->setMessage("success", (count($deletes) > 1 ? "Menus" : "Menu") ." deleted successfully!");
-            header('Location: index.php?component=menu&controller=menus');
+            $mod->setMessage("success", (count($deletes) > 1 ? "Enquiries" : "Enquiry") ." deleted successfully!");
+            header('Location: index.php?component=contact&controller=enquiries');
         }
         
     }

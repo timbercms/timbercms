@@ -23,7 +23,14 @@
             $this->model->blocked_reason = $_POST["blocked_reason"];
             $this->model->register_time = ($_POST["register_time"] > 0 ? $_POST["register_time"] : time());
             $this->model->usergroup_id = $_POST["usergroup_id"];
-            $this->model->store();
+            if ($this->model->store())
+            {
+                $this->model->setMessage("success", "User saved");
+            }
+            else
+            {
+                $this->model->setMessage("danger", "Something went wrong during saving");
+            }
             header("Location: index.php?component=user&controller=users");
         }
         

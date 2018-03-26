@@ -20,7 +20,7 @@
             {
                 $mod->delete($delete);
             }
-            $mod->setMessage("success", (count($deletes) > 1 ? "Modules" : "Module") ." deleted successfully!");
+            $this->model->setMessage("success", (count($deletes) > 1 ? "Modules" : "Module") ." deleted successfully!");
             header('Location: index.php?component=modules&controller=modules');
         }
         
@@ -32,6 +32,7 @@
             $this->model->database->query("UPDATE #__modules SET ordering = ? WHERE ordering = ? AND position = ?", array($swap ."-". $with, $swap, $position));
             $this->model->database->query("UPDATE #__modules SET ordering = ? WHERE ordering = ? AND position = ?", array($swap, $with, $position));
             $this->model->database->query("UPDATE #__modules SET ordering = ? WHERE ordering = ? AND position = ?", array($with, $swap ."-". $with, $position));
+            $this->model->setMessage("success", "Modules reordered");
             header('Location: index.php?component=modules&controller=modules&position='. $position);
         }
         

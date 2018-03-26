@@ -20,7 +20,7 @@
             {
                 $mod->delete($delete);
             }
-            $mod->setMessage("success", (count($deletes) > 1 ? "Users" : "User") ." deleted successfully!");
+            $this->model->setMessage("success", (count($deletes) > 1 ? "Users" : "User") ." deleted successfully!");
             header('Location: index.php?component=user&controller=users');
         }
         

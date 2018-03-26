@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
-    <name value="Content" icon="newspaper-o" />
+    <name value="Content" icon="newspaper" />
     <items value="articles" label="Articles" />
     <items value="categories" label="Categories" />
     <controller label="Category View" internal_name="category" query="SELECT id, title FROM #__articles_categories ORDER BY id ASC" key="id" keyvalue="title" description="View a list of articles from a specific category." />

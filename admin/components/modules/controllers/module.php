@@ -23,19 +23,28 @@
             $this->model->params = $_POST["params"];
             $this->model->ordering = $_POST["ordering"];
             $this->model->pages = $_POST["pages"];
-            $this->model->store();
+            if ($this->model->store())
+            {
+                $this->model->setMessage("success", "Module saved");
+            }
+            else
+            {
+                $this->model->setMessage("danger", "Something went wrong during saving");
+            }
             header("Location: index.php?component=modules&controller=modules");
         }
         
         public function publish()
         {
             $this->model->database->query("UPDATE #__modules SET published = '1' WHERE id = ?", array($_GET["id"]));
+            $this->model->setMessage("success", "Module published");
             header("Location: index.php?component=modules&controller=modules");
         }
         
         public function unpublish()
         {
             $this->model->database->query("UPDATE #__modules SET published = '0' WHERE id = ?", array($_GET["id"]));
+            $this->model->setMessage("success", "Module unpublished");
             header("Location: index.php?component=modules&controller=modules");
         }
         

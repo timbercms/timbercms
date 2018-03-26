@@ -16,7 +16,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
         <script src="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/js/bootstrap.min.js"></script>
         <script src="<?php echo BASE_URL; ?>tinymce/tinymce.min.js"></script>
-        <script>tinymce.init({ selector:'textarea',height:350,theme: 'modern',
+        <script>tinymce.init({ selector:'.editor',height:350,theme: 'modern',
                 menubar:false,
                 statusbar: false,
               plugins: [

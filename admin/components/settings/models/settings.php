@@ -3,7 +3,7 @@
     require_once(__DIR__ ."/../../../classes/form.php");
     require_once(__DIR__ ."/../../extensions/models/extension.php");
 
-    class SettingsModel
+    class SettingsModel extends Model
     {
         
         public $template = "settings.php";

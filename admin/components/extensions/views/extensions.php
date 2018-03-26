@@ -28,7 +28,7 @@
             </div>
             <?php if ($extension->is_locked == 1) { ?>
                 <div class="col-md-1" style="text-align: center;">
-                    <button class="btn btn-success btn-disabled"><i class="fa fa-lock"></i></button>
+                    <button class="btn btn-success btn-warning"><i class="fa fa-lock"></i></button>
                 </div>
             <?php } else { ?>
                 <div class="col-md-1" style="text-align: center;">

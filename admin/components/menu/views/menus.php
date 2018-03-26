@@ -22,7 +22,7 @@
                     <a href="index.php?component=menu&controller=menu&id=<?php echo $menu->id; ?>"><?php echo $menu->title; ?></a>
                 </div>
                 <div class="col-md-2">
-                    <a href="index.php?component=menu&controller=menuitems&id=<?php echo $menu->id; ?>" class="button"><i class="fa fa-pencil"></i> Menu Items (<?php echo count($menu->items); ?>)</a>
+                    <a href="index.php?component=menu&controller=menuitems&id=<?php echo $menu->id; ?>" class="button"><i class="fa fa-edit"></i> Menu Items (<?php echo count($menu->items); ?>)</a>
                 </div>
             </div>
         <?php } ?>

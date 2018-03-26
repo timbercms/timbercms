@@ -235,7 +235,7 @@ form label {
     display: inline-block;
     margin-left: 20px;
 }
-.user-username i {
+.user-username svg {
     display: inline-block;
     margin-left: 20px;
 }
