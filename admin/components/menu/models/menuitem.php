@@ -52,7 +52,7 @@
             $this->params = unserialize($temp->params);
             $this->is_home = $temp->is_home;
             $this->ordering = $temp->ordering;
-            $temp_children = $this->database->loadObjectList("SELECT id FROM #__menus_items WHERE parent_id = ?", array($id));
+            $temp_children = $this->database->loadObjectList("SELECT id FROM #__menus_items WHERE parent_id = ? ORDER BY ordering ASC", array($id));
             if (count($temp_children) > 0)
             {
                 foreach ($temp_children as $child)
@@ -85,6 +85,14 @@
             $data[] = array("name" => "content_id", "value" => $this->content_id);
             $data[] = array("name" => "params", "value" => serialize($this->params));
             $data[] = array("name" => "is_home", "value" => $this->is_home);
+            if ($this->id <= 0)
+            {
+                $item = $this->database->loadObject("SELECT id, ordering FROM #__menus_items WHERE menu_id = ? AND parent_id = ? ORDER BY ordering DESC LIMIT 1", array($this->menu_id, $this->parent_id));
+                if ($item->id > 0)
+                {
+                    $this->ordering = $item->ordering + 1;
+                }
+            }
             $data[] = array("name" => "ordering", "value" => $this->ordering);
 			return parent::store("#__menus_items", $data);
 		}
