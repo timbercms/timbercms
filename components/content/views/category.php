@@ -16,7 +16,7 @@
                 <div class="col-md-9">
                     <div class="category-article-info">
                         <h4 class="card-title"><a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>"><?php echo $article->title; ?></a></h4>
-                        <p class="card-text category-publish-time"><i class="fa fa-clock-o"></i><time pubdate><?php echo $this->model->relativeTime($article->publish_time); ?> ago</time></p>
+                        <p class="card-text category-publish-time"><i class="far fa-clock"></i>&nbsp;<time pubdate><?php echo $this->model->relativeTime($article->publish_time); ?> ago</time></p>
                         <p class="card-text"><?php echo substr(strip_tags($article->content), 0, 300); ?><?php echo (strlen($article->content) > 300 ? "..." : ""); ?></p>
                         <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>" class="button">Read More</a>
                     </div>

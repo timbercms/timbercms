@@ -16,6 +16,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
         <script src="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/js/bootstrap.min.js"></script>
         <script src="<?php echo BASE_URL; ?>tinymce/tinymce.min.js"></script>
+        <script src="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/js/fontawesome-all.min.js?v=<?php echo time(); ?>"></script>
         <script>tinymce.init({ selector:'.editor',height:350,theme: 'modern',
                 menubar:false,
                 statusbar: false,
@@ -32,34 +33,7 @@
     <body>
         <div class="body-container">
             <div class="menu-container">
-                <div class="header-content">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <?php $this->template->displayModules("main-menu"); ?>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="header-login">
-                                <?php if ($this->user()->id > 0) { ?>
-                                    <div class="dropdown">
-                                        <button class="user-menu" type="button" data-toggle="dropdown">
-                                            <?php echo $this->user()->username; ?> <i class="fa fa-chevron-down"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="<?php echo $this->route("index.php?component=user&controller=profile&id=". $this->user()->id); ?>">My Profile</a>
-                                            <?php if ($this->user()->usergroup->is_admin == 1) { ?>
-                                                <a class="dropdown-item" href="<?php echo BASE_URL; ?>admin">Admin Panel</a>
-                                            <?php } ?>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="<?php echo $this->route("index.php?component=user&controller=user&task=logout"); ?>">Logout</a>
-                                        </div>
-                                    </div>
-                                <?php } else { ?>
-                                    <a href="<?php echo $this->route("index.php?component=user&controller=login"); ?>" class="user-menu">Login</a>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php $this->template->displayModules("main-menu"); ?>
             </div>
             <div class="body-content">
                 <div class="system-messages">
