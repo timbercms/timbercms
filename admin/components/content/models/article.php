@@ -57,7 +57,7 @@
 			$data[] = array("name" => "title", "value" => $this->title);
             if (strlen($this->alias) == 0)
             {
-                $this->alias = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->title)));
+                $this->alias = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', str_replace("-", "", $this->title))));
             }
             $data[] = array("name" => "alias", "value" => $this->alias);
             $data[] = array("name" => "content", "value" => $this->content);

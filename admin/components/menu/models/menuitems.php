@@ -18,7 +18,7 @@
         
         public function load($id)
         {
-            $temp_items = $this->database->loadObjectList("SELECT id FROM #__menus_items WHERE menu_id = ?", array($id));
+            $temp_items = $this->database->loadObjectList("SELECT id FROM #__menus_items WHERE menu_id = ? AND parent_id = 0", array($id));
             foreach ($temp_items as $temp_item)
             {
                 $item = new MenuitemModel($temp_item->id, $this->database);

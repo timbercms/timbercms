@@ -18,8 +18,10 @@
         public $content_id;
         public $params = array();
         public $is_home;
+        public $ordering;
         public $controllers = array();
         public $controller_query;
+        public $children = array();
         
         public $form;
         
@@ -49,6 +51,15 @@
             $this->content_id = $temp->content_id;
             $this->params = unserialize($temp->params);
             $this->is_home = $temp->is_home;
+            $this->ordering = $temp->ordering;
+            $temp_children = $this->database->loadObjectList("SELECT id FROM #__menus_items WHERE parent_id = ?", array($id));
+            if (count($temp_children) > 0)
+            {
+                foreach ($temp_children as $child)
+                {
+                    $this->children[] = new MenuitemModel($child->id, $this->database);
+                }
+            }
         }
         
         public function store($table = "", $data = array())
@@ -74,6 +85,7 @@
             $data[] = array("name" => "content_id", "value" => $this->content_id);
             $data[] = array("name" => "params", "value" => serialize($this->params));
             $data[] = array("name" => "is_home", "value" => $this->is_home);
+            $data[] = array("name" => "ordering", "value" => $this->ordering);
 			return parent::store("#__menus_items", $data);
 		}
         
@@ -106,17 +118,34 @@
         
         public function getSiblings()
         {
-            $array = array();
-            $default = new stdClass();
-            $default->value = 0;
-            $default->name = "-- NO PARENT --";
-            $array[] = $default;
-            $results = $this->database->loadObjectList("SELECT id AS value, title AS name FROM #__menus_items WHERE menu_id = ? AND id != ? ORDER BY id ASC", array($_GET["menu_id"], $this->id));
+            $items = array();
+            $results = $this->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND id != ? AND parent_id = 0 ORDER BY ordering ASC", array($_GET["menu_id"], $this->id));
             foreach ($results as $result)
             {
-                $array[] = $result;
+                $item = new stdClass();
+                $item->id = $result->id;
+                $item->title = $result->title;
+                $item->children = array();
+                $children = $this->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND id != ? AND parent_id = ? ORDER BY ordering ASC", array($_GET["menu_id"], $this->id, $result->id));
+                foreach ($children as $child)
+                {
+                    $child_item = new stdClass();
+                    $child_item->id = $child->id;
+                    $child_item->title = $child->title;
+                    $child_item->children = array();
+                    $grandchildren = $this->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND id != ? AND parent_id = ? ORDER BY ordering ASC", array($_GET["menu_id"], $this->id, $child->id));
+                    foreach ($grandchildren as $grandchild)
+                    {
+                        $grandchild_item = new stdClass();
+                        $grandchild_item->id = $grandchild->id;
+                        $grandchild_item->title = $grandchild->title;
+                        $child_item->children[] = $grandchild;
+                    }
+                    $item->children[] = $child_item;
+                }
+                $items[] = $item;
             }
-            return $array;
+            return $items;
         }
         
         public function delete($id)
