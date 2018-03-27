@@ -97,6 +97,9 @@
 .category-articles {
     margin-top: 40px;   
 }
+.share-buttons {
+    margin-top: 40px;   
+}
 .share-buttons a {
     font-size: 28px;
     display: inline-block;
