@@ -61,7 +61,7 @@
                             <i class="fa fa-<?php echo ($child->published == 1 ? "check" : "times"); ?>"></i>
                         </a>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" style="text-align: center;">
                         <div class="btn-group">
                             <a id="order-up order-up-<?php echo $child->id; ?>" class="btn btn-warning<?php if ($child->ordering == 0) { echo ' disabled'; } ?>" href="index.php?component=menu&controller=menuitems&task=order&swap=<?php echo $child->ordering; ?>&with=<?php echo ($child->ordering - 1); ?>&menu_id=<?php echo $child->menu_id; ?>&parent_id=<?php echo $item->id; ?>"><i class="fa fa-arrow-up"></i></a>
                             <a id="order-down order-down-<?php echo $child->id; ?>" class="btn btn-warning<?php if ($child->ordering == (count($item->children) - 1)) { echo ' disabled'; } ?>" href="index.php?component=menu&controller=menuitems&task=order&swap=<?php echo $child->ordering; ?>&with=<?php echo ($child->ordering + 1); ?>&menu_id=<?php echo $child->menu_id; ?>&parent_id=<?php echo $item->id; ?>"><i class="fa fa-arrow-down"></i></a>
@@ -90,7 +90,7 @@
                                 <i class="fa fa-<?php echo ($grandchild->published == 1 ? "check" : "times"); ?>"></i>
                             </a>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2" style="text-align: right;">
                             <div class="btn-group">
                                 <a id="order-up order-up-<?php echo $grandchild->id; ?>" class="btn btn-secondary<?php if ($grandchild->ordering == 0) { echo ' disabled'; } ?>" href="index.php?component=menu&controller=menuitems&task=order&swap=<?php echo $grandchild->ordering; ?>&with=<?php echo ($grandchild->ordering - 1); ?>&menu_id=<?php echo $grandchild->menu_id; ?>&parent_id=<?php echo $child->id; ?>"><i class="fa fa-arrow-up"></i></a>
                                 <a id="order-down order-down-<?php echo $grandchild->id; ?>" class="btn btn-secondary<?php if ($grandchild->ordering == (count($child->children) - 1)) { echo ' disabled'; } ?>" href="index.php?component=menu&controller=menuitems&task=order&swap=<?php echo $grandchild->ordering; ?>&with=<?php echo ($grandchild->ordering + 1); ?>&menu_id=<?php echo $grandchild->menu_id; ?>&parent_id=<?php echo $child->id; ?>"><i class="fa fa-arrow-down"></i></a>
