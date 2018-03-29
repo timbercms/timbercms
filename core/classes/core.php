@@ -15,6 +15,7 @@
     require_once(__DIR__ ."/../../admin/components/menu/models/menuitem.php");
     require_once(__DIR__ ."/../../admin/components/modules/models/module.php");
     require_once(__DIR__ ."/../../admin/components/modules/models/module.php");
+    require_once(__DIR__ ."/../libraries/Mobile_Detect.php");
 
     class Core
     {

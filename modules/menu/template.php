@@ -1,7 +1,7 @@
 <ul class="menu-list">
     <?php foreach ($worker->items as $item) { ?>
         <li class="top-level<?php if (Core::menu_item_id() == $item->id) { echo ' active'; } ?><?php echo (count($item->children) > 0 ? ' parent' : ''); ?>">
-            <a href="<?php echo BASE_URL.$item->alias; ?>"><?php echo $item->title; ?><?php echo (count($item->children) > 0 ? '&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>' : ''); ?></a>
+            <a href="<?php echo BASE_URL.$item->alias; ?>"><?php echo $item->title; ?></a>
             <?php if (count($item->children) > 0) { ?>
                 <ul>
                     <?php foreach ($item->children as $child) { ?>
