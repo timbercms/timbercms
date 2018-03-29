@@ -1,4 +1,5 @@
 <div class="reset-container">
+    <h1 class="component-title">Request password reset</h1>
     <form action="index.php?component=user&controller=requestreset&task=reset" method="post">
         <div class="frame">
             <div class="frame-3">

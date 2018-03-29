@@ -1,4 +1,5 @@
 <div class="reset-container">
+    <h1 class="component-title">Reset your password</h1>
     <?php if (strlen($this->model->token) > 0) { ?>
         <form action="index.php?component=user&controller=reset&task=reset" method="post">
             <div class="frame">

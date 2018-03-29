@@ -29,6 +29,10 @@
               ],
               toolbar1: 'undo redo | bold italic | bullist numlist outdent indent | link | preview media<?php if ($this->user()->usergroup->is_admin == 1) { ?> | code<?php } ?>', });</script>
         <!-- HEADER_STYLES -->
+        <?php $detect = new Mobile_Detect; ?>
+        <?php if ($detect->isMobile()) { ?>
+            <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/css/template-responsive.css?v=<?php echo time(); ?>">
+        <?php } ?>
         <!-- HEADER_SCRIPTS -->
     </head>
     <body>

@@ -1,4 +1,5 @@
 <div class="register-container">
+    <h1 class="component-title">Register an account</h1>
     <form action="<?php echo $this->route("index.php?component=user&controller=user&task=register"); ?>" method="post">
         <div class="frame">
             <div class="frame-3">

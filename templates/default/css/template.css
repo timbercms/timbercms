@@ -322,49 +322,6 @@ input[type="text"],input[type="password"], input[type="email"] {
 .component-title {
     margin-bottom: 40px;   
 }
-.mobile-menu-toggler {
-    text-align: right;   
-}
-.mobile-menu-button {
-    color: #FFF;
-    background: var(--rust);
-    padding: 8px 10px;
-    border-radius: 3px;
-    display: inline-block;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-.mobile-menu-container:not(.active) {
-    display: none;
-}
-.mobile-menu-list {
-    padding: 10px;
-    list-style-type: none;
-}
-.mobile-menu-list a {
-    display: block;
-    padding: 10px;
-    border-bottom: 1px solid var(--rust);
-    color: #FFF;
-}
-.mobile-menu-list li {
-    position: relative;   
-}
-.mobile-menu-list .parent-toggler {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    color: #FFF;
-    font-size: 20px;
-    background: var(--rust);
-    padding: 8px 10px;
-    cursor: pointer;
-}
-.mobile-menu-list .parent-toggler:empty {
-    display: none;   
-}
-.mobile-menu-list li.parent:not(.active) > ul {
-    display: none;   
+.footer-content {
+    padding: 20px;   
 }
