@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <version>
-    <numerical>0.0.1</numerical>
-    <releaseDate>17th August 2017</releaseDate>
+    <numerical>0.9.0</numerical>
+    <releaseDate>29th March 2018</releaseDate>
     <packageURL>https://github.com/Smith0r/bulletin/archive/master.zip</packageURL>
     <new>
         <![CDATA[
-            <h4>Version 0.1.0 Changelog</h4>
+            <h4>Version 0.9.0 Changelog</h4>
             <ul>
-                <li>Inital release.</li>
+                <li>Beta release.</li>
             </ul>
         ]]>
     </new>
