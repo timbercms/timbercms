@@ -9,7 +9,10 @@
 		public function __construct($host = DATABASE_HOST, $name = DATABASE_NAME, $user = DATABASE_USER, $password = DATABASE_PASSWORD, $prefix = DATABASE_PREFIX)
 		{
             $this->prefix = $prefix;
-			$this->connect($host, $name, $user, $password);
+            if (defined("DATABASE_HOST") || strlen($host) > 0 && $host != "DATABASE_HOST")
+            {
+                $this->connect($host, $name, $user, $password);
+            }
 		}
 		
 		public function connect($host, $name, $user, $password)

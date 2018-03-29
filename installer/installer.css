@@ -5,7 +5,7 @@
     --foliage: #763626;
 }
 body {
-    background: #F5F8FA;
+    background: url('../templates/default/images/pattern.png');
     font-family: 'Open Sans', 'Arial', sans-serif;
     font-size: 16px;
     line-height: 16px;
@@ -32,6 +32,7 @@ a:hover {
     border-radius: 0.25rem;
     padding: 20px;
     margin-top: 40px;
+    background: #FFF;
 }
 .header-container {
     background: var(--shadow);
