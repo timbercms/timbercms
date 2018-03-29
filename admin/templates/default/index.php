@@ -3,7 +3,16 @@
     $dirs = scandir(__DIR__ ."/../../components");
     unset($dirs["0"], $dirs["1"]);
     $version = simplexml_load_file(__DIR__ ."/../../version.xml");
-    $web_version = simplexml_load_file("https://raw.githubusercontent.com/Smith0r/bulletin/master/admin/version.xml", null, LIBXML_NOCDATA);
+    $opts = [
+        'http' => [
+                'method' => 'GET',
+                'header' => [
+                        'User-Agent: PHP'
+                ]
+        ]
+    ];
+    $context = stream_context_create($opts);
+    $web_version = json_decode(file_get_contents("https://api.github.com/repos/Smith0r/bulletin/releases", false, $context));
 
 ?>
 <!DOCTYPE html>
@@ -95,8 +104,8 @@
                     <?php $this->view->output(); ?>
                     <div class="white-card centre-text">
                         Bulletin. <strong>v<?php echo $version->numerical; ?></strong>
-                        <?php if (version_compare($version->numerical, $web_version->numerical)) { ?>
-                             - <span class="badge badge-danger version-label">UPDATE (v<?php echo $web_version->numerical; ?> Available)</span>
+                        <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>
+                             - <span class="badge badge-danger version-label">UPDATE (v<?php echo $web_version->tag_name; ?> Available)</span>
                         <?php } else { ?>
                              - <span class="badge badge-success version-label">UP TO DATE</span>
                         <?php } ?>

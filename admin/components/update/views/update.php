@@ -19,7 +19,8 @@
     <div class="component-action-bar">
         <a href="index.php?component=settings&controller=settings&extension=update"><i class="fa fa-cog"></i> Settings</a>
     </div>
-    <?php if (version_compare($version->numerical, $web_version->tag_name)) { ?>
+    <div class="alert alert-success">You are running Bulletin CMS v<?php echo $version->numerical; ?></div>
+    <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>
         <p>&nbsp;</p>
         <h3>Release Information for <?php echo $web_version->name; ?></h3>
         <div class="new-version-notes">
@@ -27,10 +28,10 @@
         </div>
         <h4>Update steps</h4>
         <ol>
-            <li>Download the v<?php echo $web_version->tag_name; ?> update package <a href="<?php echo $web_version->assets["0"]->browser_download_url; ?>">here</a>.</li>
+            <li><a href="<?php echo $web_version->assets["0"]->browser_download_url; ?>" class="btn btn-primary">Download the v<?php echo $web_version->tag_name; ?> update package</a></li>
             <li>Extract the files using a program like Winrar</li>
             <li>Upload the contents of the UPLOAD folder to the root directory of your website</li>
-            <li>Run the database updater tool <a href="index.php?component=update&controller=database">here</a>.</li>
+            <li><a href="index.php?component=update&controller=database" class="btn btn-primary">Run the database updater tool</a></li>
         </ol>
     <?php } else { ?>
         <p>&nbsp;</p>
