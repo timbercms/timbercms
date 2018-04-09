@@ -196,13 +196,15 @@ input[type="text"],input[type="password"], input[type="email"] {
 .menu-container .menu-list li.top-level {
     float: left;
 }
+.menu-container .menu-list li.top-level > a > svg {
+    float: right;   
+}
 .menu-container ul.menu-list > li > a {
     display: inline-block;
-    padding: 20px 30px;
+    padding: 15px;
     color: #FFF;
     text-decoration: none;
     transition: background .25s;
-    height: 57px;
 }
 .menu-container ul.menu-list > li > a:hover, ul.menu-list > li.active > a {
     background: var(--rust);   
@@ -239,8 +241,8 @@ input[type="text"],input[type="password"], input[type="email"] {
 .menu-container .menu-list li.parent:hover > ul {
     display: block;
     position: absolute;
-    top: 57px;
-    left: 15px;
+    top: 46px;
+    left: 0px;
     border-top: 1px solid var(--rust);
 }
 .menu-container .menu-list li.parent.first-child:hover > ul {
