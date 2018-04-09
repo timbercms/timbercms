@@ -64,7 +64,6 @@ a:hover {
     color: #FFF;
     position: relative;
     z-index: 15;
-    overflow-y: auto;
     transition: height .25s;
 }
 .menu-header {
