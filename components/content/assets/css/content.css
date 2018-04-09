@@ -60,10 +60,11 @@
     margin-bottom: 20px;
 }
 .article-image {
-    height: 300px;
-    width: 100%;
-    background-position: center;
-    background-size: cover;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid var(--charcoal);
+    border-radius: 3px;
 }
 .article-title {
     margin-top: 40px;

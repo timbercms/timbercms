@@ -2,8 +2,7 @@
     <article class="article-container">
         <header>
             <?php if ($this->model->image) { ?>
-                <div class="article-image" style="background-image: url('<?php echo (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/"); ?><?php echo $this->model->image; ?>');">
-                </div>
+                <img class="article-image" src="<?php echo (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/"); ?><?php echo $this->model->image; ?>" alt="<?php echo $this->model->title; ?>" />
             <?php } ?>
             <h1 class="article-title"><?php echo $this->model->title; ?></h1>
             <p class="article-publish-date">
