@@ -25,7 +25,7 @@
     </head>
     <body>
         <div class="header-container">
-            <span class="title">Bulletin. Installer</span><span class="subtitle">v1.0.0</span>
+            <span class="title">Bulletin. Installer</span><span class="subtitle">v1.1.0</span>
         </div>
         <div class="body-container">
             <?php if ($_GET["stage"] == 0 || strlen($_GET["stage"]) == 0) { ?>

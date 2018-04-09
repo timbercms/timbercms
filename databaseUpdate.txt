@@ -1,1 +1,0 @@
-INSERT INTO `#__components` (`id`, `title`, `description`, `internal_name`, `is_frontend`, `is_backend`, `is_locked`, `author_name`, `author_url`, `version`, `params`, `enabled`) VALUES (NULL, 'About', 'Provides information about packages and installed CMS.', 'about', '0', '1', '1', 'Chris Smith', 'https://github.com/Smith0r', '1.1.0', NULL, '1');
