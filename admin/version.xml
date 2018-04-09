@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <version>
-    <numerical>1.0.0</numerical>
-    <releaseDate>29th March 2018</releaseDate>
+    <numerical>1.1.0</numerical>
+    <releaseDate>9th April 2018</releaseDate>
     <packageURL>https://github.com/Smith0r/bulletin/archive/master.zip</packageURL>
     <new>
         <![CDATA[
-            <h4>No Changes</h4>
+            <h4>Changes</h4>
             <ul>
-                <li>In future, changes will appear here.</li>
+                <li>Recent Articles on User Profiles.</li>
+                <li>Admin component to show information about installation, and packagaes used.</li>
+                <li>Fix for thin article images.</li>
+                <li>Menu dropdown padding fix.</li>
             </ul>
         ]]>
     </new>
