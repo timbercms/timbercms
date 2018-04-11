@@ -16,6 +16,7 @@
     require_once(__DIR__ ."/../../admin/components/modules/models/module.php");
     require_once(__DIR__ ."/../../admin/components/modules/models/module.php");
     require_once(__DIR__ ."/../libraries/Mobile_Detect.php");
+    require_once(__DIR__ ."/hooks.php");
 
     class Core
     {
@@ -43,6 +44,7 @@
         public static $meta_itemprops = array();
         public static $meta_names = array();
         public static $meta_author = "";
+        public static $hooks;
         
         public function __construct()
         {
@@ -95,6 +97,7 @@
             {
                 $this->setDatabase();
                 $this->cleanSessions();
+                self::$hooks = new Hooks($this->database);
                 $config = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = 'settings' LIMIT 1");
                 self::$config = (object) unserialize($config->params);
                 require_once(__DIR__ ."/template.php");
@@ -455,6 +458,11 @@
         public static function config()
         {
             return self::$config;
+        }
+        
+        public static function hooks()
+        {
+            return self::$hooks;
         }
         
         public static function componentconfig()

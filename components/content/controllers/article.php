@@ -24,6 +24,7 @@
             Core::addMetaName("twitter:title", $this->model->title ." - ". Core::config()->site_title);
             Core::addMetaName("twitter:description", $this->model->meta_description);
             Core::addMetaName("twitter:image", BASE_URL.$this->model->image);
+            Core::hooks()->executeHook("onLoadContent");
         }
         
     }
