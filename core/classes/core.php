@@ -55,9 +55,10 @@
                 $this->content_id = (strlen($_GET["id"]) > 0 ? $_GET["id"] : "0");
                 $this->setDatabase();
                 $config = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = 'settings' LIMIT 1");
-                self::$config = (object) unserialize($config->params);
+                $params = (object) unserialize($config->params);
+                self::$config = $params;
                 require_once(__DIR__ ."/template.php");
-                $template = new Template($this->database, self::$config);
+                $template = new Template($this->database, $params->admin_template);
                 $this->template = $template;
                 self::$user = new UserModel(0, $this->database);
                 if (self::$user->usergroup->is_admin != 1)
@@ -99,9 +100,10 @@
                 $this->cleanSessions();
                 self::$hooks = new Hooks($this->database);
                 $config = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = 'settings' LIMIT 1");
-                self::$config = (object) unserialize($config->params);
+                $params = (object) unserialize($config->params);
+                self::$config = $params;
                 require_once(__DIR__ ."/template.php");
-                $template = new Template($this->database, self::$config);
+                $template = new Template($this->database, $params->default_template);
                 $this->template = $template;
                 self::$user = new UserModel(0, $this->database);
                 if (strlen($_GET["task"]) > 0)

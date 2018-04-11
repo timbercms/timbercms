@@ -6,10 +6,10 @@
         public $name;
         public $database;
         
-        public function __construct($database, $config)
+        public function __construct($database, $name)
         {
             $this->database = $database;
-            $this->name = $config->default_template;
+            $this->name = $name;
         }
         
         public function addComponentStylesheet($component = "")

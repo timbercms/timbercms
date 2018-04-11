@@ -60,7 +60,7 @@
                 $string .= '>';
                 $string .= '<label class="col-md-2 col-form-label">'.$field->attributes()->label.'</label>';
                 $string .= '<div class="col-md-10">';
-                if ($type != "textarea" && $type != "select" && $type != "sql" && $type != "template_position" && $type != "file" && $type != "date") {
+                if ($type != "textarea" && $type != "select" && $type != "sql" && $type != "template_position" && $type != "template_picker" && $type != "file" && $type != "date") {
                     $string .= '<input type="'.$type.'" name="'.$field_name.'" class="form-control';
                     if (strlen($field->attributes()->class) > 0)
                     {
@@ -163,6 +163,42 @@
                             $string .= ' selected="selected"';
                         }
                         $string .= '>'. $position .'</option>';
+                    }
+                    $string .= '</select>';
+                } elseif ($type == "template_picker") {
+                    if ($field_name == "params[admin_template]")
+                    {
+                        $dirs = scandir(__DIR__ ."/../templates");
+                    }
+                    else
+                    {
+                        $dirs = scandir(__DIR__ ."/../../templates");
+                    }
+                    unset($dirs["0"], $dirs["1"]);
+                    $string .= '<select name="'. $field_name .'" class="form-control';
+                    if (strlen($field->attributes()->class) > 0)
+                    {
+                        $string .= ' '. $field->attributes()->class;
+                    }
+                    $string .= '">';
+                    foreach ($dirs as $dir)
+                    {
+                        $string .= '<option value="'.$dir .'"';
+                        if ($value == $dir)
+                        {
+                            $string .= ' selected="selected"';
+                        }
+                        $string .= '>';
+                            if ($field_name == "params[admin_template]")
+                            {
+                                $xml = simplexml_load_file(BASE_DIR ."/templates/". $dir ."/template.xml");
+                            }
+                            else
+                            {
+                                $xml = simplexml_load_file(BASE_DIR ."/../templates/". $dir ."/template.xml");
+                            }
+                            $string .= $xml->name;
+                        $string .= '</option>';
                     }
                     $string .= '</select>';
                 } elseif ($type == "file") {

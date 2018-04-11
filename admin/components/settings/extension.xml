@@ -3,5 +3,6 @@
     <name value="Configuration" icon="cog" />
     <items value="settings" label="Site Settings" />
     <fields type="text" name="site_title" label="Site Title" />
-    <fields type="select" name="default_template" label="Default Template" values="Default|default" default="default" />
+    <fields type="template_picker" name="default_template" label="Default Template" />
+    <fields type="template_picker" name="admin_template" label="Admin Template" />
 </settings>
