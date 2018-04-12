@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
     <fields type="hidden" name="id" />
-    <fields type="text" length="255" name="title" label="Title" />
+    <fields type="text" length="255" name="title" label="Title" required="required" />
     <fields type="select" name="show_title" label="Show Title" values="No|0,Yes|1" default="1" />
     <fields type="select" name="published" label="Published" values="No|0,Yes|1" default="1" />
     <fields type="template_position" name="position" label="Template Position" />

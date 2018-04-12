@@ -6,13 +6,13 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Username:</label>
                     <div class="col-sm-10">
-                        <input type="text" name="username" class="form-control" />
+                        <input type="text" name="username" class="form-control" required />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password:</label>
                     <div class="col-sm-10">
-                        <input type="password" name="password" class="form-control" />
+                        <input type="password" name="password" class="form-control" required />
                     </div>
                 </div>
                 <button type="submit" class="button pull-right"><i class="fa fa-key"></i> Login</button>

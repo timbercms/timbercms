@@ -73,6 +73,10 @@
                     if ($length > 0) {
                         $string .= 'maxlength="'.$length.'"';
                     }
+                    if ($field->attributes()->required == "required")
+                    {
+                        $string .= ' required';
+                    }
                     $string .= '/>';
                 } elseif ($type == "select" || $type == "sql") {
                     $string .= '<select name="'.$field_name;
@@ -220,6 +224,10 @@
                         $string .= ' '. $field->attributes()->class;
                     }
                     $string .= '" name="'. $field_name .'" />';
+                    if ($field->attributes()->required == "required")
+                    {
+                        $string .= ' required';
+                    }
                     $string .= '<input type="hidden" name="'. $folder_name .'" value="'. $field->attributes()->folder .'" />';
                 } elseif ($type == "date") {
                     $string .= '<input type="date" name="'.$field_name.'" class="form-control';
@@ -236,6 +244,10 @@
                         $value = date("Y-m-d", $value);
                     }
                     $string .= '" value="'.$value.'"';
+                    if ($field->attributes()->required == "required")
+                    {
+                        $string .= ' required';
+                    }
                     $string .= '/>';
                 } else {
                     $string .= '<textarea name="'.$field_name.'" class="form-control';
@@ -243,7 +255,12 @@
                     {
                         $string .= ' '. $field->attributes()->class;
                     }
-                    $string .= '">'.$value.'</textarea>';
+                    $string .= '"';
+                    if ($field->attributes()->required == "required")
+                    {
+                        $string .= ' required';
+                    }
+                    $string .= '>'.$value.'</textarea>';
                 }
                 $string .= '</div>';
             }

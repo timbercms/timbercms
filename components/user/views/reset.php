@@ -7,7 +7,7 @@
                     <strong>Password:</strong>
                 </div>
                 <div class="frame-9">
-                    <input type="password" name="password" />
+                    <input type="password" name="password" required />
                 </div>
             </div>
             <div class="frame">
@@ -15,7 +15,7 @@
                     <strong>Password (again):</strong>
                 </div>
                 <div class="frame-9">
-                    <input type="password" name="password_again" />
+                    <input type="password" name="password_again" required />
                 </div>
             </div>
             <input type="hidden" name="token" value="<?php echo $this->model->token; ?>" />

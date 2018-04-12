@@ -6,7 +6,7 @@
                 <strong>Email Address:</strong>
             </div>
             <div class="frame-9">
-                <input type="text" name="email" />
+                <input type="text" name="email" required />
             </div>
         </div>
         <button type="submit" class="button"><i class="fa fa-users"></i> Request Reset</button>
