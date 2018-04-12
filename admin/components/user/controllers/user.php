@@ -16,7 +16,6 @@
         {
             $this->model->id = $_POST["id"];
             $this->model->username = $_POST["username"];
-            $this->model->real_name = $_POST["real_name"];
             $this->model->email = $_POST["email"];
             $this->model->activated = $_POST["activated"];
             $this->model->blocked = $_POST["blocked"];

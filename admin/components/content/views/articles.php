@@ -37,7 +37,7 @@
                     <?php echo date("jS M Y", $article->publish_time); ?>
                 </div>
                 <div class="col-md-1">
-                    <?php echo $article->author->real_name; ?>
+                    <?php echo $article->author->username; ?>
                 </div>
                 <div class="col-md-1">
                     <?php echo $article->hits; ?>

@@ -12,7 +12,6 @@
         
         public $id;
         public $username;
-        public $real_name;
         public $email;
         public $password;
         public $activated;
@@ -46,7 +45,6 @@
             $temp = $this->database->loadObject("SELECT * FROM #__users WHERE id = ?", array($id));
             $this->id = $temp->id;
             $this->username = $temp->username;
-            $this->real_name = $temp->real_name;
             $this->email = $temp->email;
             $this->password = $temp->password;
             $this->activated = $temp->activated;
@@ -63,7 +61,6 @@
 			$data = array();
 			$data[] = array("name" => "id", "value" => $this->id);
 			$data[] = array("name" => "username", "value" => $this->username);
-            $data[] = array("name" => "real_name", "value" => $this->real_name);
             $data[] = array("name" => "email", "value" => $this->email);
             $data[] = array("name" => "activated", "value" => $this->activated);
             $data[] = array("name" => "blocked", "value" => $this->blocked);

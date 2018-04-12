@@ -2,7 +2,6 @@
 <settings>
     <fields type="hidden" name="id" />
     <fields type="text" length="255" name="username" label="Username" required="required" />
-    <fields type="text" length="255" name="real_name" label="Real Name" />
     <fields type="text" name="email" label="Email Address" required="required" />
     <fields type="select" name="activated" label="Activated" values="No|0,Yes|1" default="1" />
     <fields type="select" name="blocked" label="Blocked" values="No|0,Yes|1" default="0" />

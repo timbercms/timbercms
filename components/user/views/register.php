@@ -11,14 +11,6 @@
         </div>
         <div class="frame">
             <div class="frame-3">
-                <strong>Real Name:</strong>
-            </div>
-            <div class="frame-9">
-                <input type="text" name="real_name" required />
-            </div>
-        </div>
-        <div class="frame">
-            <div class="frame-3">
                 <strong>Password:</strong>
             </div>
             <div class="frame-9">

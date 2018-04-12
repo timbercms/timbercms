@@ -6,7 +6,7 @@
             <?php } ?>
             <h1 class="article-title"><?php echo $this->model->title; ?></h1>
             <p class="article-publish-date">
-                Written by <?php echo $this->model->author->real_name; ?> on the <time pubdate><?php echo date("jS F Y", $this->model->publish_time); ?></time>
+                Written by <?php echo $this->model->author->username; ?> on the <time pubdate><?php echo date("jS F Y", $this->model->publish_time); ?></time>
             </p>
         </header>
         <div class="article-content">
