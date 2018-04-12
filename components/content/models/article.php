@@ -13,6 +13,7 @@
         public $alias;
         public $category;
         public $content;
+        public $short_content;
         public $published;
         public $publish_time;
         public $author;
@@ -37,6 +38,7 @@
             $this->title = $temp->title;
             $this->alias = $temp->alias;
             $this->content = $temp->content;
+            $this->short_content = explode("</p>", $this->content)["0"]."</p>";
             $this->published = $temp->published;
             $this->publish_time = $temp->publish_time;
             $this->hits = $temp->hits;
