@@ -255,7 +255,7 @@
             echo $string;
         }
         
-        public function displaySelect($items, $field_name, $current = "", $multiple = false, $class = "", $label = "")
+        public function displaySelect($items, $field_name, $current = "", $multiple = false, $class = "", $label = "", $default = "")
         {
             $string = '<div class="form-group"><label>'. (strlen($label) > 0 ? $label : $field_name) .'</label>';
             $string .= '<select name="'.$field_name;
@@ -275,7 +275,7 @@
             foreach ($items as $option)
             {
                 $string .= '<option value="'.$option->value.'" ';
-                if ($current == $option->value)
+                if ($current == $option->value || $default == $option->value && strlen($current) <= 0)
                 {
                     $string .= 'selected="selected"';
                 }

@@ -112,7 +112,7 @@
             $data[] = array("name" => "blocked", "value" => 0);
             $data[] = array("name" => "blocked_reason", "value" => "");
             $data[] = array("name" => "register_time", "value" => time());
-            $data[] = array("name" => "usergroup_id", "value" => 1);
+            $data[] = array("name" => "usergroup_id", "value" => Core::config()->default_usergroup);
             $data[] = array("name" => "verify_token", "value" => md5($email).time().(time() + rand(67234)));
 			return parent::store("#__users", $data);
         }

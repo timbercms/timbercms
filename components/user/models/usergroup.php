@@ -13,10 +13,11 @@
         public function __construct($id = 0, $database)
         {
             $this->database = $database;
-            if ($id > 0)
+            if ($id <= 0)
             {
-                $this->load($id);
+                $id = Core::config()->default_usergroup;
             }
+            $this->load($id);
         }
         
         public function load($id)
