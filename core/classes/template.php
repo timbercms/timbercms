@@ -9,6 +9,10 @@
         public function __construct($database, $name)
         {
             $this->database = $database;
+            if (strlen($name) <= 0)
+            {
+                $name = "default";
+            }
             $this->name = $name;
         }
         

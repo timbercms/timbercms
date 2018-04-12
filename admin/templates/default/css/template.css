@@ -17,7 +17,7 @@ body {
     line-height: 16px;
     margin: 0px;
     padding: 0px;
-    background-image: url('../images/pattern.png');
+    background: #ebeef2;
     overflow-x: hidden;
 }
 a {
@@ -70,9 +70,8 @@ a:hover {
     font-size: 26px;
     line-height: 26px;
     font-weight: 700;
-    text-align: center;
-    padding: 20px;
-    background: var(--accent);
+    padding: 7px;
+    float: left;
 }
 .menu-header a {
     color: #FFF;
@@ -80,23 +79,18 @@ a:hover {
 }
 .white-card {
     background: #FFF;
-    padding: 20px;
-    border-radius: 3px;
-    border: 1px solid #DDD;
+    padding: 30px;
     margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .white-card > h2 {
     border-bottom: 1px solid #333;
     padding-bottom: 10px;
 }
 .main-content {
-    margin: 20px;
-    margin-left: 0px;
-    padding-top: 80px;
-}
-.menu-container {
-    padding: 10px;   
+    max-width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10vh;
 }
 .menu-container ul {
     list-style-type: none;
@@ -104,7 +98,7 @@ a:hover {
     margin: 0px;
 }
 .menu-container a {
-    color: #FFF;
+    color: var(--base);
     text-decoration: none;
     display: block;
     padding: 10px;
@@ -117,10 +111,10 @@ a:hover {
 }
 .admin-menu-category {
     padding: 10px;
-    border-top: 1px solid #FFF;
-    border-bottom: 1px solid #FFF;
-    background: #FFF;
-    color: #333;
+    border-top: 1px solid var(--base);
+    border-bottom: 1px solid var(--base);
+    background: var(--base);
+    color: #FFF;
 }
 .admin-menu-category i {
     display: inline-block;
@@ -128,19 +122,19 @@ a:hover {
     text-align: center;
 }
 .admin-menu-container {
-    border-left: 1px solid #FFF;
-    border-right: 1px solid #FFF;
-    border-bottom: 1px solid #FFF;
+    border-left: 1px solid var(--base);
+    border-right: 1px solid var(--base);
+    border-bottom: 1px solid var(--base);
     margin-bottom: 20px;
 }
 .admin-menu-subitems {
     padding: 10px 0px;
 }
 .menu-container a:hover {
-    color: #DDD;
+    color: #000;
 }
 .action-bar {
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     width: 100%;

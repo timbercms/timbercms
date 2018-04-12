@@ -50,7 +50,10 @@
     </head>
     <body>
         <div class="action-bar">
-            <div class="dropdown">
+            <div class="menu-header">
+                <a href="index.php"><i class="far fa-circle"></i> Bulletin.</a>
+            </div>
+            <div class="dropdown" style="float: right;">
                 <a class="dropdown-toggle" href="#" type="button" role="button" id="adminUserMenu" data-toggle="dropdown">
                     <img src="<?php echo $this->user()->avatar; ?>" /><span class="user-username"><?php echo $this->user()->username; ?><i class="fas fa-chevron-down"></i></span>
                 </a>
@@ -59,13 +62,24 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="margin-right: 0px !important;">
-            <div class="col-md-2" style="padding-right: 0px !important;">
-                <div class="sidebar">
-                    <div class="menu-header">
-                        <a href="index.php"><i class="far fa-circle"></i> Bulletin.</a>
+        <div class="main-content">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="system-messages">
+                        <?php $this->displaySystemMessages(); ?>
                     </div>
-                    <div class="menu-container">
+                    <?php $this->view->output(); ?>
+                    <div class="white-card centre-text">
+                        Bulletin. <strong>v<?php echo $version->numerical; ?></strong>
+                        <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>
+                             - <span class="badge badge-danger version-label">UPDATE (v<?php echo $web_version->tag_name; ?> Available)</span>
+                        <?php } else { ?>
+                             - <span class="badge badge-success version-label">UP TO DATE</span>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="menu-container white-card">
                         <ul>
                             <?php 
                                 foreach ($dirs as $dir) 
@@ -96,32 +110,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-10" style="padding-left: 30px !important;">
-                <div class="main-content">
-                    <div class="system-messages">
-                        <?php $this->displaySystemMessages(); ?>
-                    </div>
-                    <?php $this->view->output(); ?>
-                    <div class="white-card centre-text">
-                        Bulletin. <strong>v<?php echo $version->numerical; ?></strong>
-                        <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>
-                             - <span class="badge badge-danger version-label">UPDATE (v<?php echo $web_version->tag_name; ?> Available)</span>
-                        <?php } else { ?>
-                             - <span class="badge badge-success version-label">UP TO DATE</span>
-                        <?php } ?>
-                    </div>
-                </div>
-            </div>
         </div>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                setTimeout(function() {
-                    $(".sidebar").css("height", $("html").height() + "px");
-                }, 750);
-                setInterval(function() {
-                    $(".sidebar").css("height", $("html").height() + "px");
-                }, 5000);
-            });
-        </script>
     </body>
 </html>
