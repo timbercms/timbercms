@@ -48,7 +48,14 @@
             $this->last_action_time = $temp->last_action_time;
             $this->usergroup = new UsergroupModel($temp->usergroup_id, $this->database);
             $this->verify_token = $temp->verify_token;
-            $this->avatar = "https://www.gravatar.com/avatar/" .md5(strtolower(trim($this->email))) ."?s=200";
+            if (strlen($temp->avatar) > 0)
+            {
+                $this->avatar = BASE_URL .$temp->avatar;
+            }
+            else
+            {
+                $this->avatar = "https://www.gravatar.com/avatar/" .md5(strtolower(trim($this->email))) ."?s=200";
+            }
         }
         
         public function loadSession()
@@ -113,6 +120,24 @@
             $data[] = array("name" => "verify_token", "value" => md5($email).time().(time() + rand(67234)));
 			return parent::store("#__users", $data);
         }
+        
+        public function updateSettings($table = "", $data = array(), $updatePassword = false)
+		{
+			$data = array();
+			$data[] = array("name" => "id", "value" => $this->id);
+			$data[] = array("name" => "username", "value" => $this->username);
+            $data[] = array("name" => "email", "value" => $this->email);
+            $data[] = array("name" => "activated", "value" => $this->activated);
+            $data[] = array("name" => "blocked", "value" => $this->blocked);
+            $data[] = array("name" => "blocked_reason", "value" => $this->blocked_reason);
+            $data[] = array("name" => "register_time", "value" => $this->register_time);
+            $data[] = array("name" => "usergroup_id", "value" => $this->usergroup_id);
+            if ($updatePassword)
+            {
+                $data[] = array("name" => "password", "value" => password_hash($this->password, PASSWORD_DEFAULT));
+            }
+			return parent::store("#__users", $data);
+		}
         
     }
 

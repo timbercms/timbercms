@@ -9,6 +9,7 @@
             </div>
             <ul class="login-options">
                 <li><a href="<?php echo $this->route("index.php?component=user&controller=profile&id=". Core::user()->id); ?>">My Profile</a></li>
+                <li><a href="<?php echo $this->route("index.php?component=user&controller=settings"); ?>">Settings</a></li>
                 <?php if (Core::user()->usergroup->is_admin == 1) { ?>
                     <li><a href="<?php echo BASE_URL; ?>admin">Admin Panel</a></li>
                 <?php } ?>

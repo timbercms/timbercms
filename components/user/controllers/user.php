@@ -65,7 +65,7 @@
             if ($user->id > 0)
             {
                 // User already has an account
-                $this->model->setMessage("primary", "It looks like you already have an account. If you've forgotten your password, you can reset it [here]");
+                $this->model->setMessage("primary", "It looks like you already have an account. If you've forgotten your password, you can reset it <a href='". Core::route("index.php?component=user&controller=requestreset") ."'>here</a>");
             }
             else
             {
@@ -96,6 +96,48 @@
             {
                 $this->model->setMessage("danger", "Sorry, but you did not supply a valid verification token");
                 header("Location: ". Core::route("index.php"));
+            }
+        }
+        
+        public function updateSettings()
+        {
+            $this->model->database->query("UPDATE #__users SET email = ?", array($_POST["email"]));
+            if (strlen($_FILES["avatar"]["name"]) > 0)
+            {
+                foreach ($_FILES as $key => $file)
+                {
+                    if (strlen($file["name"]) > 0)
+                    {
+                        $name = explode(".", $file["name"])["0"]."-".time().".jpg";
+                        $tmp = $file["tmp_name"];
+                        move_uploaded_file($tmp, __DIR__ ."/../../../images/avatars/". $name);
+                        $this->model->database->query("UPDATE #__users SET avatar = ?", array("images/avatars/". $name));
+                        break;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            if (strlen($_POST["password"]) > 0)
+            {
+                if ($_POST["password"] == $_POST["password_verify"])
+                {
+                    $this->model->database->query("UPDATE #__users SET password = ?", array(password_hash($_POST["password"], PASSWORD_DEFAULT)));
+                    $this->model->setMessage("success", "Changes Saved");
+                    header("Location: ". Core::route("index.php?component=user&controller=settings"));
+                }
+                else
+                {
+                    $this->model->setMessage("danger", "The passwords you entered do not match");
+                    header("Location: ". Core::route("index.php?component=user&controller=settings"));
+                }
+            }
+            else
+            {
+                $this->model->setMessage("success", "Changes Saved");
+                header("Location: ". Core::route("index.php?component=user&controller=settings"));
             }
         }
         

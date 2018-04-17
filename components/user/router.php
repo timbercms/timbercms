@@ -62,6 +62,10 @@
                 {
                     return BASE_URL .$this->component ."/user/?task=". $task;
                 }
+                else if ($controller == "settings")
+                {
+                    return BASE_URL .$this->component ."/settings";
+                }
             }
             else
             {
@@ -94,6 +98,11 @@
             else if ($parts["1"] == "user")
             {
                 $new_parts = ["user", "user", 0];
+                return $new_parts;
+            }
+            else if ($parts["1"] == "settings")
+            {
+                $new_parts = ["user", "settings", 0];
                 return $new_parts;
             }
             return false;
