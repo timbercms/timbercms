@@ -1,37 +1,21 @@
 <div class="register-container">
     <h1 class="component-title">Register an account</h1>
     <form action="<?php echo $this->route("index.php?component=user&controller=user&task=register"); ?>" method="post">
-        <div class="frame">
-            <div class="frame-3">
-                <strong>Username:</strong>
-            </div>
-            <div class="frame-9">
-                <input type="text" name="username" required />
-            </div>
+        <div class="form-group">
+            <label><strong>Username:</strong></label>
+            <input type="text" name="username" class="form-control" required />
         </div>
-        <div class="frame">
-            <div class="frame-3">
-                <strong>Password:</strong>
-            </div>
-            <div class="frame-9">
-                <input type="password" name="password" required />
-            </div>
+        <div class="form-group">
+            <label><strong>Password:</strong></label>
+            <input type="password" name="password" class="form-control" required />
         </div>
-        <div class="frame">
-            <div class="frame-3">
-                <strong>Password (again):</strong>
-            </div>
-            <div class="frame-9">
-                <input type="password" name="password_again" required />
-            </div>
+        <div class="form-group">
+            <label><strong>Password (again):</strong></label>
+            <input type="password" name="password_again" class="form-control" required />
         </div>
-        <div class="frame">
-            <div class="frame-3">
-                <strong>Email Address:</strong>
-            </div>
-            <div class="frame-9">
-                <input type="email" name="email" required />
-            </div>
+        <div class="form-group">
+            <label><strong>Email Address:</strong></label>
+            <input type="email" name="email" class="form-control" required />
         </div>
         <button type="submit" class="button"><i class="fa fa-users"></i> Register</button>
     </form>
