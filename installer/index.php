@@ -156,10 +156,6 @@ RedirectMatch 404 ^404.php';
                             <input type="text" name="username" class="form-control" required placeholder="Enter your username" />
                         </div>
                         <div class="form-group">
-                            <label class="col-form-label"><strong>Real name</strong></label>
-                            <input type="text" name="real_name" class="form-control" required placeholder="Enter your real name" />
-                        </div>
-                        <div class="form-group">
                             <label class="col-form-label"><strong>Password</strong></label>
                             <input type="password" name="password" class="form-control" required placeholder="Enter your password" />
                         </div>
@@ -292,7 +288,6 @@ RedirectMatch 404 ^404.php';
                     $db->query("CREATE TABLE `#__users` (
                          `id` int(11) NOT NULL AUTO_INCREMENT,
                          `username` varchar(255) DEFAULT NULL,
-                         `real_name` varchar(255) DEFAULT NULL,
                          `email` varchar(255) DEFAULT NULL,
                          `usergroup_id` int(11) DEFAULT NULL,
                          `password` varchar(255) DEFAULT NULL,
@@ -301,6 +296,7 @@ RedirectMatch 404 ^404.php';
                          `register_time` int(11) DEFAULT NULL,
                          `last_action_time` int(11) DEFAULT NULL,
                          `verify_token` varchar(5000) DEFAULT NULL,
+                         `avatar` varchar(255) DEFAULT NULL,
                          PRIMARY KEY (`id`)
                         )");
                     $db->query("CREATE TABLE `#__users_recovery` (
@@ -313,7 +309,7 @@ RedirectMatch 404 ^404.php';
     
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Content", "Article category and detail view. Includes comments via third-party Disqus.", "content", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.1.0", 'a:1:{s:15:"enable_comments";s:1:"0";}', "1"));
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("User", "Provides functions for account management, and profile views.", "user", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.1.0", '', "1"));
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Settings", "Provides sitewide, and component specific settings.", "settings", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.1.0", 'a:2:{s:10:"site_title";s:13:"Bulletin. CMS";s:16:"default_template";s:7:"default";}', "1"));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Settings", "Provides sitewide, and component specific settings.", "settings", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.1.0", 'a:4:{s:10:"site_title";s:13:"Bulletin. CMS";s:16:"default_template";s:7:"default";s:14:"admin_template";s:7:"default";s:17:"default_usergroup";s:1:"1";}', "1"));
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Extensions", "Provides management of extensions.", "extensions", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.1.0", '', "1"));
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Menu Manager", "Basic Menu Management.", "menu", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.1.0", '', "1"));
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Module Manager", "Basic Module Management.", "modules", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.1.0", '', "1"));
@@ -329,10 +325,10 @@ RedirectMatch 404 ^404.php';
                     $db->query("INSERT INTO #__menus_items (menu_id, parent_id, title, alias, published, component, controller, content_id, params, is_home, ordering) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("1", "0", "Home", "home", "1", "content", "category", "1", "N;", "1", "0"));
                     $db->query("INSERT INTO #__modules (title, type, show_title, published, position, params, pages, ordering) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", array("Main Menu", "mainmenu", "0", "1", "main-menu", 'a:1:{s:7:"menu_id";s:1:"1";}', "0", "0"));
                     $db->query("INSERT INTO #__modules (title, type, show_title, published, position, params, pages, ordering) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", array("User Menu", "login", "1", "1", "sidebar", '', "0", "0"));
-                    $db->query("INSERT INTO #__usergroups (title, is_admin) VALUES (?, ?)", array("Administrators", "1"));
                     $db->query("INSERT INTO #__usergroups (title, is_admin) VALUES (?, ?)", array("Members", "0"));
+                    $db->query("INSERT INTO #__usergroups (title, is_admin) VALUES (?, ?)", array("Administrators", "1"));
                         
-                    $db->query("INSERT INTO #__users (username, real_name, email, usergroup_id, password, activated, blocked, register_time, last_action_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", array($_POST["username"], $_POST["real_name"], $_POST["email"], "1", password_hash($_POST["password"], PASSWORD_DEFAULT), "1", "0", time(), time()));
+                    $db->query("INSERT INTO #__users (username, email, usergroup_id, password, activated, blocked, register_time, last_action_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", array($_POST["username"], $_POST["email"], "2", password_hash($_POST["password"], PASSWORD_DEFAULT), "1", "0", time(), time()));
                     $db->query("INSERT INTO #__articles_categories (title, alias, description, published, params) VALUES (?, ?, ?, ?, ?)", array("Site Pages", "site-pages", "", "1", 'a:1:{s:10:"show_title";s:1:"1";}'));
                     $db->query("INSERT INTO #__articles (title, alias, category_id, content, published, publish_time, author_id, hits, meta_description, tags, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Welcome to Bulletin CMS", "welcome-to-bulletin-cms", "1", '<p>Welcome to Bulletin CMS!</p><p>Please feel free to delete this article.</p><p>If you require help with any part of the CMS, please open an issue on Github (<a href="https://github.com/Smith0r/bulletin" target="_blank">https://github.com/Smith0r/bulletin</a>)</p>', "1", time(), "1", "0", "Welcome to Bulletin CMS!", "", ""));
     
