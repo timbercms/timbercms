@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-md-9">
                     <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>"><?php echo $article->title; ?></a><br />
-                    By <?php echo $article->author->real_name; ?>
+                    By <?php echo $article->author->username; ?>
                 </div>
             </div>
         </div>
