@@ -44,7 +44,7 @@
                 else if ($controller == "profile")
                 {
                     $user = new UserModel($id, $this->database);
-                    return BASE_URL .$this->component ."/profile/". $user->username;
+                    return BASE_URL .$this->component ."/profile/". strtolower($user->username);
                 }
                 else if ($controller == "register")
                 {
@@ -83,7 +83,7 @@
             }
             else if ($parts["1"] == "profile")
             {
-                $user = $this->database->loadObject("SELECT * FROM #__users WHERE username = ?", array($parts["2"]));
+                $user = $this->database->loadObject("SELECT * FROM #__users WHERE LOWER(username) = ?", array($parts["2"]));
                 if ($user->id > 0)
                 {
                     $new_parts = ["user", "profile", $user->id];
