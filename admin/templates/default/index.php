@@ -88,7 +88,7 @@
                                     if (file_exists(__DIR__ ."/../../components/". $dir ."/extension.xml")) {
                                         $xml = simplexml_load_file(__DIR__ ."/../../components/". $dir ."/extension.xml");
                                         $comp = Core::db()->loadObject("SELECT * FROM #__components WHERE internal_name = ?", array($dir));
-                                        if ($comp->enabled)
+                                        if ($comp->enabled && $comp->is_backend)
                                         {
                                             echo '<div class="admin-menu-container">';
                                                 echo '<div class="admin-menu-category"><i class="fas fa-'. $xml->name->attributes()->icon .'"></i> '. $xml->name->attributes()->value .'</div>';

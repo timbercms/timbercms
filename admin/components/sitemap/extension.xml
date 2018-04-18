@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+    <title>Sitemap</title>
+    <description>Shows XML sitemap.</description>
+    <is_frontend>1</is_frontend>
+    <is_backend>0</is_backend>
+    <is_locked>0</is_locked>
+    <author>Chris Smith</author>
+    <author_url>https://github.com/Smith0r</author_url>
+    <version>1.2.0</version>
+    <controller label="Sitemap Display" internal_name="display" description="Display the sitemap in Human Readable Format" />
+</settings>
