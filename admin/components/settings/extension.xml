@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
+    <title>Settings</title>
+    <description>Provides sitewide, and component specific settings.</description>
+    <is_frontend>1</is_frontend>
+    <is_backend>1</is_backend>
+    <is_locked>1</is_locked>
+    <author>Chris Smith</author>
+    <author_url>https://github.com/Smith0r</author_url>
+    <version>1.2.0</version>
     <name value="Configuration" icon="cog" />
     <items value="settings" label="Site Settings" />
     <fields type="text" name="site_title" label="Site Title" />

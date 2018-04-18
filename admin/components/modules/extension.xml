@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
+    <title>Module Manager</title>
+    <description>Basic Module Management.</description>
+    <is_frontend>0</is_frontend>
+    <is_backend>1</is_backend>
+    <is_locked>1</is_locked>
+    <author>Chris Smith</author>
+    <author_url>https://github.com/Smith0r</author_url>
+    <version>1.2.0</version>
     <name value="Module Manager" icon="cubes" />
     <items value="modules" label="Manage" />
 </settings>

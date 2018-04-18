@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
-    <title>Content</title>
-    <description>Article category, and detail view. Includes comments.</description>
-    <is_frontend>1</is_frontend>
+    <title>Dashboard</title>
+    <description>Show information on the Admin Panel homepage.</description>
+    <is_frontend>0</is_frontend>
     <is_backend>1</is_backend>
     <is_locked>1</is_locked>
     <author>Chris Smith</author>

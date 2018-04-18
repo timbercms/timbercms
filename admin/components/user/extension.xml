@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
+    <title>User</title>
+    <description>Provides functions for account management, and profile views.</description>
+    <is_frontend>1</is_frontend>
+    <is_backend>1</is_backend>
+    <is_locked>1</is_locked>
+    <author>Chris Smith</author>
+    <author_url>https://github.com/Smith0r</author_url>
+    <version>1.2.0</version>
     <name value="User Manager" icon="user" />
     <items value="users" label="Users" />
     <items value="usergroups" label="Usergroups" />

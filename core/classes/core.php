@@ -145,8 +145,8 @@
                 }
                 self::$content_item_id = $this->content_id;
                 // Check if component is disabled
-                $test_comp = $this->database->loadObject("SELECT id, enabled FROM #__components WHERE internal_name = ?", array($this->component));
-                if (!$test_comp->enabled)
+                $test_comp = $this->database->loadObject("SELECT id, enabled, is_frontend FROM #__components WHERE internal_name = ?", array($this->component));
+                if (!$test_comp->enabled || !$test_comp->is_frontend)
                 {
                     // Abort! Component is disabled!
                     header("HTTP/1.0 404 Not Found");
