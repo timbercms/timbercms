@@ -106,17 +106,18 @@
             {
                 foreach ($_FILES as $key => $file)
                 {
-                    if (strlen($file["name"]) > 0)
+                    if ($file["size"] <= 1048576)
                     {
                         $name = explode(".", $file["name"])["0"]."-".time().".jpg";
                         $tmp = $file["tmp_name"];
                         move_uploaded_file($tmp, __DIR__ ."/../../../images/avatars/". $name);
                         $this->model->database->query("UPDATE #__users SET avatar = ?", array("images/avatars/". $name));
+                        $this->model->setMessage("success", "Avatar Uploaded");
                         break;
                     }
                     else
                     {
-                        return false;
+                        $this->model->setMessage("danger", "Your avatar must be below 1MB in filesize.");
                     }
                 }
             }
@@ -125,20 +126,14 @@
                 if ($_POST["password"] == $_POST["password_verify"])
                 {
                     $this->model->database->query("UPDATE #__users SET password = ?", array(password_hash($_POST["password"], PASSWORD_DEFAULT)));
-                    $this->model->setMessage("success", "Changes Saved");
-                    header("Location: ". Core::route("index.php?component=user&controller=settings"));
+                    $this->model->setMessage("success", "New password saved");
                 }
                 else
                 {
                     $this->model->setMessage("danger", "The passwords you entered do not match");
-                    header("Location: ". Core::route("index.php?component=user&controller=settings"));
                 }
             }
-            else
-            {
-                $this->model->setMessage("success", "Changes Saved");
-                header("Location: ". Core::route("index.php?component=user&controller=settings"));
-            }
+            header("Location: ". Core::route("index.php?component=user&controller=settings"));
         }
         
     }

@@ -25,6 +25,7 @@
                                     <p><img src="<?php echo $this->model->user->avatar; ?>" style="max-width: 40%;" /></p>
                                 </div>
                             <?php } ?>
+                            <p>Max image filesize: <strong>1MB</strong></p>
                             <input type="file" class="form-control" name="avatar" />
                         </div>
                         <button class="button" type="submit">Save</button>
