@@ -1,4 +1,4 @@
-<?php if ($this->model->id > 0) { ?>
+<?php if ($this->model->id > 0 && $this->model->published) { ?>
     <?php if ($this->model->params->show_title) { ?>
         <div class="category-container">
             <h1 class="category-title"><?php echo $this->model->title; ?></h1>
@@ -25,5 +25,5 @@
         </div>
     <?php } ?>
 <?php } else { ?>
-    Category not found
+    <div class="system-message danger">Category not found</div>
 <?php } ?>

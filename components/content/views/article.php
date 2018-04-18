@@ -1,4 +1,4 @@
-<?php if ($this->model->id > 0) { ?>
+<?php if ($this->model->id > 0 && $this->model->published && $this->model->category->published) { ?>
     <article class="article-container">
         <header>
             <?php if ($this->model->image) { ?>
@@ -44,5 +44,5 @@
         </footer>
     </article>
 <?php } else { ?>
-    Article not found
+    <div class="system-message danger">Article not found</div>
 <?php } ?>
