@@ -277,12 +277,12 @@
             {
                 $link = str_replace("index.php?", "", $link);
                 $parts = explode("&", $link);
+                $component = "";
+                $controller = "";
+                $content_id = "";
                 foreach ($parts as $part)
                 {
                     $part = explode("=", $part);
-                    $component = "";
-                    $controller = "";
-                    $content_id = "";
                     switch ($part["0"])
                     {
                         case "component":
@@ -295,25 +295,25 @@
                             $content_id = $part["1"];
                             break;
                     }
-                    $item = Core::db()->loadObject("SELECT id FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($component, $controller, $content_id));
-                    if ($item->id > 0)
+                }
+                $item = self::db()->loadObject("SELECT id, alias FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($component, $controller, $content_id));
+                if ($item->id > 0)
+                {
+                    return BASE_URL.$item->alias;
+                }
+                else
+                {
+                    $routername = $component ."Router";
+                    require_once(__DIR__ ."/../../components/". $component ."/router.php");
+                    self::$router = new $routername(self::$db);
+                    $custom = self::router()->route($link);
+                    if (strlen($custom) > 0)
                     {
-                        return BASE_URL."index.php?component=". $component ."&controller=". $controller ."&id=". $content_id ."&iid=". $item->id;
+                        return $custom;
                     }
                     else
                     {
-                        $routername = $component ."Router";
-                        require_once(__DIR__ ."/../../components/". $component ."/router.php");
-                        self::$router = new $routername(self::$db);
-                        $custom = self::router()->route($link);
-                        if (strlen($custom) > 0)
-                        {
-                            return $custom;
-                        }
-                        else
-                        {
-                            return BASE_URL."index.php?". $link;
-                        }
+                        return BASE_URL."index.php?". $link;
                     }
                 }
             }
@@ -326,7 +326,7 @@
             if ($string == "index.php" || $string == "")
             {
                 // If no rule from router found, find homepage
-                $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
+                $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
                 self::changeTitle($item->title);
                 $this->component = $item->component;
                 $this->controller = $item->controller;
@@ -350,11 +350,11 @@
             {
                 $task_split = explode("?", $string);
                 $parts = explode("/", $task_split["0"]);
-                $first = $this->database->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($parts["0"]));
+                $first = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($parts["0"]));
                 if ($first->id > 0)
                 {
                     $alias = end($parts);
-                    $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
+                    $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
                     if ($item->id <= 0)
                     {
                         // Use Custom Router
@@ -381,7 +381,7 @@
                 else
                 {
                     $alias = end($parts);
-                    $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
+                    $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
                 }
             }
             if (!$router_set)
@@ -420,11 +420,11 @@
                     else
                     {
                         // If no rule from router found, find homepage
-                        $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
+                        $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
                         self::$menu_item_id = $item->id;
                         if ($item->id <= 0 && strlen($_GET["component"]) == 0)
                         {
-                            $item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
+                            $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
                             self::$menu_item_id = $item->id;
                         }
                         elseif (strlen($_GET["component"]) > 0)
