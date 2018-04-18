@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <version>
-    <numerical>1.1.0</numerical>
-    <releaseDate>9th April 2018</releaseDate>
+    <numerical>1.2.0</numerical>
+    <releaseDate>18th April 2018</releaseDate>
     <packageURL>https://github.com/Smith0r/bulletin/archive/master.zip</packageURL>
     <new>
         <![CDATA[
             <h4>Changes</h4>
             <ul>
-                <li>Recent Articles on User Profiles.</li>
-                <li>Admin component to show information about installation, and packagaes used.</li>
-                <li>Fix for thin article images.</li>
-                <li>Menu dropdown padding fix.</li>
+                <li>Sitemap</li>
+                <li>New Extension Discovery</li>
+                <li>Avatar Uploading + Restrictions</li>
+                <li>Dashboard Update</li>
+                <li>Slightly improved User Profile Design</li>
+                <li>User Settings</li>
+                <li>Form Rework</li>
+                <li>Category article view, only strips image tags</li>
+                <li>Can actually now swap templates</li>
+                <li>Hooks system</li>
+                <li>Hooks system</li>
             </ul>
         ]]>
     </new>
