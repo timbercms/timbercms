@@ -10,11 +10,6 @@
             $this->database = $database;
 		}
         
-        public function onLoadContent()
-        {
-            // Process Content Load Hook example
-        }
-        
         public function onXMLSitemap()
         {
             $time = date("Y-m-d", time());
