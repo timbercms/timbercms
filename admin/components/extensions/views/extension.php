@@ -1,6 +1,9 @@
 <div class="white-card">
     <h2><?php echo $this->model->title; ?> Extension</h2>
     <div class="component-action-bar">
+        <a href="index.php?component=extensions&controller=extension&task=<?php echo ($this->model->enabled == 1 ? "unpublish" : "publish"); ?>&id=<?php echo $this->model->id; ?>" class="btn btn-<?php echo ($this->model->enabled == 0 ? "success" : "danger"); ?>">
+            <i class="fa fa-<?php echo ($this->model->enabled == 0 ? "eye" : "eye-slash"); ?>"></i> <?php echo ($this->model->enabled == 0 ? "Enable" : "Disable"); ?>
+        </a>
         <a href="index.php?component=extensions&controller=extensions" class="button"><i class="fa fa-chevron-left"></i> Back to List</a>
     </div>
     <?php if ($this->model->is_locked) { ?>
