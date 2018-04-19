@@ -10,8 +10,7 @@
         ]
     ];
     $context = stream_context_create($opts);
-    $web_version = json_decode(file_get_contents("https://api.github.com/repos/Smith0r/bulletin/releases", false, $context));
-    $web_version = $web_version["0"];
+    $web_version = json_decode(file_get_contents("https://api.github.com/repos/Smith0r/bulletin/releases", false, $context))["0"];
 
 ?>
 <div class="white-card">
@@ -19,7 +18,7 @@
     <div class="component-action-bar">
         <a href="index.php?component=settings&controller=settings&extension=update" class="button"><i class="fa fa-cog"></i> Settings</a>
     </div>
-    <div class="alert alert-success">You are running Bulletin CMS v<?php echo $version->numerical; ?></div>
+    <div class="alert alert-<?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>danger<?php } else { ?>success<?php } ?>">You are running Bulletin CMS v<?php echo $version->numerical; ?> <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?> - [OUT OF DATE]<?php } ?></div>
     <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>
         <p>&nbsp;</p>
         <h3>Release Information for <?php echo $web_version->name; ?></h3>

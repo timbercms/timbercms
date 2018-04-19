@@ -12,7 +12,7 @@
         ]
     ];
     $context = stream_context_create($opts);
-    $web_version = json_decode(file_get_contents("https://api.github.com/repos/Smith0r/bulletin/releases", false, $context));
+    $web_version = json_decode(file_get_contents("https://api.github.com/repos/Smith0r/bulletin/releases", false, $context))["0"];
 
 ?>
 <!DOCTYPE html>
