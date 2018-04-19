@@ -266,7 +266,7 @@
             }
             if ($display_submit)
             {
-                $string .= '<button type="submit" class="button float-right no-margin"><i class="fa fa-save"></i> Save</button>';
+                $string .= '<button type="submit" class="btn btn-success float-right no-margin"><i class="fa fa-save"></i> Save</button>';
             }
             $string .= '<div class="clearfix"></div>';
             echo $string;

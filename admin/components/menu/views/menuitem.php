@@ -41,7 +41,7 @@
         <input type="hidden" name="component" value="<?php echo (strlen($this->model->component) > 0 && $_GET["overwrite"] != 1 ? $this->model->component : $_GET["comp"]); ?>" />
         <input type="hidden" name="controller" value="<?php echo (strlen($this->model->controller) > 0 && $_GET["overwrite"] != 1 ? $this->model->controller : $_GET["cont"]); ?>" />
         <input type="hidden" name="menu_id" value="<?php echo ($this->model->menu_id > 0 ? $this->model->menu_id : $_GET["menu_id"]); ?>" />
-        <button type="submit" class="button float-right no-margin" style="margin-top: 20px;"><i class="fa fa-save"></i> Save</button>
+        <button type="submit" class="btn btn-success float-right no-margin" style="margin-top: 20px;"><i class="fa fa-save"></i> Save</button>
         <div class="clearfix"></div>
     </form>
 </div>
