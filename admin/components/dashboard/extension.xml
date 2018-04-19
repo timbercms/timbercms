@@ -8,11 +8,6 @@
     <author>Chris Smith</author>
     <author_url>https://github.com/Smith0r</author_url>
     <version>1.2.0</version>
-    <name value="Content" icon="newspaper" />
-    <items value="articles" label="Articles" />
-    <items value="categories" label="Categories" />
-    <fields type="select" name="enable_comments" label="Enable Disqus Comments" values="No|0,Yes|1" default="0" />
-    <fields type="text" name="disqus_shortname" label="Disqus Shortname" />
-    <controller label="Category View" internal_name="category" query="SELECT id, title FROM #__articles_categories ORDER BY id ASC" key="id" keyvalue="title" description="View a list of articles from a specific category." />
-    <controller label="Single Article" internal_name="article" query="SELECT id, title FROM #__articles ORDER BY publish_time DESC" key="id" keyvalue="title" description="Show a specific article." />
+    <name value="Dashboard" icon="sitemap" />
+    <items value="dashboard" label="Admin Dashboard" />
 </settings>
