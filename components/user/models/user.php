@@ -82,7 +82,7 @@
             {
                 $this->database->query("INSERT INTO #__sessions (php_session_id, user_id, last_action_time) VALUES (?, ?, ?)", array($session_id, $id, time()));
             }
-            setcookie("bgdy_session_id", $session_id, time() + (86400 * 30), "/");
+            setcookie("bgdy_session_id", $session_id, time() + (86400 * 30), COOKIE_DOMAIN);
         }
         
         public function logout()
@@ -92,7 +92,7 @@
             if ($session->id > 0)
             {
                 $this->database->query("DELETE FROM #__sessions WHERE id = ?", array($session->id));
-                setcookie("bgdy_session_id", "", time() - (86400 * 30), "/");
+                setcookie("bgdy_session_id", "", time() - (86400 * 30), COOKIE_DOMAIN);
                 unset($_COOKIE["bgdy_session_id"]);
                 session_destroy();
                 session_start();

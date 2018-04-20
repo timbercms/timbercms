@@ -48,6 +48,11 @@
                         <p>If your website is in a subfolder, for example https://www.website.com/cms, enter the subfolder as /cms/.</p>
                         <input type="text" name="subfolder" class="form-control" placeholder="Your website subfolder. If none, leave blank." value="<?php echo str_replace("installer/", "", $_SERVER["REQUEST_URI"]); ?>" />
                     </div>
+                    <div class="form-group">
+                        <label class="col-form-label"><strong>Cookie Domain</strong></label>
+                        <p>Usually you can leave this as "/", however, <strong>if you know what you're doing you can change this</strong>.</p>
+                        <input type="text" name="cookie_domain" class="form-control" value="/" />
+                    </div>
                     
                     <h3>Database Information</h3>
                     <div class="form-group">
@@ -113,6 +118,7 @@
     define("BASE_URL", "'. $baseurl.($subfolder != "/" ? ltrim($subfolder, "/") : "") .'");
     define("SUBFOLDER", "'. $subfolder .'");
     define("LAUNCH_TIME", "'. time() .'");
+    define("COOKIE_DOMAIN", "'. $_POST["cookie_domain"] .'");
 
 ?>';
 
