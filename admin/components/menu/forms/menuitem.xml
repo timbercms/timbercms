@@ -6,4 +6,5 @@
     <fields type="select" name="published" label="Published" values="No|0,Yes|1" default="1" />
     <fields type="select" name="is_home" label="Is Home?" values="No|0,Yes|1" default="0" />
     <fields type="hidden" name="menu_id" />
+    <fields type="hidden" name="ordering" />
 </settings>

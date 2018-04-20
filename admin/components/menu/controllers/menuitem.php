@@ -26,6 +26,7 @@
             $this->model->content_id = $_POST["content_id"];
             $this->model->params = $_POST["params"];
             $this->model->is_home = $_POST["is_home"];
+            $this->model->ordering = $_POST["ordering"];
             if ($this->model->store())
             {
                 $this->model->setMessage("success", "Menu item saved");
