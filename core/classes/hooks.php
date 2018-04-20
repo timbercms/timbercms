@@ -18,9 +18,16 @@
             unset($files["0"], $files["1"]);
             foreach ($files as $file)
             {
-                require_once(__DIR__ ."/../../hooks/". $file);
-                $name = explode(".", $file)["0"]."Hook";
-                $this->hooks[] = new $name($this->database);
+                if (strtolower(explode(".", $file)["1"]) == "php")
+                {
+                    $hook = $this->database->loadObject("SELECT id, enabled FROM #__components_hooks WHERE component_name = ?", array(explode(".", $file)["0"]));
+                    if ($hook->enabled)
+                    {
+                        require_once(__DIR__ ."/../../hooks/". $file);
+                        $name = explode(".", $file)["0"]."Hook";
+                        $this->hooks[] = new $name($this->database);
+                    }
+                }
             }
         }
         

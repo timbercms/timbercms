@@ -17,22 +17,20 @@
         </div>
         <h3 style="margin-top: 20px; margin-bottom: 20px;">Basic Information</h3>
         <?php $this->model->form->display(false); ?>
-        <div class="row form-group">
-            <label class="col-md-2 col-form-label">Parent Item</label>
-            <div class="col-md-10">
-                <select name="parent_id" class="form-control">
-                    <option value="0">-- PLEASE SELECT --</option>
-                    <?php foreach ($this->model->getSiblings() as $item) { ?>
-                        <option value="<?php echo $item->id; ?>"<?php echo ($item->id == $this->model->parent_id ? ' selected="selected"' : ''); ?>><?php echo $item->title; ?></option>
-                        <?php foreach ($item->children as $child) { ?>
-                            <option value="<?php echo $child->id; ?>"<?php echo ($child->id == $this->model->parent_id ? ' selected="selected"' : ''); ?>>-- <?php echo $child->title; ?></option>
-                            <?php foreach ($child->children as $grandchild) { ?>
-                                <option value="<?php echo $grandchild->id; ?>"<?php echo ($grandchild->id == $this->model->parent_id ? ' selected="selected"' : ''); ?>>---- <?php echo $grandchild->title; ?></option>
-                            <?php } ?>
+        <div class="form-group">
+            <label class="col-form-label">Parent Item</label>
+            <select name="parent_id" class="form-control">
+                <option value="0">-- PLEASE SELECT --</option>
+                <?php foreach ($this->model->getSiblings() as $item) { ?>
+                    <option value="<?php echo $item->id; ?>"<?php echo ($item->id == $this->model->parent_id ? ' selected="selected"' : ''); ?>><?php echo $item->title; ?></option>
+                    <?php foreach ($item->children as $child) { ?>
+                        <option value="<?php echo $child->id; ?>"<?php echo ($child->id == $this->model->parent_id ? ' selected="selected"' : ''); ?>>-- <?php echo $child->title; ?></option>
+                        <?php foreach ($child->children as $grandchild) { ?>
+                            <option value="<?php echo $grandchild->id; ?>"<?php echo ($grandchild->id == $this->model->parent_id ? ' selected="selected"' : ''); ?>>---- <?php echo $grandchild->title; ?></option>
                         <?php } ?>
                     <?php } ?>
-                </select>
-            </div>
+                <?php } ?>
+            </select>
         </div>
         <?php if (strlen($this->model->controller_query->attributes()->query) > 0) { ?>
             <h3 style="margin-top: 20px; margin-bottom: 20px;">Item Options</h3>

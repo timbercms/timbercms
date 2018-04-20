@@ -1,0 +1,12 @@
+<div class="white-card">
+    <h2><?php echo $this->model->title; ?> Hook</h2>
+    <div class="component-action-bar">
+        <a href="index.php?component=extensions&controller=hook&task=<?php echo ($this->model->enabled == 1 ? "unpublish" : "publish"); ?>&id=<?php echo $this->model->id; ?>" class="btn btn-<?php echo ($this->model->enabled == 0 ? "success" : "danger"); ?>">
+            <i class="fa fa-<?php echo ($this->model->enabled == 0 ? "eye" : "eye-slash"); ?>"></i> <?php echo ($this->model->enabled == 0 ? "Enable" : "Disable"); ?>
+        </a>
+        <a href="index.php?component=extensions&controller=hooks" class="button"><i class="fa fa-chevron-left"></i> Back to List</a>
+    </div>
+    <p><?php echo $this->model->description; ?></p>
+    <p>&nbsp;</p>
+    <p style="font-style: italic;">Maintained by <?php echo $this->model->author_name; ?> (<a href="<?php echo $this->model->author_url; ?>" target="_blank"><?php echo $this->model->author_url; ?></a>)</p>
+</div>

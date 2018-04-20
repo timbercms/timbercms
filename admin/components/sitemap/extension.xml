@@ -8,5 +8,5 @@
     <author>Chris Smith</author>
     <author_url>https://github.com/Smith0r</author_url>
     <version>1.2.0</version>
-    <controller label="Sitemap Display" internal_name="display" description="Display the sitemap in Human Readable Format" />
+    <controller label="Sitemap Display" internal_name="sitemap" description="Display the sitemap in Human Readable Format" />
 </settings>

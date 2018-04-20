@@ -33,7 +33,7 @@
                 </div>
             <?php } else { ?>
                 <div class="col-md-1" style="text-align: center;">
-                    <a href="index.php?component=extensions&controller=extension&task=<?php echo ($extension->enabled == 1 ? "unpublish" : "publish"); ?>&id=<?php echo $extension->id; ?>" class="btn btn-<?php echo ($extension->enabled == 1 ? "success" : "danger"); ?>">
+                    <a href="index.php?component=extensions&controller=extension&task=<?php echo ($extension->enabled == 1 ? "unpublish" : "publish"); ?>&id=<?php echo $extension->id; ?>&return=1" class="btn btn-<?php echo ($extension->enabled == 1 ? "success" : "danger"); ?>">
                         <i class="fa fa-<?php echo ($extension->enabled == 1 ? "check" : "times"); ?>"></i>
                     </a>
                 </div>

@@ -9,5 +9,6 @@
     <author_url>https://github.com/Smith0r</author_url>
     <version>1.2.0</version>
     <name value="Extension Manager" icon="sitemap" />
-    <items value="extensions" label="Manage" />
+    <items value="extensions" label="Manage Extensions" />
+    <items value="hooks" label="Manage Hooks" />
 </settings>
