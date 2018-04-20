@@ -2,7 +2,7 @@
     <h2>Extension Manager</h2>
     <div class="component-action-bar">
         <a href="index.php?component=extensions&controller=discover" class="btn btn-success"><i class="fa fa-plus"></i> Discover</a>
-        <a href="index.php?component=settings&controller=settings&extension=extensions" class="button"><i class="fa fa-cog"></i> Settings</a>
+        <?php if (count($this->model->settings->fields) > 0) { ?><a href="index.php?component=settings&controller=settings&extension=extensions" class="button"><i class="fa fa-cog"></i> Settings</a><?php } ?>
     </div>
     <div class="d-flex admin-header">
         <div class="col-md-1"><strong>ID</strong></div>

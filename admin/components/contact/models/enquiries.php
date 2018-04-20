@@ -10,10 +10,13 @@
         
         public $enquiries = array();
         
+        public $settings;
+        
         public function __construct($id = 0, $database)
         {
             $this->database = $database;
             $this->load();
+            $this->settings = simplexml_load_file(__DIR__ ."/../extension.xml");
         }
         
         public function load()

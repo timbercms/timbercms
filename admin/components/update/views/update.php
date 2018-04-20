@@ -16,7 +16,7 @@
 <div class="white-card">
     <h2>Update your Bulletin installation</h2>
     <div class="component-action-bar">
-        <a href="index.php?component=settings&controller=settings&extension=update" class="button"><i class="fa fa-cog"></i> Settings</a>
+        <?php if (count($this->model->settings->fields) > 0) { ?><a href="index.php?component=settings&controller=settings&extension=update" class="button"><i class="fa fa-cog"></i> Settings</a><?php } ?>
     </div>
     <div class="alert alert-<?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>danger<?php } else { ?>success<?php } ?>">You are running Bulletin CMS v<?php echo $version->numerical; ?> <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?> - [OUT OF DATE]<?php } ?></div>
     <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>
