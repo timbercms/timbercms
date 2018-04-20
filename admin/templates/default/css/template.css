@@ -275,3 +275,6 @@ form label {
     margin-top: -20px;
     margin-bottom: 20px;
 }
+.form-control {
+    max-width: 50%;   
+}
