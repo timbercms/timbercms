@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
+    <title>Main Menu</title>
+    <description>Show the main menu.</description>
+    <author>Chris Smith</author>
+    <author_url>https://github.com/Smith0r</author_url>
+    <version>1.2.0</version>
     <fields type="sql" query="SELECT id, title FROM #__menus ORDER BY title ASC" key="id" keyvalue="title" name="menu_id" label="Menu" />
 </settings>
