@@ -18,21 +18,21 @@
         </div>
     <?php } else { ?>
         <form action="<?php echo $this->route("index.php?component=user&controller=user&task=login"); ?>" method="post">
-            <div class="row form-group">
-                <label class="col-md-3 col-form-label">Username:</label>
-                <div class="col-md-9">
-                    <input type="text" name="username" class="form-control" />
-                </div>
+            <div class="form-group">
+                <label class="col-form-label"><strong>Username:</strong></label>
+                <input type="text" name="username" class="form-control" />
             </div>
-            <div class="row form-group">
-                <label class="col-md-3 col-form-label">Password:</label>
-                <div class="col-md-9">
-                    <input type="password" name="password" class="form-control" />
-                    <p style="text-align: right;">
-                        <a href="<?php echo Core::route("index.php?component=user&controller=requestreset"); ?>">Forgotten password?</a>
-                    </p>
-                </div>
+            <div class="form-group">
+                <label class="col-form-label"><strong>Password:</strong></label>
+                <input type="password" name="password" class="form-control" />
             </div>
+            <div class="form-group form-check" style="margin-bottom: 40px;">
+                <input type="checkbox" class="form-check-input" name="remember" style="margin-top: .2rem;">
+                <label class="form-check-label">Remember me</label>
+            </div>
+            <p style="text-align: right;">
+                <a href="<?php echo Core::route("index.php?component=user&controller=requestreset"); ?>">Forgotten password?</a>
+            </p>
             <button type="submit" class="button pull-right"><i class="fa fa-key"></i> Login</button> <a href="<?php echo $this->route("index.php?component=user&controller=register"); ?>" class="button hollow pull-right">Don't have an account?</a>
             <div class="clearfix"></div>
         </form>

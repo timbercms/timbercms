@@ -13,8 +13,7 @@
         <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/css/template.css?v=<?php echo time(); ?>">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-        <script src="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/js/bootstrap.min.js"></script>
+        <script src="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/js/bootstrap.bundle.min.js"></script>
         <script src="<?php echo BASE_URL; ?>tinymce/tinymce.min.js"></script>
         <script src="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/js/fontawesome-all.min.js?v=<?php echo time(); ?>"></script>
         <script src="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/js/template.js?v=<?php echo time(); ?>"></script>

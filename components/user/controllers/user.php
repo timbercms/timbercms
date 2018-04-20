@@ -23,7 +23,7 @@
                     {
                         $this->model->setMessage("success", "Welcome back, ". $username);
                         // Login as details are correct
-                        $this->model->login($temp->id);
+                        $this->model->login($temp->id, $_POST["remember"]);
                         header("Location: ". Core::route("index.php?component=user&controller=profile&id=". $temp->id));
                     }
                     else

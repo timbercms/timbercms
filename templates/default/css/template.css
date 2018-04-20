@@ -24,7 +24,7 @@ body {
     font-family: "Open Sans", "Arial", sans-serif !important;
     font-weight: 500;
     letter-spacing: -1px !important;
-    background: var(--charcoal);
+    background: var(--blueberry);
 }
 html {
   box-sizing: border-box;
@@ -123,11 +123,11 @@ pre {
 }
 .button.hollow {
     background: transparent;
-    color: #AA4B41;
+    color: var(--link);
 }
 .button.hollow:hover {
     background: transparent;
-    color: #853B34;
+    color: var(--link-accent);
 }
 .button:hover {
     text-decoration: none;

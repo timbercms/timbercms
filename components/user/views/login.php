@@ -3,17 +3,17 @@
     <div class="row">
         <div class="col-md-6">
             <form action="<?php echo $this->route("index.php?component=user&controller=user&task=login"); ?>" method="post">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Username:</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="username" class="form-control" required />
-                    </div>
+                <div class="form-group">
+                    <label class="col-form-label"><strong>Username:</strong></label>
+                    <input type="text" name="username" class="form-control" required />
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Password:</label>
-                    <div class="col-sm-10">
-                        <input type="password" name="password" class="form-control" required />
-                    </div>
+                <div class="form-group">
+                    <label class="col-form-label"><strong>Password:</strong></label>
+                    <input type="password" name="password" class="form-control" required />
+                </div>
+                <div class="form-group form-check" style="margin-bottom: 40px;">
+                    <input type="checkbox" class="form-check-input" name="remember" style="margin-top: .2rem;">
+                    <label class="form-check-label">Remember me</label>
                 </div>
                 <button type="submit" class="button pull-right"><i class="fa fa-key"></i> Login</button>
                 <div class="clearfix"></div>

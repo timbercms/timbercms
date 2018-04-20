@@ -60,7 +60,7 @@
         
         public function loadSession()
         {
-            $session_id = (strlen($_COOKIE["bgdy_session_id"]) > 0 ? $_COOKIE["bgdy_session_id"] : session_id());
+            $session_id = (strlen($_COOKIE["bul_session_id"]) > 0 ? $_COOKIE["bul_session_id"] : session_id());
             $session = $this->database->loadObject("SELECT * FROM #__sessions WHERE php_session_id = ?", array($session_id));
             if ($session->id > 0)
             {
@@ -70,9 +70,9 @@
             }
         }
         
-        public function login($id)
+        public function login($id, $remember = false)
         {
-            $session_id = (strlen($_COOKIE["bgdy_session_id"]) > 0 ? $_COOKIE["bgdy_session_id"] : session_id());
+            $session_id = (strlen($_COOKIE["bul_session_id"]) > 0 ? $_COOKIE["bul_session_id"] : session_id());
             $session = $this->database->loadObject("SELECT * FROM #__sessions WHERE user_id = ?", array($id));
             if ($session->id > 0)
             {
@@ -82,18 +82,21 @@
             {
                 $this->database->query("INSERT INTO #__sessions (php_session_id, user_id, last_action_time) VALUES (?, ?, ?)", array($session_id, $id, time()));
             }
-            setcookie("bgdy_session_id", $session_id, time() + (86400 * 30), COOKIE_DOMAIN);
+            if ($remember)
+            {
+                setcookie("bul_session_id", $session_id, time() + (86400 * (Core::config()->cookie_duration > 0 ? Core::config()->cookie_duration : 28)), COOKIE_DOMAIN);
+            }
         }
         
         public function logout()
         {
-            $session_id = (strlen($_COOKIE["bgdy_session_id"]) > 0 ? $_COOKIE["bgdy_session_id"] : session_id());
+            $session_id = (strlen($_COOKIE["bul_session_id"]) > 0 ? $_COOKIE["bul_session_id"] : session_id());
             $session = $this->database->loadObject("SELECT * FROM #__sessions WHERE php_session_id = ?", array($session_id));
             if ($session->id > 0)
             {
                 $this->database->query("DELETE FROM #__sessions WHERE id = ?", array($session->id));
-                setcookie("bgdy_session_id", "", time() - (86400 * 30), COOKIE_DOMAIN);
-                unset($_COOKIE["bgdy_session_id"]);
+                setcookie("bul_session_id", "", time() - (86400 * (Core::config()->cookie_duration > 0 ? Core::config()->cookie_duration : 28)), COOKIE_DOMAIN);
+                unset($_COOKIE["bul_session_id"]);
                 session_destroy();
                 session_start();
             }
