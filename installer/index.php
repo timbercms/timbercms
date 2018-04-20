@@ -39,14 +39,14 @@
                     <h3>Website Information</h3>
                     <div class="form-group">
                         <label class="col-form-label"><strong>Website URL</strong></label>
-                        <p>You must include a trailing slash (https://www.website.com/)</p>
-                        <input type="text" name="base_url" class="form-control" required placeholder="Your website address, with trailing slash. (https://www.website.com/)" />
+                        <p>You must include a trailing slash (https://www.website.com/). <strong>This has been prefilled for you, make sure it is correct before moving on to the next stage.</strong></p>
+                        <input type="text" name="base_url" class="form-control" required placeholder="Your website address, with trailing slash. (https://www.website.com/)" value="<?php echo $_SERVER["REQUEST_SCHEME"]; ?>://<?php echo $_SERVER["SERVER_NAME"]; ?>/" />
                     </div>
                     <div class="form-group">
                         <label class="col-form-label"><strong>Subfolder</strong></label>
-                        <p><span style="color: #FF0000;">You may leave this field blank</span></p>
+                        <p><span style="color: #FF0000;">You may leave this field blank if required</span></p>
                         <p>If your website is in a subfolder, for example https://www.website.com/cms, enter the subfolder as /cms/.</p>
-                        <input type="text" name="subfolder" class="form-control" placeholder="Your website subfolder. If none, leave blank." />
+                        <input type="text" name="subfolder" class="form-control" placeholder="Your website subfolder. If none, leave blank." value="<?php echo str_replace("installer/", "", $_SERVER["REQUEST_URI"]); ?>" />
                     </div>
                     
                     <h3>Database Information</h3>
@@ -110,7 +110,7 @@
     define("DATABASE_PASSWORD", "'. $_POST["db_password"] .'");
     define("DATABASE_NAME", "'. $_POST["db_name"] .'");
     define("DATABASE_PREFIX", "'. $prefix .'_");
-    define("BASE_URL", "'. $baseurl .'");
+    define("BASE_URL", "'. $baseurl.($subfolder != "/" ? ltrim($subfolder, "/") : "") .'");
     define("SUBFOLDER", "'. $subfolder .'");
     define("LAUNCH_TIME", "'. time() .'");
 
@@ -124,7 +124,7 @@
 RewriteEngine On
 
 RewriteCond %{SERVER_PORT} 80
-RewriteRule ^(.*)$ '. $baseurl .'$1 [R,L]
+RewriteRule ^(.*)$ '. $baseurl.($subfolder != "/" ? ltrim($subfolder, "/") : "") .'$1 [R,L]
  
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
@@ -151,6 +151,12 @@ RedirectMatch 404 ^404.php';
                     </div>
                 <?php } else { ?>
                     <form action="index.php?stage=3" method="post">
+                        <h3>Website Identity</h3>
+                        <div class="form-group">
+                            <label class="col-form-label"><strong>Website Name</strong></label>
+                            <input type="text" name="site_name" class="form-control" required placeholder="My First Website" />
+                        </div>
+                        <h3>Your Information</h3>
                         <div class="form-group">
                             <label class="col-form-label"><strong>Username</strong></label>
                             <input type="text" name="username" class="form-control" required placeholder="Enter your username" />
@@ -309,7 +315,7 @@ RedirectMatch 404 ^404.php';
     
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Content", "Article category and detail view. Includes comments via third-party Disqus.", "content", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.0", 'a:1:{s:15:"enable_comments";s:1:"0";}', "1"));
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("User", "Provides functions for account management, and profile views.", "user", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.0", '', "1"));
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Settings", "Provides sitewide, and component specific settings.", "settings", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.0", 'a:4:{s:10:"site_title";s:13:"Bulletin. CMS";s:16:"default_template";s:7:"default";s:14:"admin_template";s:7:"default";s:17:"default_usergroup";s:1:"1";}', "1"));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Settings", "Provides sitewide, and component specific settings.", "settings", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.0", 'a:4:{s:10:"site_title";s:'. strlen($_POST["site_name"]) .':"'. $_POST["site_name"] .'";s:16:"default_template";s:7:"default";s:14:"admin_template";s:7:"default";s:17:"default_usergroup";s:1:"1";}', "1"));
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Extensions", "Provides management of extensions.", "extensions", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.0", '', "1"));
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Menu Manager", "Basic Menu Management.", "menu", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.0", '', "1"));
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Module Manager", "Basic Module Management.", "modules", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.0", '', "1"));
