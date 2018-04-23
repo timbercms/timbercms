@@ -65,6 +65,7 @@
     margin-right: auto;
     border: 3px solid var(--charcoal);
     border-radius: 3px;
+    display: block;
 }
 .article-title {
     margin-top: 40px;
