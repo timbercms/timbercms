@@ -322,7 +322,7 @@
         public function unroute()
         {
             $string = $_SERVER["REQUEST_URI"];
-            $string = str_replace(SUBFOLDER, "", $string); // Remove after putting live
+            $string = str_replace(SUBFOLDER, "", $string);
             if ($string == "index.php" || $string == "")
             {
                 // If no rule from router found, find homepage
@@ -350,6 +350,7 @@
             {
                 $task_split = explode("?", $string);
                 $parts = explode("/", $task_split["0"]);
+                if (strlen($parts[0]) == 0) array_shift($parts);
                 $first = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($parts["0"]));
                 if ($first->id > 0)
                 {
