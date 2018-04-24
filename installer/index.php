@@ -313,6 +313,7 @@ RedirectMatch 404 ^404.php';
                          `password` varchar(255) DEFAULT NULL,
                          `activated` int(11) DEFAULT '0',
                          `blocked` int(11) DEFAULT '0',
+                         `blocked_reason` varchar(500) DEFAULT NULL,
                          `register_time` int(11) DEFAULT NULL,
                          `last_action_time` int(11) DEFAULT NULL,
                          `verify_token` varchar(5000) DEFAULT NULL,
