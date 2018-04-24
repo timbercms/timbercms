@@ -4,7 +4,7 @@
         <?php if (count($this->model->broken_tables) > 0) { ?><a href="index.php?component=settings&controller=database&task=fix" class="btn btn-primary"><i class="fas fa-wrench"></i> Repair Issues</a><?php } ?>
     </div>
     <div>
-        <h3 style="margin-bottom: 40px;"><?php echo count($this->model->broken_tables); ?> Table<?php if (count($this->model->broken_tables) != 1) { ?>s have<?php } else { ?> has<?php } ?> an issue</h3>
+        <h3 style="margin-bottom: 40px;"><?php echo count($this->model->broken_tables); ?> Core Table<?php if (count($this->model->broken_tables) != 1) { ?>s have<?php } else { ?> has<?php } ?> an issue</h3>
         <?php foreach ($this->model->current_tables as $key => $table) { ?>
             <div class="system-message <?php if (in_array($key, $this->model->broken_tables)) { ?>danger<?php } else { ?>success<?php } ?>">
                 <?php if (in_array($key, $this->model->broken_tables)) { ?>

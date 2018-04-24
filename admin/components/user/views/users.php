@@ -32,8 +32,8 @@
                     </a>
                 </div>
                 <div class="col-md-1" style="text-align: center;">
-                    <a href="index.php?component=user&controller=user&task=<?php echo ($user->blocked == 1 ? "unblock" : "block"); ?>&id=<?php echo $user->id; ?>" class="btn btn-<?php echo ($user->blocked == 1 ? "danger" : "success"); ?>">
-                        <i class="fa fa-<?php echo ($user->blocked == 0 ? "check" : "times"); ?>"></i>
+                    <a href="index.php?component=user&controller=user&task=<?php echo ($user->blocked == 1 ? "unblock" : "block"); ?>&id=<?php echo $user->id; ?>" class="btn btn-<?php echo ($user->blocked == 1 ? "success" : "danger"); ?>">
+                        <i class="fa fa-<?php echo ($user->blocked == 0 ? "times" : "check"); ?>"></i>
                     </a>
                 </div>
             </div>

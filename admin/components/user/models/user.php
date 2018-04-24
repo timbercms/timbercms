@@ -52,6 +52,7 @@
             $this->blocked_reason = $temp->blocked_reason;
             $this->register_time = $temp->register_time;
             $this->last_action_time = $temp->last_action_time;
+            $this->usergroup_id = $temp->usergroup_id;
             $this->usergroup = new UsergroupModel($temp->usergroup_id, $this->database);
             $this->avatar = "https://www.gravatar.com/avatar/" .md5(strtolower(trim($this->email))) ."?s=38";
         }

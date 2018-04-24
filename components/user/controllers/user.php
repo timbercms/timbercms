@@ -17,7 +17,7 @@
             $temp = $this->model->database->loadObject("SELECT * FROM #__users WHERE username = ?", array($username));
             if ($temp->id > 0)
             {
-                if ($temp->activated == 1)
+                if ($temp->activated == 1 && $temp->blocked == 0)
                 {
                     if (password_verify($password, $temp->password))
                     {
@@ -35,7 +35,7 @@
                 }
                 else
                 {
-                    $this->model->setMessage("danger", "Sorry, but it looks like you haven't activated your account. We sent an email to ". $temp->email ." which contains an activation link.");
+                    $this->model->setMessage("danger", "Sorry, but it looks like you haven't activated your account. We previously sent an email to your account which contains an activation link.");
                     header("Location: ". Core::route("index.php"));
                 }
             }
