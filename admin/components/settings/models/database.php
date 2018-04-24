@@ -9,8 +9,11 @@
         public $schema = array();
         public $optimal_schema = array();
         public $broken_tables = array();
+        public $extra_tables = array();
         public $current_tables = array();
+        public $optimal_tables = array();
         public $missing = array();
+        public $extra = array();
         
         public function __construct($id = 0, $database)
         {
@@ -105,6 +108,7 @@
             $tables[DATABASE_PREFIX."modules"][] = array("name" => "position", "params" => "varchar(255) DEFAULT NULL");
             $tables[DATABASE_PREFIX."modules"][] = array("name" => "params", "params" => "varchar(10000) DEFAULT NULL");
             $tables[DATABASE_PREFIX."modules"][] = array("name" => "pages", "params" => "varchar(255) DEFAULT '0'");
+            $tables[DATABASE_PREFIX."modules"][] = array("name" => "ordering", "params" => "varchar(255) DEFAULT '0'");
             
             $tables[DATABASE_PREFIX."sessions"][] = array("name" => "id", "params" => "int(11) NOT NULL AUTO_INCREMENT");
             $tables[DATABASE_PREFIX."sessions"][] = array("name" => "php_session_id", "params" => "varchar(255) DEFAULT NULL");
@@ -142,7 +146,30 @@
             {
                 $this->current_tables[$record->table_name][] = $record->column_name;
             }
-        
+            foreach ($this->optimal_schema as $key => $table)
+            {
+                foreach ($table as $record)
+                {
+                    $this->optimal_tables[$key][] = $record["name"];
+                }
+            }
+            foreach ($this->current_tables as $key => $table)
+            {
+                foreach ($table as $column)
+                {
+                    if (!in_array($column, $this->optimal_tables[$key]))
+                    {
+                        $extra = new stdClass();
+                        $extra->name = $column;
+                        $extra->table = $key;
+                        $this->extra[$key][] = $extra;
+                        if (!in_array($key, $this->extra_tables))
+                        {
+                            $this->extra_tables[] = $key;
+                        }
+                    }
+                }
+            }
             foreach ($this->optimal_schema as $key => $table)
             {
                 foreach ($table as $column)
@@ -169,6 +196,11 @@
                     $this->database->query("ALTER TABLE `". $missing->table ."` ADD `". $missing->name ."` ". $missing->params);
                 }
             }
+        }
+        
+        public function remove($table, $column)
+        {
+            $this->database->query("ALTER TABLE `". $table ."` DROP `". $column ."`");
         }
         
     }

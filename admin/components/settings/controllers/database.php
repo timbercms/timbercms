@@ -19,6 +19,13 @@
             header("Location: index.php?component=settings&controller=database");
         }
         
+        public function remove()
+        {
+            $this->model->remove($_GET["table"], $_GET["column"]);
+            $this->model->setMessage("success", $_GET["table"].".". $_GET["column"] ." removed successfully");
+            header("Location: index.php?component=settings&controller=database");
+        }
+        
     }
 
 ?>
