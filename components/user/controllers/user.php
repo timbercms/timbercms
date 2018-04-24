@@ -26,6 +26,7 @@
                             $this->model->setMessage("success", "Welcome back, ". $username);
                             // Login as details are correct
                             $this->model->login($temp->id, $_POST["remember"]);
+                            Core::hooks()->executeHook("onUserLogin");
                             header("Location: ". Core::route("index.php?component=user&controller=profile&id=". $temp->id));
                         }
                         else
@@ -58,6 +59,7 @@
         public function logout()
         {
             $this->model->logout();
+            Core::hooks()->executeHook("onUserLogout");
             $this->model->setMessage("success", "Come back soon!");
             header("Location: ". Core::route("index.php"));
         }
@@ -80,6 +82,7 @@
                 // Register a new account
                 if ($this->model->register($username, $real_name, $password, $email))
                 {
+                    Core::hooks()->executeHook("onUserRegister");
                     $this->model->setMessage("success", "Thank you for registering an account. We've sent an email to ". $email ." to confirm it's really you. You won't be able to login until you've activated your account.");
                     header("Location: ". Core::route("index.php"));
                 }
@@ -97,6 +100,7 @@
             if ($user->id > 0)
             {
                 $this->model->database->query("UPDATE #__users SET activated = ?, verify_token = ? WHERE id = ?", array(1, '', $user->id));
+                Core::hooks()->executeHook("onUserVerify");
                 $this->model->setMessage("danger", "Thank you for activating your account, you may now log in.");
                 header("Location: ". Core::route("index.php?component=user&controller=login"));
             }
@@ -141,6 +145,7 @@
                     $this->model->setMessage("danger", "The passwords you entered do not match");
                 }
             }
+            Core::hooks()->executeHook("onUserUpdateSettings");
             header("Location: ". Core::route("index.php?component=user&controller=settings"));
         }
         

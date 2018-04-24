@@ -9,6 +9,7 @@
         {
             Core::changeTitle("Complete");
             $this->model = $model;
+            Core::hooks()->executeHook("onContactComplete");
         }
         
     }

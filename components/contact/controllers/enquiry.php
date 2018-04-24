@@ -70,6 +70,7 @@
             $enquiry->sent_time = time();
             $enquiry->store();
             mail($admin, $subject, $message, $headers);
+            Core::hooks()->executeHook("onSubmitContact");
             header('Location: '. Core::route("index.php?component=contact&controller=complete"));
         }
         

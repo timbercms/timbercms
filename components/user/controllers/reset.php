@@ -17,6 +17,7 @@
                 if ($_POST["password"] == $_POST["password_again"])
                 {
                     $this->model->database->query("UPDATE #__users SET password = ? WHERE id = ?", array(password_hash($_POST["password"], PASSWORD_DEFAULT), $reset->user_id));
+                    Core::hooks()->executeHook("onResetPassword");
                     $this->model->setMessage("success", "Your password has been reset. You may now login using your new password.");
                     header("Location: index.php?component=user&controller=login");
                 }
