@@ -108,7 +108,7 @@
             $this->load($id);
         }
         
-        public function register($username, $real_name, $password, $email)
+        public function register($username, $password, $email)
         {
 			$data = array();
 			$data[] = array("name" => "id", "value" => 0);

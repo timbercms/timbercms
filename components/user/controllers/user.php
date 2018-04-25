@@ -67,7 +67,6 @@
         public function register()
         {
             $username = $_POST["username"];
-            $real_name = $_POST["real_name"];
             $password = $_POST["password"];
             $password_again = $_POST["password_again"];
             $email = $_POST["email"];
@@ -80,7 +79,7 @@
             else
             {
                 // Register a new account
-                if ($this->model->register($username, $real_name, $password, $email))
+                if ($this->model->register($username, $password, $email))
                 {
                     Core::hooks()->executeHook("onUserRegister");
                     $this->model->setMessage("success", "Thank you for registering an account. We've sent an email to ". $email ." to confirm it's really you. You won't be able to login until you've activated your account.");
