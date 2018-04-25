@@ -33,7 +33,7 @@
             $tables[DATABASE_PREFIX."articles"][] = array("name" => "category_id", "params" => "int(11) NOT NULL DEFAULT '0'");
             $tables[DATABASE_PREFIX."articles"][] = array("name" => "content", "params" => "text");
             $tables[DATABASE_PREFIX."articles"][] = array("name" => "published", "params" => "int(11) NOT NULL DEFAULT '1'");
-            $tables[DATABASE_PREFIX."articles"][] = array("name" => "published", "params" => "int(11) DEFAULT NULL");
+            $tables[DATABASE_PREFIX."articles"][] = array("name" => "publish_time", "params" => "int(11) DEFAULT NULL");
             $tables[DATABASE_PREFIX."articles"][] = array("name" => "author_id", "params" => "int(11) DEFAULT NULL");
             $tables[DATABASE_PREFIX."articles"][] = array("name" => "hits", "params" => "int(11) DEFAULT NULL");
             $tables[DATABASE_PREFIX."articles"][] = array("name" => "meta_description", "params" => "varchar(500) DEFAULT NULL");
