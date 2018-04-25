@@ -2,7 +2,7 @@
 
     require_once(__DIR__ ."/menu.php");
 
-    class MenusModel
+    class MenusModel extends Model
     {
         
         public $template = "menus.php";

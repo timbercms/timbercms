@@ -2,7 +2,7 @@
 
     require_once(__DIR__ ."/hook.php");
 
-    class HooksModel
+    class HooksModel extends Model
     {
         
         public $template = "hooks.php";

@@ -2,7 +2,7 @@
 
     require_once(__DIR__ ."/extension.php");
 
-    class ExtensionsModel
+    class ExtensionsModel extends Model
     {
         
         public $template = "extensions.php";

@@ -2,7 +2,7 @@
 
     require_once(__DIR__ ."/../../content/models/article.php");
 
-    class DashboardModel
+    class DashboardModel extends Model
     {
         
         public $template = "dashboard.php";

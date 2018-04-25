@@ -2,7 +2,7 @@
 
     require_once(__DIR__ ."/enquiry.php");
 
-    class EnquiriesModel
+    class EnquiriesModel extends Model
     {
         
         public $template = "enquiries.php";

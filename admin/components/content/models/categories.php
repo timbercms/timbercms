@@ -2,7 +2,7 @@
 
     require_once(__DIR__ ."/category.php");
 
-    class CategoriesModel
+    class CategoriesModel extends Model
     {
         
         public $template = "categories.php";

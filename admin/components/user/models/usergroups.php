@@ -2,7 +2,7 @@
 
     require_once(__DIR__ ."/usergroup.php");
 
-    class UsergroupsModel
+    class UsergroupsModel extends Model
     {
         
         public $template = "usergroups.php";
