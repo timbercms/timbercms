@@ -33,6 +33,9 @@
                     case "task":
                         $task = $string["1"];
                         break;
+                    case "token":
+                        $token = $string["1"];
+                        break;
                 }
             }
             if ($comp == $this->component)
@@ -60,7 +63,7 @@
                 }
                 else if ($controller == "user")
                 {
-                    return BASE_URL .$this->component ."/user/?task=". $task;
+                    return BASE_URL .$this->component ."/user/?task=". $task.(strlen($token) > 0 ? "&token=". $token : "");
                 }
                 else if ($controller == "settings")
                 {

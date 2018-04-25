@@ -1,6 +1,6 @@
 <?php
 
-    class UsersModel
+    class UsersModel extends Model
     {
         
         public $template = "users.php";

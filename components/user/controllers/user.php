@@ -81,6 +81,22 @@
                 // Register a new account
                 if ($this->model->register($username, $password, $email))
                 {
+                    $user = $this->model->database->loadObject("SELECT * FROM #__users WHERE username = ?", array($username));
+                    $component = $this->model->database->loadObject("SELECT * FROM #__components WHERE internal_name = ?", array("contact"));
+                    $params = (object) unserialize($component->params);
+                    $email = $user->email;
+                    $subject = 'Account Activation Required - '. Core::config()->site_title;
+                    $headers = "From: ". $params->admin_email ."\r\n";
+                    $headers .= "Reply-To: ". $params->admin_email ."\r\n";
+                    $headers .= "MIME-Version: 1.0\r\n";
+                    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+                    $message = '<html><body>';
+                        $message .= '<h4>Account Activation Required - '. Core::config()->site_title .'</h4>';
+                        $message .= '<p>Hi '. $user->username .',</p>';
+                        $message .= '<p>In order to access your account we require that you verify yourself. Please click the following link to activate your account: <a href="'. Core::route("index.php?component=user&controller=user&task=verify&token=". $user->verify_token) .'">Click here to activate</a></p>';
+                        $message .= '<p>Thanks,<br />'. Core::config()->site_title .' Management</p>';
+                    $message .= '</body></html>';
+                    mail($email, $subject, $message, $headers);
                     Core::hooks()->executeHook("onUserRegister");
                     $this->model->setMessage("success", "Thank you for registering an account. We've sent an email to ". $email ." to confirm it's really you. You won't be able to login until you've activated your account.");
                     header("Location: ". Core::route("index.php"));
@@ -95,12 +111,12 @@
         
         public function verify()
         {
-            $user = $this->model->database->loadObject("SELECT id FROM #__users WHERE verify_token = ?", array($_GET["token"]));
+            $user = $this->model->database->loadObject("SELECT * FROM #__users WHERE verify_token = ?", array($_GET["token"]));
             if ($user->id > 0)
             {
                 $this->model->database->query("UPDATE #__users SET activated = ?, verify_token = ? WHERE id = ?", array(1, '', $user->id));
                 Core::hooks()->executeHook("onUserVerify");
-                $this->model->setMessage("danger", "Thank you for activating your account, you may now log in.");
+                $this->model->setMessage("success", "Thank you for activating your account, you may now log in.");
                 header("Location: ". Core::route("index.php?component=user&controller=login"));
             }
             else

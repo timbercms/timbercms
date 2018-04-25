@@ -19,7 +19,7 @@
             
             $admin = Core::componentconfig()->admin_email;
 
-            $subject = 'Contact Form Submitted - '. Core::config()->site_name;
+            $subject = 'Contact Form Submitted - '. Core::config()->site_title;
 
             $headers = "From: ". $admin ."\r\n";
             $headers .= "Reply-To: ". $_POST["email"] ."\r\n";
