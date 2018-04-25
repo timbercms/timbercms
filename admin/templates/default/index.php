@@ -41,7 +41,7 @@
               toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | code responsivefilemanager',
               image_advtab: true,
               relative_urls: false,
-              external_filemanager_path:"https://localhost/bulletin/filemanager/",
+              external_filemanager_path:"<?php echo BASE_URL; ?>filemanager/",
               filemanager_title:"Responsive Filemanager" ,
               external_plugins: { "filemanager" : "../filemanager/plugin.min.js"},
               extended_valid_elements : 'i[class]' });</script>
