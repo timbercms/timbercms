@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <version>
-    <numerical>1.2.1</numerical>
-    <releaseDate>20th April 2018</releaseDate>
+    <numerical>1.2.2</numerical>
+    <releaseDate>25th April 2018</releaseDate>
     <packageURL>https://github.com/Smith0r/bulletin/archive/master.zip</packageURL>
     <new>
-        <![CDATA[
-            <h4>Changes</h4>
-            <ul>
-                <li>UI Fixes</li>
-                <li>Bug Fixes</li>
-                <li>Button to enable/disable in extension view</li>
-                <li>Show CMS version in red banner if out of date</li>
-                <li>Further simplify installation</li>
-                <li>New frontend template colours</li>
-                <li>Ability to enable/disable hooks</li>
-                <li>Discover hooks and modules just like components</li>
-                <li>Menuitem ordering fix</li>
-                <li>Cookie settings</li>
-            </ul>
-        ]]>
     </new>
 </version>
