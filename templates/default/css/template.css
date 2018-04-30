@@ -218,7 +218,7 @@ input[type="text"],input[type="password"], input[type="email"] {
     text-decoration: none;
     transition: background .25s;
 }
-.menu-container ul.menu-list > li > a:hover, ul.menu-list > li.active > a {
+.menu-container ul.menu-list > li > a:hover, .menu-container ul.menu-list > li.active > a {
     background: var(--link-accent);   
 }
 .menu-container .menu-list li.parent > ul {
