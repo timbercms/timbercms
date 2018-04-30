@@ -214,7 +214,7 @@
                     {
                         $folder_name = $name;
                     }
-                    if (strlen($field->attributes()->image) > 0)
+                    if (strlen($value) > 0)
                     {
                         $string .= '<img src="../'. $value .'" style="max-width: 50%; margin-bottom: 20px;" />';
                     }
