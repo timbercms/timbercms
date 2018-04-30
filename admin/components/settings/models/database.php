@@ -144,7 +144,10 @@
         {
             foreach ($this->schema as $record)
             {
-                $this->current_tables[$record->table_name][] = $record->column_name;
+                if (strpos($record->table_name, DATABASE_PREFIX) !== false)
+                {
+                    $this->current_tables[$record->table_name][] = $record->column_name;
+                }
             }
             foreach ($this->optimal_schema as $key => $table)
             {
