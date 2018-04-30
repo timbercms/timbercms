@@ -342,3 +342,13 @@ input[type="text"],input[type="password"], input[type="email"] {
 .footer-content {
     padding: 20px;   
 }
+.branding-container {
+    padding: 40px 0px;
+    max-width: var(--site-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+.website-title {
+    font-size: 52px;
+    line-height: 52px;
+}

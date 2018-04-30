@@ -36,6 +36,11 @@
     </head>
     <body>
         <div class="body-container">
+            <div class="branding-container">
+                <div class="website-title">
+                    <?php echo Core::config()->site_title; ?>
+                </div>
+            </div>
             <div class="menu-container">
                 <?php $this->template->displayModules("main-menu"); ?>
             </div>
