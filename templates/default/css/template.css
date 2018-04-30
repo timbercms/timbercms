@@ -279,6 +279,7 @@ input[type="text"],input[type="password"], input[type="email"] {
 }
 .module-title {
     margin-top: 0px;
+    margin-bottom: 0px;
     background: var(--charcoal);
     padding: 10px 15px;
     color: #FFF;
@@ -287,6 +288,9 @@ input[type="text"],input[type="password"], input[type="email"] {
 }
 .module-inner {
     padding: 15px;   
+}
+.module-inner p:last-of-type {
+    margin-bottom: 0px;   
 }
 .latestnews-article-image {
     width: 100%;   
