@@ -153,3 +153,6 @@
 .category-article-image {
     width: 100%;
 }
+.article-content img {
+    max-width: 100%;   
+}
