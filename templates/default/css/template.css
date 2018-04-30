@@ -49,7 +49,6 @@ p {
 }
 .footer-container .module {
     border: none;
-    border-radius: 0px;
 }
 .footer-container .module-title {
     background: transparent;   
@@ -113,7 +112,6 @@ pre {
     background: var(--link);
     color: #FFF;
     text-decoration: none;
-    border-radius: 3px;
     padding: 10px 15px;
     display: inline-block;
     margin-bottom: 5px;
@@ -137,15 +135,11 @@ pre {
 input[type="text"],input[type="password"], input[type="email"] {
     border: 1px solid rgba(0, 0, 0, 0.3);
     padding: 5px 10px;
-    border-radius: 0.25rem;
-    -moz-border-radius: 0.25rem;
-    -webkit-border-radius: 0.25rem;
     margin-bottom: 20px;
 }
 .system-message {
     background: #FFF;
     padding: 20px;
-    border-radius: 0.25rem;
     color: #333;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     margin-bottom: 20px;
@@ -192,7 +186,6 @@ input[type="text"],input[type="password"], input[type="email"] {
 .menu-container .module {
     margin-bottom: 0px;
     border: none;
-    border-radius: 0px;
 }
 .menu-container .module-inner {
     padding: 0px;   
@@ -272,7 +265,6 @@ input[type="text"],input[type="password"], input[type="email"] {
 .module {
     border: 1px solid var(--charcoal);
     margin-bottom: 20px;
-    border-radius: 3px;
 }
 .module:last-of-type {
     margin-bottom: 0px;   
