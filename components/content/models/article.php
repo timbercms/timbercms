@@ -38,7 +38,7 @@
             $this->title = $temp->title;
             $this->alias = $temp->alias;
             $this->content = $temp->content;
-            $this->short_content = strip_tags(explode("</p>", $this->content)["0"], "<p></p>");
+            $this->short_content = strip_tags(explode("<!-- pagebreak -->", $this->content)["0"], "<p></p>");
             $this->published = $temp->published;
             $this->publish_time = $temp->publish_time;
             $this->hits = $temp->hits;
