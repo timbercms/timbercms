@@ -3,6 +3,20 @@
     <div class="component-action-bar">
         <?php if (count($this->model->settings->fields) > 0) { ?><a href="index.php?component=settings&controller=settings&extension=content" class="button"><i class="fa fa-cog"></i> Settings</a><?php } ?><a href="index.php?component=content&controller=category" class="button green-button"><i class="fa fa-plus"></i> New Category</a><a class="delete-by-ids button red-button"><i class="fa fa-trash"></i> Delete</a>
     </div>
+    <div class="component-filters">
+        <form action="index.php?component=content&controller=categories" method="get">
+            <input type="hidden" name="component" value="content" />
+            <input type="hidden" name="controller" value="categories" />
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="text" name="title" placeholder="Filter by title" class="form-control" value="<?php echo $_GET["title"]; ?>" />
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="button">Filter</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <form action="index.php?component=content&controller=categories&task=delete" method="post" class="admin-form">
         <div class="d-flex admin-header">
             <div class="col-md-1">&nbsp;</div>
