@@ -21,7 +21,6 @@
         public function load()
         {
             $query = "SELECT id FROM #__articles_categories";
-            $args = array();
             if (strlen($_GET["title"]) > 0)
             {
                 $query .= " WHERE title LIKE '%". $_GET["title"] ."%'";

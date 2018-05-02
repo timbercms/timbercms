@@ -4,6 +4,21 @@
         <?php if (count($this->model->settings->fields) > 0) { ?><a href="index.php?component=settings&controller=settings&extension=menu" class="button"><i class="fa fa-cog"></i> Settings</a><?php } ?>
         <a href="index.php?component=menu&controller=newitem&menu_id=<?php echo $_GET["id"]; ?>" class="button green-button"><i class="fa fa-plus"></i> New Menu Item</a><a class="delete-by-ids button red-button"><i class="fa fa-trash"></i> Delete</a>
     </div>
+    <div class="component-filters">
+        <form action="index.php?component=menu&controller=menuitems" method="get">
+            <input type="hidden" name="component" value="menu" />
+            <input type="hidden" name="controller" value="menuitems" />
+            <input type="hidden" name="id" value="<?php echo $_GET["id"]; ?>" />
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="text" name="title" placeholder="Filter by title" class="form-control" value="<?php echo $_GET["title"]; ?>" />
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="button">Filter</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <form action="index.php?component=menu&controller=menuitems&task=delete&id=<?php echo $_GET["id"]; ?>" method="post" class="admin-form">
         <div class="d-flex admin-header">
             <div class="col-md-1">&nbsp;</div>
@@ -34,10 +49,14 @@
                     </a>
                 </div>
                 <div class="col-md-2">
-                    <div class="btn-group">
-                        <a id="order-up order-up-<?php echo $item->id; ?>" class="btn btn-primary<?php if ($item->ordering == 0) { echo ' disabled'; } ?>" href="index.php?component=menu&controller=menuitems&task=order&swap=<?php echo $item->ordering; ?>&with=<?php echo ($item->ordering - 1); ?>&menu_id=<?php echo $item->menu_id; ?>&parent_id=0"><i class="fa fa-arrow-up"></i></a>
-                        <a id="order-down order-down-<?php echo $item->id; ?>" class="btn btn-primary<?php if ($item->ordering == (count($this->model->items) - 1)) { echo ' disabled'; } ?>" href="index.php?component=menu&controller=menuitems&task=order&swap=<?php echo $item->ordering; ?>&with=<?php echo ($item->ordering + 1); ?>&menu_id=<?php echo $item->menu_id; ?>&parent_id=0"><i class="fa fa-arrow-down"></i></a>
-                    </div>
+                    <?php if (strlen($_GET["title"]) == 0) { ?>
+                        <div class="btn-group">
+                            <a id="order-up order-up-<?php echo $item->id; ?>" class="btn btn-primary<?php if ($item->ordering == 0) { echo ' disabled'; } ?>" href="index.php?component=menu&controller=menuitems&task=order&swap=<?php echo $item->ordering; ?>&with=<?php echo ($item->ordering - 1); ?>&menu_id=<?php echo $item->menu_id; ?>&parent_id=0"><i class="fa fa-arrow-up"></i></a>
+                            <a id="order-down order-down-<?php echo $item->id; ?>" class="btn btn-primary<?php if ($item->ordering == (count($this->model->items) - 1)) { echo ' disabled'; } ?>" href="index.php?component=menu&controller=menuitems&task=order&swap=<?php echo $item->ordering; ?>&with=<?php echo ($item->ordering + 1); ?>&menu_id=<?php echo $item->menu_id; ?>&parent_id=0"><i class="fa fa-arrow-down"></i></a>
+                        </div>
+                    <?php } else { ?>
+                        Remove filters to order
+                    <?php } ?>
                 </div>
                 <div class="col-md-2" style="text-align: right;">
                     <a href="index.php?component=menu&controller=menuitem&id=<?php echo $item->id; ?>&menu_id=<?php echo $item->menu_id; ?>" class="button"><i class="fa fa-edit"></i> Edit Item</a>

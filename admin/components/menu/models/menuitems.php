@@ -20,7 +20,13 @@
         
         public function load($id)
         {
-            $temp_items = $this->database->loadObjectList("SELECT id FROM #__menus_items WHERE menu_id = ? AND parent_id = 0 ORDER BY ordering ASC", array($id));
+            $query = "SELECT id FROM #__menus_items WHERE menu_id = ? AND parent_id = 0";
+            if (strlen($_GET["title"]) > 0)
+            {
+                $query .= " AND title LIKE '%". $_GET["title"] ."%'";
+            }
+            $query .= " ORDER BY ordering ASC";
+            $temp_items = $this->database->loadObjectList($query, array($id));
             foreach ($temp_items as $temp_item)
             {
                 $item = new MenuitemModel($temp_item->id, $this->database);
