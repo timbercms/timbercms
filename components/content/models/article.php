@@ -46,7 +46,14 @@
             $this->tags = $temp->tags;
             $this->category = new CategoryModel($temp->category_id, $this->database, false);
             $this->author = new UserModel($temp->author_id, $this->database);
-            $this->image = $temp->image;
+            if (strlen($temp->image) > 0)
+            {
+                $this->image = $temp->image;
+            }
+            else
+            {
+                $this->image = "images/articles/placeholder.jpg";
+            }
         }
         
         public function addHit()
