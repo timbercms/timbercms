@@ -45,6 +45,7 @@
         public static $meta_names = array();
         public static $meta_author = "";
         public static $hooks;
+        public static $cookie_name;
         
         public function __construct()
         {

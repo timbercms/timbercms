@@ -14,6 +14,7 @@
     <fields type="text" name="site_title" label="Site Title" />
     <fields type="template_picker" name="default_template" label="Default Template" />
     <fields type="template_picker" name="admin_template" label="Admin Template" />
+    <fields type="text" name="cookie_name" label="Cookie Name" default="bulletin_cookie" />
     <fields type="text" name="cookie_duration" label="Cookie Session Duration (In days)" default="28" />
     <fields type="sql" query="SELECT id, title FROM #__usergroups ORDER BY title ASC" key="id" keyvalue="title" name="default_usergroup" label="Default Usergroup" />
 </settings>
