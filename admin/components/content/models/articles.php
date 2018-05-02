@@ -20,7 +20,14 @@
         
         public function load()
         {
-            $temp = $this->database->loadObjectList("SELECT id FROM #__articles");
+            $query = "SELECT id FROM #__articles";
+            $args = array();
+            if (strlen($_GET["title"]) > 0)
+            {
+                $query .= " WHERE title REGEXP ?";
+                $args[] = "[[:<:]]". $_GET["title"] ."[[:>:]]";
+            }
+            $temp = $this->database->loadObjectList($query, $args);
             foreach ($temp as $temp_article)
             {
                 $article = new ArticleModel($temp_article->id, $this->database);

@@ -275,6 +275,9 @@ form label {
     margin-top: -20px;
     margin-bottom: 20px;
 }
-.form-control {
+.form-group .form-control {
     max-width: 50%;   
+}
+.component-filters {
+    margin-bottom: 40px;   
 }
