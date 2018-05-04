@@ -128,7 +128,8 @@
         
         public function updateSettings()
         {
-            $this->model->database->query("UPDATE #__users SET email = ?", array($_POST["email"]));
+            $this->model->database->query("UPDATE #__users SET email = ? WHERE id = ?", array($_POST["email"], Core::user()->id));
+            $this->model->database->query("UPDATE #__users SET params = ? WHERE id = ?", array(serialize($_POST["params"]), Core::user()->id));
             if (strlen($_FILES["avatar"]["name"]) > 0)
             {
                 foreach ($_FILES as $key => $file)
@@ -138,7 +139,7 @@
                         $name = explode(".", $file["name"])["0"]."-".time().".jpg";
                         $tmp = $file["tmp_name"];
                         move_uploaded_file($tmp, __DIR__ ."/../../../images/avatars/". $name);
-                        $this->model->database->query("UPDATE #__users SET avatar = ?", array("images/avatars/". $name));
+                        $this->model->database->query("UPDATE #__users SET avatar = ? WHERE id = ?", array("images/avatars/". $name, Core::user()->id));
                         $this->model->setMessage("success", "Avatar Uploaded");
                         break;
                     }
@@ -152,7 +153,7 @@
             {
                 if ($_POST["password"] == $_POST["password_verify"])
                 {
-                    $this->model->database->query("UPDATE #__users SET password = ?", array(password_hash($_POST["password"], PASSWORD_DEFAULT)));
+                    $this->model->database->query("UPDATE #__users SET password = ? WHERE id = ?", array(password_hash($_POST["password"], PASSWORD_DEFAULT), Core::user()->id));
                     $this->model->setMessage("success", "New password saved");
                 }
                 else

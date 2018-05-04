@@ -1,29 +1,37 @@
 <?php if ($this->model->user->activated) { ?>
-    <div class="row">
-        <div class="col-md-4">
-            <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($this->model->user->email))); ?>?s=200" class="user-profile-avatar" />
+    <div class="profile-header <?php echo (strlen($this->model->user->params->header_pattern) > 0 ? $this->model->user->params->header_pattern : "topography"); ?>">
+        <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($this->model->user->email))); ?>?s=200" class="user-profile-avatar" />
+        <div class="profile-username">
+            <?php echo $this->model->user->username; ?><div class="online-status <?php if ((time() - $this->model->user->last_action_time) <= 900) { ?>online<?php } else { ?>offline<?php } ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->model->user->username; ?> is <?php if ((time() - $this->model->user->last_action_time) <= 900) { ?>Online now<?php } else { ?>Offline<?php } ?>"></div>
         </div>
-        <div class="col-md-8">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <div class="user-information">
-                <h3>About <?php echo explode(" ", $this->model->user->username)["0"]; ?></h3>
+                <h3>About <?php echo $this->model->user->username; ?></h3>
                 <ul>
                     <li><strong>Member since:</strong> <?php echo date("jS F Y", $this->model->user->register_time); ?></li>
                     <li><strong>Last Online:</strong> <?php echo ((time() - $this->model->user->last_action_time) <= 900 ? "Online Now" : $this->model->relativeTime($this->model->user->last_action_time) ." ago"); ?></li>
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="user-information">
-        <div class="row">
-            <div class="col-md-6">
+        <div class="col-md-6">
+            <div class="user-information">
                 <h3 style="margin-top: 40px;">Recent Articles by <?php echo $this->model->user->username; ?></h3>
-                <ul>
+                <div class="latest-news-list">
                     <?php foreach ($this->model->articles as $article) { ?>
-                        <li>
-                            <p><a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>"><?php echo $article->title; ?></a><br /><?php echo $this->model->relativeTime($article->publish_time); ?> ago</p>
-                        </li>
+                        <div class="latest-news-item">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>"><img src="<?php echo BASE_URL.$article->image; ?>" class="latestnews-article-image" /></a>
+                                </div>
+                                <div class="col-md-9">
+                                    <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>"><?php echo $article->title; ?><br />By <?php echo $article->author->username; ?></a>
+                                </div>
+                            </div>
+                        </div>
                     <?php } ?>
-                </ul>
+                </div>
             </div>
         </div>
     </div>

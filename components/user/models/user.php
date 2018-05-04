@@ -20,6 +20,7 @@
         public $usergroup;
         public $verify_token;
         public $avatar;
+        public $params;
         
         public function __construct($id = 0, $database)
         {
@@ -48,6 +49,7 @@
             $this->last_action_time = $temp->last_action_time;
             $this->usergroup = new UsergroupModel($temp->usergroup_id, $this->database);
             $this->verify_token = $temp->verify_token;
+            $this->params = (object) unserialize($temp->params);
             if (strlen($temp->avatar) > 0)
             {
                 $this->avatar = BASE_URL .$temp->avatar;
@@ -135,6 +137,7 @@
             $data[] = array("name" => "blocked_reason", "value" => $this->blocked_reason);
             $data[] = array("name" => "register_time", "value" => $this->register_time);
             $data[] = array("name" => "usergroup_id", "value" => $this->usergroup_id);
+            $data[] = array("name" => "params", "value" => serialize($this->params));
             if ($updatePassword)
             {
                 $data[] = array("name" => "password", "value" => password_hash($this->password, PASSWORD_DEFAULT));

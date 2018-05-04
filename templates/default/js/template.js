@@ -12,3 +12,10 @@ $(document).on('click', '.parent-toggler', function() {
         $(this).children().removeClass("fa-chevron-up").addClass("fa-chevron-down");
     }
 });
+$(document).on('click', '.header-preview', function(el) {
+    var els = $("[data-label]");
+    $(els).each(function (i, element) {
+        $(element).removeClass("active");
+    });
+    $(this).addClass("active");
+});
