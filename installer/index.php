@@ -202,7 +202,6 @@ RedirectMatch 404 ^404.php';
                          `author_id` int(11) DEFAULT NULL,
                          `hits` int(11) DEFAULT NULL,
                          `meta_description` varchar(500) DEFAULT NULL,
-                         `tags` varchar(5000) DEFAULT NULL,
                          `image` varchar(1000) DEFAULT NULL,
                          PRIMARY KEY (`id`)
                         )");
@@ -356,7 +355,7 @@ RedirectMatch 404 ^404.php';
                         
                     $db->query("INSERT INTO #__users (username, email, usergroup_id, password, activated, blocked, register_time, last_action_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", array($_POST["username"], $_POST["email"], "2", password_hash($_POST["password"], PASSWORD_DEFAULT), "1", "0", time(), time()));
                     $db->query("INSERT INTO #__articles_categories (title, alias, description, published, params) VALUES (?, ?, ?, ?, ?)", array("Site Pages", "site-pages", "", "1", 'a:1:{s:10:"show_title";s:1:"1";}'));
-                    $db->query("INSERT INTO #__articles (title, alias, category_id, content, published, publish_time, author_id, hits, meta_description, tags, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Welcome to Bulletin CMS", "welcome-to-bulletin-cms", "1", '<p>Welcome to Bulletin CMS!</p><p>Please feel free to delete this article.</p><p>If you require help with any part of the CMS, please open an issue on Github (<a href="https://github.com/Smith0r/bulletin" target="_blank">https://github.com/Smith0r/bulletin</a>)</p>', "1", time(), "1", "0", "Welcome to Bulletin CMS!", "", ""));
+                    $db->query("INSERT INTO #__articles (title, alias, category_id, content, published, publish_time, author_id, hits, meta_description, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Welcome to Bulletin CMS", "welcome-to-bulletin-cms", "1", '<p>Welcome to Bulletin CMS!</p><p>Please feel free to delete this article.</p><p>If you require help with any part of the CMS, please open an issue on Github (<a href="https://github.com/Smith0r/bulletin" target="_blank">https://github.com/Smith0r/bulletin</a>)</p>', "1", time(), "1", "0", "Welcome to Bulletin CMS!", ""));
     
                     header("Location: index.php?stage=4");
     

@@ -19,7 +19,6 @@
         public $author;
         public $hits;
         public $meta_description;
-        public $tags;
         public $image;
         public $form;
         
@@ -44,7 +43,6 @@
             $this->publish_time = $temp->publish_time;
             $this->hits = $temp->hits;
             $this->meta_description = $temp->meta_description;
-            $this->tags = $temp->tags;
             $this->image = $temp->image;
             $this->category = new CategoryModel($temp->category_id, $this->database, false);
             $this->author = new UserModel($temp->author_id, $this->database);
@@ -65,7 +63,6 @@
             $data[] = array("name" => "publish_time", "value" => $this->publish_time);
             $data[] = array("name" => "hits", "value" => $this->hits);
             $data[] = array("name" => "meta_description", "value" => $this->meta_description);
-            $data[] = array("name" => "tags", "value" => $this->tags);
             $data[] = array("name" => "image", "value" => $this->image);
             $data[] = array("name" => "category_id", "value" => $this->category_id);
             $data[] = array("name" => "author_id", "value" => $this->author_id);

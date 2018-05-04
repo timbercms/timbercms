@@ -24,7 +24,6 @@
             $this->model->author_id = ($_POST["author_id"] > 0 ? $_POST["author_id"] : $this->core->user()->id);
             $this->model->hits = $_POST["hits"];
             $this->model->meta_description = $_POST["meta_description"];
-            $this->model->tags = $_POST["tags"];
             $this->model->image = $_POST["image"];
             if (strlen($_FILES["image"]["name"]) > 0)
             {

@@ -19,7 +19,6 @@
         public $author;
         public $hits;
         public $meta_description;
-        public $tags;
         public $image;
         
         public function __construct($id = 0, $database)
@@ -43,7 +42,6 @@
             $this->publish_time = $temp->publish_time;
             $this->hits = $temp->hits;
             $this->meta_description = $temp->meta_description;
-            $this->tags = $temp->tags;
             $this->category = new CategoryModel($temp->category_id, $this->database, false);
             $this->author = new UserModel($temp->author_id, $this->database);
             if (strlen($temp->image) > 0)
