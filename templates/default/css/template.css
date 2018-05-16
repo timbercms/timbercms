@@ -263,8 +263,9 @@ input[type="text"],input[type="password"], input[type="email"] {
     margin-top: 20px;   
 }
 .module {
-    border: 1px solid var(--charcoal);
+    border: 1px solid rgba(0,0,0,.125);
     margin-bottom: 20px;
+    border-radius: 5px;
 }
 .module:last-of-type {
     margin-bottom: 0px;   
@@ -272,9 +273,7 @@ input[type="text"],input[type="password"], input[type="email"] {
 .module-title {
     margin-top: 0px;
     margin-bottom: 0px;
-    background: var(--charcoal);
     padding: 10px 15px;
-    color: #FFF;
     font-size: 22px;
     line-height: 22px;
 }
