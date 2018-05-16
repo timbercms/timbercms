@@ -284,19 +284,6 @@ input[type="text"],input[type="password"], input[type="email"] {
 .module-inner p:last-of-type {
     margin-bottom: 0px;   
 }
-.latestnews-article-image {
-    width: 100%;   
-}
-.latest-news-item {
-    border-bottom: #DDD;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-}
-.latest-news-item:last-of-type {
-    border-bottom: none;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
-}
 .login-options {
     list-style-type: none;
     padding: 0px;
