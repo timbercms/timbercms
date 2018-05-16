@@ -206,8 +206,19 @@
         {
             if (!in_array($link, self::$stylesheet_links))
             {
-                self::$stylesheet_links[] = $link;
-                self::$stylesheets[] = '<link rel="stylesheet" href="'. BASE_URL.$link .'?v='. time() .'">';
+                if (substr($link, 0, 4) != "http")
+                {
+                    if (file_exists(__DIR__ ."/../../". $link))
+                    {
+                        self::$stylesheet_links[] = $link;
+                        self::$stylesheets[] = '<link rel="stylesheet" href="'. BASE_URL.$link .'?v='. time() .'">';
+                    }
+                }
+                else
+                {
+                    self::$stylesheet_links[] = $link;
+                    self::$stylesheets[] = '<link rel="stylesheet" href="'. BASE_URL.$link .'?v='. time() .'">';
+                }
             }
         }
         
@@ -215,8 +226,19 @@
         {
             if (!in_array($link, self::$script_links))
             {
-                self::$script_links[] = $link;
-                self::$scripts[] = '<script src="'. BASE_URL.$link .'?v='. time() .'"></script>';
+                if (substr($link, 0, 4) != "http")
+                {
+                    if (file_exists(__DIR__ ."/../../". $link))
+                    {
+                        self::$script_links[] = $link;
+                        self::$scripts[] = '<script src="'. BASE_URL.$link .'?v='. time() .'"></script>';
+                    }
+                }
+                else
+                {
+                    self::$script_links[] = $link;
+                    self::$scripts[] = '<script src="'. BASE_URL.$link .'?v='. time() .'"></script>';
+                }
             }
         }
         
