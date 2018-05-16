@@ -118,6 +118,7 @@ pre {
     transition: background .25s;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
 }
 .button.hollow {
     background: transparent;
