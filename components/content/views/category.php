@@ -20,7 +20,7 @@
                                 <img src="<?php echo $article->author->avatar; ?>" />
                             </div>
                             <div class="col-md-9">
-                                <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $article->author->id); ?>"><?php echo $article->author->username; ?></a><br />
+                                By <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $article->author->id); ?>"><?php echo $article->author->username; ?></a><br />
                                 <time pubdate><?php echo $this->model->relativeTime($article->publish_time); ?> ago</time>
                             </div>
                         </div>

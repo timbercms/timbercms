@@ -144,21 +144,17 @@
 .category-container {
     margin-bottom: 40px;   
 }
-.category-publish-time i {
-    display: inline-block;
-    margin-right: 5px;
-}
 .category-article-image {
     width: 100%;
 }
 .article-content img {
     max-width: 100%;   
 }
-.category-author-info img {
-    border-radius: 100px;
+.category-author-info img, .article-author-info img {
+    border-radius: 100px !important;
     width: 100%;
 }
-.category-author-info time {
+.category-author-info time, .article-author-info time {
     font-size: 13px;
     display: inline-block;
     margin-top: 10px;
@@ -168,4 +164,8 @@
 }
 .article-container img {
     border-radius: 5px;   
+}
+.article-author-info {
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
