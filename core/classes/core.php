@@ -27,7 +27,9 @@
         public static $router;
         public static $user;
         public static $stylesheets = array();
+        public static $stylesheet_links = array();
         public static $scripts = array();
+        public static $script_links = array();
         public static $db;
         public static $title = "";
         public static $description = '<meta name="description" content="Burgundy CMS">';
@@ -202,12 +204,20 @@
         
         public static function addStylesheet($link)
         {
-            self::$stylesheets[] = '<link rel="stylesheet" href="'. BASE_URL.$link .'?v='. time() .'">';
+            if (!in_array($link, self::$stylesheet_links))
+            {
+                self::$stylesheet_links[] = $link;
+                self::$stylesheets[] = '<link rel="stylesheet" href="'. BASE_URL.$link .'?v='. time() .'">';
+            }
         }
         
         public static function addScript($link)
         {
-            self::$scripts[] = '<script src="'. BASE_URL.$link .'?v='. time() .'"></script>';
+            if (!in_array($link, self::$script_links))
+            {
+                self::$script_links[] = $link;
+                self::$scripts[] = '<script src="'. BASE_URL.$link .'?v='. time() .'"></script>';
+            }
         }
         
         public static function changeTitle($title)
