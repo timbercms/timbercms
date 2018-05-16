@@ -16,14 +16,14 @@
                     <?php echo preg_replace("/<img[^>]+\>/i", "", $article->short_content); ?>
                     <div class="category-author-info">
                         <div class="row align-items-center">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-4">
                                 <img src="<?php echo $article->author->avatar; ?>" />
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-8">
                                 By <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $article->author->id); ?>"><?php echo $article->author->username; ?></a><br />
                                 <time pubdate><?php echo $this->model->relativeTime($article->publish_time); ?> ago</time>
                             </div>
-                            <div class="col-md-3" style="text-align: right;">
+                            <div class="col-md-3 col-12" style="text-align: right;">
                                 <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>" class="button">More</a>
                             </div>
                         </div>

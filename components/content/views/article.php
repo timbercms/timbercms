@@ -7,10 +7,10 @@
             <h1 class="article-title"><?php echo $this->model->title; ?></h1>
             <div class="article-author-info">
                 <div class="row align-items-center">
-                    <div class="col-md-1">
+                    <div class="col-md-1 col-4">
                         <img src="<?php echo $this->model->author->avatar; ?>" />
                     </div>
-                    <div class="col-md-11">
+                    <div class="col-md-11 col-8">
                         By <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $this->model->id); ?>"><?php echo $this->model->author->username; ?></a><br />
                         <time pubdate><?php echo $this->model->relativeTime($this->model->publish_time); ?> ago</time>
                     </div>
