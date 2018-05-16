@@ -8,7 +8,7 @@
         public function __construct($module, $database)
         {
             $this->module = $module;
-            Core::addStylesheet("components/content/assets/css/user.css");
+            Core::addStylesheet("components/user/assets/css/user.css");
         }
         
     }

@@ -1,11 +1,13 @@
 <div class="login-module">
     <?php if (Core::user()->id > 0) { ?>
         <div class="logged-in-user">
-            <div class="login-avatar">
-                <img src="<?php echo Core::user()->avatar; ?>" />
-            </div>
-            <div class="login-username">
-                <?php echo Core::user()->username; ?>
+            <div class="login-header <?php echo (strlen(Core::user()->params->header_pattern) > 0 ? Core::user()->params->header_pattern : "topography"); ?>">
+                <div class="login-avatar">
+                    <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". Core::user()->id); ?>"><img src="<?php echo Core::user()->avatar; ?>" /></a>
+                </div>
+                <div class="login-username">
+                    <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". Core::user()->id); ?>"><?php echo Core::user()->username; ?></a>
+                </div>
             </div>
             <ul class="login-options">
                 <li><a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". Core::user()->id); ?>">My Profile</a></li>

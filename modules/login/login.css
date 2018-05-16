@@ -22,13 +22,24 @@
     text-align: center;   
 }
 .login-username {
-    font-size: 20px;   
+    text-align: center;
+    font-size: 28px;
+    line-height: 28px;
+    text-shadow: 1px 1px rgba(0, 0, 0, .75);   
+}
+.login-username a {
+    color: #FFF !important;   
 }
 .login-avatar {
     margin-bottom: 20px;
 }
 .login-avatar img {
-    border: 5px solid #DDD;
+    border: 5px solid #FFF;
     border-radius: 100px;
     width: 130px;
+}
+.login-header {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin: -15px;
 }
