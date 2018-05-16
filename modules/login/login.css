@@ -1,0 +1,34 @@
+.login-options {
+    margin-top: 20px;   
+}
+.login-options {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 40px;
+}
+.login-options li {
+    display: block;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #DDD;
+}
+.login-options li:last-of-type {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    border-bottom: none;
+}
+.login-username, .login-avatar {
+    text-align: center;   
+}
+.login-username {
+    font-size: 20px;   
+}
+.login-avatar {
+    margin-bottom: 20px;
+}
+.login-avatar img {
+    border: 5px solid #DDD;
+    border-radius: 100px;
+    width: 130px;
+}

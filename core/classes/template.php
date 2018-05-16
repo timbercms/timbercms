@@ -57,8 +57,8 @@
                 $modules = $this->database->loadObjectList("SELECT id FROM #__modules WHERE published = '1' AND position = ? AND (pages = '0' OR find_in_set(?, pages)) ORDER BY ordering ASC", array($position, Core::menu_item_id()));
                 foreach ($modules as $mod)
                 {
-                    Core::addStyleSheet("modules/". $module->type ."/". $module->type .".css");
                     $module = new ModuleModel($mod->id, $this->database);
+                    Core::addStyleSheet("modules/". $module->type ."/". $module->type .".css");
                     require_once(__DIR__ ."/../../modules/". $module->type ."/worker.php");
                     $worker_string = $module->type."Worker";
                     $worker = new $worker_string($module, $this->database);

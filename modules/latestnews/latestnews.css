@@ -1,5 +1,6 @@
 .latestnews-article-image {
-    width: 100%;   
+    width: 100%;
+    border-radius: 5px;
 }
 .latest-news-item {
     border-bottom: #DDD;
