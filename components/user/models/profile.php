@@ -10,6 +10,8 @@
         
         public $user;
         public $articles = array();
+        public $article_count;
+        public $days;
         
         public function __construct($id = 0, $database)
         {
@@ -20,6 +22,9 @@
             {
                 $this->articles[] = new ArticleModel($recent->id, $this->database);
             }
+            $counts = $this->database->loadObjectList("SELECT id FROM #__articles WHERE author_id = ? AND published = '1'", array($this->user->id));
+            $this->article_count = count($counts);
+            $this->days = number_format((time() - $this->user->register_time) / 86400);
         }
         
     }
