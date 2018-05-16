@@ -154,3 +154,18 @@
 .article-content img {
     max-width: 100%;   
 }
+.category-author-info img {
+    border-radius: 100px;
+    width: 100%;
+}
+.category-author-info time {
+    font-size: 13px;
+    display: inline-block;
+    margin-top: 10px;
+}
+.category-card p {
+    padding-bottom: 10px;
+}
+.article-container img {
+    border-radius: 5px;   
+}
