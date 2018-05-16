@@ -13,6 +13,7 @@
 .menu-container .module {
     margin-bottom: 0px;
     border: none;
+    border-radius: 0px;
 }
 .menu-container .module-inner {
     padding: 0px;   
