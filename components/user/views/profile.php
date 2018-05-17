@@ -14,6 +14,7 @@
                     <li><strong>Member for:</strong> <?php echo $this->model->days; ?> days</li>
                     <li><strong>Last Online:</strong> <?php echo ((time() - $this->model->user->last_action_time) <= 900 ? "Online Now" : $this->model->relativeTime($this->model->user->last_action_time) ." ago"); ?></li>
                     <li><strong>Articles written:</strong> <?php echo $this->model->article_count; ?></li>
+                    <li><strong>Comments written:</strong> <?php echo $this->model->comment_count; ?></li>
                 </ul>
             </div>
         </div>
@@ -25,7 +26,7 @@
                         <div class="profile-news-item">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>"><img src="<?php echo BASE_URL.$article->image; ?>" class="profile-article-image" /></a>
+                                    <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>"><img src="<?php echo $article->image; ?>" class="profile-article-image" /></a>
                                 </div>
                                 <div class="col-md-9">
                                     <p><a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>"><?php echo $article->title; ?></a></p>
@@ -36,6 +37,20 @@
                         </div>
                     <?php } ?>
                 </div>
+            </div>
+            <div class="user-information">
+                <h3 style="margin-top: 40px;">Recent Comments by <?php echo $this->model->user->username; ?></h3>
+                <?php foreach ($this->model->comments as $comment) { ?>
+                    <div class="card">
+                        <div class="card-header">
+                            <?php $article = $this->model->database->loadObject("SELECT title FROM #__articles WHERE id = ?", array($comment->article_id)); ?>
+                            In: <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $comment->article_id); ?>"><?php echo $article->title; ?></a>
+                        </div>
+                        <div class="card-body">
+                            <?php echo $comment->content; ?>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
         </div>
     </div>

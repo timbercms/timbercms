@@ -54,7 +54,7 @@
             {
                 $this->image = (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/")."images/articles/placeholder.jpg";
             }
-            $temp_comments = $this->database->loadObjectList("SELECT id FROM #__articles_comments WHERE article_id = ?", array($this->id));
+            $temp_comments = $this->database->loadObjectList("SELECT id FROM #__articles_comments WHERE article_id = ? ORDER BY publish_time DESC", array($this->id));
             foreach ($temp_comments as $temp_comment)
             {
                 $this->comments[] = new CommentModel($temp_comment->id, $this->database);
