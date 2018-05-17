@@ -37,7 +37,6 @@
             $tables[DATABASE_PREFIX."articles"][] = array("name" => "author_id", "params" => "int(11) DEFAULT NULL");
             $tables[DATABASE_PREFIX."articles"][] = array("name" => "hits", "params" => "int(11) DEFAULT NULL");
             $tables[DATABASE_PREFIX."articles"][] = array("name" => "meta_description", "params" => "varchar(500) DEFAULT NULL");
-            $tables[DATABASE_PREFIX."articles"][] = array("name" => "tags", "params" => "varchar(5000) DEFAULT NULL");
             $tables[DATABASE_PREFIX."articles"][] = array("name" => "image", "params" => "varchar(1000) DEFAULT NULL");
             
             $tables[DATABASE_PREFIX."articles_categories"][] = array("name" => "id", "params" => "int(11) NOT NULL AUTO_INCREMENT");
@@ -46,6 +45,14 @@
             $tables[DATABASE_PREFIX."articles_categories"][] = array("name" => "description", "params" => "text");
             $tables[DATABASE_PREFIX."articles_categories"][] = array("name" => "published", "params" => "int(11) DEFAULT '1'");
             $tables[DATABASE_PREFIX."articles_categories"][] = array("name" => "params", "params" => "text");
+            
+            $tables[DATABASE_PREFIX."articles_comments"] = array();
+            $tables[DATABASE_PREFIX."articles_comments"][] = array("name" => "id", "params" => "int(11) NOT NULL AUTO_INCREMENT");
+            $tables[DATABASE_PREFIX."articles_comments"][] = array("name" => "article_id", "params" => "INT(11) NOT NULL");
+            $tables[DATABASE_PREFIX."articles_comments"][] = array("name" => "content", "params" => "text NOT NULL");
+            $tables[DATABASE_PREFIX."articles_comments"][] = array("name" => "published", "params" => "INT(11) NOT NULL");
+            $tables[DATABASE_PREFIX."articles_comments"][] = array("name" => "publish_time", "params" => "INT(11) NOT NULL");
+            $tables[DATABASE_PREFIX."articles_comments"][] = array("name" => "author_id", "params" => "INT(11) NOT NULL");
             
             $tables[DATABASE_PREFIX."components"][] = array("name" => "id", "params" => "int(11) NOT NULL AUTO_INCREMENT");
             $tables[DATABASE_PREFIX."components"][] = array("name" => "title", "params" => "varchar(255) DEFAULT NULL");
@@ -131,6 +138,7 @@
             $tables[DATABASE_PREFIX."users"][] = array("name" => "last_action_time", "params" => "int(11) DEFAULT NULL");
             $tables[DATABASE_PREFIX."users"][] = array("name" => "verify_token", "params" => "varchar(5000) DEFAULT NULL");
             $tables[DATABASE_PREFIX."users"][] = array("name" => "avatar", "params" => "varchar(255) DEFAULT NULL");
+            $tables[DATABASE_PREFIX."users"][] = array("name" => "params", "params" => "text");
             
             $tables[DATABASE_PREFIX."users_recovery"][] = array("name" => "id", "params" => "int(11) NOT NULL AUTO_INCREMENT");
             $tables[DATABASE_PREFIX."users_recovery"][] = array("name" => "user_id", "params" => "int(11) DEFAULT NULL");
