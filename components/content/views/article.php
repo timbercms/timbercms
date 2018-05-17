@@ -8,7 +8,7 @@
             <div class="article-author-info">
                 <div class="row align-items-center">
                     <div class="col-md-1 col-4">
-                        <img src="<?php echo $this->model->author->avatar; ?>" />
+                        <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $this->model->id); ?>"><img src="<?php echo $this->model->author->avatar; ?>" /></a>
                     </div>
                     <div class="col-md-11 col-8">
                         By <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $this->model->id); ?>"><?php echo $this->model->author->username; ?></a><br />
@@ -20,7 +20,7 @@
         <div class="article-content">
             <?php echo $this->model->content; ?>
         </div>
-        <?php if (Core::componentconfig()->enable_comments == 1) { ?>
+        <?php if (Core::componentconfig()->enable_comments == 1 && Core::componentconfig()->comments_type == "disqus") { ?>
             <div id="disqus_thread"></div>
             <script>
 
@@ -50,6 +50,38 @@
             <p><strong>Category:</strong> <?php echo $this->model->category->title; ?></p>
             <p><strong>Views:</strong> <?php echo $this->model->hits; ?> times</p>
         </footer>
+        <?php if (Core::componentconfig()->enable_comments == 1 && Core::componentconfig()->comments_type == "internal") { ?>
+            <div class="comments-container">
+                <h3><?php echo count($this->model->comments); ?> Comments</h3>
+                <?php if (count($this->model->comments) == 0) { ?>
+                    <p style="font-style: italic;">Be the first to comment!</p>
+                <?php } ?>
+                <?php foreach ($this->model->comments as $comment) { ?>
+                    <div class="comment-container">
+                        <div class="row">
+                            <div class="col-md-2 comment-author">
+                                <p><a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $comment->author->id); ?>"><img src="<?php echo $comment->author->avatar; ?>" /></a></p>
+                                <p><a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $comment->author->id); ?>"><?php echo $comment->author->username; ?></a></p>
+                                <p><time pubdate><?php echo $this->model->relativeTime($comment->publish_time); ?> ago</time></p>
+                            </div>
+                            <div class="col-md-10">
+                                <?php echo $comment->content; ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                <?php if (Core::user()->id > 0) { ?>
+                    <h3>Add your comment</h3>
+                    <div class="comments-form">
+                        <form action="<?php echo Core::route("index.php?component=content&controller=article&task=postComment"); ?>" method="post">
+                            <textarea name="content" class="form-control"></textarea>
+                            <input type="hidden" name="article_id" value="<?php echo $this->model->id; ?>" />
+                            <p style="text-align: right; margin-top: 20px;"><button type="submit" class="button">Add your Comment&nbsp;&nbsp;&nbsp;<i class="fa fa-comments"></i></button></p>
+                        </form>
+                    </div>
+                <?php } ?>
+            </div>
+        <?php } ?>
     </article>
 <?php } else { ?>
     <div class="system-message danger">Article not found</div>

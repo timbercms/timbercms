@@ -1,6 +1,7 @@
 <?php
 
     require_once(__DIR__ ."/category.php");
+    require_once(__DIR__ ."/comment.php");
 
     class ArticleModel extends Model
     {
@@ -20,6 +21,7 @@
         public $hits;
         public $meta_description;
         public $image;
+        public $comments = array();
         
         public function __construct($id = 0, $database)
         {
@@ -51,6 +53,11 @@
             else
             {
                 $this->image = "images/articles/placeholder.jpg";
+            }
+            $temp_comments = $this->database->loadObjectList("SELECT id FROM #__articles_comments WHERE article_id = ?", array($this->id));
+            foreach ($temp_comments as $temp_comment)
+            {
+                $this->comments[] = new CommentModel($temp_comment->id, $this->database);
             }
         }
         

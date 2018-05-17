@@ -27,6 +27,28 @@
             Core::hooks()->executeHook("onLoadContent");
         }
         
+        public function postComment()
+        {
+            if (Core::user()->id > 0)
+            {
+                $comment = new CommentModel(0, $this->database);
+                $comment->article_id = $_POST["article_id"];
+                $comment->content = $_POST["content"];
+                $comment->published = 1;
+                $comment->publish_time = time();
+                $comment->author_id = Core::user()->id;
+                $comment->store();
+                Core::hooks()->executeHook("onPostComment");
+                $this->model->setMessage("success", "Your comment has been posted successfully!");
+                header("Location: ". Core::route("index.php?component=content&controller=article&id=". $comment->article_id));
+            }
+            else
+            {
+                $this->model->setMessage("danger", "Sorry, but you must be logged in to post a comment.");
+                header("Location: ". Core::route("index.php?component=content&controller=article&id=". $comment->article_id));
+            }
+        }
+        
     }
 
 ?>

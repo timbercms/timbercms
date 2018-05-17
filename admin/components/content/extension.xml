@@ -11,7 +11,8 @@
     <name value="Content" icon="newspaper" />
     <items value="articles" label="Articles" />
     <items value="categories" label="Categories" />
-    <fields type="select" name="enable_comments" label="Enable Disqus Comments" values="No|0,Yes|1" default="0" />
+    <fields type="select" name="enable_comments" label="Enable Comments" values="No|0,Yes|1" default="0" />
+    <fields type="select" name="comments_type" label="Comment Supplier" values="Internal|internal,Disqus|Disqus" default="internal" />
     <fields type="text" name="disqus_shortname" label="Disqus Shortname" />
     <controller label="Category View" internal_name="category" query="SELECT id, title FROM #__articles_categories ORDER BY id ASC" key="id" keyvalue="title" description="View a list of articles from a specific category." />
     <controller label="Single Article" internal_name="article" query="SELECT id, title FROM #__articles ORDER BY publish_time DESC" key="id" keyvalue="title" description="Show a specific article." />
