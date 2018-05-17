@@ -329,10 +329,24 @@
                             break;
                     }
                 }
-                $item = self::db()->loadObject("SELECT id, alias FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($component, $controller, $content_id));
+                $item = self::db()->loadObject("SELECT id, alias, parent_id FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($component, $controller, $content_id));
                 if ($item->id > 0)
                 {
-                    return BASE_URL.$item->alias;
+                    $alias = array();
+                    $alias[] = $item->alias;
+                    if ($item->parent_id > 0)
+                    {
+                        $parent = self::db()->loadObject("SELECT id, alias, parent_id FROM #__menus_items WHERE id = ?", array($item->parent_id));
+                        $alias[] = $parent->alias;
+                        if ($parent->parent_id > 0)
+                        {
+                            $grandparent = self::db()->loadObject("SELECT id, alias, parent_id FROM #__menus_items WHERE id = ?", array($parent->parent_id));
+                            $alias[] = $grandparent->alias;
+                        }
+                    }
+                    $alias = array_reverse($alias);
+                    $alias = implode("/", $alias);
+                    return BASE_URL.$alias;
                 }
                 else
                 {
