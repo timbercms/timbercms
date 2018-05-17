@@ -29,6 +29,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-footer">
+                    <p><i class="fa fa-eye"></i> <?php echo $article->hits; ?></p>
+                    <p><i class="fa fa-comments"></i> <?php echo count($article->comments); ?></p>
+                </div>
             </div>
         <?php } ?>
     </div>

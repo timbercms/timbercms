@@ -188,3 +188,13 @@
 .search-page h1 {
     margin-bottom: 40px;   
 }
+.category-card .card-footer {
+    text-align: right;   
+}
+.category-card .card-footer p:first-of-type {
+    float: left;
+}
+.category-card .card-footer p {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
