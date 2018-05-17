@@ -217,7 +217,7 @@
                 else
                 {
                     self::$stylesheet_links[] = $link;
-                    self::$stylesheets[] = '<link rel="stylesheet" href="'. BASE_URL.$link .'?v='. time() .'">';
+                    self::$stylesheets[] = '<link rel="stylesheet" href="'. $link .'?v='. time() .'">';
                 }
             }
         }
@@ -237,7 +237,7 @@
                 else
                 {
                     self::$script_links[] = $link;
-                    self::$scripts[] = '<script src="'. BASE_URL.$link .'?v='. time() .'"></script>';
+                    self::$scripts[] = '<script src="'. $link .'?v='. time() .'"></script>';
                 }
             }
         }
