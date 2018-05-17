@@ -48,11 +48,11 @@
             $this->author = new UserModel($temp->author_id, $this->database);
             if (strlen($temp->image) > 0)
             {
-                $this->image = $temp->image;
+                $this->image = (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/").$temp->image;
             }
             else
             {
-                $this->image = "images/articles/placeholder.jpg";
+                $this->image = (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/")."images/articles/placeholder.jpg";
             }
             $temp_comments = $this->database->loadObjectList("SELECT id FROM #__articles_comments WHERE article_id = ?", array($this->id));
             foreach ($temp_comments as $temp_comment)

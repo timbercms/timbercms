@@ -30,11 +30,14 @@
                     case "id":
                         $id = $string["1"];
                         break;
+                    case "query":
+                        $query = $string["1"];
+                        break;
                 }
             }
-            if ($id > 0 && $comp == $this->component)
+            if ($comp == $this->component)
             {
-                if ($controller == "article")
+                if ($controller == "article" && $id > 0)
                 {
                     $article = new ArticleModel($id, $this->database);
                     $item = Core::db()->loadObject("SELECT id, alias FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ? AND is_home != '1'", array($this->component, "category", $article->category->id));
@@ -47,10 +50,18 @@
                         return BASE_URL .$this->component ."/article/". $article->category->alias ."/". $article->alias;
                     }
                 }
-                else if ($controller == "category")
+                else if ($controller == "category" && $id > 0)
                 {
                     $category = new CategoryModel($id, $this->database, false);
                     return BASE_URL .$this->component ."/category/". $category->alias;
+                }
+                else if ($controller == "search")
+                {
+                    return BASE_URL .$this->component ."/search/results?query=". $query;
+                }
+                else
+                {
+                    return;
                 }
             }
             else
@@ -83,6 +94,13 @@
                     $new_parts[] = "category";
                     $new_parts[] = $category->id;
                 }
+                return $new_parts;
+            }
+            else if ($parts["1"] == "search")
+            {
+                $new_parts[] = "content";
+                $new_parts[] = "search";
+                $new_parts[] = 0;
                 return $new_parts;
             }
             else
