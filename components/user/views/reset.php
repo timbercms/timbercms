@@ -18,6 +18,9 @@
                     <input type="password" name="password_again" required />
                 </div>
             </div>
+            <?php if (Core::config()->enable_recaptcha == 1) { ?>
+                <div class="g-recaptcha" data-sitekey="<?php echo Core::config()->recaptcha_site; ?>" style="margin-bottom: 20px;"></div>
+            <?php } ?>
             <input type="hidden" name="token" value="<?php echo $this->model->token; ?>" />
             <button type="submit" class="button"><i class="fa fa-users"></i> Reset Password</button>
         </form>

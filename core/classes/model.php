@@ -95,6 +95,32 @@
 		{
 			 $_SESSION["MESSAGES"][] = '<div class="system-message '. $type .'">'. $message .'</div>';
 		}
+        
+        public function checkCaptcha()
+        {
+            if (isset($_POST['g-recaptcha-response']))
+            {
+                $captcha = $_POST['g-recaptcha-response'];
+            }
+            if (!$captcha)
+            {
+                return false;
+            }
+            else
+            {
+                $response = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=". Core::config()->recaptcha_secret ."&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
+                if ($response['success'] == false)
+                {
+                    // Spammer
+                    return false;
+                }
+                else
+                {
+                    // Legitimate Enquiry
+                    return true;
+                }
+            }
+        }
 	}
 
 ?>

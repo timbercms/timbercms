@@ -17,6 +17,9 @@
             <label><strong>Email Address:</strong></label>
             <input type="email" name="email" class="form-control" required />
         </div>
+        <?php if (Core::config()->enable_recaptcha == 1) { ?>
+            <div class="g-recaptcha" data-sitekey="<?php echo Core::config()->recaptcha_site; ?>" style="margin-bottom: 20px;"></div>
+        <?php } ?>
         <button type="submit" class="button"><i class="fa fa-users"></i> Register</button>
     </form>
 </div>

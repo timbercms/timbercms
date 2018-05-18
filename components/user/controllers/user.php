@@ -66,6 +66,26 @@
         
         public function register()
         {
+            if (Core::config()->enable_recaptcha == 1)
+            {
+                if ($this->model->checkCaptcha())
+                {
+                    $this->processRegister();
+                }
+                else
+                {
+                    $this->model->setMessage("danger", "ReCaptcha verification failed.");
+                    header("Location: ". Core::route("index.php?component=user&controller=register"));
+                }
+            }
+            else
+            {
+                $this->processRegister();
+            }
+        }
+        
+        public function processRegister()
+        {
             $username = $_POST["username"];
             $password = $_POST["password"];
             $password_again = $_POST["password_again"];

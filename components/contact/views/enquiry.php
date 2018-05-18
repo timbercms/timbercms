@@ -13,6 +13,9 @@
             <label>Your message: *</label>
             <textarea type="text" class="form-control" name="content" rows="15" required></textarea>
         </div>
+        <?php if (Core::config()->enable_recaptcha == 1) { ?>
+            <div class="g-recaptcha" data-sitekey="<?php echo Core::config()->recaptcha_site; ?>" style="margin-bottom: 20px;"></div>
+        <?php } ?>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

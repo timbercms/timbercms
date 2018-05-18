@@ -6,10 +6,35 @@
         
         public function __construct($model)
         {
+            Core::changeTitle("Reset your password");
             $this->model = $model;
+            if (Core::config()->enable_recaptcha == 1)
+            {
+                Core::addScript("https://www.google.com/recaptcha/api.js");
+            }
         }
         
         public function reset()
+        {
+            if (Core::config()->enable_recaptcha == 1)
+            {
+                if ($this->model->checkCaptcha())
+                {
+                    $this->processReset();
+                }
+                else
+                {
+                    $this->model->setMessage("danger", "ReCaptcha verification failed.");
+                    header("Location: index.php?component=user&controller=reset");
+                }
+            }
+            else
+            {
+                $this->processReset();
+            }
+        }
+        
+        public function processReset()
         {
             $reset = $this->model->database->loadObject("SELECT id, user_id FROM #__users_recovery WHERE token = ?", array($_POST["token"]));
             if ($reset->id > 0)
@@ -23,7 +48,7 @@
                 }
                 else
                 {
-                    $this->model->setMessage("danger", "Sorry, but the two password you entered did not appear to match.");
+                    $this->model->setMessage("danger", "Sorry, but the two passwords you entered did not appear to match.");
                     header("Location: index.php?component=user&controller=reset&token=". $_POST["token"]);
                 }
             }

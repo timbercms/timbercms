@@ -10,13 +10,37 @@
         public function __construct($model)
         {
             Core::changeTitle("Contact Form");
+            if (Core::config()->enable_recaptcha == 1)
+            {
+                Core::addScript("https://www.google.com/recaptcha/api.js");
+            }
             $this->model = $model;
         }
         
         public function send()
         {
+            if (Core::config()->enable_recaptcha == 1)
+            {
+                if ($this->model->checkCaptcha())
+                {
+                    $this->storeEnquiry();
+                }
+                else
+                {
+                    $this->model->setMessage("danger", "ReCaptcha verification failed.");
+                    header('Location: '. Core::route("index.php?component=contact&controller=enquiry"));
+                }
+            }
+            else
+            {
+                $this->storeEnquiry();
+            }
+        }
+        
+        public function storeEnquiry()
+        {
             $time = time();
-            
+
             $admin = Core::componentconfig()->admin_email;
 
             $subject = 'Contact Form Submitted - '. Core::config()->site_title;
@@ -25,7 +49,7 @@
             $headers .= "Reply-To: ". $_POST["email"] ."\r\n";
             $headers .= "MIME-Version: 1.0\r\n";
             $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-                
+
             $message = '<html><body>';
                 $message .= '<h4>Contact Form Received</h4>';
                 $message .= '<table border="1" width="100%">';

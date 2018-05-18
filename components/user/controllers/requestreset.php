@@ -6,10 +6,35 @@
         
         public function __construct($model)
         {
+            Core::changeTitle("Request Password Reset");
             $this->model = $model;
+            if (Core::config()->enable_recaptcha == 1)
+            {
+                Core::addScript("https://www.google.com/recaptcha/api.js");
+            }
         }
         
         public function reset()
+        {
+            if (Core::config()->enable_recaptcha == 1)
+            {
+                if ($this->model->checkCaptcha())
+                {
+                    $this->processReset();
+                }
+                else
+                {
+                    $this->model->setMessage("danger", "ReCaptcha verification failed.");
+                    header("Location: index.php?component=user&controller=requestreset");
+                }
+            }
+            else
+            {
+                $this->processReset();
+            }
+        }
+        
+        public function processReset()
         {
             $user = $this->model->database->loadObject("SELECT id FROM #__users WHERE email = ?", array($_POST["email"]));
             if ($user->id > 0)
