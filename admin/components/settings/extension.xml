@@ -17,4 +17,7 @@
     <fields type="text" name="cookie_name" label="Cookie Name" default="bulletin_cookie" />
     <fields type="text" name="cookie_duration" label="Cookie Session Duration (In days)" default="28" />
     <fields type="sql" query="SELECT id, title FROM #__usergroups ORDER BY title ASC" key="id" keyvalue="title" name="default_usergroup" label="Default Usergroup" />
+    <fields type="select" name="enable_recaptcha" label="Enable ReCaptcha" values="No|0,Yes|1" default="0" />
+    <fields type="text" name="recaptcha_site" label="ReCaptcha Site Key" />
+    <fields type="text" name="recaptcha_secret" label="ReCaptcha Secret Key" />
 </settings>
