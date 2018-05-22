@@ -8,6 +8,7 @@
     session_start();
     ini_set("display_errors", "1");
     error_reporting(E_ALL & ~E_NOTICE);
+    $version = simplexml_load_file(__DIR__ ."/../admin/version.xml");
     if (file_exists(__DIR__ ."/../configuration.php"))
     {
         require_once(__DIR__ ."/../configuration.php");
@@ -25,7 +26,7 @@
     </head>
     <body>
         <div class="header-container">
-            <span class="title">Bulletin. Installer</span><span class="subtitle">v1.2.1</span>
+            <span class="title">Bulletin. Installer</span><span class="subtitle">v<?php echo $version->numerical; ?></span>
         </div>
         <div class="body-container">
             <?php if ($_GET["stage"] == 0 || strlen($_GET["stage"]) == 0) { ?>
@@ -205,6 +206,15 @@ RedirectMatch 404 ^404.php';
                          `image` varchar(1000) DEFAULT NULL,
                          PRIMARY KEY (`id`)
                         )");
+                    $db->query("CREATE TABLE `#__articles_comments` (
+                         `id` int(11) NOT NULL AUTO_INCREMENT,
+                         `article_id` int(11) NOT NULL,
+                         `content` text NOT NULL,
+                         `published` int(11) NOT NULL,
+                         `publish_time` int(11) NOT NULL,
+                         `author_id` int(11) NOT NULL,
+                         PRIMARY KEY (`id`)
+                        )");
                     $db->query("CREATE TABLE `#__articles_categories` (
                          `id` int(11) NOT NULL AUTO_INCREMENT,
                          `title` varchar(500) DEFAULT NULL,
@@ -317,6 +327,7 @@ RedirectMatch 404 ^404.php';
                          `last_action_time` int(11) DEFAULT NULL,
                          `verify_token` varchar(5000) DEFAULT NULL,
                          `avatar` varchar(255) DEFAULT NULL,
+                         `params` text DEFAULT NULL,
                          PRIMARY KEY (`id`)
                         )");
                     $db->query("CREATE TABLE `#__users_recovery` (
@@ -327,25 +338,26 @@ RedirectMatch 404 ^404.php';
                          PRIMARY KEY (`id`)
                         )");
     
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Content", "Article category and detail view. Includes comments via third-party Disqus.", "content", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.0", 'a:1:{s:15:"enable_comments";s:1:"0";}', "1"));
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("User", "Provides functions for account management, and profile views.", "user", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.1", '', "1"));
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Settings", "Provides sitewide, and component specific settings.", "settings", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.1", 'a:6:{s:10:"site_title";s:'. strlen($_POST["site_name"]) .':"'. $_POST["site_name"] .'";s:16:"default_template";s:7:"default";s:14:"admin_template";s:7:"default";s:11:"cookie_name";s:15:"bulletin_cookie";s:15:"cookie_duration";s:2:"28";s:17:"default_usergroup";s:1:"1";}', "1"));
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Extensions", "Provides management of extensions.", "extensions", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.1", '', "1"));
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Menu Manager", "Basic Menu Management.", "menu", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.1", '', "1"));
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Module Manager", "Basic Module Management.", "modules", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.1", '', "1"));
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Update Manager", "Allow updating of the base CMS.", "update", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.1", '', "1"));
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("About", "Provides information about packages and installed CMS.", "about", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.1", '', "1"));
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Dashboard", "Show information on the Admin Panel homepage.", "dashboard", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.1", '', "1"));
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Sitemap", "Shows XML sitemap.", "sitemap", "1", "0", "0", "Chris Smith", "https://github.com/Smith0r", "1.2.1", '', "1"));
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Contact", "Contact Form display. Sends email to configured address.", "contact", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", "1.2.1", 'a:3:{s:11:"admin_email";s:'. strlen($_POST["email"]) .':"'. $_POST["email"] .'";s:14:"complete_title";s:23:"Thanks for your message";s:16:"complete_message";s:81:"<p>Thank you for getting in touch. We\'ll get back to you as soon as possible.</p>";}', "1"));
-                    $db->query("INSERT INTO #__components_modules (title, description, internal_name, author_name, author_url, version) VALUES (?, ?, ?, ?, ?, ?)", array("Latest News", "Show the latest news in a list", "latestnews", "Chris Smith", "https://github.com/Smith0r", "1.2.1"));
-                    $db->query("INSERT INTO #__components_modules (title, description, internal_name, author_name, author_url, version) VALUES (?, ?, ?, ?, ?, ?)", array("Main Menu", "Show the main menu.", "mainmenu", "Chris Smith", "https://github.com/Smith0r", "1.2.1"));
-                    $db->query("INSERT INTO #__components_modules (title, description, internal_name, author_name, author_url, version) VALUES (?, ?, ?, ?, ?, ?)", array("Login", "Show login form.", "login", "Chris Smith", "https://github.com/Smith0r", "1.2.1"));
-                    $db->query("INSERT INTO #__components_modules (title, description, internal_name, author_name, author_url, version) VALUES (?, ?, ?, ?, ?, ?)", array("HTML", "Custom HTML Module.", "html", "Chris Smith", "https://github.com/Smith0r", "1.2.1"));
-                    $db->query("INSERT INTO #__components_modules (title, description, internal_name, author_name, author_url, version) VALUES (?, ?, ?, ?, ?, ?)", array("Menu", "Show menu items in a menu format.", "menu", "Chris Smith", "https://github.com/Smith0r", "1.2.1"));
-                    $db->query("INSERT INTO #__components_hooks (title, description, component_name, author_name, author_url, version, enabled) VALUES (?, ?, ?, ?, ?, ?, ?)", array("Content", "Hooks for the content component.", "content", "Chris Smith", "https://github.com/Smith0r", "1.2.1", 1));
-                    $db->query("INSERT INTO #__components_hooks (title, description, component_name, author_name, author_url, version, enabled) VALUES (?, ?, ?, ?, ?, ?, ?)", array("User", "Hooks for the user component.", "user", "Chris Smith", "https://github.com/Smith0r", "1.2.1", 1));
-                    $db->query("INSERT INTO #__components_hooks (title, description, component_name, author_name, author_url, version, enabled) VALUES (?, ?, ?, ?, ?, ?, ?)", array("Sitemap", "Hooks for the sitemap component.", "sitemap", "Chris Smith", "https://github.com/Smith0r", "1.2.1", 1));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Content", "Article category and detail view. Includes comments via third-party Disqus.", "content", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, 'a:1:{s:15:"enable_comments";s:1:"0";}', "1"));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("User", "Provides functions for account management, and profile views.", "user", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, '', "1"));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Settings", "Provides sitewide, and component specific settings.", "settings", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, 'a:6:{s:10:"site_title";s:'. strlen($_POST["site_name"]) .':"'. $_POST["site_name"] .'";s:16:"default_template";s:7:"default";s:14:"admin_template";s:7:"default";s:11:"cookie_name";s:15:"bulletin_cookie";s:15:"cookie_duration";s:2:"28";s:17:"default_usergroup";s:1:"1";}', "1"));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Extensions", "Provides management of extensions.", "extensions", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, '', "1"));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Menu Manager", "Basic Menu Management.", "menu", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, '', "1"));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Module Manager", "Basic Module Management.", "modules", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, '', "1"));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Update Manager", "Allow updating of the base CMS.", "update", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, '', "1"));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("About", "Provides information about packages and installed CMS.", "about", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, '', "1"));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Dashboard", "Show information on the Admin Panel homepage.", "dashboard", "0", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, '', "1"));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Sitemap", "Shows XML sitemap.", "sitemap", "1", "0", "0", "Chris Smith", "https://github.com/Smith0r", $version->numerical, '', "1"));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Contact", "Contact Form display. Sends email to configured address.", "contact", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, 'a:3:{s:11:"admin_email";s:'. strlen($_POST["email"]) .':"'. $_POST["email"] .'";s:14:"complete_title";s:23:"Thanks for your message";s:16:"complete_message";s:81:"<p>Thank you for getting in touch. We\'ll get back to you as soon as possible.</p>";}', "1"));
+                    $db->query("INSERT INTO #__components_modules (title, description, internal_name, author_name, author_url, version) VALUES (?, ?, ?, ?, ?, ?)", array("Latest News", "Show the latest news in a list", "latestnews", "Chris Smith", "https://github.com/Smith0r", $version->numerical));
+                    $db->query("INSERT INTO #__components_modules (title, description, internal_name, author_name, author_url, version) VALUES (?, ?, ?, ?, ?, ?)", array("Main Menu", "Show the main menu.", "mainmenu", "Chris Smith", "https://github.com/Smith0r", $version->numerical));
+                    $db->query("INSERT INTO #__components_modules (title, description, internal_name, author_name, author_url, version) VALUES (?, ?, ?, ?, ?, ?)", array("Login", "Show login form.", "login", "Chris Smith", "https://github.com/Smith0r", $version->numerical));
+                    $db->query("INSERT INTO #__components_modules (title, description, internal_name, author_name, author_url, version) VALUES (?, ?, ?, ?, ?, ?)", array("HTML", "Custom HTML Module.", "html", "Chris Smith", "https://github.com/Smith0r", $version->numerical));
+                    $db->query("INSERT INTO #__components_modules (title, description, internal_name, author_name, author_url, version) VALUES (?, ?, ?, ?, ?, ?)", array("Menu", "Show menu items in a menu format.", "menu", "Chris Smith", "https://github.com/Smith0r", $version->numerical));
+                    $db->query("INSERT INTO #__components_modules (title, description, internal_name, author_name, author_url, version) VALUES (?, ?, ?, ?, ?, ?)", array("Search", "Show search form.", "search", "Chris Smith", "https://github.com/Smith0r", $version->numerical));
+                    $db->query("INSERT INTO #__components_hooks (title, description, component_name, author_name, author_url, version, enabled) VALUES (?, ?, ?, ?, ?, ?, ?)", array("Content", "Hooks for the content component.", "content", "Chris Smith", "https://github.com/Smith0r", $version->numerical, 1));
+                    $db->query("INSERT INTO #__components_hooks (title, description, component_name, author_name, author_url, version, enabled) VALUES (?, ?, ?, ?, ?, ?, ?)", array("User", "Hooks for the user component.", "user", "Chris Smith", "https://github.com/Smith0r", $version->numerical, 1));
+                    $db->query("INSERT INTO #__components_hooks (title, description, component_name, author_name, author_url, version, enabled) VALUES (?, ?, ?, ?, ?, ?, ?)", array("Sitemap", "Hooks for the sitemap component.", "sitemap", "Chris Smith", "https://github.com/Smith0r", $version->numerical, 1));
                     $db->query("INSERT INTO #__menus (title) VALUES (?)", array("Main Menu"));
                     $db->query("INSERT INTO #__menus_items (menu_id, parent_id, title, alias, published, component, controller, content_id, params, is_home, ordering) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("1", "0", "Home", "home", "1", "content", "category", "1", "N;", "1", "0"));
                     $db->query("INSERT INTO #__modules (title, type, show_title, published, position, params, pages, ordering) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", array("Main Menu", "mainmenu", "0", "1", "main-menu", 'a:1:{s:7:"menu_id";s:1:"1";}', "0", "0"));
