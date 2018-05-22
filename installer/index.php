@@ -361,7 +361,7 @@ RedirectMatch 404 ^404.php';
                     $db->query("INSERT INTO #__menus (title) VALUES (?)", array("Main Menu"));
                     $db->query("INSERT INTO #__menus_items (menu_id, parent_id, title, alias, published, component, controller, content_id, params, is_home, ordering) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("1", "0", "Home", "home", "1", "content", "category", "1", "N;", "1", "0"));
                     $db->query("INSERT INTO #__modules (title, type, show_title, published, position, params, pages, ordering) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", array("Main Menu", "mainmenu", "0", "1", "main-menu", 'a:1:{s:7:"menu_id";s:1:"1";}', "0", "0"));
-                    $db->query("INSERT INTO #__modules (title, type, show_title, published, position, params, pages, ordering) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", array("User Menu", "login", "1", "1", "sidebar", '', "0", "0"));
+                    $db->query("INSERT INTO #__modules (title, type, show_title, published, position, params, pages, ordering) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", array("User Menu", "login", "0", "1", "sidebar", '', "0", "0"));
                     $db->query("INSERT INTO #__usergroups (title, is_admin) VALUES (?, ?)", array("Members", "0"));
                     $db->query("INSERT INTO #__usergroups (title, is_admin) VALUES (?, ?)", array("Administrators", "1"));
                         
