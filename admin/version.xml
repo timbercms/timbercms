@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <version>
-    <numerical>1.2.2</numerical>
-    <releaseDate>25th April 2018</releaseDate>
+    <numerical>1.3.0</numerical>
+    <releaseDate>22nd May 2018</releaseDate>
     <packageURL>https://github.com/Smith0r/bulletin/archive/master.zip</packageURL>
     <new>
     </new>
