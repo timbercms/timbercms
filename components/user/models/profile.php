@@ -32,7 +32,7 @@
             {
                 $this->comments[] = new CommentModel($recent->id, $this->database);
             }
-            $comment_counts = $this->database->loadObjectList("SELECT id FROM #__articles_comments WHERE author_id = ? AND published = '1'", array($this->user->id));
+            $comment_counts = $this->database->loadObjectList("SELECT id FROM #__articles_comments WHERE author_id = ? AND published = '1' ORDER BY publish_time DESC", array($this->user->id));
             $this->comment_count = count($comment_counts);
         }
         
