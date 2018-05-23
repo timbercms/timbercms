@@ -26,7 +26,7 @@
             <div class="col-md-1" style="text-align: center;"><strong>Published</strong></div>
             <div class="col-md-2"><strong>Publish Date</strong></div>
             <div class="col-md-1"><strong>Author</strong></div>
-            <div class="col-md-1"><strong>Hits</strong></div>
+            <div class="col-md-1" style="text-align: center;"><strong>Hits</strong></div>
         </div>
         <?php foreach ($this->model->articles as $article) { ?>
             <div class="d-flex admin-list align-items-center">
@@ -53,7 +53,7 @@
                 <div class="col-md-1">
                     <?php echo $article->author->username; ?>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-1" style="text-align: center;">
                     <?php echo $article->hits; ?>
                 </div>
             </div>
