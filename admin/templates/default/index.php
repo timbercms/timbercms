@@ -72,9 +72,9 @@
                     </div>
                     <?php $this->view->output(); ?>
                     <div class="white-card centre-text">
-                        Bulletin. <strong>v<?php echo $version->numerical; ?></strong>
+                        Bulletin. <strong>v<?php echo $version->numerical; ?></strong> 
                         <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>
-                             - <span class="badge badge-danger version-label">UPDATE (v<?php echo $web_version->tag_name; ?> Available)</span>
+                            - <a href="index.php?component=update&controller=update"><span class="badge badge-danger version-label">UPDATE (v<?php echo $web_version->tag_name; ?> Available)</span></a>
                         <?php } else { ?>
                              - <span class="badge badge-success version-label">UP TO DATE</span>
                         <?php } ?>
