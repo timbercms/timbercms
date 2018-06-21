@@ -78,3 +78,7 @@
 .website-title {
     font-size: 2.6rem;   
 }
+.profile-news-item a {
+    margin-top: 20px;
+    display: block;
+}
