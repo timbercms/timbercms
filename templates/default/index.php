@@ -50,7 +50,7 @@
                 <div class="row">
                     <div class="<?php echo ($this->template->hasModules("sidebar") ? "col-md-9" : "col-md-12"); ?>">
                         <div class="component-container">
-                            <?php $this->view->output(); ?>
+                            <?php Core::outputView($this->view); ?>
                         </div>
                     </div>
                     <?php if ($this->template->hasModules("sidebar")) { ?>

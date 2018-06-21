@@ -26,6 +26,15 @@
                 <?php } ?>
             </select>
         </div>
+        <div class="form-group">
+            <label class="col-form-label">Access Control</label>
+            <select name="params[access][]" multiple class="form-control">
+                <option value="0"<?php echo (!is_array($this->model->params["access"]) || (is_array($this->model->params["access"]) && in_array(0, $this->model->params["access"])) ? 'selected="selected"' : ''); ?>>Public</option>
+                <?php foreach ($this->model->getUsergroups() as $usergroup) { ?>
+                    <option value="<?php echo $usergroup->id; ?>"<?php echo (is_array($this->model->params["access"]) && in_array($usergroup->id, $this->model->params["access"]) ? ' selected="selected"' : ''); ?>><?php echo $usergroup->title; ?></option>
+                <?php } ?>
+            </select>
+        </div>
         <?php if (strlen($this->model->controller_query->attributes()->query) > 0) { ?>
             <h3 style="margin-top: 20px; margin-bottom: 20px;">Item Options</h3>
             <?php $this->model->form->displaySql($this->model->controller_query, "content_id", $this->model->content_id, $this->model->database, "Content"); ?>

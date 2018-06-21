@@ -26,6 +26,7 @@
         public $database;
         public static $router;
         public static $user;
+        public static $menu_item;
         public static $stylesheets = array();
         public static $stylesheet_links = array();
         public static $scripts = array();
@@ -178,6 +179,25 @@
                     $this->template->addComponentScript($this->component);
                     $this->database->close();
                 }
+            }
+        }
+
+        public static function outputView($view)
+        {
+            if (is_array(self::$menu_item->params["access"]))
+            {
+                if (in_array(self::$user->usergroup->id, self::$menu_item->params["access"]) || in_array(0, self::$menu_item->params["access"]))
+                {
+                    $view->output();
+                }
+                else
+                {
+                    echo '<div class="alert alert-danger">You do not have access to this page</div>';
+                }
+            }
+            else
+            {
+                $view->output();
             }
         }
         
@@ -379,6 +399,7 @@
                 $this->controller = $item->controller;
                 $this->content_id = $item->content_id;
                 self::$menu_item_id = $item->id;
+                self::$menu_item = new MenuItemModel($item->id, self::db());
                 return;
             }
             if (strpos($string, "index.php?") !== false)
@@ -401,6 +422,7 @@
                 $first = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($parts["0"]));
                 if ($first->id > 0)
                 {
+                    self::$menu_item = new MenuItemModel($first->id, self::db());
                     $alias = end($parts);
                     $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
                     if ($item->id <= 0)
@@ -430,6 +452,7 @@
                 {
                     $alias = end($parts);
                     $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
+                    self::$menu_item = new MenuItemModel($item->id, self::db());
                 }
             }
             if (!$router_set)
@@ -441,6 +464,7 @@
                     $this->controller = $item->controller;
                     $this->content_id = $item->content_id;
                     self::$menu_item_id = $item->id;
+                    self::$menu_item = new MenuItemModel($item->id, self::db());
                 }
                 else
                 {
@@ -470,6 +494,7 @@
                         // If no rule from router found, find homepage
                         $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
                         self::$menu_item_id = $item->id;
+                        self::$menu_item = new MenuItemModel($item->id, self::db());
                         if ($item->id <= 0 && strlen($_GET["component"]) == 0)
                         {
                             $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
