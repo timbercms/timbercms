@@ -10,4 +10,5 @@
     <version>1.2.0</version>
     <name value="About" icon="question-circle" />
     <items value="about" label="About Installation" />
+    <items value="contributors" label="Contributors" />
 </settings>
