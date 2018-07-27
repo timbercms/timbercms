@@ -54,7 +54,14 @@
             {
                 $this->image = (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/")."images/articles/placeholder.jpg";
             }
-            $temp_comments = $this->database->loadObjectList("SELECT id FROM #__articles_comments WHERE article_id = ? ORDER BY publish_time DESC", array($this->id));
+            if (Core::user()->usergroup->is_admin == 1)
+            {
+                $temp_comments = $this->database->loadObjectList("SELECT id FROM #__articles_comments WHERE article_id = ? ORDER BY publish_time DESC", array($this->id));
+            }
+            else
+            {
+                $temp_comments = $this->database->loadObjectList("SELECT id FROM #__articles_comments WHERE article_id = ? AND published = ? ORDER BY publish_time DESC", array($this->id, 1));
+            }
             foreach ($temp_comments as $temp_comment)
             {
                 $this->comments[] = new CommentModel($temp_comment->id, $this->database);
