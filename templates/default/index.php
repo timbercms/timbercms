@@ -9,7 +9,6 @@
         <!-- META_ITEMPROPS -->
         <!-- META_NAMES -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/css/font-awesome.min.css">
         <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/<?php echo $this->template->name; ?>/css/template.css?v=<?php echo time(); ?>">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -51,7 +50,7 @@
                 <div class="row">
                     <div class="<?php echo ($this->template->hasModules("sidebar") ? "col-md-9" : "col-md-12"); ?>">
                         <div class="component-container">
-                            <?php $this->view->output(); ?>
+                            <?php Core::outputView($this->view); ?>
                         </div>
                     </div>
                     <?php if ($this->template->hasModules("sidebar")) { ?>

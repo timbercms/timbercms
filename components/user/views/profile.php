@@ -43,8 +43,7 @@
                 <?php foreach ($this->model->comments as $comment) { ?>
                     <div class="card">
                         <div class="card-header">
-                            <?php $article = $this->model->database->loadObject("SELECT title FROM #__articles WHERE id = ?", array($comment->article_id)); ?>
-                            In: <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $comment->article_id); ?>"><?php echo $article->title; ?></a>
+                            In: <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $comment->article_id); ?>"><?php echo $comment->article_title; ?></a>
                         </div>
                         <div class="card-body">
                             <?php echo $comment->content; ?>

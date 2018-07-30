@@ -5,16 +5,10 @@
     </div>
     <form action="index.php?component=menu&controller=menuitem&task=save" method="post" class="admin-form">
         <h3 style="margin-bottom: 20px;">Change Menu Type</h3>
-        <div class="row form-group">
-            <label class="col-md-2 col-form-label">Current Type</label>
-            <div class="col-md-10">
-                <p>
-                    <strong>Component:</strong> <?php echo $this->model->component; ?><br />
-                    <strong>View:</strong> <?php echo $this->model->controller; ?>
-                </p>
-                <a href="index.php?component=menu&controller=newitem&menu_id=<?php echo $_GET["menu_id"]; ?>&id=<?php echo $this->model->id; ?>" class="button">Change</a>
-            </div>
-        </div>
+        <p><strong>Component:</strong> <span style="text-transform: capitalize;"><?php echo $this->model->component; ?></span></p>
+        <p><strong>View:</strong> <?php echo $this->model->controller_query->attributes()->label; ?></p>
+        <p><strong>Overview:</strong> <?php echo $this->model->controller_query->attributes()->description; ?></p>
+        <p><a href="index.php?component=menu&controller=newitem&menu_id=<?php echo $_GET["menu_id"]; ?>&id=<?php echo $this->model->id; ?>" class="button">Change</a></p>
         <h3 style="margin-top: 20px; margin-bottom: 20px;">Basic Information</h3>
         <?php $this->model->form->display(false); ?>
         <div class="form-group">
@@ -29,6 +23,15 @@
                             <option value="<?php echo $grandchild->id; ?>"<?php echo ($grandchild->id == $this->model->parent_id ? ' selected="selected"' : ''); ?>>---- <?php echo $grandchild->title; ?></option>
                         <?php } ?>
                     <?php } ?>
+                <?php } ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label">Access Control</label>
+            <select name="params[access][]" multiple class="form-control">
+                <option value="0"<?php echo (!is_array($this->model->params["access"]) || (is_array($this->model->params["access"]) && in_array(0, $this->model->params["access"])) ? 'selected="selected"' : ''); ?>>Public</option>
+                <?php foreach ($this->model->getUsergroups() as $usergroup) { ?>
+                    <option value="<?php echo $usergroup->id; ?>"<?php echo (is_array($this->model->params["access"]) && in_array($usergroup->id, $this->model->params["access"]) ? ' selected="selected"' : ''); ?>><?php echo $usergroup->title; ?></option>
                 <?php } ?>
             </select>
         </div>

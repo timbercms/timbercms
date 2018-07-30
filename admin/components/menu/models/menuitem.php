@@ -22,6 +22,7 @@
         public $controllers = array();
         public $controller_query;
         public $children = array();
+        public $usergroups = array();
         
         public $form;
         
@@ -154,6 +155,17 @@
                 $items[] = $item;
             }
             return $items;
+        }
+        
+        public function getUsergroups()
+        {
+            $temp = $this->database->loadObjectList("SELECT id FROM #__usergroups ORDER BY title ASC");
+            $groups = array();
+            foreach ($temp as $t)
+            {
+                $groups[] = new UserGroupModel($t->id, $this->database);
+            }
+            return $groups;
         }
         
         public function delete($id)

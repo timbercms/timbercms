@@ -10,6 +10,7 @@
         public $published;
         public $publish_time;
         public $author;
+        public $article_title;
         
         public function __construct($id = 0, $database)
         {
@@ -29,6 +30,7 @@
             $this->published = $temp->published;
             $this->publish_time = $temp->publish_time;
             $this->author = new UserModel($temp->author_id, $this->database);
+            $this->article_title = $this->database->loadObject("SELECT title FROM #__articles WHERE id = ?", array($this->article_id))->title;
         }
         
         public function store($table = "", $data = array())

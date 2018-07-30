@@ -57,7 +57,7 @@
                     <p style="font-style: italic;">Be the first to comment!</p>
                 <?php } ?>
                 <?php foreach ($this->model->comments as $comment) { ?>
-                    <div class="comment-container">
+                    <div class="comment-container<?php if ($comment->published == 0) { ?> comment-hidden<?php } ?>">
                         <div class="row">
                             <div class="col-md-2 comment-author">
                                 <p><a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $comment->author->id); ?>"><img src="<?php echo $comment->author->avatar; ?>" /></a></p>
@@ -65,6 +65,15 @@
                                 <p><time pubdate><?php echo $this->model->relativeTime($comment->publish_time); ?> ago</time></p>
                             </div>
                             <div class="col-md-10">
+                                <?php if (Core::user()->usergroup->is_admin == 1) { ?>
+                                    <div class="comment-moderation">
+                                        <?php if ($comment->published == 1) { ?>
+                                            <a href="index.php?component=content&controller=article&task=hideComment&id=<?php echo $comment->id; ?>&article_id=<?php echo $this->model->id; ?>"><i class="far fa-eye-slash"></i> Hide Comment</a>
+                                        <?php } else { ?>
+                                            <a href="index.php?component=content&controller=article&task=unhideComment&id=<?php echo $comment->id; ?>&article_id=<?php echo $this->model->id; ?>"><i class="far fa-eye"></i> Unhide Comment</a>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
                                 <?php echo $comment->content; ?>
                             </div>
                         </div>

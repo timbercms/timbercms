@@ -49,6 +49,36 @@
             }
         }
         
+        public function hideComment()
+        {
+            if (Core::user()->usergroup->is_admin == 1)
+            {
+                $this->model->database->query("UPDATE #__articles_comments SET published = ? WHERE id = ?", array(0, $_GET["id"]));
+                $this->model->setMessage("success", "The comment has been hidden.");
+                header("Location: ". Core::route("index.php?component=content&controller=article&id=". $_GET["article_id"]));
+            }
+            else
+            {
+                $this->model->setMessage("danger", "Sorry, but you do not have the required authorisation to perform this action.");
+                header("Location: ". Core::route("index.php?component=content&controller=article&id=". $_GET["article_id"]));
+            }
+        }
+        
+        public function unhideComment()
+        {
+            if (Core::user()->usergroup->is_admin == 1)
+            {
+                $this->model->database->query("UPDATE #__articles_comments SET published = ? WHERE id = ?", array(1, $_GET["id"]));
+                $this->model->setMessage("success", "The comment has been unhidden.");
+                header("Location: ". Core::route("index.php?component=content&controller=article&id=". $_GET["article_id"]));
+            }
+            else
+            {
+                $this->model->setMessage("danger", "Sorry, but you do not have the required authorisation to perform this action.");
+                header("Location: ". Core::route("index.php?component=content&controller=article&id=". $_GET["article_id"]));
+            }
+        }
+        
     }
 
 ?>
