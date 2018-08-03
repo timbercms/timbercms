@@ -81,6 +81,10 @@ a:hover {
     background: #FFF;
     padding: 30px;
     margin-bottom: 20px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(51,51,51,0.5);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(51,51,51,0.5);
+    box-shadow: 0px 2px 5px 0px rgba(51,51,51,0.5);
 }
 .white-card > h2 {
     border-bottom: 1px solid #333;
@@ -280,4 +284,86 @@ form label {
 }
 .component-filters {
     margin-bottom: 40px;   
+}
+.menu-toggler {
+    display: none;   
+}
+.menu-container {
+    background: var(--link);
+    max-width: var(--site-width);
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 100;
+    min-height: 44.25px;
+}
+.menu-container .module {
+    margin-bottom: 0px;
+    border: none;
+    border-radius: 0px;
+    overflow: inherit;
+}
+.menu-container .module-inner {
+    padding: 0px;   
+}
+.menu-container .menu-list, .menu-container .menu-list ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+.menu-container .menu-list li {
+    position: relative;   
+}
+.menu-container .menu-list li.top-level {
+    float: left;
+}
+.menu-container ul.menu-list > li > a {
+    display: inline-block;
+    padding: 15px;
+    color: #FFF;
+    text-decoration: none;
+    transition: background .25s;
+}
+.menu-container ul.menu-list > li > a:hover, .menu-container ul.menu-list > li.active > a {
+    background: var(--link-accent);   
+}
+.menu-container .menu-list li.parent > ul {
+    display: none;
+}
+.menu-container .menu-list li.first-child > a, .menu-container .menu-list li.second-child > a {
+    background: var(--link);
+    padding: 15px;
+    border-bottom: 1px solid var(--link-accent);
+    color: #FFF;
+    display: block;
+    min-width: 230px;
+}
+.menu-container .menu-list li.first-child:hover > a, .menu-container .menu-list li.second-child:hover > a {
+    background: var(--link-accent);
+}
+.menu-container .menu-list li.first-child:last-of-type > a, .menu-container .menu-list li.second-child:last-of-type > a {
+    border-bottom: none;   
+}
+.menu-container .menu-list li.first-child.parent > a::after {
+    content: "›";
+    display: block;
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    color: #FFF;
+    font-size: 32px;
+}
+.menu-container .menu-list li.parent:hover {
+    background: var(--link);   
+}
+.menu-container .menu-list li.parent:hover > ul {
+    display: block;
+    position: absolute;
+    top: 44.25px;
+    left: 0px;
+    border-top: 1px solid var(--link);
+}
+.menu-container .menu-list li.parent.first-child:hover > ul {
+    left: 230px;
+    top: -1px;
 }

@@ -67,6 +67,7 @@
             $tables[DATABASE_PREFIX."components"][] = array("name" => "version", "params" => "varchar(255) DEFAULT '1.0.0'");
             $tables[DATABASE_PREFIX."components"][] = array("name" => "params", "params" => "text");
             $tables[DATABASE_PREFIX."components"][] = array("name" => "enabled", "params" => "int(11) DEFAULT '1'");
+            $tables[DATABASE_PREFIX."components"][] = array("name" => "ordering", "params" => "int(11) DEFAULT '0'");
             
             $tables[DATABASE_PREFIX."components_hooks"][] = array("name" => "id", "params" => "int(11) NOT NULL AUTO_INCREMENT");
             $tables[DATABASE_PREFIX."components_hooks"][] = array("name" => "title", "params" => "varchar(255) DEFAULT NULL");

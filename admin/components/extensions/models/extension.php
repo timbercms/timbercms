@@ -19,6 +19,7 @@
         public $version;
         public $params;
         public $enabled;
+        public $ordering;
         
         public function __construct($id = 0, $database)
         {
@@ -45,6 +46,7 @@
             $this->version = $temp->version;
             $this->params = unserialize($temp->params);
             $this->enabled = $temp->enabled;
+            $this->ordering = $temp->ordering;
         }
         
         public function store($table = "", $data = array())
@@ -63,6 +65,7 @@
             $data[] = array("name" => "version", "value" => $this->version);
             $data[] = array("name" => "params", "value" => serialize($this->params));
             $data[] = array("name" => "enabled", "value" => $this->enabled);
+            $data[] = array("name" => "ordering", "value" => $this->ordering);
 			return parent::store("#__components", $data);
 		}
         
