@@ -61,6 +61,7 @@
             $tables[DATABASE_PREFIX."components"][] = array("name" => "is_frontend", "params" => "int(11) NOT NULL DEFAULT '0'");
             $tables[DATABASE_PREFIX."components"][] = array("name" => "is_backend", "params" => "int(11) NOT NULL DEFAULT '0'");
             $tables[DATABASE_PREFIX."components"][] = array("name" => "is_locked", "params" => "int(11) NOT NULL DEFAULT '0'");
+            $tables[DATABASE_PREFIX."components"][] = array("name" => "is_core", "params" => "int(11) NOT NULL DEFAULT '0'");
             $tables[DATABASE_PREFIX."components"][] = array("name" => "author_name", "params" => "varchar(500) DEFAULT NULL");
             $tables[DATABASE_PREFIX."components"][] = array("name" => "author_url", "params" => "varchar(2000) DEFAULT NULL");
             $tables[DATABASE_PREFIX."components"][] = array("name" => "version", "params" => "varchar(255) DEFAULT '1.0.0'");
