@@ -8,7 +8,7 @@
     <author>Chris Smith</author>
     <author_url>https://github.com/Smith0r</author_url>
     <version>1.2.0</version>
-    <name value="User Manager" icon="user" />
+    <name value="Users" icon="user" />
     <items value="users" label="Users" />
     <items value="usergroups" label="Usergroups" />
     <controller label="Login Form" internal_name="login" description="Display the Login form." />

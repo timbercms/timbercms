@@ -8,6 +8,6 @@
     <author>Chris Smith</author>
     <author_url>https://github.com/Smith0r</author_url>
     <version>1.2.0</version>
-    <name value="Update Manager" icon="download" />
+    <name value="Updates" icon="download" />
     <items value="update" label="Manage Updates" />
 </settings>

@@ -8,6 +8,6 @@
     <author>Chris Smith</author>
     <author_url>https://github.com/Smith0r</author_url>
     <version>1.2.0</version>
-    <name value="Module Manager" icon="cubes" />
+    <name value="Modules" icon="cubes" />
     <items value="modules" label="Manage" />
 </settings>

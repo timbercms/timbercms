@@ -8,6 +8,6 @@
     <author>Chris Smith</author>
     <author_url>https://github.com/Smith0r</author_url>
     <version>1.2.0</version>
-    <name value="Menu Manager" icon="bars" />
+    <name value="Menus" icon="bars" />
     <items value="menus" label="Manage" />
 </settings>
