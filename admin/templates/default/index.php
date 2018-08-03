@@ -52,6 +52,9 @@
     <body>
         <div class="menu-container">
             <ul class="menu-list">
+                <li class="top-level">
+                    <a href="index.php" style="font-weight: bold; letter-spacing: 2px;"><i class="far fa-circle"></i> Bulletin.</a>
+                </li>
                 <?php 
                     $comps = Core::db()->loadObjectList("SELECT * FROM #__components WHERE is_core = '1' ORDER BY ordering ASC", array());
                     foreach ($comps as $comp)
@@ -96,6 +99,15 @@
                                     }
                                 }
                             }
+                        echo '</ul>';
+                    echo '</li>';
+                    echo '<li class="top-level parent" style="float: right;">';
+                        echo '<a href="#">'. $this->user()->username .'&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i></a>';
+                        echo '<ul>';
+                            echo '<li class="first-child parent">';
+                                echo '<a href="../" target="_blank">Homepage</a>';
+                                echo '<a href="../user/user/?task=logout">Logout</a>';
+                            echo '</li>';
                         echo '</ul>';
                     echo '</li>';
                 ?>
