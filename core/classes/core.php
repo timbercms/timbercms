@@ -49,6 +49,7 @@
         public static $meta_author = "";
         public static $hooks;
         public static $cookie_name;
+        public static $template_name;
         
         public function __construct()
         {
@@ -109,6 +110,7 @@
                 require_once(__DIR__ ."/template.php");
                 $template = new Template($this->database, $params->default_template);
                 $this->template = $template;
+                self::$template_name = $template->name;
                 self::$user = new UserModel(0, $this->database);
                 if (strlen($_GET["task"]) > 0)
                 {
@@ -553,6 +555,11 @@
         public static function menu_item_id()
         {
             return self::$menu_item_id;
+        }
+        
+        public static function template_name()
+        {
+            return self::$template_name;
         }
         
         public function cleanSessions()
