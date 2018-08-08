@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <database>
+    <install>
+        <tables>
+            <table>
+                CREATE TABLE `#__components` (`id` int(11) NOT NULL AUTO_INCREMENT, `title` varchar(255) DEFAULT NULL, `description` varchar(5000) DEFAULT NULL, `internal_name` varchar(255) DEFAULT NULL, `is_frontend` int(11) NOT NULL DEFAULT '0', `is_backend` int(11) NOT NULL DEFAULT '0', `is_locked` int(11) DEFAULT '0', `is_core` int(11) DEFAULT '0', `author_name` varchar(500) DEFAULT NULL, `author_url` varchar(2000) DEFAULT NULL, `version` varchar(255) DEFAULT '1.0.0', `params` text, `enabled` int(11) DEFAULT '1', `ordering` int(11) DEFAULT '0', PRIMARY KEY (`id`));
+            </table>
+            <table>
+                CREATE TABLE `#__components_hooks` (`id` int(11) NOT NULL AUTO_INCREMENT, `title` varchar(255) DEFAULT NULL, `description` varchar(5000) DEFAULT NULL, `component_name` varchar(255) DEFAULT NULL, `author_name` varchar(500) DEFAULT NULL, `author_url` varchar(2000) DEFAULT NULL, `version` varchar(255) DEFAULT '1.0.0', `enabled` int(11) DEFAULT '1', PRIMARY KEY (`id`));
+            </table>
+            <table>
+                CREATE TABLE `#__components_modules` (`id` int(11) NOT NULL AUTO_INCREMENT, `title` varchar(255) DEFAULT NULL, `description` varchar(5000) DEFAULT NULL, `internal_name` varchar(255) DEFAULT NULL, `author_name` varchar(500) DEFAULT NULL, `author_url` varchar(2000) DEFAULT NULL, `version` varchar(255) DEFAULT '1.0.0', PRIMARY KEY (`id`));
+            </table>
+        </tables>
+    </install>
     <tables>
         <table>
             <name>components</name>

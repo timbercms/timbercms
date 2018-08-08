@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <database>
+    <install>
+        <tables>
+            <table>
+                CREATE TABLE `#__enquiries` (`id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(255) DEFAULT NULL, `email` varchar(255) DEFAULT NULL, `content` text, `sent_time` int(11) DEFAULT NULL, PRIMARY KEY (`id`));
+            </table>
+        </tables>
+    </install>
     <tables>
         <table>
             <name>enquiries</name>

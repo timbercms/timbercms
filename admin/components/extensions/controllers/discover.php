@@ -19,15 +19,12 @@
             if (strlen($xml) > 0)
             {
                 $this->model->database->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array($xml->title, $xml->description, $extension, $xml->is_frontend, $xml->is_backend, $xml->is_locked, $xml->author, $xml->author_url, $xml->version, 1));
-                if (file_exists(__DIR__ ."/../../". $extension ."/installDatabase.txt"))
+                if (file_exists(__DIR__ ."/../../". $extension ."/database.xml"))
                 {
-                    $contents = file_get_contents(__DIR__ ."/../../". $extension ."/installDatabase.txt");
-                    $contents = str_replace("#__", DATABASE_PREFIX, $contents);
-                    $contents = explode(";", $contents);
-                    unset($contents[count($contents) - 1]);
-                    foreach ($contents as $command)
+                    $xml = simplexml_load_file(__DIR__ ."/../../". $extension ."/database.xml");
+                    foreach ($xml->install->tables->table as $table)
                     {
-                        $this->model->database->query($command);
+                        $this->model->database->query(str_replace("#__", DATABASE_PREFIX, $table));
                     }
                 }
                 $this->model->setMessage("success", "Extension installed");
