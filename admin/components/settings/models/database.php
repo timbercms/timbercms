@@ -28,16 +28,22 @@
             $tables = array();
             
             $dirs = scandir(__DIR__ ."/../../");
+            unset($dirs[0]);
+            unset($dirs[1]);
             foreach ($dirs as $dir)
             {
-                if (file_exists(__DIR__ ."/../../". $dir ."/database.xml"))
+                $component = $this->database->loadObject("SELECT id, enabled FROM #__components WHERE internal_name = ?", array($dir));
+                if ($component->enabled)
                 {
-                    $xml = simplexml_load_file(__DIR__ ."/../../". $dir ."/database.xml");
-                    foreach ($xml->tables->table as $table)
+                    if (file_exists(__DIR__ ."/../../". $dir ."/database.xml"))
                     {
-                        foreach ($table->columns->column as $column)
+                        $xml = simplexml_load_file(__DIR__ ."/../../". $dir ."/database.xml");
+                        foreach ($xml->tables->table as $table)
                         {
-                            $tables[DATABASE_PREFIX.$table->name][] = array("name" => $column->attributes()->name, "params" => $column->attributes()->params);
+                            foreach ($table->columns->column as $column)
+                            {
+                                $tables[DATABASE_PREFIX.$table->name][] = array("name" => $column->attributes()->name, "params" => $column->attributes()->params);
+                            }
                         }
                     }
                 }
