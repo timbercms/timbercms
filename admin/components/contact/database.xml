@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+    <tables>
+        <table>
+            <name>enquiries</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="name" params="varchar(255) DEFAULT NULL" />
+                <column name="email" params="varchar(255) DEFAULT NULL" />
+                <column name="content" params="text" />
+                <column name="sent_time" params="int(11) DEFAULT NULL" />
+            </columns>
+        </table>
+    </tables>
+</database>

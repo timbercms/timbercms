@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+    <tables>
+        <table>
+            <name>articles</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="title" params="varchar(500) DEFAULT NULL" />
+                <column name="alias" params="varchar(500) NOT NULL" />
+                <column name="category_id" params="int(11) NOT NULL DEFAULT '0'" />
+                <column name="content" params="text" />
+                <column name="published" params="int(11) NOT NULL DEFAULT '1'" />
+                <column name="publish_time" params="int(11) DEFAULT NULL" />
+                <column name="author_id" params="int(11) DEFAULT NULL" />
+                <column name="hits" params="int(11) DEFAULT NULL" />
+                <column name="meta_description" params="varchar(500) DEFAULT NULL" />
+                <column name="image" params="varchar(1000) DEFAULT NULL" />
+            </columns>
+        </table>
+        <table>
+            <name>articles_categories</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="title" params="varchar(500) DEFAULT NULL" />
+                <column name="alias" params="varchar(500) DEFAULT NULL" />
+                <column name="description" params="text" />
+                <column name="published" params="int(11) DEFAULT '1'" />
+                <column name="params" params="text" />
+            </columns>
+        </table>
+        <table>
+            <name>articles_comments</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="article_id" params="INT(11) NOT NULL" />
+                <column name="content" params="text NOT NULL" />
+                <column name="published" params="INT(11) NOT NULL" />
+                <column name="publish_time" params="INT(11) NOT NULL" />
+                <column name="author_id" params="INT(11) NOT NULL" />
+            </columns>
+        </table>
+    </tables>
+</database>

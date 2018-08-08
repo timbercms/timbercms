@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+    <tables>
+        <table>
+            <name>components</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="title" params="varchar(255) DEFAULT NULL" />
+                <column name="description" params="varchar(5000) DEFAULT NULL" />
+                <column name="internal_name" params="varchar(255) DEFAULT NULL" />
+                <column name="is_frontend" params="int(11) NOT NULL DEFAULT '0'" />
+                <column name="is_backend" params="int(11) NOT NULL DEFAULT '0'" />
+                <column name="is_locked" params="int(11) NOT NULL DEFAULT '0'" />
+                <column name="is_core" params="int(11) NOT NULL DEFAULT '0'" />
+                <column name="author_name" params="varchar(500) DEFAULT NULL" />
+                <column name="author_url" params="varchar(2000) DEFAULT NULL" />
+                <column name="version" params="varchar(255) DEFAULT '1.0.0'" />
+                <column name="params" params="text" />
+                <column name="enabled" params="int(11) DEFAULT '1'" />
+                <column name="ordering" params="int(11) DEFAULT '0'" />
+            </columns>
+        </table>
+        <table>
+            <name>components_hooks</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="title" params="varchar(255) DEFAULT NULL" />
+                <column name="description" params="varchar(5000) DEFAULT NULL" />
+                <column name="component_name" params="varchar(255) DEFAULT NULL" />
+                <column name="author_name" params="varchar(500) DEFAULT NULL" />
+                <column name="author_url" params="varchar(2000) DEFAULT NULL" />
+                <column name="version" params="varchar(255) DEFAULT '1.0.0'" />
+                <column name="enabled" params="int(11) DEFAULT '1'" />
+            </columns>
+        </table>
+        <table>
+            <name>components_modules</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="title" params="varchar(255) DEFAULT NULL" />
+                <column name="description" params="varchar(5000) DEFAULT NULL" />
+                <column name="internal_name" params="varchar(255) DEFAULT NULL" />
+                <column name="author_name" params="varchar(500) DEFAULT NULL" />
+                <column name="author_url" params="varchar(2000) DEFAULT NULL" />
+                <column name="version" params="varchar(255) DEFAULT '1.0.0'" />
+            </columns>
+        </table>
+    </tables>
+</database>

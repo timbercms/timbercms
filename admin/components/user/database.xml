@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+    <tables>
+        <table>
+            <name>sessions</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="php_session_id" params="varchar(255) DEFAULT NULL" />
+                <column name="user_id" params="int(11) DEFAULT NULL" />
+                <column name="last_action_time" params="int(11) DEFAULT NULL" />
+            </columns>
+        </table>
+        <table>
+            <name>usergroups</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="title" params="varchar(255) DEFAULT NULL" />
+                <column name="is_admin" params="int(11) DEFAULT '0'" />
+            </columns>
+        </table>
+        <table>
+            <name>users</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="username" params="varchar(255) DEFAULT NULL" />
+                <column name="email" params="varchar(255) DEFAULT NULL" />
+                <column name="usergroup_id" params="int(11) DEFAULT NULL" />
+                <column name="password" params="varchar(255) DEFAULT NULL" />
+                <column name="activated" params="int(11) DEFAULT '0'" />
+                <column name="blocked" params="int(11) DEFAULT '0'" />
+                <column name="blocked_reason" params="varchar(500) DEFAULT NULL" />
+                <column name="register_time" params="int(11) DEFAULT NULL" />
+                <column name="last_action_time" params="int(11) DEFAULT NULL" />
+                <column name="verify_token" params="varchar(5000) DEFAULT NULL" />
+                <column name="avatar" params="varchar(255) DEFAULT NULL" />
+                <column name="params" params="text" />
+            </columns>
+        </table>
+        <table>
+            <name>users_recovery</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="user_id" params="int(11) DEFAULT NULL" />
+                <column name="reset_requested" params="int(11) DEFAULT NULL" />
+                <column name="token" params="varchar(5000) DEFAULT NULL" />
+            </columns>
+        </table>
+    </tables>
+</database>

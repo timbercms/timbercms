@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+    <tables>
+        <table>
+            <name>menus</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="title" params="varchar(500)" />
+            </columns>
+        </table>
+        <table>
+            <name>menus_items</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="menu_id" params="int(11) NOT NULL" />
+                <column name="parent_id" params="int(11) NOT NULL DEFAULT '0'" />
+                <column name="title" params="varchar(500) DEFAULT NULL" />
+                <column name="alias" params="varchar(500) DEFAULT NULL" />
+                <column name="published" params="int(11) DEFAULT NULL" />
+                <column name="access_group" params="int(11) DEFAULT NULL" />
+                <column name="component" params="varchar(255) DEFAULT NULL" />
+                <column name="controller" params="varchar(255) DEFAULT NULL" />
+                <column name="content_id" params="varchar(255) DEFAULT NULL" />
+                <column name="params" params="text" />
+                <column name="is_home" params="int(11) DEFAULT '0'" />
+                <column name="ordering" params="varchar(255) DEFAULT '0'" />
+            </columns>
+        </table>
+    </tables>
+</database>
