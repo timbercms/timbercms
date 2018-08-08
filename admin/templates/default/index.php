@@ -52,7 +52,7 @@
     <body>
         <div class="menu-container">
             <ul class="menu-list">
-                <li class="top-level">
+                <li class="top-level cms-name">
                     <a href="index.php" style="font-weight: bold; letter-spacing: 2px;"><i class="far fa-circle"></i> Bulletin.</a>
                 </li>
                 <?php 

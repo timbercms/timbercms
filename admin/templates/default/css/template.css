@@ -367,3 +367,6 @@ form label {
     left: 230px;
     top: -1px;
 }
+.cms-name a {
+    background: var(--link-accent) !important;   
+}
