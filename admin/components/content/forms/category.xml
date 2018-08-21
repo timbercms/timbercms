@@ -6,4 +6,5 @@
     <fields type="textarea" editor="true" name="description" label="Description" />
     <fields type="select" name="params[show_title]" label="Show title in listings?" values="No|0,Yes|1" default="1" />
     <fields type="select" name="published" label="Published" values="No|0,Yes|1" default="1" />
+    <fields type="select" name="ordering" label="Article list ordering" values="Newest First|publish_time DESC,Oldest First|publish_time ASC,Alphabetical A-Z|title ASC,Alphabetical Z-A|title DESC,Hits (Most first)|hits DESC,Hits (Least first)|hits ASC" default="publish_time DESC" />
 </settings>

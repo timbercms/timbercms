@@ -19,6 +19,7 @@
             $this->model->alias = $_POST["alias"];
             $this->model->description = $_POST["description"];
             $this->model->published = $_POST["published"];
+            $this->model->ordering = $_POST["ordering"];
             $this->model->params = $_POST["params"];
             if ($this->model->store())
             {

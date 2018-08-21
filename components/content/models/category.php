@@ -13,6 +13,7 @@
         public $alias;
         public $description;
         public $published;
+        public $ordering;
         public $params;
         public $articles = array();
         
@@ -33,16 +34,17 @@
             $this->alias = $temp->alias;
             $this->description = $temp->description;
             $this->published = $temp->published;
+            $this->ordering = $temp->ordering;
             $this->params = (object) unserialize($temp->params);
             if ($load_articles)
             {
                 if (Core::user()->usergroup->is_admin == 1)
                 {
-                    $ta = $this->database->loadObjectList("SELECT a.id FROM #__articles a WHERE a.category_id = ? ORDER BY publish_time DESC", array($id));
+                    $ta = $this->database->loadObjectList("SELECT a.id FROM #__articles a WHERE a.category_id = ? ORDER BY ". $this->ordering, array($id));
                 }
                 else
                 {
-                    $ta = $this->database->loadObjectList("SELECT id FROM #__articles WHERE category_id = ? AND published = '1' ORDER BY publish_time DESC", array($id));
+                    $ta = $this->database->loadObjectList("SELECT id FROM #__articles WHERE category_id = ? AND published = '1' ORDER BY ". $this->ordering, array($id));
                 }
                 foreach ($ta as $a)
                 {
