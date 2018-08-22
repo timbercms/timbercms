@@ -66,6 +66,7 @@
             {
                 $this->comments[] = new CommentModel($temp_comment->id, $this->database);
             }
+            Core::hooks()->executeHook("onLoadArticleModel", $this);
         }
         
         public function addHit()

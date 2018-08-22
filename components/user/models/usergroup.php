@@ -26,6 +26,7 @@
             $this->id = $temp->id;
             $this->title = $temp->title;
             $this->is_admin = $temp->is_admin;
+            Core::hooks()->executeHook("onLoadUsergroupModel", $this);
         }
         
     }

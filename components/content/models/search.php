@@ -30,6 +30,7 @@
             {
                 $this->articles[] = new ArticleModel($temp_article->id, $this->database);
             }
+            Core::hooks()->executeHook("onLoadSearchModel", $this);
         }
         
     }

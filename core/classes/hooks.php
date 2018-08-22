@@ -31,13 +31,20 @@
             }
         }
         
-        public function executeHook($name)
+        public function executeHook($name, $model = 0)
         {
             foreach ($this->hooks as $hook)
             {
                 if (method_exists($hook, $name))
                 {
-                    $hook->$name();
+                    if ($model != 0)
+                    {
+                        $hook->$name($model);
+                    }
+                    else
+                    {
+                        $hook->$name();
+                    }
                 }
             }
         }

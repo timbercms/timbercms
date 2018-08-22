@@ -51,6 +51,7 @@
                     $this->articles[] = new ArticleModel($a->id, $this->database);
                 }
             }
+            Core::hooks()->executeHook("onLoadCategoryModel", $this);
         }
         
     }

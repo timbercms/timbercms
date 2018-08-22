@@ -33,6 +33,11 @@
                 echo '<p><a href="'. Core::route("index.php?component=user&controller=profile&id=". $item->id) .'">'. $item->username .'\'s Profile</a></p>';
             }
         }
+        
+        public function onLoadCategoryModel($model)
+        {
+            $model->testing = "Test!";
+        }
 	}
 
 ?>

@@ -58,6 +58,7 @@
             {
                 $this->avatar = "https://www.gravatar.com/avatar/" .md5(strtolower(trim($this->email))) ."?s=200";
             }
+            Core::hooks()->executeHook("onLoadUserModel", $this);
         }
         
         public function loadSession()
