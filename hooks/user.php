@@ -36,7 +36,8 @@
         
         public function onLoadCategoryModel($model)
         {
-            $model->testing = "Test!";
+            // Example field addition
+            // $model->testing = "Test!";
         }
 	}
 
