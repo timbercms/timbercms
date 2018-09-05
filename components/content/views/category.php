@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-9">
                         <div class="category-article-title">
-                            <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $article->author->id); ?>">
+                            <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>">
                                 <?php echo $article->title; ?>
                             </a>
                         </div>
