@@ -85,7 +85,7 @@
                     {
                         $baseurl = $_POST["base_url"];
                         $subfolder = $_POST["subfolder"];
-                        $prefix = $_POST["db_prefix"];
+                        $prefix = strtolower($_POST["db_prefix"]);
                         if (substr($baseurl, -1) != "/")
                         {
                             $baseurl = $baseurl."/";
@@ -115,7 +115,7 @@
     define("DATABASE_USER", "'. $_POST["db_username"] .'");
     define("DATABASE_PASSWORD", "'. $_POST["db_password"] .'");
     define("DATABASE_NAME", "'. $_POST["db_name"] .'");
-    define("DATABASE_PREFIX", "'. $prefix .'_");
+    define("DATABASE_PREFIX", "'. $prefix .'");
     define("BASE_URL", "'. $baseurl.($subfolder != "/" ? ltrim($subfolder, "/") : "") .'");
     define("SUBFOLDER", "'. $subfolder .'");
     define("LAUNCH_TIME", "'. time() .'");
