@@ -29,7 +29,7 @@
         <script src="templates/<?php echo $this->template->name; ?>/js/sweetalert.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
         <script src="templates/<?php echo $this->template->name; ?>/js/template.js?v=<?php echo time(); ?>"></script>
-        <script src="templates/<?php echo $this->template->name; ?>/js/fontawesome-all.min.js?v=<?php echo time(); ?>"></script>
+        <script src="templates/<?php echo $this->template->name; ?>/js/all.min.js?v=<?php echo time(); ?>"></script>
         <script src="../tinymce/tinymce.min.js"></script>
         <script>tinymce.init({ selector:'textarea',height:500,theme: 'modern',
               plugins: [
