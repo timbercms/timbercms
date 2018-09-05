@@ -13,6 +13,7 @@
         public $title;
         public $alias;
         public $category;
+        public $category_id;
         public $content;
         public $published;
         public $publish_time;
@@ -44,6 +45,7 @@
             $this->hits = $temp->hits;
             $this->meta_description = $temp->meta_description;
             $this->image = $temp->image;
+            $this->category_id = $temp->category_id;
             $this->category = new CategoryModel($temp->category_id, $this->database, false);
             $this->author = new UserModel($temp->author_id, $this->database);
         }

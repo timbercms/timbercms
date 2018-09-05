@@ -318,14 +318,13 @@ class Form
      */
     protected function generateSelectSqlField($field_name, $attributes)
     {
-        $name = $attributes->name;
         $multiple = $attributes->multiple; // applies to select / sql
         $query = $attributes->query; // applies to sql
         $default_option = $attributes->default_option; // applies to sql
         $values = $attributes->values; // applies to select (, seperated) label|value
         $selectdefault = $attributes->selectdefault; // applies to sql (label|value)
 
-        $currentValue = $this->data->$name;
+        $currentValue = $this->data->$field_name;
 
         $string = '<select name="'.$field_name;
         if ($multiple == "true")
@@ -347,20 +346,13 @@ class Form
             // array[object{id,title}]
             $key = $attributes->key;
             $keyvalue = $attributes->keyvalue;
+            
+            $finalOptions = [];
 
             if (strlen($default_option) > 0)
             {
-                $default = explode("|", $default_option);
-                $default_field = $field_name;
-                $string .= '<option value="'. $default["0"] .'"';
-                if (is_array($this->data->$default_field) && in_array($default["0"], $this->data->$default_field) || !is_array($this->data->$default_field) && strlen($this->data->$default_field) <= 0 && $selectdefault != 0)
-                {
-                    $string .= ' selected="selected"';
-                }
-                $string .= '>'. $default["1"] .'</option>';
+                $finalOptions[] = $default_option;
             }
-
-            $finalOptions = [];
 
             foreach ($options as $option) {
                 $option = (object) $option;
