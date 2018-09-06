@@ -22,7 +22,7 @@
         }
         
         public function load()
-        
+        {
             $query = "SELECT id FROM #__articles";
             if (strlen($_GET["title"]) > 0)
             {
