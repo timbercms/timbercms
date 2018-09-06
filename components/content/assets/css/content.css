@@ -217,3 +217,14 @@
     border-bottom: 1px solid #DDD;
     padding-bottom: 10px;
 }
+.child-categories {
+    margin-bottom: 40px;   
+}
+.child-category {
+    border-radius: 5px;
+    border: 1px solid #DDDDDD;
+    padding: 15px;
+}
+.child-category > p:last-of-type {
+    margin-bottom: 0px;   
+}

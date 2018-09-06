@@ -41,6 +41,44 @@
                     </a>
                 </div>
             </div>
+            <?php if (count($category->children) > 0) { ?>
+                <?php foreach ($category->children as $child) { ?>
+                    <div class="d-flex align-items-center admin-list">
+                        <div class="col-md-1" style="text-align: center;">
+                            <input type="checkbox" name="ids[]" value="<?php echo $child->id; ?>" />
+                        </div>
+                        <div class="col-md-1">
+                            <?php echo $child->id; ?>
+                        </div>
+                        <div class="col-md-9">
+                            <a href="index.php?component=content&controller=category&id=<?php echo $child->id; ?>" style="display: inline-block; padding-left: 20px;"><i class="fas fa-angle-right"></i> <?php echo $child->title; ?></a>
+                        </div>
+                        <div class="col-md-1" style="text-align: center;">
+                            <a href="index.php?component=content&controller=category&task=<?php echo ($child->published == 1 ? "unpublish" : "publish"); ?>&id=<?php echo $child->id; ?>" class="btn btn-<?php echo ($child->published == 1 ? "success" : "danger"); ?>">
+                                <i class="fa fa-<?php echo ($child->published == 1 ? "check" : "times"); ?>"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <?php foreach ($child->children as $grandchild) { ?>
+                        <div class="d-flex align-items-center admin-list">
+                            <div class="col-md-1" style="text-align: center;">
+                                <input type="checkbox" name="ids[]" value="<?php echo $grandchild->id; ?>" />
+                            </div>
+                            <div class="col-md-1">
+                                <?php echo $grandchild->id; ?>
+                            </div>
+                            <div class="col-md-9">
+                                <a href="index.php?component=content&controller=category&id=<?php echo $grandchild->id; ?>" style="display: inline-block; padding-left: 40px;"><i class="fas fa-angle-double-right"></i> <?php echo $grandchild->title; ?></a>
+                            </div>
+                            <div class="col-md-1" style="text-align: center;">
+                                <a href="index.php?component=content&controller=category&task=<?php echo ($grandchild->published == 1 ? "unpublish" : "publish"); ?>&id=<?php echo $grandchild->id; ?>" class="btn btn-<?php echo ($grandchild->published == 1 ? "success" : "danger"); ?>">
+                                    <i class="fa fa-<?php echo ($grandchild->published == 1 ? "check" : "times"); ?>"></i>
+                                </a>
+                            </div>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
+            <?php } ?>
         <?php } ?>
     </form>
 </div>

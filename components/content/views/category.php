@@ -7,6 +7,21 @@
             </div>
         </div>
     <?php } ?>
+    <?php if ($this->model->params->show_children && count($this->model->children) > 0) { ?>
+        <div class="child-categories">
+            <?php foreach ($this->model->children as $child) { ?>
+                <div class="child-category">
+                    <h4 class="child-category-title">
+                        <a href="<?php echo Core::route("index.php?component=content&controller=category&id=". $child->id); ?>"><?php echo $child->title; ?></a>
+                    </h4>
+                    <div class="child-category-description">
+                        <?php echo $child->description; ?>
+                    </div>
+                    <p><a href="<?php echo Core::route("index.php?component=content&controller=category&id=". $child->id); ?>" class="button">View items</a></p>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
     <div class="article-list">
         <?php foreach ($this->model->articles as $article) { ?>
             <div class="category-article">

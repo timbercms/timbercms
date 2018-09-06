@@ -20,10 +20,10 @@
         
         public function load()
         {
-            $query = "SELECT id FROM #__articles_categories";
+            $query = "SELECT id FROM #__articles_categories WHERE parent_id = '0'";
             if (strlen($_GET["title"]) > 0)
             {
-                $query .= " WHERE title LIKE '%". $_GET["title"] ."%'";
+                $query .= " AND title LIKE '%". $_GET["title"] ."%'";
             }
             $temp = $this->database->loadObjectList($query);
             foreach ($temp as $temp_cat)

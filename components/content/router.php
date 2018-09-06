@@ -47,13 +47,35 @@
                     }
                     else
                     {
-                        return BASE_URL .$this->component ."/article/". $article->category->alias ."/". $article->alias;
+                        $url_parts = array($article->category->alias);
+                        if ($article->category->parent_id > 0)
+                        {
+                            $url_parts[] = $article->category->parent->alias;
+                            if ($article->category->parent->parent_id > 0)
+                            {
+                                $cat = $this->database->loadObject("SELECT alias FROM #__articles_categories WHERE id = ?", array($article->category->parent->parent_id));
+                                $url_parts[] = $cat->alias;
+                            }
+                        }
+                        $url_parts = implode("/", array_reverse($url_parts));
+                        return BASE_URL .$this->component ."/article/". $url_parts ."/". $article->alias;
                     }
                 }
                 else if ($controller == "category" && $id > 0)
                 {
                     $category = new CategoryModel($id, $this->database, false);
-                    return BASE_URL .$this->component ."/category/". $category->alias;
+                    $url_parts = array($category->alias);
+                    if ($category->parent_id > 0)
+                    {
+                        $url_parts[] = $category->parent->alias;
+                        if ($category->parent->parent_id > 0)
+                        {
+                            $cat = $this->database->loadObject("SELECT alias FROM #__articles_categories WHERE id = ?", array($category->parent->parent_id));
+                            $url_parts[] = $cat->alias;
+                        }
+                    }
+                    $url_parts = implode("/", array_reverse($url_parts));
+                    return BASE_URL .$this->component ."/category/". $url_parts;
                 }
                 else if ($controller == "search")
                 {
@@ -75,7 +97,7 @@
             $new_parts = array();
             if ($parts["1"] == "article")
             {
-                $article = $this->database->loadObject("SELECT id FROM #__articles WHERE alias = ? AND published = 1", array($parts["3"]));
+                $article = $this->database->loadObject("SELECT id FROM #__articles WHERE alias = ? AND published = 1", array(end($parts)));
                 if ($article->id > 0)
                 {
                     // We have a match!
@@ -87,7 +109,7 @@
             }
             else if ($parts["1"] == "category")
             {
-                $category = $this->database->loadObject("SELECT * FROM #__articles_categories WHERE alias = ? AND published = 1", array($parts["2"]));
+                $category = $this->database->loadObject("SELECT * FROM #__articles_categories WHERE alias = ? AND published = 1", array(end($parts)));
                 if ($category->id > 0)
                 {
                     $new_parts[] = "content";

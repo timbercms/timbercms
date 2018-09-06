@@ -10,12 +10,14 @@
         public $form;
         
         public $id;
+        public $parent_id;
         public $title;
         public $alias;
         public $description;
         public $published;
         public $ordering;
         public $params;
+        public $children = array();
         
         public function __construct($id = 0, $database)
         {
@@ -30,6 +32,7 @@
         public function load($id)
         {
             $temp = $this->database->loadObject("SELECT * FROM #__articles_categories WHERE id = ?", array($id));
+            $this->parent_id = $temp->parent_id;
             $this->id = $temp->id;
             $this->title = $temp->title;
             $this->alias = $temp->alias;
@@ -37,12 +40,18 @@
             $this->published = $temp->published;
             $this->ordering = $temp->ordering;
             $this->params = unserialize($temp->params);
+            $children = $this->database->loadObjectList("SELECT id FROM #__articles_categories WHERE parent_id = ?", array($id));
+            foreach ($children as $child)
+            {
+                $this->children[] = new CategoryModel($child->id, $this->database);
+            }
         }
         
         public function store($table = "", $data = array())
 		{
 			$data = array();
 			$data[] = array("name" => "id", "value" => $this->id);
+			$data[] = array("name" => "parent_id", "value" => $this->parent_id);
 			$data[] = array("name" => "title", "value" => $this->title);
             if (strlen($this->alias) == 0)
             {
