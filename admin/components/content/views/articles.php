@@ -17,6 +17,7 @@
             </div>
         </form>
     </div>
+    <?php $this->model->pagination->display($this->model->max); ?>
     <form action="index.php?component=content&controller=articles&task=delete" method="post" class="admin-form">
         <div class="d-flex admin-header">
             <div class="col-md-1">&nbsp;</div>
@@ -59,4 +60,5 @@
             </div>
         <?php } ?>
     </form>
+    <?php $this->model->pagination->display($this->model->max); ?>
 </div>

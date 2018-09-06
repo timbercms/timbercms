@@ -8,6 +8,7 @@
         public $template = "modules.php";
         public $database;
         public $positions = array();
+        public $pagination;
         
         public $modules = array();
         public $settings;
@@ -17,6 +18,7 @@
             $this->database = $database;
             $this->load();
             $this->settings = simplexml_load_file(__DIR__ ."/../extension.xml");
+            $this->pagination = new Pagination();
         }
         
         public function load()
@@ -28,6 +30,8 @@
                 $query .= " WHERE position = ? ORDER BY ordering";
                 $args[] = $_GET["position"];
             }
+            $this->max = count($this->database->loadObjectList($query));
+            $query .= " LIMIT ". ($_GET["p"] > 0 ? (($_GET["p"] - 1) * 20) : 0) .", 20";
             $temp = $this->database->loadObjectList($query, $args);
             foreach ($temp as $temp_module)
             {
