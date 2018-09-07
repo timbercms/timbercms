@@ -8,7 +8,7 @@
 		
 		public function display($list, $max = 20)
         {
-            if (ADMIN_PANEL)
+            if (ADMIN)
             {
                 $link = str_replace(SUBFOLDER, "", str_replace("&p=". $_GET["p"], "", $_SERVER["REQUEST_URI"])."&");
             }
@@ -28,7 +28,7 @@
             {
                 $link = substr($link, 1);
             }
-            if (!ADMIN_PANEL)
+            if (!ADMIN)
             {
                 $link = Core::route($link);
             }

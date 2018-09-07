@@ -3,6 +3,7 @@
     define("ADMIN", false);
     require_once(__DIR__ ."/model.php");
     require_once(__DIR__ ."/pagination.php");
+    require_once(__DIR__ ."/view.php");
     if (ADMIN)
     {
         require_once(__DIR__ ."/../../admin/components/user/models/user.php");
@@ -33,11 +34,11 @@
         public static $script_links = array();
         public static $db;
         public static $title = "";
-        public static $description = '<meta name="description" content="Burgundy CMS">';
-        private $component;
-        private $controller;
-        private $model;
-        private $task;
+        public static $description = '<meta name="description" content="Bulletin. CMS">';
+        public $component;
+        public $controller;
+        public $model;
+        public $task;
         public $content_id;
         public static $content_item_id;
         public static $menu_item_id;
@@ -74,7 +75,6 @@
                 $controllername = $this->controller ."Controller";
                 require_once(__DIR__ ."/../../admin/components/". $this->component ."/models/". $this->controller .".php");
                 require_once(__DIR__ ."/../../admin/components/". $this->component ."/controllers/". $this->controller .".php");
-                require_once(__DIR__ ."/../../admin/components/". $this->component ."/view.php");
                 if (strtolower($modelname) == "usermodel")
                 {
                     $model = new $modelname($this->content_id, $this->database, false);
@@ -162,7 +162,6 @@
                 $controllername = $this->controller ."Controller";
                 require_once(__DIR__ ."/../../components/". $this->component ."/models/". $this->controller .".php");
                 require_once(__DIR__ ."/../../components/". $this->component ."/controllers/". $this->controller .".php");
-                require_once(__DIR__ ."/../../components/". $this->component ."/view.php");
                 $model = new $modelname($this->content_id, $this->database);
                 $controller = new $controllername($model);
                 $componentconfig = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = ? LIMIT 1", array($this->component));
