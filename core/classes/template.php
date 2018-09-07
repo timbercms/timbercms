@@ -18,18 +18,21 @@
         
         public function addComponentStylesheet($component = "")
         {
-            $admin = "";
-            if (ADMIN)
-            {
-                $admin = "admin/";
-            }
             if (strlen($component) == 0)
             {
                 $component = $_GET["component"];
             }
-            if (file_exists(__DIR__ ."/../../". $admin ."components/". $component ."/assets/css/". $component .".css"))
+            if (ADMIN)
             {
-                Core::addStylesheet($admin. "components/". $component ."/assets/css/". $component .".css");
+                Core::addStyleSheet("admin/components/". $component ."/assets/css/". $component .".css");
+            }
+            else
+            {
+                Core::addStyleSheet("components/". $component ."/assets/css/". $component .".css");
+                if (file_exists("templates/". Core::template_name() ."/overrides/components/". $component ."/". $component .".css"))
+                {
+                    Core::addStyleSheet("templates/". Core::template_name() ."/overrides/components/". $component ."/". $component .".css");
+                }
             }
         }
         
