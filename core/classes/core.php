@@ -579,6 +579,16 @@
             }
         }
         
+        public static function generateAlias($string)
+        {
+            $string = trim($string);
+            $string = str_replace("-", "", $string);
+            $string = preg_replace('/[^A-Za-z0-9-]+/', '-', $string);
+            $string = rtrim($string, "-");
+            $string = strtolower($string);
+            return $string;
+        }
+        
     }
 
 ?>
