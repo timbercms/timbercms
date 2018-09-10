@@ -216,3 +216,11 @@ input[type="text"],input[type="password"], input[type="email"] {
     font-size: 52px;
     line-height: 52px;
 }
+.pagination a:not([href]) {
+    color: rgba(255, 255, 255, .5);
+    background: rgba(52, 58, 64, .90);
+}
+.pagination a.current-page {
+    background: #23272b !important;
+    color: #FFF;
+}
