@@ -14,15 +14,6 @@
             }
             else
             {
-                /*$link = str_replace(SUBFOLDER, "", str_replace("&p=". $_GET["p"], "", $_SERVER["REQUEST_URI"]));
-                if (!strpos($link, "?"))
-                {
-                    $link .= "?";
-                }
-                else
-                {
-                    $link .= "&";
-                }*/
                 $link = str_replace("?p=". $_GET["p"], "", str_replace("&p=". $_GET["p"], "", str_replace(SUBFOLDER, "", $_SERVER["REQUEST_URI"])));
                 if (!strpos($link, "?"))
                 {
