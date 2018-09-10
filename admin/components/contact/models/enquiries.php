@@ -23,7 +23,7 @@
         
         public function load()
         {
-            $temp = $this->database->loadObjectList("SELECT id FROM #__enquiries");
+            $temp = $this->database->loadObjectList("SELECT id FROM #__enquiries ORDER BY sent_time DESC");
             $this->max = count($this->database->loadObjectList($query));
             $query .= " LIMIT ". ($_GET["p"] > 0 ? (($_GET["p"] - 1) * 20) : 0) .", 20";
             foreach ($temp as $temp_enquiry)

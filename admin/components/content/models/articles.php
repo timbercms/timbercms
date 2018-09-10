@@ -28,6 +28,7 @@
             {
                 $query .= " WHERE title LIKE '%". $_GET["title"] ."%'";
             }
+            $query .= " ORDER BY publish_time DESC";
             $this->max = count($this->database->loadObjectList($query));
             $query .= " LIMIT ". ($_GET["p"] > 0 ? (($_GET["p"] - 1) * 20) : 0) .", 20";
             $temp = $this->database->loadObjectList($query);

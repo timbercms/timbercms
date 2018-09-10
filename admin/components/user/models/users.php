@@ -20,7 +20,7 @@
         
         public function load()
         {
-            $query = "SELECT id FROM #__users";
+            $query = "SELECT id FROM #__users ORDER BY register_time DESC";
             $this->max = count($this->database->loadObjectList($query));
             $query .= " LIMIT ". ($_GET["p"] > 0 ? (($_GET["p"] - 1) * 20) : 0) .", 20";
             $temp_users = $this->database->loadObjectList($query);
