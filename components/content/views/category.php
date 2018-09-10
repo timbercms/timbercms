@@ -22,6 +22,7 @@
             <?php } ?>
         </div>
     <?php } ?>
+    <?php $this->model->pagination->display($this->model->max, 10); ?>
     <div class="article-list">
         <?php foreach ($this->model->articles as $article) { ?>
             <div class="category-article">
@@ -49,6 +50,7 @@
             </div>
         <?php } ?>
     </div>
+    <?php $this->model->pagination->display($this->model->max, 10); ?>
 <?php } else { ?>
     <div class="system-message danger">Category not found</div>
 <?php } ?>

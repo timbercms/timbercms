@@ -7,6 +7,8 @@
         
         public $template = "category.php";
         public $database;
+        public $pagination;
+        public $max;
         
         public $id;
         public $parent_id;
@@ -27,6 +29,7 @@
             {
                 $this->load($id, $load_articles);
             }
+            $this->pagination = new Pagination();
         }
         
         public function load($id, $load_articles)
@@ -43,14 +46,10 @@
             $this->parent = $this->database->loadObject("SELECT id, alias, parent_id FROM #__articles_categories WHERE id = ?", array($this->parent_id));
             if ($load_articles)
             {
-                if (Core::user()->usergroup->is_admin == 1)
-                {
-                    $ta = $this->database->loadObjectList("SELECT a.id FROM #__articles a WHERE a.category_id = ? ORDER BY ". $this->ordering, array($id));
-                }
-                else
-                {
-                    $ta = $this->database->loadObjectList("SELECT id FROM #__articles WHERE category_id = ? AND published = '1' ORDER BY ". $this->ordering, array($id));
-                }
+                $query = "SELECT id FROM #__articles WHERE category_id = ? AND published = '1' ORDER BY ". $this->ordering;
+                $this->max = count($this->database->loadObjectList($query, array($id)));
+                $query .= " LIMIT ". ($_GET["p"] > 0 ? (($_GET["p"] - 1) * 10) : 0) .", 10";
+                $ta = $this->database->loadObjectList($query, array($id));
                 foreach ($ta as $a)
                 {
                     $this->articles[] = new ArticleModel($a->id, $this->database);

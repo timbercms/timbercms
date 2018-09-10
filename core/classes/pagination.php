@@ -14,7 +14,16 @@
             }
             else
             {
-                $link = str_replace(SUBFOLDER, "", str_replace("&p=". $_GET["p"], "", $_SERVER["REQUEST_URI"]));
+                /*$link = str_replace(SUBFOLDER, "", str_replace("&p=". $_GET["p"], "", $_SERVER["REQUEST_URI"]));
+                if (!strpos($link, "?"))
+                {
+                    $link .= "?";
+                }
+                else
+                {
+                    $link .= "&";
+                }*/
+                $link = str_replace("?p=". $_GET["p"], "", str_replace("&p=". $_GET["p"], "", str_replace(SUBFOLDER, "", $_SERVER["REQUEST_URI"])));
                 if (!strpos($link, "?"))
                 {
                     $link .= "?";
@@ -28,11 +37,7 @@
             {
                 $link = substr($link, 1);
             }
-            if (!ADMIN)
-            {
-                $link = Core::route($link);
-            }
-            else
+            if (ADMIN)
             {
                 $link = str_replace("admin/", "", $link);
             }
