@@ -109,42 +109,6 @@
 .category-articles {
     margin-top: 40px;   
 }
-.share-buttons {
-    margin-top: 40px;   
-}
-.share-buttons a {
-    font-size: 28px;
-    display: inline-block;
-    text-align: center;
-    height: 50px;
-    width: 50px;
-    border-radius: 3px;
-    color: #FFF !important;
-    padding-top: 11px;
-    margin-right: 5px;
-    margin-bottom: 20px;
-    position: relative;
-    transition: top .25s;
-    top: 0px;
-}
-.share-buttons a:hover {
-    top: -5px;
-}
-.share-buttons a:last-of-type {
-    margin-right: 0px;   
-}
-.whatsapp-button {
-    background: #075e54;
-}
-.facebook-button {
-    background: #3b5998; 
-}
-.twitter-button {
-    background: #1da1f2;   
-}
-.google-button {
-    background: #dd4b39;   
-}
 .category-time {
     color: #333;
     margin-bottom: 10px;
