@@ -138,25 +138,6 @@ input[type="text"],input[type="password"], input[type="email"] {
     padding: 5px 10px;
     margin-bottom: 20px;
 }
-.system-message {
-    background: #FFF;
-    padding: 20px;
-    color: #333;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    margin-bottom: 20px;
-}
-.system-message.success {
-    background: #b2f2bb;  
-}
-.system-message.danger {
-    background: #ffc9c9;   
-}
-.system-message.warning {
-    background: #ffec99;   
-}
-.system-message.info {
-    background: #a3daff;   
-}
 .header-login .dropdown {
     float: right;   
 }
@@ -205,22 +186,4 @@ input[type="text"],input[type="password"], input[type="email"] {
 }
 .footer-content {
     padding: 20px;   
-}
-.branding-container {
-    padding: 40px 0px;
-    max-width: var(--site-width);
-    margin-left: auto;
-    margin-right: auto;
-}
-.website-title {
-    font-size: 52px;
-    line-height: 52px;
-}
-.pagination a:not([href]) {
-    color: rgba(255, 255, 255, .5);
-    background: rgba(52, 58, 64, .90);
-}
-.pagination a.current-page {
-    background: #23272b !important;
-    color: #FFF;
 }

@@ -36,6 +36,11 @@
             }
         }
         
+        public function addCriticalCSS()
+        {
+            Core::addStyleSheet("core/assets/critical.css");
+        }
+        
         public function addComponentScript($component = "")
         {
             $admin = "";
