@@ -32,6 +32,10 @@
             {
                 $link = str_replace("admin/", "", $link);
             }
+            else
+            {
+                $link = BASE_URL.$link;
+            }
             $page = ($_GET["p"] > 0 ? $_GET["p"] : 1);
             $highest = ceil($list / $max);
             if ($list > $max && $page > 0)
