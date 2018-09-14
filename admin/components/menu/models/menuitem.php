@@ -102,19 +102,22 @@
         {
             $this->component = (strlen($this->component) > 0 && $_GET["overwrite"] != 1 ? $this->component : $_GET["comp"]);
             $this->controller = (strlen($this->controller) > 0 && $_GET["overwrite"] != 1 ? $this->controller : $_GET["cont"]);
-            $xml = simplexml_load_file(__DIR__ ."/../../". $this->component ."/extension.xml");
-            foreach ($xml->controller as $control)
+            if (strlen($this->component) > 0)
             {
-                $temp_controller = new stdClass();
-                $temp_controller->name = $control->attributes()->label;
-                $temp_controller->value = $control->attributes()->internal_name;
-                $this->controllers[] = $temp_controller;
-                if (strlen($this->controller) > 0)
+                $xml = simplexml_load_file(__DIR__ ."/../../". $this->component ."/extension.xml");
+                foreach ($xml->controller as $control)
                 {
-                    $this->controller_xml = $control;
-                    if ($this->controller == $control->attributes()->internal_name)
+                    $temp_controller = new stdClass();
+                    $temp_controller->name = $control->attributes()->label;
+                    $temp_controller->value = $control->attributes()->internal_name;
+                    $this->controllers[] = $temp_controller;
+                    if (strlen($this->controller) > 0)
                     {
-                        $this->controller_query = $control;
+                        $this->controller_xml = $control;
+                        if ($this->controller == $control->attributes()->internal_name)
+                        {
+                            $this->controller_query = $control;
+                        }
                     }
                 }
             }
