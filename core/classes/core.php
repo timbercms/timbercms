@@ -470,48 +470,59 @@
                 }
                 else
                 {
-                    // Use Custom Router
-                    if (strlen($parts["0"]) > 0)
+                    // Check that we have a valid component
+                    $component = $this->database->loadObject("SELECT id FROM #__components WHERE internal_name = ? AND enabled = '1'", array($parts[0]));
+                    if ($component->id > 0)
                     {
-                        $routername = $parts["0"] ."Router";
-                        require_once(__DIR__ ."/../../components/". $parts["0"] ."/router.php");
-                        self::$router = new $routername($this->database);
-                        if (strlen(self::router()->component) > 0)
+                        // Use Custom Router
+                        if (strlen($parts["0"]) > 0)
                         {
-                            // We have a router!
-                            $new_parts = self::router()->unroute($parts);
-                            $this->component = $new_parts["0"];
-                            $this->controller = $new_parts["1"];
-                            $this->content_id = $new_parts["2"];
+                            $routername = $parts["0"] ."Router";
+                            require_once(__DIR__ ."/../../components/". $parts["0"] ."/router.php");
+                            self::$router = new $routername($this->database);
+                            if (strlen(self::router()->component) > 0)
+                            {
+                                // We have a router!
+                                $new_parts = self::router()->unroute($parts);
+                                $this->component = $new_parts["0"];
+                                $this->controller = $new_parts["1"];
+                                $this->content_id = $new_parts["2"];
+                            }
+                            else
+                            {
+                                // Nothing. Default to 404.
+                                header("HTTP/1.0 404 Not Found");
+                                require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                            }
                         }
                         else
                         {
-                            // Nothing. Default to 404.
-                            header("HTTP/1.0 404 Not Found");
-                            require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                            // If no rule from router found, find homepage
+                            $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
+                            self::$menu_item_id = $item->id;
+                            self::$menu_item = new MenuItemModel($item->id, self::db());
+                            if ($item->id <= 0 && strlen($_GET["component"]) == 0)
+                            {
+                                $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
+                                self::$menu_item_id = $item->id;
+                            }
+                            elseif (strlen($_GET["component"]) > 0)
+                            {
+                                $item = new stdClass();
+                                $item->component = $_GET["component"];
+                                $item->controller = $_GET["controller"];
+                                $item->content_id = $_GET["id"];
+                            }
+                            $this->component = $item->component;
+                            $this->controller = $item->controller;
+                            $this->content_id = $item->content_id;
                         }
                     }
                     else
                     {
-                        // If no rule from router found, find homepage
-                        $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
-                        self::$menu_item_id = $item->id;
-                        self::$menu_item = new MenuItemModel($item->id, self::db());
-                        if ($item->id <= 0 && strlen($_GET["component"]) == 0)
-                        {
-                            $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
-                            self::$menu_item_id = $item->id;
-                        }
-                        elseif (strlen($_GET["component"]) > 0)
-                        {
-                            $item = new stdClass();
-                            $item->component = $_GET["component"];
-                            $item->controller = $_GET["controller"];
-                            $item->content_id = $_GET["id"];
-                        }
-                        $this->component = $item->component;
-                        $this->controller = $item->controller;
-                        $this->content_id = $item->content_id;
+                        // Component not found, default to 404 page
+                        header("HTTP/1.0 404 Not Found");
+                        require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
                     }
                 }
             }
