@@ -155,8 +155,7 @@
                 if (!$test_comp->enabled || !$test_comp->is_frontend)
                 {
                     // Abort! Component is disabled!
-                    header("HTTP/1.0 404 Not Found");
-                    require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                    $this->displayErrorPage();
                 }
                 $modelname = $this->controller ."Model";
                 $controllername = $this->controller ."Controller";
@@ -445,8 +444,7 @@
                         else
                         {
                             // Nothing. Default to 404.
-                            header("HTTP/1.0 404 Not Found");
-                            require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                            $this->displayErrorPage();
                         }
                     }
                 }
@@ -491,8 +489,7 @@
                             else
                             {
                                 // Nothing. Default to 404.
-                                header("HTTP/1.0 404 Not Found");
-                                require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                                $this->displayErrorPage();
                             }
                         }
                         else
@@ -521,10 +518,22 @@
                     else
                     {
                         // Component not found, default to 404 page
-                        header("HTTP/1.0 404 Not Found");
-                        require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                        $this->displayErrorPage();
                     }
                 }
+            }
+        }
+        
+        public function displayErrorPage()
+        {
+            header("HTTP/1.0 404 Not Found");
+            if (file_exists(__DIR__ ."/../../templates/". $this->template->name ."/error.php"))
+            {
+                require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+            }
+            else
+            {
+                require_once(__DIR__ ."/../templates/error.php"); die();
             }
         }
         

@@ -1,0 +1,40 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image: linear-gradient(to top, #4D648D 0%, white 100%);
+    font-family: 'Open Sans', sans-serif;
+    height: 100vh;
+}
+.error-container {
+    width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+.error-header {
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-size: 6rem;
+    margin-top: 0px;
+    font-weight: normal;
+    padding-top: 40px;
+    text-shadow: -3px 0px rgba(0, 0, 0, .5);
+}
+.error-content {
+    background: #FFF;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 5px;
+}
+.error-content p:first-of-type {
+    margin-top: 0px;   
+}
+.error-content p:last-of-type {
+    margin-bottom: 0px;
+}
