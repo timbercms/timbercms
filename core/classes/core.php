@@ -265,32 +265,50 @@
         
         public static function changeTitle($title)
         {
-            self::$title = $title." - ".self::$config->site_title;
+            if (strlen($title) > 0)
+            {
+                self::$title = $title." - ".self::$config->site_title;
+            }
         }
         
         public static function changeMetaDescription($string)
         {
-            self::$description = '<meta name="description" content="' .$string .'">';
+            if (strlen($string) > 0)
+            {
+                self::$description = '<meta name="description" content="' .$string .'">';
+            }
         }
         
         public static function addMetaProperty($name, $content)
         {
-            self::$meta_properties[] = '<meta property="'. $name .'" content="'. $content .'" />';
+            if (strlen($content) > 0)
+            {
+                self::$meta_properties[] = '<meta property="'. $name .'" content="'. $content .'" />';
+            }
         }
         
         public static function addMetaItemProp($name, $content)
         {
-            self::$meta_itemprops[] = '<meta itemprop="'. $name .'" content="'. $content .'" />';
+            if (strlen($content) > 0)
+            {
+                self::$meta_itemprops[] = '<meta itemprop="'. $name .'" content="'. $content .'" />';
+            }
         }
         
         public static function addMetaName($name, $content)
         {
-            self::$meta_names[] = '<meta name="'. $name .'" content="'. $content .'" />';
+            if (strlen($content) > 0)
+            {
+                self::$meta_names[] = '<meta name="'. $name .'" content="'. $content .'" />';
+            }
         }
         
         public static function setMetaAuthor($string)
         {
-            self::$meta_author = '<meta name="author" content="'. $string .'">';
+            if (strlen($string) > 0)
+            {
+                self::$meta_author = '<meta name="author" content="'. $string .'">';
+            }
         }
         
         public function finalise($page)
