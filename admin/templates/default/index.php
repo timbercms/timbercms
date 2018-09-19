@@ -113,20 +113,6 @@
                 ?>
             </ul>
         </div>
-        <!-- <div class="action-bar">
-            <div class="menu-header">
-                <a href="index.php"><i class="far fa-circle"></i> Bulletin.</a>
-            </div>
-            <div class="dropdown" style="float: right;">
-                <a class="dropdown-toggle" href="#" role="button" id="adminUserMenu" data-toggle="dropdown">
-                    <img src="<?php echo $this->user()->avatar; ?>" /><span class="user-username"><?php echo $this->user()->username; ?><i class="fas fa-chevron-down"></i></span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="adminUserMenu">
-                    <a class="dropdown-item" href="../" target="_blank">Website Homepage</a>
-                    <a class="dropdown-item" href="../user/user/?task=logout">Logout</a>
-                </div>
-            </div>
-        </div> -->
         <div class="main-content">
             <div class="system-messages">
                 <?php $this->displaySystemMessages(); ?>
