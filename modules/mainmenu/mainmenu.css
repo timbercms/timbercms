@@ -40,7 +40,9 @@
     transition: background .25s;
 }
 .menu-container ul.menu-list > li > a:hover, .menu-container ul.menu-list > li.active > a {
-    background: var(--link-accent);   
+    background: var(--link-accent);
+    color: #FFF;
+    cursor: pointer;
 }
 .menu-container .menu-list li.parent > ul {
     display: none;

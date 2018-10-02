@@ -13,10 +13,20 @@ class Form
     
     public function __construct($xml, $data, $database)
     {
-        $this->xml = simplexml_load_file($xml);
-        $this->data = (object) $data;
-        $this->raw_data = $data;
-        $this->database = $database;
+        if (file_exists($xml))
+        {
+            $this->xml = simplexml_load_file($xml);
+            $this->data = (object) $data;
+            $this->raw_data = $data;
+            $this->database = $database;
+        }
+        else
+        {
+            $this->xml = new stdClass();
+            $this->data = (object) $data;
+            $this->raw_data = $data;
+            $this->database = $database;
+        }
     }
     
     /**
