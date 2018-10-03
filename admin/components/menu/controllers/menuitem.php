@@ -12,7 +12,13 @@
             $this->core = $core;
         }
         
-        public function save()
+        public function saveandnew()
+        {
+            $this->save(false);
+            header("Location: index.php?component=menu&controller=newitem&menu_id=". $_GET["menu_id"]);
+        }
+        
+        public function save($redirect = true)
         {
             $this->model->id = $_POST["id"];
             $this->model->menu_id = $_POST["menu_id"];
@@ -43,7 +49,10 @@
             {
                 $id = $this->model->database->lastInsertId();
             }
-            header("Location: index.php?component=menu&controller=menuitem&id=". $id ."&menu_id=". $_POST["menu_id"]);
+            if ($redirect)
+            {
+                header("Location: index.php?component=menu&controller=menuitem&id=". $id ."&menu_id=". $_POST["menu_id"]);
+            }
         }
         
         public function publish()

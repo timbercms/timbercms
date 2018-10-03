@@ -12,7 +12,13 @@
             $this->core = $core;
         }
         
-        public function save()
+        public function saveandnew()
+        {
+            $this->save(false);
+            header("Location: index.php?component=modules&controller=newmodule");
+        }
+        
+        public function save($redirect = true)
         {
             $this->model->id = $_POST["id"];
             $this->model->title = $_POST["title"];
@@ -31,7 +37,10 @@
             {
                 $this->model->setMessage("danger", "Something went wrong during saving");
             }
-            header("Location: index.php?component=modules&controller=modules");
+            if ($redirect)
+            {
+                header("Location: index.php?component=modules&controller=modules");
+            }
         }
         
         public function publish()

@@ -1,9 +1,11 @@
 <div class="white-card">
     <h2>Menuitem Manager</h2>
-    <div class="component-action-bar">
-        <a href="index.php?component=menu&controller=menuitems&id=<?php echo $_GET["menu_id"]; ?>" class="button"><i class="fa fa-chevron-left"></i> Back to List</a>
-    </div>
     <form action="index.php?component=menu&controller=menuitem&task=save" method="post" class="admin-form">
+        <div class="component-action-bar">
+            <a href="index.php?component=menu&controller=menuitems&id=<?php echo $_GET["menu_id"]; ?>" class="button" style="float: left;"><i class="fa fa-chevron-left"></i> Back to List</a>
+            <button type="submit" class="button green-button"><i class="fas fa-save"></i> Save</button>
+            <button type="submit" class="button green-button save-and-new" data-action="index.php?component=menu&controller=menuitem&task=saveandnew&menu_id=<?php echo $_GET["menu_id"]; ?>"><i class="fas fa-save"></i> Save & New</button>
+        </div>
         <h3 style="margin-bottom: 20px;">Change Menu Type</h3>
         <p><strong>Component:</strong> <span style="text-transform: capitalize;"><?php echo $this->model->component; ?></span></p>
         <p><strong>View:</strong> <?php echo ($this->model->controller_query ?  $this->model->controller_query->attributes()->label : ucwords($this->model->controller)); ?></p>

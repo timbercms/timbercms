@@ -12,7 +12,13 @@
             $this->core = $core;
         }
         
-        public function save()
+        public function saveandnew()
+        {
+            $this->save(false);
+            header("Location: index.php?component=user&controller=usergroup");
+        }
+        
+        public function save($redirect = true)
         {
             $this->model->id = $_POST["id"];
             $this->model->title = $_POST["title"];
@@ -25,7 +31,10 @@
             {
                 $this->model->setMessage("danger", "Something went wrong during saving");
             }
-            header("Location: index.php?component=user&controller=usergroups");
+            if ($redirect)
+            {
+                header("Location: index.php?component=user&controller=usergroups");
+            }
         }
         
     }

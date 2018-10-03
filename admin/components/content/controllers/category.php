@@ -12,7 +12,13 @@
             $this->core = $core;
         }
         
-        public function save()
+        public function saveandnew()
+        {
+            $this->save(false);
+            header("Location: index.php?component=content&controller=category");
+        }
+        
+        public function save($redirect = true)
         {
             $this->model->id = $_POST["id"];
             $this->model->parent_id = $_POST["parent_id"];
@@ -30,7 +36,10 @@
             {
                 $this->model->setMessage("danger", "Something went wrong during saving");
             }
-            header("Location: index.php?component=content&controller=categories");
+            if ($redirect)
+            {
+                header("Location: index.php?component=content&controller=categories");
+            }
         }
         
         public function publish()
