@@ -2,29 +2,12 @@
 
     class MenuitemModel extends Model
     {
+        public $component = "menu";
+        public $table = "menus_items";
         public $database;
         public $template = "menuitem.php";
-        
-        public $id = 0;
-        public $menu_id;
-        public $parent_id;
-        public $title;
-        public $alias;
-        public $published;
-        public $access_group = array();
-        public $component;
-        public $controller;
-        public $controller_xml;
-        public $content_id;
-        public $params = array();
-        public $is_home;
-        public $ordering;
-        public $controllers = array();
-        public $controller_query;
-        public $children = array();
-        public $usergroups = array();
-        
         public $form;
+        public $children = array();
         
         public function __construct($id = 0, $database)
         {
@@ -37,23 +20,9 @@
             $this->form = new Form(__DIR__ ."/../forms/menuitem.xml", $this, $this->database);
         }
         
-        public function load($id)
+        public function processData()
         {
-            $temp = $this->database->loadObject("SELECT * FROM #__menus_items WHERE id = ?", array($id));
-            $this->id = $temp->id;
-            $this->menu_id = $temp->menu_id;
-            $this->parent_id = $temp->parent_id;
-            $this->title = $temp->title;
-            $this->alias = $temp->alias;
-            $this->published = $temp->published;
-            $this->access_group = explode(",", $temp->access_group);
-            $this->component = $temp->component;
-            $this->controller = $temp->controller;
-            $this->content_id = $temp->content_id;
-            $this->params = unserialize($temp->params);
-            $this->is_home = $temp->is_home;
-            $this->ordering = $temp->ordering;
-            $temp_children = $this->database->loadObjectList("SELECT id FROM #__menus_items WHERE parent_id = ? ORDER BY ordering ASC", array($id));
+            $temp_children = $this->database->loadObjectList("SELECT id FROM #__menus_items WHERE parent_id = ? ORDER BY ordering ASC", array($this->id));
             if (count($temp_children) > 0)
             {
                 foreach ($temp_children as $child)
@@ -61,31 +30,15 @@
                     $this->children[] = new MenuitemModel($child->id, $this->database);
                 }
             }
+            $this->access_group = explode(",", $this->access_group);
         }
         
-        public function store($table = "", $data = array())
-		{
+        public function preStoreData()
+        {
             if ($this->is_home == 1)
             {
                 $this->clearHome();
             }
-			$data = array();
-			$data[] = array("name" => "id", "value" => $this->id);
-            $data[] = array("name" => "menu_id", "value" => $this->menu_id);
-            $data[] = array("name" => "parent_id", "value" => $this->parent_id);
-			$data[] = array("name" => "title", "value" => $this->title);
-            if (strlen($this->alias) == 0)
-            {
-                $this->alias = Core::generateAlias($this->title);
-            }
-            $data[] = array("name" => "alias", "value" => $this->alias);
-            $data[] = array("name" => "published", "value" => $this->published);
-            $data[] = array("name" => "access_group", "value" => implode(",", $this->access_group));
-            $data[] = array("name" => "component", "value" => $this->component);
-            $data[] = array("name" => "controller", "value" => $this->controller);
-            $data[] = array("name" => "content_id", "value" => $this->content_id);
-            $data[] = array("name" => "params", "value" => serialize($this->params));
-            $data[] = array("name" => "is_home", "value" => $this->is_home);
             if ($this->id <= 0)
             {
                 $item = $this->database->loadObject("SELECT id, ordering FROM #__menus_items WHERE menu_id = ? AND parent_id = ? ORDER BY ordering DESC LIMIT 1", array($this->menu_id, $this->parent_id));
@@ -94,9 +47,7 @@
                     $this->ordering = $item->ordering + 1;
                 }
             }
-            $data[] = array("name" => "ordering", "value" => $this->ordering);
-			return parent::store("#__menus_items", $data);
-		}
+        }
         
         public function getControllers()
         {
@@ -134,21 +85,42 @@
         public function getSiblings()
         {
             $items = array();
-            $results = $this->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND id != ? AND parent_id = 0 ORDER BY ordering ASC", array($_GET["menu_id"], $this->id));
+            if ($this->id > 0)
+            {
+                $results = $this->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND id != ? AND parent_id = 0 ORDER BY ordering ASC", array($_GET["menu_id"], $this->id));
+            }
+            else
+            {
+                $results = $this->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND parent_id = 0 ORDER BY ordering ASC", array($_GET["menu_id"]));
+            }
             foreach ($results as $result)
             {
                 $item = new stdClass();
                 $item->id = $result->id;
                 $item->title = $result->title;
                 $item->children = array();
-                $children = $this->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND id != ? AND parent_id = ? ORDER BY ordering ASC", array($_GET["menu_id"], $this->id, $result->id));
+                if ($this->id > 0)
+                {
+                    $children = $this->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND id != ? AND parent_id = ? ORDER BY ordering ASC", array($_GET["menu_id"], $this->id, $result->id));
+                }
+                else
+                {
+                    $children = $this->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND parent_id = ? ORDER BY ordering ASC", array($_GET["menu_id"], $result->id));
+                }
                 foreach ($children as $child)
                 {
                     $child_item = new stdClass();
                     $child_item->id = $child->id;
                     $child_item->title = $child->title;
                     $child_item->children = array();
-                    $grandchildren = $this->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND id != ? AND parent_id = ? ORDER BY ordering ASC", array($_GET["menu_id"], $this->id, $child->id));
+                    if ($this->id > 0)
+                    {
+                        $grandchildren = $this->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND id != ? AND parent_id = ? ORDER BY ordering ASC", array($_GET["menu_id"], $this->id, $child->id));
+                    }
+                    else
+                    {
+                        $grandchildren = $this->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND parent_id = ? ORDER BY ordering ASC", array($_GET["menu_id"], $child->id));
+                    }
                     foreach ($grandchildren as $grandchild)
                     {
                         $grandchild_item = new stdClass();

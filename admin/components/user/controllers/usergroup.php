@@ -20,9 +20,10 @@
         
         public function save($redirect = true)
         {
-            $this->model->id = $_POST["id"];
-            $this->model->title = $_POST["title"];
-            $this->model->is_admin = $_POST["is_admin"];
+            foreach ($_POST as $key => $value)
+            {
+                $this->model->$key = $value;
+            }
             if ($this->model->store())
             {
                 $this->model->setMessage("success", "Usergroup saved");

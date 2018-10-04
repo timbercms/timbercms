@@ -5,13 +5,10 @@
 
     class MenuModel extends Model
     {
+        public $component = "menu";
+        public $table = "menus";
         public $template = "menu.php";
         public $database;
-        
-        public $id;
-        public $title;
-        public $form;
-        public $items = array();
         
         public function __construct($id = 0, $database)
         {
@@ -23,12 +20,9 @@
             $this->form = new Form(__DIR__ ."/../forms/menu.xml", $this, $this->database);
         }
         
-        public function load($id)
+        public function processData()
         {
-            $temp = $this->database->loadObject("SELECT * FROM #__menus WHERE id = ?", array($id));
-            $this->id = $temp->id;
-            $this->title = $temp->title;
-            $ti = $this->database->loadObjectList("SELECT id FROM #__menus_items WHERE menu_id = ?", array($id));
+            $ti = $this->database->loadObjectList("SELECT id FROM #__menus_items WHERE menu_id = ?", array($this->id));
             if (is_array($ti))
             {
                 foreach ($ti as $i)
@@ -38,14 +32,6 @@
                 }
             }
         }
-        
-        public function store($table = "", $data = array())
-		{
-			$data = array();
-			$data[] = array("name" => "id", "value" => $this->id);
-			$data[] = array("name" => "title", "value" => $this->title);
-			return parent::store("#__menus", $data);
-		}
         
         public function delete($id)
         {

@@ -18,7 +18,7 @@
             $this->pagination = new Pagination();
         }
         
-        public function load()
+        public function load($id = false)
         {
             $query = "SELECT id FROM #__users ORDER BY register_time DESC";
             $this->max = count($this->database->loadObjectList($query));

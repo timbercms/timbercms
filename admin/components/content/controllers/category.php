@@ -20,14 +20,10 @@
         
         public function save($redirect = true)
         {
-            $this->model->id = $_POST["id"];
-            $this->model->parent_id = $_POST["parent_id"];
-            $this->model->title = $_POST["title"];
-            $this->model->alias = $_POST["alias"];
-            $this->model->description = $_POST["description"];
-            $this->model->published = $_POST["published"];
-            $this->model->ordering = $_POST["ordering"];
-            $this->model->params = $_POST["params"];
+            foreach ($_POST as $key => $value)
+            {
+                $this->model->$key = $value;
+            }
             if ($this->model->store())
             {
                 $this->model->setMessage("success", "Category saved");

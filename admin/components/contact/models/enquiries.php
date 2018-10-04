@@ -21,7 +21,7 @@
             $this->pagination = new Pagination();
         }
         
-        public function load()
+        public function load($id = false)
         {
             $temp = $this->database->loadObjectList("SELECT id FROM #__enquiries ORDER BY sent_time DESC");
             $this->max = count($this->database->loadObjectList($query));

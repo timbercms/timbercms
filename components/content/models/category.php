@@ -9,16 +9,6 @@
         public $database;
         public $pagination;
         public $max;
-        
-        public $id;
-        public $parent_id;
-        public $title;
-        public $alias;
-        public $description;
-        public $published;
-        public $ordering;
-        public $params;
-        public $parent;
         public $articles = array();
         public $children = array();
         
@@ -27,12 +17,12 @@
             $this->database = $database;
             if ($id > 0)
             {
-                $this->load($id, $load_articles);
+                $this->loadList($id, $load_articles);
             }
             $this->pagination = new Pagination();
         }
         
-        public function load($id, $load_articles)
+        public function loadList($id, $load_articles)
         {
             $temp = $this->database->loadObject("SELECT * FROM #__articles_categories WHERE id = ?", array($id));
             $this->id = $temp->id;

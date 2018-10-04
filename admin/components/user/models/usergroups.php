@@ -20,7 +20,7 @@
             $this->pagination = new Pagination();
         }
         
-        public function load()
+        public function load($id = false)
         {
             $query = "SELECT id FROM #__usergroups";
             $this->max = count($this->database->loadObjectList($query));

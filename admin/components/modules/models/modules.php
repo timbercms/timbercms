@@ -21,7 +21,7 @@
             $this->pagination = new Pagination();
         }
         
-        public function load()
+        public function load($id = false)
         {
             $args = array();
             $query = "SELECT id FROM #__modules";

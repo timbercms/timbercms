@@ -4,63 +4,108 @@
 	{
 		public function __construct()
 		{
-			
 		}
-		
-		public function store($table, $data)
-		{
-			if ($data["0"]["value"] > 0)
-			{
-				$string = "UPDATE `". $table ."` SET ";
-				$strings = array();
-				$values = array();
-				foreach ($data as $val)
-				{
-					$strings[] = "`". $val["name"] ."`=?";
-					$values[] = $val["value"];
-				}
-				$strings = implode(", ", $strings);
-				$string .= $strings;
-				$string .= " WHERE id='". $data["0"]["value"] ."'";
-				try
-				{
-					Core::db()->query($string, $values);
-					return $data["0"]["value"];
-				}
-				catch (PDOException $e) {
-					echo "<pre>"; print_r($e->getMessage()); echo "</pre>"; die();
-				}
-			}
-			else
-			{
-				$string = "INSERT INTO `". $table ."` ";
-				$strings = array();
-				$values = array();
-				$val_names = array();
-				foreach ($data as $val)
-				{
-                    if ($val["name"] != "id")
+        
+        public function is_serial($string) {
+            return (@unserialize($string) !== false || $string == 'b:0;');
+        }
+        
+        public function load($id)
+        {
+            $rows = $this->database->loadObject("SELECT * FROM #__". $this->table ." WHERE id = ?", array($id));
+            foreach ($rows as $key => $value)
+            {
+                if ($this->is_serial($value))
+                {
+                    $this->$key = unserialize($value);
+                }
+                else
+                {
+                    $this->$key = $value;
+                }
+            }
+            if (method_exists($this, 'processData'))
+            {
+                $this->processData();
+            }
+        }
+        
+        public function store()
+        {
+            if (method_exists($this, 'preStoreData'))
+            {
+                $this->preStoreData();
+            }
+            $xml = simplexml_load_file(__DIR__ ."/../../admin/components/". $this->component ."/database.xml");
+            $names = array();
+            $values = array();
+            $value_names = array();
+            $title = "";
+            foreach ($xml->tables->table as $table)
+            {
+                if ($table->name == $this->table)
+                {
+                    foreach ($table->columns->column as $column)
                     {
-                        $strings[] = "`". $val["name"] ."`";
-                        $val_names[] = ":". $val["name"];
-                        $values[":". $val["name"]] = $val["value"];
+                        $name = $column->attributes()->name;
+                        if ($name == "title")
+                        {
+                            $title = $this->$name;
+                        }
+                        else if ($name == "alias")
+                        {
+                            if (strlen($title) > 0 && strlen($this->$name) == 0)
+                            {
+                                $this->$name = Core::generateAlias($title);   
+                            }
+                        }
+                        if (is_array($this->$name))
+                        {
+                            $this->$name = serialize($this->$name);
+                        }
+                        if ($this->id > 0)
+                        {
+                            // Update Query
+                            $names[] = "`". $name ."`=?";
+                            $values[] = $this->$name;
+                        }
+                        else
+                        {
+                            // Insert Query
+                            if ($name != "id")
+                            {
+                                $names[] = "`". $name ."`";
+                                $value_names[] = ":".$name;
+                                $values[":". $name] = $this->$name;
+                            }
+                        }
                     }
-				}
-				$strings = implode(", ", $strings);
-				$val_names = implode(", ", $val_names);
-				$string .= "(". $strings .")";
-				$string .= " VALUES ";
-				$string .= "(". $val_names .")";
-				try
-				{
-					Core::db()->query($string, $values);
-					return Core::db()->connection->lastInsertId();
-				}
-				catch (PDOException $e) {
-					echo "<pre>"; print_r($e->getMessage()); echo "</pre>"; die();
-				}
-			}
-		}
+                }
+            }
+            if ($this->id > 0)
+            {
+                $query = "UPDATE `#__". $this->table ."` SET ". implode(", ", $names) ." WHERE id = '". $this->id ."'";
+            }
+            else
+            {
+                $query = "INSERT INTO `#__". $this->table ."` (". implode(", ", $names) .") VALUES (". implode(", ", $value_names) .")";
+            }
+            try
+            {
+                $this->database->query($query, $values);
+                if ($this->id > 0)
+                {
+                    return $this->id;
+                }
+                {
+                    return Core::db()->connection->lastInsertId();
+                }
+            }
+            catch (PDOException $e)
+            {
+                echo "<pre>"; print_r($e->getMessage()); echo "</pre>"; die();
+            }
+        }
         
         //=============================================================
         // * Cheers to Zachstronaut for this one

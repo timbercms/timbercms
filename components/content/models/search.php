@@ -16,7 +16,7 @@
             $this->load();
         }
         
-        public function load()
+        public function load($id = false)
         {
             if (strlen($_GET["query"]) > 0)
             {

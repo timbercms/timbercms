@@ -20,17 +20,12 @@
         
         public function save($redirect = true)
         {
-            $this->model->id = $_POST["id"];
-            $this->model->title = $_POST["title"];
-            $this->model->alias = $_POST["alias"];
-            $this->model->category_id = $_POST["category_id"];
-            $this->model->content = $_POST["content"];
-            $this->model->published = $_POST["published"];
+            foreach ($_POST as $key => $value)
+            {
+                $this->model->$key = $value;
+            }
             $this->model->publish_time = ($_POST["publish_time"] > 0 ? $_POST["publish_time"] : time());
             $this->model->author_id = ($_POST["author_id"] > 0 ? $_POST["author_id"] : $this->core->user()->id);
-            $this->model->hits = $_POST["hits"];
-            $this->model->meta_description = $_POST["meta_description"];
-            $this->model->image = $_POST["image"];
             if (strlen($_FILES["image"]["name"]) > 0)
             {
                 $this->model->image = $this->uploadFile();

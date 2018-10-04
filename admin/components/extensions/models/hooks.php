@@ -18,7 +18,7 @@
             $this->settings = simplexml_load_file(__DIR__ ."/../extension.xml");
         }
         
-        public function load()
+        public function load($id = false)
         {
             $temp_hooks = $this->database->loadObjectList("SELECT id FROM #__components_hooks");
             foreach ($temp_hooks as $temp_hook)

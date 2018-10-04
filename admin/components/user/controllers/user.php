@@ -20,14 +20,11 @@
         
         public function save($redirect = true)
         {
-            $this->model->id = $_POST["id"];
-            $this->model->username = $_POST["username"];
-            $this->model->email = $_POST["email"];
-            $this->model->activated = $_POST["activated"];
-            $this->model->blocked = $_POST["blocked"];
-            $this->model->blocked_reason = $_POST["blocked_reason"];
+            foreach ($_POST as $key => $value)
+            {
+                $this->model->$key = $value;
+            }
             $this->model->register_time = ($_POST["register_time"] > 0 ? $_POST["register_time"] : time());
-            $this->model->usergroup_id = $_POST["usergroup_id"];
             if ($this->model->store())
             {
                 $this->model->setMessage("success", "User saved");

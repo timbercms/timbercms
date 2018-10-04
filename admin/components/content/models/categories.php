@@ -20,7 +20,7 @@
             $this->pagination = new Pagination();
         }
         
-        public function load()
+        public function load($id = false)
         {
             $query = "SELECT id FROM #__articles_categories WHERE parent_id = '0'";
             if (strlen($_GET["title"]) > 0)
