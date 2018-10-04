@@ -4,23 +4,10 @@
 
     class UserModel extends Model
     {
-        
+        public $component = "user";
+        public $table = "users";
         public $template = "profile.php";
         public $database;
-        
-        public $id;
-        public $username;
-        public $email;
-        public $password;
-        public $activated;
-        public $blocked;
-        public $blocked_reason;
-        public $register_time;
-        public $last_action_time;
-        public $usergroup;
-        public $verify_token;
-        public $avatar;
-        public $params;
         
         public function __construct($id = 0, $database)
         {
@@ -35,24 +22,13 @@
             }
         }
         
-        public function load($id)
+        public function processData()
         {
-            $temp = $this->database->loadObject("SELECT * FROM #__users WHERE id = ?", array($id));
-            $this->id = $temp->id;
-            $this->username = $temp->username;
-            $this->email = $temp->email;
-            $this->password = $temp->password;
-            $this->activated = $temp->activated;
-            $this->blocked = $temp->blocked;
-            $this->blocked_reason = $temp->blocked_reason;
-            $this->register_time = $temp->register_time;
-            $this->last_action_time = $temp->last_action_time;
-            $this->usergroup = new UsergroupModel($temp->usergroup_id, $this->database);
-            $this->verify_token = $temp->verify_token;
-            $this->params = (object) unserialize($temp->params);
-            if (strlen($temp->avatar) > 0)
+            $this->usergroup = new UsergroupModel($this->usergroup_id, $this->database);
+            $this->params = (object) $this->params;
+            if (strlen($this->avatar) > 0)
             {
-                $this->avatar = BASE_URL .$temp->avatar;
+                $this->avatar = BASE_URL .$this->avatar;
             }
             else
             {

@@ -9,7 +9,7 @@
                 CREATE TABLE `#__usergroups` (`id` int(11) NOT NULL AUTO_INCREMENT, `title` varchar(255) DEFAULT NULL, `is_admin` int(11) DEFAULT '0', PRIMARY KEY (`id`));
             </table>
             <table>
-                CREATE TABLE `#__users` (`id` int(11) NOT NULL AUTO_INCREMENT, `username` varchar(255) DEFAULT NULL, `email` varchar(255) DEFAULT NULL, `usergroup_id` int(11) DEFAULT NULL, `password` varchar(255) DEFAULT NULL, `activated` int(11) DEFAULT '0', `blocked` int(11) DEFAULT '0', `register_time` int(11) DEFAULT NULL, `last_action_time` int(11) DEFAULT NULL, `verify_token` varchar(5000) DEFAULT NULL, `avatar` varchar(255) DEFAULT NULL, `blocked_reason` varchar(500) DEFAULT NULL, `params` text, PRIMARY KEY (`id`));
+                CREATE TABLE `#__users` (`id` int(11) NOT NULL AUTO_INCREMENT, `username` varchar(255) DEFAULT NULL, `name` varchar(255) DEFAULT NULL, `email` varchar(255) DEFAULT NULL, `usergroup_id` int(11) DEFAULT NULL, `password` varchar(255) DEFAULT NULL, `activated` int(11) DEFAULT '0', `blocked` int(11) DEFAULT '0', `register_time` int(11) DEFAULT NULL, `last_action_time` int(11) DEFAULT NULL, `verify_token` varchar(5000) DEFAULT NULL, `avatar` varchar(255) DEFAULT NULL, `blocked_reason` varchar(500) DEFAULT NULL, `params` text, PRIMARY KEY (`id`));
             </table>
             <table>
                 CREATE TABLE `#__users_recovery` (`id` int(11) NOT NULL AUTO_INCREMENT, `user_id` int(11) DEFAULT NULL, `token` varchar(5000) DEFAULT NULL, `reset_requested` int(11) DEFAULT NULL, PRIMARY KEY (`id`));
@@ -39,6 +39,7 @@
             <columns>
                 <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
                 <column name="username" params="varchar(255) DEFAULT NULL" />
+                <column name="name" params="varchar(255) DEFAULT NULL" />
                 <column name="email" params="varchar(255) DEFAULT NULL" />
                 <column name="usergroup_id" params="int(11) DEFAULT NULL" />
                 <column name="password" params="varchar(255) DEFAULT NULL" />

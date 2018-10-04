@@ -6,7 +6,7 @@
                     <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". Core::user()->id); ?>"><img src="<?php echo Core::user()->avatar; ?>" /></a>
                 </div>
                 <div class="login-username">
-                    <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". Core::user()->id); ?>"><?php echo Core::user()->username; ?></a>
+                    <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". Core::user()->id); ?>"><?php echo Core::user()->name; ?></a>
                 </div>
             </div>
             <ul class="login-options">

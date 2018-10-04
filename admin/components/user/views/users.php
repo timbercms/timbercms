@@ -8,7 +8,8 @@
         <div class="d-flex admin-header">
             <div class="col-md-1">&nbsp;</div>
             <div class="col-md-1"><strong>ID</strong></div>
-            <div class="col-md-4"><strong>Username</strong></div>
+            <div class="col-md-2"><strong>Name</strong></div>
+            <div class="col-md-2"><strong>Username</strong></div>
             <div class="col-md-4"><strong>Email</strong></div>
             <div class="col-md-1" style="text-align: center;"><strong>Activated</strong></div>
             <div class="col-md-1" style="text-align: center;"><strong>Blocked</strong></div>
@@ -21,7 +22,10 @@
                 <div class="col-md-1">
                     <?php echo $user->id; ?>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
+                    <a href="index.php?component=user&controller=user&id=<?php echo $user->id; ?>"><?php echo $user->name; ?></a>
+                </div>
+                <div class="col-md-2">
                     <a href="index.php?component=user&controller=user&id=<?php echo $user->id; ?>"><?php echo $user->username; ?></a>
                 </div>
                 <div class="col-md-4">
