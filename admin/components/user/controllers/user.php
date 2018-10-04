@@ -22,7 +22,10 @@
         {
             foreach ($_POST as $key => $value)
             {
-                $this->model->$key = $value;
+                if ($key != "password")
+                {
+                    $this->model->$key = $value;
+                }
             }
             $this->model->register_time = ($_POST["register_time"] > 0 ? $_POST["register_time"] : time());
             if ($this->model->store())

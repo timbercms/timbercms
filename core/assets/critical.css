@@ -26,7 +26,7 @@
 .website-title {
     font-size: 52px;
     line-height: 52px;
-    color: #FFF;
+    color: #333;
 }
 .pagination a:not([href]) {
     color: rgba(255, 255, 255, .5);

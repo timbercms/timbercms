@@ -1,12 +1,12 @@
 :root {
-    --site-width: 85vw;
+    --site-width: 1300px;
     --stormysea: #335252;
     --fog: #D4DDE1;
     --rust: #AA4B41;
     --rust-hover: #853B34;
     --charcoal: #2D3033;
-    --link: #598234;
-    --link-accent: #AEBD38;
+    --link: #786AFF;
+    --link-accent: #968BFC;
     --blueberry: #283655;
     --base: #1E1F26;
     --accent: #4D648D;
@@ -24,7 +24,7 @@ body {
     font-family: "Open Sans", "Arial", sans-serif !important;
     font-weight: 500;
     letter-spacing: -1px !important;
-    background: var(--blueberry);
+    background: #F5F6F7;
 }
 html {
   box-sizing: border-box;
@@ -49,6 +49,9 @@ p {
 }
 .footer-container .module {
     border: none;
+    background: none;
+    border-radius: 0px;
+    box-shadow: none;
 }
 .footer-container .module-title {
     background: transparent;   
@@ -98,8 +101,8 @@ p {
     max-width: var(--site-width);
     margin-left: auto;
     margin-right: auto;
-    background: #FFF;
-    padding: 30px;  
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 pre {
     white-space: pre-wrap;
@@ -160,9 +163,7 @@ input[type="text"],input[type="password"], input[type="email"] {
     margin-right: auto;
 }
 .module {
-    border: 1px solid rgba(0,0,0,.125);
     margin-bottom: 20px;
-    border-radius: 5px;
     overflow: hidden;
 }
 .module:last-of-type {
@@ -170,13 +171,9 @@ input[type="text"],input[type="password"], input[type="email"] {
 }
 .module-title {
     margin-top: 0px;
-    margin-bottom: 0px;
-    padding: 10px 15px;
+    margin-bottom: 20px;
     font-size: 22px;
     line-height: 22px;
-}
-.module-inner {
-    padding: 15px;   
 }
 .module-inner p:last-of-type {
     margin-bottom: 0px;   
@@ -186,4 +183,12 @@ input[type="text"],input[type="password"], input[type="email"] {
 }
 .footer-content {
     padding: 20px;   
+}
+.component-container, .module {
+    padding: 20px;
+    background: #FFF;
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(128,128,128,1);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(128,128,128,1);
+    box-shadow: 0px 2px 5px 0px rgba(128,128,128,1);
+    border-radius: 5px;
 }

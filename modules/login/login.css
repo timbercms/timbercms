@@ -11,12 +11,16 @@
     display: block;
     margin-bottom: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #DDD;
 }
 .login-options li:last-of-type {
     margin-bottom: 0px;
     padding-bottom: 0px;
     border-bottom: none;
+}
+.login-options svg {
+    display: inline-block;
+    margin-right: 10px;
+    width: 25px !important;
 }
 .login-username, .login-avatar {
     text-align: center;   
@@ -41,5 +45,5 @@
 .login-header {
     padding-top: 40px;
     padding-bottom: 40px;
-    margin: -15px;
+    margin: -20px;
 }

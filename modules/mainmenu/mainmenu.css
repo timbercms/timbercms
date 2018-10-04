@@ -2,19 +2,23 @@
     display: none;   
 }
 .menu-container {
-    background: var(--charcoal);
+    background: #333;
     max-width: var(--site-width);
     margin-left: auto;
     margin-right: auto;
     position: relative;
     z-index: 100;
+    border-radius: 5px;
 }
 .menu-container .module {
     margin-bottom: 0px;
     border: none;
-    border-radius: 0px;
     overflow: inherit;
+    background: none;
+    box-shadow: none;
+    padding: 0px;
 }
+
 .menu-container .module-inner {
     padding: 0px;   
 }
@@ -32,6 +36,10 @@
 .menu-container .menu-list li.top-level > a > svg {
     float: right;   
 }
+.menu-container ul.menu-list > li:first-of-type > a {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
 .menu-container ul.menu-list > li > a {
     display: inline-block;
     padding: 15px;
@@ -39,7 +47,10 @@
     text-decoration: none;
     transition: background .25s;
 }
-.menu-container ul.menu-list > li > a:hover, .menu-container ul.menu-list > li.active > a {
+.menu-container ul.menu-list > li.active > a {
+    background: var(--link);   
+}
+.menu-container ul.menu-list > li > a:hover {
     background: var(--link-accent);
     color: #FFF;
     cursor: pointer;
