@@ -24,7 +24,6 @@
             {
                 $this->model->$key = $value;
             }
-            $this->model->access_group = implode(",", $_POST["access_group"]);
             if ($this->model->store())
             {
                 $this->model->setMessage("success", "Menu item saved");

@@ -30,7 +30,6 @@
                     $this->children[] = new MenuitemModel($child->id, $this->database);
                 }
             }
-            $this->access_group = explode(",", $this->access_group);
         }
         
         public function preStoreData()

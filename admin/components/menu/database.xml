@@ -6,7 +6,7 @@
                 CREATE TABLE `#__menus` (`id` int(11) NOT NULL AUTO_INCREMENT, `title` varchar(500) DEFAULT NULL, PRIMARY KEY (`id`));
             </table>
             <table>
-                CREATE TABLE `#__menus_items` (`id` int(11) NOT NULL AUTO_INCREMENT, `menu_id` int(11) NOT NULL, `parent_id` int(11) NOT NULL DEFAULT '0', `title` varchar(500) DEFAULT NULL, `alias` varchar(500) DEFAULT NULL, `published` int(11) DEFAULT NULL, `access_group` int(11) DEFAULT NULL, `component` varchar(255) DEFAULT NULL, `controller` varchar(255) DEFAULT NULL, `content_id` varchar(255) DEFAULT NULL, `params` text, `is_home` int(11) DEFAULT '0', `ordering` varchar(255) DEFAULT '0', PRIMARY KEY (`id`));
+                CREATE TABLE `#__menus_items` (`id` int(11) NOT NULL AUTO_INCREMENT, `menu_id` int(11) NOT NULL, `parent_id` int(11) NOT NULL DEFAULT '0', `title` varchar(500) DEFAULT NULL, `alias` varchar(500) DEFAULT NULL, `published` int(11) DEFAULT NULL, `component` varchar(255) DEFAULT NULL, `controller` varchar(255) DEFAULT NULL, `content_id` varchar(255) DEFAULT NULL, `params` text, `is_home` int(11) DEFAULT '0', `ordering` varchar(255) DEFAULT '0', PRIMARY KEY (`id`));
             </table>
         </tables>
     </install>
@@ -27,7 +27,6 @@
                 <column name="title" params="varchar(500) DEFAULT NULL" />
                 <column name="alias" params="varchar(500) DEFAULT NULL" />
                 <column name="published" params="int(11) DEFAULT NULL" />
-                <column name="access_group" params="int(11) DEFAULT NULL" />
                 <column name="component" params="varchar(255) DEFAULT NULL" />
                 <column name="controller" params="varchar(255) DEFAULT NULL" />
                 <column name="content_id" params="varchar(255) DEFAULT NULL" />
