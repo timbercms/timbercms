@@ -2,13 +2,13 @@
     <div class="profile-header <?php echo (strlen($this->model->user->params->header_pattern) > 0 ? $this->model->user->params->header_pattern : "topography"); ?>">
         <img src="https://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($this->model->user->email))); ?>?s=200" class="user-profile-avatar" />
         <div class="profile-username">
-            <?php echo $this->model->user->username; ?><div class="online-status <?php if ((time() - $this->model->user->last_action_time) <= 900) { ?>online<?php } else { ?>offline<?php } ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->model->user->username; ?> is <?php if ((time() - $this->model->user->last_action_time) <= 900) { ?>Online now<?php } else { ?>Offline<?php } ?>"></div>
+            <?php echo $this->model->user->name; ?> (<?php echo $this->model->user->username; ?>)<div class="online-status <?php if ((time() - $this->model->user->last_action_time) <= 900) { ?>online<?php } else { ?>offline<?php } ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $this->model->user->username; ?> is <?php if ((time() - $this->model->user->last_action_time) <= 900) { ?>Online now<?php } else { ?>Offline<?php } ?>"></div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
             <div class="user-information">
-                <h3>About <?php echo $this->model->user->username; ?></h3>
+                <h3>About <?php echo explode(" ", $this->model->user->name)[0]; ?></h3>
                 <ul>
                     <li><strong>Member since:</strong> <?php echo date("jS F Y", $this->model->user->register_time); ?></li>
                     <li><strong>Member for:</strong> <?php echo $this->model->days; ?> days</li>
@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-6">
             <div class="user-information">
-                <h3 style="margin-top: 40px;">Recent Articles by <?php echo $this->model->user->username; ?></h3>
+                <h3 style="margin-top: 40px;">Recent Articles by <?php echo explode(" ", $this->model->user->name)[0]; ?></h3>
                 <div class="profile-news-list">
                     <?php foreach ($this->model->articles as $article) { ?>
                         <div class="profile-news-item">
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="user-information">
-                <h3 style="margin-top: 40px;">Recent Comments by <?php echo $this->model->user->username; ?></h3>
+                <h3 style="margin-top: 40px;">Recent Comments by <?php echo explode(" ", $this->model->user->name)[0]; ?></h3>
                 <?php foreach ($this->model->comments as $comment) { ?>
                     <div class="card">
                         <div class="card-header">
