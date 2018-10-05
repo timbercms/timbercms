@@ -28,7 +28,10 @@
             $this->params = (object) $this->params;
             if (strlen($this->avatar) > 0)
             {
-                $this->avatar = BASE_URL .$this->avatar;
+                if (substr($this->avatar, 0, 5) != "https")
+                {
+                    $this->avatar = BASE_URL.$this->avatar;
+                }
             }
             else
             {
