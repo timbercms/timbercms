@@ -44,7 +44,7 @@ p {
     line-height: 1.3rem;   
 }
 .footer-container {
-    background: var(--blueberry);
+    background: #333;
     color: #FFF;
 }
 .footer-container .module {
