@@ -32,10 +32,10 @@
                 <input type="checkbox" class="form-check-input" name="remember" style="margin-top: .2rem;">
                 <label class="form-check-label">Remember me</label>
             </div>
-            <p style="text-align: right;">
-                <a href="<?php echo Core::route("index.php?component=user&controller=requestreset"); ?>">Forgotten password?</a>
-            </p>
-            <button type="submit" class="button pull-right"><i class="fa fa-key"></i> Login</button> <a href="<?php echo $this->route("index.php?component=user&controller=register"); ?>" class="button hollow pull-right">Don't have an account?</a>
+            <button type="submit" class="button pull-right"><i class="fa fa-key"></i> Login</button>
+            <p>&nbsp;</p>
+            <p><a href="<?php echo Core::route("index.php?component=user&controller=requestreset"); ?>">Forgotten your password?</a></p>
+            <p><a href="<?php echo $this->route("index.php?component=user&controller=register"); ?>">Don't have an account?</a></p>
             <div class="clearfix"></div>
         </form>
     <?php } ?>
