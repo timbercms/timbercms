@@ -20,12 +20,23 @@
         
         public function save($redirect = true)
         {
+            if ($_POST["id"] > 0)
+            {
+                $this->model->load($_POST["id"]);
+            }
             foreach ($_POST as $key => $value)
             {
-                if ($key != "password")
+                if ($_POST["id"] > 0)
                 {
-                    $this->model->$key = $value;
+                    if ($key == "password")
+                    {
+                        if (password_hash($value, PASSWORD_DEFAULT) != $this->model->password)
+                        {
+                            $value = password_hash($_POST["password"], PASSWORD_DEFAULT);
+                        }
+                    }
                 }
+                $this->model->$key = $value;
             }
             $this->model->register_time = ($_POST["register_time"] > 0 ? $_POST["register_time"] : time());
             if ($this->model->store())
