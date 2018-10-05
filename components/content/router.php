@@ -36,6 +36,9 @@
                     case "task":
                         $task = $string[1];
                         break;
+                    case "article_id":
+                        $article_id = $string[1];
+                        break;
                 }
             }
             if ($comp == $this->component)
@@ -44,7 +47,18 @@
                 {
                     if ($controller == "article")
                     {
-                        return BASE_URL.$this->component."/article/?task=postComment";
+                        if ($task == "postComment")
+                        {
+                            return BASE_URL.$this->component."/article/?task=postComment";
+                        }
+                        else if ($task == "hideComment")
+                        {
+                            return BASE_URL.$this->component."/article/?task=hideComment&id=".$id."&article_id=".$article_id;
+                        }
+                        else if ($task == "unhideComment")
+                        {
+                            return BASE_URL.$this->component."/article/?task=unhideComment&id=".$id."&article_id=".$article_id;
+                        }
                     }
                 }
                 else if ($controller == "article" && $id > 0)

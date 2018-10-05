@@ -366,10 +366,13 @@
                         case "id":
                             $content_id = $part["1"];
                             break;
+                        case "task":
+                            $task = $part["1"];
+                            break;
                     }
                 }
                 $item = self::db()->loadObject("SELECT id, alias, parent_id FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($component, $controller, $content_id));
-                if ($item->id > 0)
+                if (strlen($task) == 0 && $item->id > 0)
                 {
                     $alias = array();
                     $alias[] = $item->alias;

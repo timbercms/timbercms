@@ -68,9 +68,9 @@
                                 <?php if (Core::user()->usergroup->is_admin == 1) { ?>
                                     <div class="comment-moderation">
                                         <?php if ($comment->published == 1) { ?>
-                                            <a href="index.php?component=content&controller=article&task=hideComment&id=<?php echo $comment->id; ?>&article_id=<?php echo $this->model->id; ?>"><i class="far fa-eye-slash"></i> Hide Comment</a>
+                                            <a href="<?php echo Core::route("index.php?component=content&controller=article&task=hideComment&id=".$comment->id."&article_id=".$this->model->id); ?>"><i class="far fa-eye-slash"></i> Hide Comment</a>
                                         <?php } else { ?>
-                                            <a href="index.php?component=content&controller=article&task=unhideComment&id=<?php echo $comment->id; ?>&article_id=<?php echo $this->model->id; ?>"><i class="far fa-eye"></i> Unhide Comment</a>
+                                            <a href="<?php echo Core::route("index.php?component=content&controller=article&task=unhideComment&id=".$comment->id."&article_id=".$this->model->id); ?>"><i class="far fa-eye"></i> Unhide Comment</a>
                                         <?php } ?>
                                     </div>
                                 <?php } ?>
