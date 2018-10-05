@@ -22,7 +22,7 @@
                             <label><strong>Profile Background:</strong></label>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label class="header-preview topography<?php if ($this->model->user->params->header_pattern == "topography") { ?> active<?php } ?>" data-label><input type="radio" name="params[header_pattern]" value="topography"<?php if ($this->model->user->params->header_pattern == "topography") { ?>checked="checked"<?php } ?>></label>
+                                    <label class="header-preview topography<?php if ($this->model->user->params->header_pattern == "topography" || !is_object($this->model->user->params)) { ?> active<?php } ?>" data-label><input type="radio" name="params[header_pattern]" value="topography"<?php if ($this->model->user->params->header_pattern == "topography") { ?>checked="checked"<?php } ?>></label>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="header-preview jupiter<?php if ($this->model->user->params->header_pattern == "jupiter") { ?> active<?php } ?>" data-label><input type="radio" name="params[header_pattern]" value="jupiter"<?php if ($this->model->user->params->header_pattern == "jupiter") { ?>checked="checked"<?php } ?>></label>

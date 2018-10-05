@@ -92,38 +92,26 @@
         
         public function register($username, $password, $email)
         {
-			$data = array();
-			$data[] = array("name" => "id", "value" => 0);
-			$data[] = array("name" => "username", "value" => $username);
-            $data[] = array("name" => "password", "value" => password_hash($password, PASSWORD_DEFAULT));
-            $data[] = array("name" => "email", "value" => $email);
-            $data[] = array("name" => "activated", "value" => 0);
-            $data[] = array("name" => "blocked", "value" => 0);
-            $data[] = array("name" => "blocked_reason", "value" => "");
-            $data[] = array("name" => "register_time", "value" => time());
-            $data[] = array("name" => "usergroup_id", "value" => Core::config()->default_usergroup);
-            $data[] = array("name" => "verify_token", "value" => md5($email).time().(time() + rand(67234)));
-			return parent::store("#__users", $data);
-        }
-        
-        public function updateSettings($table = "", $data = array(), $updatePassword = false)
-		{
-			$data = array();
-			$data[] = array("name" => "id", "value" => $this->id);
-			$data[] = array("name" => "username", "value" => $this->username);
-            $data[] = array("name" => "email", "value" => $this->email);
-            $data[] = array("name" => "activated", "value" => $this->activated);
-            $data[] = array("name" => "blocked", "value" => $this->blocked);
-            $data[] = array("name" => "blocked_reason", "value" => $this->blocked_reason);
-            $data[] = array("name" => "register_time", "value" => $this->register_time);
-            $data[] = array("name" => "usergroup_id", "value" => $this->usergroup_id);
-            $data[] = array("name" => "params", "value" => serialize($this->params));
-            if ($updatePassword)
+            $this->id = 0;
+            $this->username = $username;
+            $this->password = password_hash($password, PASSWORD_DEFAULT);
+            $this->email = $email;
+            $this->activated = 0;
+            $this->blocked = 0;
+            $this->blocked_reason = "";
+            $this->register_time = time();
+            $this->usergroup_id = Core::config()->default_usergroup;
+            $this->verify_token = md5($email).time().(time() + rand());
+            $this->params = array();
+			if ($this->store())
             {
-                $data[] = array("name" => "password", "value" => password_hash($this->password, PASSWORD_DEFAULT));
+                return true;
             }
-			return parent::store("#__users", $data);
-		}
+            else
+            {
+                return false;
+            }
+        }
         
     }
 
