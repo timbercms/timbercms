@@ -31,7 +31,10 @@
         public function processData()
         {
             $this->usergroup = new UsergroupModel($this->usergroup_id, $this->database);
-            $this->avatar = "https://www.gravatar.com/avatar/" .md5(strtolower(trim($this->email))) ."?s=200";
+            if (strlen($this->avatar) == 0)
+            {
+                $this->avatar = "https://www.gravatar.com/avatar/" .md5(strtolower(trim($this->email))) ."?s=200";
+            }
         }
         
         public function loadSession()
