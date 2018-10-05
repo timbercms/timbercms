@@ -1,6 +1,9 @@
 <?php
 
-    require_once(__DIR__ ."/models/user.php");
+    if (!class_exists('UserModel'))
+    {
+        require_once(__DIR__ ."/models/user.php");
+    }
 
     class UserRouter
     {

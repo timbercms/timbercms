@@ -31,7 +31,7 @@
         {
             if (Core::user()->id > 0)
             {
-                $comment = new CommentModel(0, $this->database);
+                $comment = new CommentModel(0, $this->model->database);
                 $comment->article_id = $_POST["article_id"];
                 $comment->content = $_POST["content"];
                 $comment->published = 1;

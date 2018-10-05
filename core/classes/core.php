@@ -69,7 +69,7 @@
                 self::$user = new UserModel(0, $this->database);
                 if (self::$user->usergroup->is_admin != 1)
                 {
-                    header("Location: ../index.php?component=user&controller=login");
+                    header("Location: ". self::route("index.php?component=user&controller=login"));
                 }
                 $modelname = $this->controller ."Model";
                 $controllername = $this->controller ."Controller";

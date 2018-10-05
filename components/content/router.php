@@ -19,25 +19,35 @@
             foreach ($parts as $part)
             {
                 $string = explode("=", $part);
-                switch ($string["0"])
+                switch ($string[0])
                 {
                     case "component":
-                        $comp = $string["1"];
+                        $comp = $string[1];
                         break;
                     case "controller":
-                        $controller = $string["1"];
+                        $controller = $string[1];
                         break;
                     case "id":
-                        $id = $string["1"];
+                        $id = $string[1];
                         break;
                     case "query":
-                        $query = $string["1"];
+                        $query = $string[1];
+                        break;
+                    case "task":
+                        $task = $string[1];
                         break;
                 }
             }
             if ($comp == $this->component)
             {
-                if ($controller == "article" && $id > 0)
+                if (strlen($task) > 0)
+                {
+                    if ($controller == "article")
+                    {
+                        return BASE_URL.$this->component."/article/?task=postComment";
+                    }
+                }
+                else if ($controller == "article" && $id > 0)
                 {
                     $article = new ArticleModel($id, $this->database);
                     $category = $this->database->loadObject("SELECT id, parent_id, alias FROM #__articles_categories WHERE id = ?", array($article->category->id));
