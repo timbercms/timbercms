@@ -8,10 +8,10 @@
     </head>
     <body>
         <div class="error-container">
-            <h1 class="error-header">404</h1>
+            <h1 class="error-header">...Lost?</h1>
             <div class="error-content">
-                <p>Unfortunately, this page could not be found. It may have been moved, or may never have existed in the first place.</p>
-                <p>We suggest going back to the <a href="<?php echo BASE_URL; ?>">home page</a>.</p>
+                <p>We couldn't find this page either. It may have been moved, or may never have existed in the first place.</p>
+                <p><a href="<?php echo BASE_URL; ?>">HOME PAGE</a></p>
             </div>
         </div>
     </body>

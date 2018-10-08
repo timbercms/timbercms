@@ -4,37 +4,57 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+a {
+    color: #FFF;
+    padding: 10px 20px;
+    border: 1px solid #FFF;
+    text-decoration: none;
+    transition: all .25s;
+}
+a:hover {
+    background: rgba(255, 255, 255, .25);   
+}
 body {
     margin: 0px;
     padding: 0px;
-    background-image: linear-gradient(to top, #4D648D 0%, white 100%);
+    background-image: url('../assets/forest.jpg');
     font-family: 'Open Sans', sans-serif;
     height: 100vh;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body::after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0px;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(33, 37, 41, .75);
+    z-index: 1;
 }
 .error-container {
     width: 40vw;
-    margin-left: auto;
-    margin-right: auto;
+    position: relative;
+    z-index: 2;
+    color: #FFF;
 }
 .error-header {
     text-align: center;
-    margin-bottom: 40px;
-    text-transform: uppercase;
-    font-size: 6rem;
+    padding-top: 20px;
     margin-top: 0px;
-    font-weight: normal;
-    padding-top: 40px;
-    text-shadow: -3px 0px rgba(0, 0, 0, .5);
-}
-.error-content {
-    background: #FFF;
-    padding: 20px;
-    margin-top: 40px;
-    border-radius: 5px;
+    font-size: 4rem;
+    margin-bottom: 20px;
 }
 .error-content p:first-of-type {
     margin-top: 0px;   
 }
 .error-content p:last-of-type {
     margin-bottom: 0px;
+    padding-bottom: 20px;
+    text-align: center;
+    margin-top: 60px;
 }
