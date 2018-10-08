@@ -26,16 +26,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-body::after {
-    display: block;
-    content: "";
-    position: absolute;
-    top: 0px;
-    height: 100vh;
-    width: 100vw;
-    background: rgba(33, 37, 41, .75);
-    z-index: 1;
-}
 .error-container {
     width: 40vw;
     position: relative;

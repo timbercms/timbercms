@@ -5,8 +5,8 @@
     --rust: #AA4B41;
     --rust-hover: #853B34;
     --charcoal: #2D3033;
-    --link: #786AFF;
-    --link-accent: #968BFC;
+    --link: #DC5842;
+    --link-accent: #DE3114;
     --blueberry: #283655;
     --base: #1E1F26;
     --accent: #4D648D;
@@ -52,6 +52,7 @@ p {
     background: none;
     border-radius: 0px;
     box-shadow: none;
+    padding: 0px;
 }
 .footer-container .module-title {
     background: transparent;   
@@ -95,14 +96,16 @@ p {
     color: #FFF;
 }
 .body-container {
-    background: url('../images/pattern.png');   
+    background: url('../../../core/assets/forest.jpg');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
 }
 .body-content {
     max-width: var(--site-width);
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
-    margin-bottom: 20px;
 }
 pre {
     white-space: pre-wrap;
@@ -181,14 +184,14 @@ input[type="text"],input[type="password"], input[type="email"] {
 .component-title {
     margin-bottom: 40px;   
 }
-.footer-content {
-    padding: 20px;   
-}
 .component-container, .module {
     padding: 20px;
     background: #FFF;
-    -webkit-box-shadow: 0px 2px 5px 0px rgba(128,128,128,1);
-    -moz-box-shadow: 0px 2px 5px 0px rgba(128,128,128,1);
-    box-shadow: 0px 2px 5px 0px rgba(128,128,128,1);
     border-radius: 5px;
+}
+.component-container {
+    margin-bottom: 20px;   
+}
+.website-title {
+    color: #FFF !important;   
 }

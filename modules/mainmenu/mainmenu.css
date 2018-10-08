@@ -2,7 +2,7 @@
     display: none;   
 }
 .menu-container {
-    background: #333;
+    background: #FFF;
     max-width: var(--site-width);
     margin-left: auto;
     margin-right: auto;
@@ -43,12 +43,13 @@
 .menu-container ul.menu-list > li > a {
     display: inline-block;
     padding: 15px;
-    color: #FFF;
+    color: var(--link);
     text-decoration: none;
     transition: background .25s;
 }
 .menu-container ul.menu-list > li.active > a {
-    background: var(--link);   
+    background: var(--link);
+    color: #FFF;
 }
 .menu-container ul.menu-list > li > a:hover {
     background: var(--link-accent);
@@ -68,6 +69,7 @@
 }
 .menu-container .menu-list li.first-child:hover > a, .menu-container .menu-list li.second-child:hover > a {
     background: var(--link-accent);
+    color: #FFF;
 }
 .menu-container .menu-list li.first-child:last-of-type > a, .menu-container .menu-list li.second-child:last-of-type > a {
     border-bottom: none;   
@@ -82,7 +84,11 @@
     font-size: 32px;
 }
 .menu-container .menu-list li.parent:hover {
-    background: var(--link);   
+    background: var(--link);
+    color: #FFF !important;
+}
+.menu-container .menu-list li.parent:hover > a {
+    color: #FFF;
 }
 .menu-container .menu-list li.parent:hover > ul {
     display: block;
