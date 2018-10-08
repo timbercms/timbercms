@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="login-container">
-            <h1>Admin Login</h1>
+            <h1>Timber CMS Login</h1>
             <?php Core::displaySystemMessages(); ?>
             <form action="index.php?component=user&controller=user&task=login" method="post">
                 <input type="text" name="username" placeholder="Username">
