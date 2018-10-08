@@ -107,7 +107,7 @@
                         echo '<ul>';
                             echo '<li class="first-child parent">';
                                 echo '<a href="../" target="_blank">Homepage</a>';
-                                echo '<a href="../user/user/?task=logout">Logout</a>';
+                                echo '<a href="index.php?component=user&controller=user&task=logout">Logout</a>';
                             echo '</li>';
                         echo '</ul>';
                     echo '</li>';

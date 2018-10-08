@@ -81,6 +81,58 @@
             header("Location: index.php?component=user&controller=users");
         }
         
+        public function login()
+        {
+            $username = $_POST["username"];
+            $password = $_POST["password"];
+            $temp = $this->model->database->loadObject("SELECT * FROM #__users WHERE username = ?", array($username));
+            if ($temp->id > 0)
+            {
+                if ($temp->blocked == 0)
+                {
+                    if ($temp->activated == 1)
+                    {
+                        if (password_verify($password, $temp->password))
+                        {
+                            $this->model->setMessage("success", "Welcome back, ". $username);
+                            // Login as details are correct
+                            $this->model->login($temp->id, $_POST["remember"]);
+                            header("Location: index.php");
+                        }
+                        else
+                        {
+                            $this->model->setMessage("danger", "Sorry, but those details do not match an account in our system.");
+                            // Password is incorrect
+                            header("Location: index.php");
+                        }
+                    }
+                    else
+                    {
+                        $this->model->setMessage("danger", "Sorry, but it looks like you haven't activated your account. We previously sent an email to your account which contains an activation link.");
+                        header("Location: index.php");
+                    }
+                }
+                else
+                {
+                    $this->model->setMessage("danger", "Sorry, but it appears you have been blocked from logging into this website. The reason given is: <strong>". $temp->blocked_reason ."</strong>");
+                    header("Location: index.php");
+                }
+            }
+            else
+            {
+                $this->model->setMessage("danger", "Sorry, but those details do not match an account in our system.");
+                // No User with that username found
+                header("Location: index.php");
+            }
+        }
+        
+        public function logout()
+        {
+            $this->model->logout();
+            $this->model->setMessage("success", "Come back soon!");
+            header("Location: index.php");
+        }
+        
     }
 
 ?>

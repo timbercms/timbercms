@@ -1,0 +1,64 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+button {
+    color: #FFF;
+    padding: 10px 20px;
+    border: 1px solid #FFF;
+    text-decoration: none;
+    transition: all .25s;
+    background: transparent;
+    display: block;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+}
+button:hover {
+    background: rgba(255, 255, 255, .25);   
+}
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image: url('../assets/autumn-forest.jpg');
+    font-family: 'Open Sans', sans-serif;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body::after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0px;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(33, 37, 41, .25);
+    z-index: 1;
+}
+h1 {
+    text-align: center;   
+}
+.login-container {
+    width: 15vw;
+    position: relative;
+    z-index: 2;
+    color: #FFF;
+}
+input {
+    padding: 10px;
+    background: rgba(255, 255, 255, .5);
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid #FFF;
+    text-align: center;
+}
+input::placeholder {
+    color: #333;   
+}

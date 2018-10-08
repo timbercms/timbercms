@@ -69,9 +69,9 @@
                 $template = new Template($this->database, $params->admin_template);
                 $this->template = $template;
                 self::$user = new UserModel(0, $this->database);
-                if (self::$user->usergroup->is_admin != 1)
+                if (self::$user->usergroup->is_admin != 1 && $_GET["task"] != "login")
                 {
-                    header("Location: ". self::route("index.php?component=user&controller=login"));
+                    require_once(__DIR__ ."/../../admin/login.php"); die();
                 }
                 $modelname = $this->controller ."Model";
                 $controllername = $this->controller ."Controller";
