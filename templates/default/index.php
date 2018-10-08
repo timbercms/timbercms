@@ -37,7 +37,7 @@
         <div class="body-container">
             <div class="branding-container">
                 <div class="website-title">
-                    <?php echo Core::config()->site_title; ?>
+                    <i class="fas fa-tree"></i> <?php echo Core::config()->site_title; ?>
                 </div>
             </div>
             <div class="menu-container">
