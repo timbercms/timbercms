@@ -19,6 +19,7 @@
 <html>
     <head>
         <title>Timber CMS - Admin</title>
+        <link rel="icon" type="image/png" href="../core/assets/favicon.png">
         <!-- META_DESCRIPTION -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
         <link rel="stylesheet" href="templates/<?php echo $this->template->name; ?>/css/bootstrap.min.css">
