@@ -22,7 +22,9 @@
             }
             else
             {
+                echo '<div class="component-container">';
                 require_once($this->core->loadOverride($this->model->template));
+                echo '</div>';
             }
         }
         

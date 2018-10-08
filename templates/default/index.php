@@ -49,9 +49,7 @@
                 </div>
                 <div class="row">
                     <div class="<?php echo ($this->template->hasModules("sidebar") ? "col-md-9" : "col-md-12"); ?>">
-                        <div class="component-container">
-                            <?php Core::outputView($this->view); ?>
-                        </div>
+                        <?php Core::outputView($this->view); ?>
                     </div>
                     <?php if ($this->template->hasModules("sidebar")) { ?>
                         <div class="col-md-3">

@@ -51,6 +51,8 @@
         public static $hooks;
         public static $cookie_name;
         public static $template_name;
+        public static $component_name;
+        public static $controller_name;
         
         public function __construct()
         {
@@ -151,29 +153,35 @@
                 }
                 self::$content_item_id = $this->content_id;
                 // Check if component is disabled
-                $test_comp = $this->database->loadObject("SELECT id, enabled, is_frontend FROM #__components WHERE internal_name = ?", array($this->component));
-                if (!$test_comp->enabled || !$test_comp->is_frontend)
+                if ($this->component != "system" && $this->controller != "blank")
                 {
-                    // Abort! Component is disabled!
-                    $this->displayErrorPage();
+                    $test_comp = $this->database->loadObject("SELECT id, enabled, is_frontend FROM #__components WHERE internal_name = ?", array($this->component));
+                    if (!$test_comp->enabled || !$test_comp->is_frontend)
+                    {
+                        // Abort! Component is disabled!
+                        $this->displayErrorPage();
+                    }
+                    $modelname = $this->controller ."Model";
+                    $controllername = $this->controller ."Controller";
+                    require_once(__DIR__ ."/../../components/". $this->component ."/models/". $this->controller .".php");
+                    require_once(__DIR__ ."/../../components/". $this->component ."/controllers/". $this->controller .".php");
+                    $model = new $modelname($this->content_id, $this->database);
+                    $controller = new $controllername($model);
+                    $componentconfig = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = ? LIMIT 1", array($this->component));
+                    self::$componentconfig = (object) unserialize($componentconfig->params);
                 }
-                $modelname = $this->controller ."Model";
-                $controllername = $this->controller ."Controller";
-                require_once(__DIR__ ."/../../components/". $this->component ."/models/". $this->controller .".php");
-                require_once(__DIR__ ."/../../components/". $this->component ."/controllers/". $this->controller .".php");
-                $model = new $modelname($this->content_id, $this->database);
-                $controller = new $controllername($model);
-                $componentconfig = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = ? LIMIT 1", array($this->component));
-                self::$componentconfig = (object) unserialize($componentconfig->params);
-                if (strlen($_GET["task"]) > 0)
+                if (strlen($_GET["task"]) > 0 && ($this->component != "system" && $this->controller != "blank"))
                 {
                     $task = $_GET["task"];
                     $controller->$task();
                 }
                 else
                 {
-                    $view = new View($controller, $model, $this);
-                    $this->view = $view;
+                    if ($this->component != "system" && $this->controller != "blank")
+                    {
+                        $view = new View($controller, $model, $this);
+                        $this->view = $view;
+                    }
                     require_once(__DIR__ ."/../../templates/". $this->template->name ."/index.php");
                     $this->template->addCriticalCSS();
                     $this->template->addComponentStylesheet($this->component);
@@ -185,20 +193,23 @@
 
         public static function outputView($view)
         {
-            if (is_array(self::$menu_item->params["access"]))
+            if (self::$component_name != "system" && self::$controller_name != "blank")
             {
-                if (in_array(self::$user->usergroup->id, self::$menu_item->params["access"]) || in_array(0, self::$menu_item->params["access"]))
+                if (is_array(self::$menu_item->params["access"]))
                 {
-                    $view->output();
+                    if (in_array(self::$user->usergroup->id, self::$menu_item->params["access"]) || in_array(0, self::$menu_item->params["access"]))
+                    {
+                        $view->output();
+                    }
+                    else
+                    {
+                        echo '<div class="alert alert-danger">You do not have access to this page</div>';
+                    }
                 }
                 else
                 {
-                    echo '<div class="alert alert-danger">You do not have access to this page</div>';
+                    $view->output();
                 }
-            }
-            else
-            {
-                $view->output();
             }
         }
         
@@ -444,6 +455,15 @@
                 $first = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($parts["0"]));
                 if ($first->id > 0)
                 {
+                    if ($first->component == "system" && $first->controller == "blank")
+                    {
+                        $this->component = "system";
+                        self::$component_name = "system";
+                        $this->controller = "blank";
+                        self::$controller_name = "blank";
+                        $this->content_id = 0;
+                        $router_set = true;
+                    }
                     self::$menu_item = new MenuItemModel($first->id, self::db());
                     $alias = end($parts);
                     $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
