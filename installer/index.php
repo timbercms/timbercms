@@ -20,13 +20,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bulletin. Installer</title>
+        <title>Timber CMS - Installer</title>
         <link rel="stylesheet" type="text/css" href="../templates/default/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="installer.css" />
     </head>
     <body>
         <div class="header-container">
-            <span class="title">Bulletin. Installer</span><span class="subtitle">v<?php echo $version->numerical; ?></span>
+            <span class="title">Timber CMS - Installer</span> <span class="subtitle">v<?php echo $version->numerical; ?></span>
         </div>
         <div class="body-container">
             <?php if ($_GET["stage"] == 0 || strlen($_GET["stage"]) == 0) { ?>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-form-label"><strong>Database Prefix</strong></label>
-                        <input type="text" name="db_prefix" value="bul_" class="form-control" required placeholder="bul_" />
+                        <input type="text" name="db_prefix" value="bul_" class="form-control" required placeholder="tim_" />
                     </div>
                     <button type="submit" class="btn btn-primary float-right">Next Stage ></button>
                     <div class="clearfix"></div>
@@ -342,7 +342,7 @@ RedirectMatch 404 ^404.php';
     
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, is_core, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Content", "Article category and detail view. Includes comments via third-party Disqus.", "content", "1", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, 'a:1:{s:15:"enable_comments";s:1:"0";}', "1"));
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, is_core, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("User", "Provides functions for account management, and profile views.", "user", "1", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, '', "1"));
-                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, is_core, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Settings", "Provides sitewide, and component specific settings.", "settings", "0", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, 'a:6:{s:10:"site_title";s:'. strlen($_POST["site_name"]) .':"'. $_POST["site_name"] .'";s:16:"default_template";s:7:"default";s:14:"admin_template";s:7:"default";s:11:"cookie_name";s:15:"bulletin_cookie";s:15:"cookie_duration";s:2:"28";s:17:"default_usergroup";s:1:"1";}', "1"));
+                    $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, is_core, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Settings", "Provides sitewide, and component specific settings.", "settings", "0", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, 'a:6:{s:10:"site_title";s:'. strlen($_POST["site_name"]) .':"'. $_POST["site_name"] .'";s:16:"default_template";s:7:"default";s:14:"admin_template";s:7:"default";s:11:"cookie_name";s:15:"timbercms_cookie";s:15:"cookie_duration";s:2:"28";s:17:"default_usergroup";s:1:"1";}', "1"));
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, is_core, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Extensions", "Provides management of extensions.", "extensions", "0", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, '', "1"));
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, is_core, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Menu Manager", "Basic Menu Management.", "menu", "0", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, '', "1"));
                     $db->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, is_core, author_name, author_url, version, params, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Module Manager", "Basic Module Management.", "modules", "0", "1", "1", "1", "Chris Smith", "https://github.com/Smith0r", $version->numerical, '', "1"));
@@ -369,7 +369,7 @@ RedirectMatch 404 ^404.php';
                         
                     $db->query("INSERT INTO #__users (username, email, usergroup_id, password, activated, blocked, register_time, last_action_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", array($_POST["username"], $_POST["email"], "2", password_hash($_POST["password"], PASSWORD_DEFAULT), "1", "0", time(), time()));
                     $db->query("INSERT INTO #__articles_categories (title, alias, description, published, ordering, params) VALUES (?, ?, ?, ?, ?)", array("Site Pages", "site-pages", "", "1", "publish_time DESC", 'a:1:{s:10:"show_title";s:1:"1";}'));
-                    $db->query("INSERT INTO #__articles (title, alias, category_id, content, published, publish_time, author_id, hits, meta_description, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Welcome to Bulletin CMS", "welcome-to-bulletin-cms", "1", '<p>Welcome to Bulletin CMS!</p><p>Please feel free to delete this article.</p><p>If you require help with any part of the CMS, please open an issue on Github (<a href="https://github.com/Smith0r/bulletin" target="_blank">https://github.com/Smith0r/bulletin</a>)</p>', "1", time(), "1", "0", "Welcome to Bulletin CMS!", ""));
+                    $db->query("INSERT INTO #__articles (title, alias, category_id, content, published, publish_time, author_id, hits, meta_description, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array("Welcome to Timber CMS", "welcome-to-timber-cms", "1", '<p>Welcome to Timber CMS!</p><p>Please feel free to delete this article.</p><p>If you require help with any part of the CMS, please open an issue on Github (<a href="https://github.com/timbercms/timbercms" target="_blank">https://github.com/timbercms/timbercms</a>)</p>', "1", time(), "1", "0", "Welcome to Timber CMS!", ""));
     
                     header("Location: index.php?stage=4");
     

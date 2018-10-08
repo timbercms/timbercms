@@ -18,7 +18,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bulletin. Admin</title>
+        <title>Timber CMS - Admin</title>
         <!-- META_DESCRIPTION -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
         <link rel="stylesheet" href="templates/<?php echo $this->template->name; ?>/css/bootstrap.min.css">
@@ -53,7 +53,7 @@
         <div class="menu-container">
             <ul class="menu-list">
                 <li class="top-level cms-name">
-                    <a href="index.php" style="font-weight: bold; letter-spacing: 2px;"><i class="far fa-circle"></i> Bulletin.</a>
+                    <a href="index.php" style="font-weight: bold; letter-spacing: 2px;"><i class="fas fa-tree"></i> Timber CMS</a>
                 </li>
                 <?php 
                     $comps = Core::db()->loadObjectList("SELECT * FROM #__components WHERE is_core = '1' ORDER BY ordering ASC", array());
@@ -119,7 +119,7 @@
             </div>
             <?php $this->view->output(); ?>
             <div class="white-card centre-text">
-                Bulletin. <strong>v<?php echo $version->numerical; ?></strong> 
+                Timber CMS <strong>v<?php echo $version->numerical; ?></strong> 
                 <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>
                     - <a href="index.php?component=update&controller=update"><span class="badge badge-danger version-label">UPDATE (v<?php echo $web_version->tag_name; ?> Available)</span></a>
                 <?php } else { ?>
