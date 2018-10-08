@@ -28,7 +28,7 @@
                 $query .= " AND title LIKE '%". $_GET["title"] ."%'";
             }
             $query .= " ORDER BY ordering ASC";
-            $this->max = count($this->database->loadObjectList($query));
+            $this->max = count($this->database->loadObjectList($query, array($id)));
             $query .= " LIMIT ". ($_GET["p"] > 0 ? (($_GET["p"] - 1) * 20) : 0) .", 20";
             $temp_items = $this->database->loadObjectList($query, array($id));
             foreach ($temp_items as $temp_item)
