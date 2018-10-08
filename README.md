@@ -1,4 +1,4 @@
-# Bulletin.
+# Timber CMS
 Free, Open Source Basic CMS. Currently in development.
 
 ## Current Progress
