@@ -14,6 +14,11 @@
                     <p>Allows you to use a menu item as a separator. Useful for dropdown menus.</p>
                     <a href="index.php?component=menu&controller=menuitem<?php echo (strlen($_GET["id"]) > 0 ? "&overwrite=1&id=". $_GET["id"] : ""); ?>&menu_id=<?php echo $_GET["menu_id"]; ?>&comp=system&cont=separator" class="button">Select</a>
                 </div>
+                <div class="component-controller">
+                    <p><strong>Blank</strong></p>
+                    <p>Shows a blank page. Perfect for module only pages!</p>
+                    <a href="index.php?component=menu&controller=menuitem<?php echo (strlen($_GET["id"]) > 0 ? "&overwrite=1&id=". $_GET["id"] : ""); ?>&menu_id=<?php echo $_GET["menu_id"]; ?>&comp=system&cont=blank" class="button">Select</a>
+                </div>
             </div>
         </div>
         <?php foreach ($this->model->components as $key => $component) { ?>

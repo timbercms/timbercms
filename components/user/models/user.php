@@ -4,7 +4,7 @@
 
     class UserModel extends Model
     {
-        public $component = "user";
+        public $component_name = "user";
         public $table = "users";
         public $template = "profile.php";
         public $database;

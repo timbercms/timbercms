@@ -2,7 +2,7 @@
 
     class MenuitemModel extends Model
     {
-        public $component = "menu";
+        public $component_name = "menu";
         public $table = "menus_items";
         public $database;
         public $template = "menuitem.php";

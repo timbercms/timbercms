@@ -2,7 +2,7 @@
 
     class HookModel extends Model
     {
-        public $component = "extensions";
+        public $component_name = "extensions";
         public $table = "components_hooks";
         public $template = "hook.php";
         public $database;

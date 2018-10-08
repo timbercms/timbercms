@@ -2,7 +2,7 @@
 
     class EnquiryModel extends Model
     {
-        public $component = "contact";
+        public $component_name = "contact";
         public $table = "enquiries";
         public $template = "enquiry.php";
         public $database;

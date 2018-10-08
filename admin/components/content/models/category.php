@@ -4,7 +4,7 @@
 
     class CategoryModel extends Model
     {
-        public $component = "content";
+        public $component_name = "content";
         public $table = "articles_categories";
         public $template = "category.php";
         public $database;

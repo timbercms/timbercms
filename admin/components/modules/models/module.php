@@ -4,7 +4,7 @@
 
     class ModuleModel extends Model
     {
-        public $component = "modules";
+        public $component_name = "modules";
         public $table = "modules";
         public $template = "module.php";
         public $database;

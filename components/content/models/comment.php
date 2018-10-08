@@ -2,7 +2,7 @@
 
     class CommentModel extends Model
     {
-        public $component = "content";
+        public $component_name = "content";
         public $table = "articles_comments";
         public $database;
         

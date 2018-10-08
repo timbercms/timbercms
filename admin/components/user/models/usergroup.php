@@ -4,7 +4,7 @@
 
     class UsergroupModel extends Model
     {
-        public $component = "user";
+        public $component_name = "user";
         public $table = "usergroups";
         public $template = "usergroup.php";
         public $database;

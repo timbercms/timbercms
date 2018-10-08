@@ -5,7 +5,7 @@
 
     class MenuModel extends Model
     {
-        public $component = "menu";
+        public $component_name = "menu";
         public $table = "menus";
         public $template = "menu.php";
         public $database;

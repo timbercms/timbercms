@@ -36,7 +36,7 @@
             {
                 $this->preStoreData();
             }
-            $xml = simplexml_load_file(__DIR__ ."/../../admin/components/". $this->component ."/database.xml");
+            $xml = simplexml_load_file(__DIR__ ."/../../admin/components/". $this->component_name ."/database.xml");
             $names = array();
             $values = array();
             $value_names = array();

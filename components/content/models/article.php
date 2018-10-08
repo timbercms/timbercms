@@ -5,7 +5,7 @@
 
     class ArticleModel extends Model
     {
-        public $component = "content";
+        public $component_name = "content";
         public $table = "articles";
         public $template = "article.php";
         public $database;
