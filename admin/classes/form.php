@@ -67,7 +67,7 @@ class Form
             switch ($type) {
                 case "select":
                 case "sql":
-                    $string .= $this->generateSelectSqlField($field_name, $attributes);
+                    $string .= $this->generateSelectSqlField($field_name, $attributes, $is_extra_config);
                     break;
                 case "textarea":
                     $string .= $this->generateTextareaField($field_name, $value, $attributes);
@@ -326,7 +326,7 @@ class Form
      * @param string $field_name
      * @param object $attributes
      */
-    protected function generateSelectSqlField($field_name, $attributes)
+    protected function generateSelectSqlField($field_name, $attributes, $is_extra_config)
     {
         $multiple = $attributes->multiple; // applies to select / sql
         $query = $attributes->query; // applies to sql
@@ -334,7 +334,15 @@ class Form
         $values = $attributes->values; // applies to select (, seperated) label|value
         $selectdefault = $attributes->selectdefault; // applies to sql (label|value)
 
-        $currentValue = $this->data->$field_name;
+        if ($is_extra_config)
+        {
+            $name = rtrim(explode("params[", $field_name)[1], "]");
+            $currentValue = $this->data->$name;
+        }
+        else
+        {
+            $currentValue = $this->data->$field_name;
+        }
 
         $string = '<select name="'.$field_name;
         if ($multiple == "true")
