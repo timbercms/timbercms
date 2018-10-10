@@ -12,6 +12,7 @@
     <items value="settings" label="Site Settings" />
     <items value="database" label="Database Checker" />
     <fields type="text" name="site_title" label="Site Title" />
+    <fields type="select" name="error_reporting" label="Error Reporting" values="Off|0,On|1" />
     <fields type="template_picker" name="default_template" label="Default Template" />
     <fields type="template_picker" name="admin_template" label="Admin Template" />
     <fields type="text" name="cookie_name" label="Cookie Name" default="bulletin_cookie" />

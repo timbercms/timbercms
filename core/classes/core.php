@@ -108,6 +108,7 @@
                 self::$hooks = new Hooks($this->database);
                 $config = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = 'settings' LIMIT 1");
                 $params = (object) unserialize($config->params);
+                ini_set("display_errors", $params->error_reporting);
                 self::$config = $params;
                 require_once(__DIR__ ."/template.php");
                 $template = new Template($this->database, $params->default_template);
