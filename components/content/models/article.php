@@ -29,10 +29,6 @@
             {
                 $this->image = (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/").$this->image;
             }
-            else
-            {
-                $this->image = (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/")."images/articles/placeholder.jpg";
-            }
             if (Core::user()->usergroup->is_admin == 1)
             {
                 $temp_comments = $this->database->loadObjectList("SELECT id FROM #__articles_comments WHERE article_id = ? ORDER BY publish_time DESC", array($this->id));

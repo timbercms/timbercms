@@ -3,12 +3,12 @@
 }
 .menu-container {
     background: #FFF;
-    max-width: var(--site-width);
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
+    position: fixed;
+    width: 100%;
     z-index: 100;
-    border-radius: 5px;
+    -webkit-box-shadow: 0px 5px 5px 0px rgba(45,48,51,0.5);
+    -moz-box-shadow: 0px 5px 5px 0px rgba(45,48,51,0.5);
+    box-shadow: 0px 5px 5px 0px rgba(45,48,51,0.5);
 }
 .menu-container .module {
     margin-bottom: 0px;
@@ -17,8 +17,10 @@
     background: none;
     box-shadow: none;
     padding: 0px;
+    max-width: var(--site-width);
+    margin-left: auto;
+    margin-right: auto;
 }
-
 .menu-container .module-inner {
     padding: 0px;   
 }
@@ -35,10 +37,6 @@
 }
 .menu-container .menu-list li.top-level > a > svg {
     float: right;   
-}
-.menu-container ul.menu-list > li:first-of-type > a {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
 }
 .menu-container ul.menu-list > li > a {
     display: inline-block;
