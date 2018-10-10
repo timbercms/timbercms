@@ -276,9 +276,9 @@
         
         public static function changeTitle($title)
         {
-            if (strlen($title) > 0)
+            if (strlen($title) > 0 && strlen(self::$title) == 0)
             {
-                self::$title = $title." - ".self::$config->site_title;
+                self::$title = $title;
             }
         }
         
@@ -326,7 +326,7 @@
         {
             $page = str_replace("<!-- HEADER_STYLES -->", implode("", self::$stylesheets), $page);
             $page = str_replace("<!-- HEADER_SCRIPTS -->", implode("", self::$scripts), $page);
-            $page = str_replace("<!-- PAGE_TITLE -->", self::$title, $page);
+            $page = str_replace("<!-- PAGE_TITLE -->", self::$title." - ".self::$config->site_title, $page);
             $page = str_replace("<!-- META_DESCRIPTION -->", self::$description, $page);
             $page = str_replace("<!-- META_AUTHOR -->", self::$meta_author, $page);
             $page = str_replace("<!-- META_PROPERTIES -->", implode("", self::$meta_properties), $page);
@@ -464,7 +464,9 @@
                         $this->content_id = 0;
                         $router_set = true;
                     }
-                    self::$menu_item = new MenuItemModel($first->id, self::db());
+                    $menu_item = new MenuItemModel($first->id, self::db());
+                    self::$menu_item = $menu_item;
+                    self::changeTitle($menu_item->title);
                     $alias = end($parts);
                     $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
                     if ($item->id <= 0)
