@@ -631,6 +631,8 @@
         
         public function displaySystemMessages()
         {
+            if (!isset($_SESSION["MESSAGES"])) return;
+
             if (count($_SESSION["MESSAGES"]) > 0 && strlen($_GET["task"]) == 0)
             {
                 foreach ($_SESSION["MESSAGES"] as $message)
