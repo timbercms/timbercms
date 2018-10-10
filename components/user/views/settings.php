@@ -7,6 +7,10 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
+                            <label><strong>Name:</strong></label>
+                            <input type="text" class="form-control" name="name" value="<?php echo $this->model->user->name; ?>" />
+                        </div>
+                        <div class="form-group">
                             <label><strong>Email Address:</strong></label>
                             <input type="email" class="form-control" name="email" value="<?php echo $this->model->user->email; ?>" />
                         </div>

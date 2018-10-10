@@ -3,7 +3,7 @@
     <head>
         <title><!-- PAGE_TITLE --></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/png" href="core/assets/favicon.png">
+        <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>core/assets/favicon.png">
         <!-- META_DESCRIPTION -->
         <!-- META_AUTHOR -->
         <!-- META_PROPERTIES -->

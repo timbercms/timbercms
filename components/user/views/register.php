@@ -2,6 +2,10 @@
     <h1 class="component-title">Register an account</h1>
     <form action="<?php echo $this->route("index.php?component=user&controller=user&task=register"); ?>" method="post">
         <div class="form-group">
+            <label><strong>Name:</strong></label>
+            <input type="text" name="name" class="form-control" required />
+        </div>
+        <div class="form-group">
             <label><strong>Username:</strong></label>
             <input type="text" name="username" class="form-control" required />
         </div>

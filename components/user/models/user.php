@@ -90,9 +90,10 @@
             $this->load($id);
         }
         
-        public function register($username, $password, $email)
+        public function register($username, $password, $email, $name)
         {
             $this->id = 0;
+            $this->name = $name;
             $this->username = $username;
             $this->password = password_hash($password, PASSWORD_DEFAULT);
             $this->email = $email;

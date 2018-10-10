@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
     <fields type="hidden" name="id" />
-    <fields type="text" length="255" name="username" label="Username" required="required" />
     <fields type="text" length="255" name="name" label="Name" required="required" />
+    <fields type="text" length="255" name="username" label="Username" required="required" />
     <fields type="password" name="password" label="Password" required="required" />
     <fields type="text" name="email" label="Email Address" required="required" />
     <fields type="select" name="activated" label="Activated" values="No|0,Yes|1" default="1" />
