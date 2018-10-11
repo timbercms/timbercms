@@ -96,6 +96,7 @@
                     $view = new View($controller, $model, $this);
                     $this->view = $view;
                     require_once(__DIR__ ."/../../admin/templates/". $this->template->name ."/index.php");
+                    $this->template->addCriticalCSS();
                     $this->template->addComponentStylesheet($this->component);
                     $this->template->addComponentScript($this->component);
                     $this->database->close();
