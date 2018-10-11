@@ -238,6 +238,7 @@ RedirectMatch 404 ^404.php';
                         "site_title" => $_POST["site_name"],
                         "error_reporting" => "0",
                         "enable_registration" => "1",
+                        "tagline" => "",
                         "default_template" => "default",
                         "admin_template" => "default",
                         "cookie_name" => "timbercms_cookie",

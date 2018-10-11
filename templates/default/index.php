@@ -41,7 +41,7 @@
         <div class="header-container">
             <div class="hero-container">
                 <h1><i class="fas fa-tree"></i> <?php echo Core::config()->site_title; ?></h1>
-                <p>Free, Open Source Content Management System</p>
+                <p><?php echo Core::config()->tagline; ?></p>
             </div>
         </div>
         <div class="body-container">
