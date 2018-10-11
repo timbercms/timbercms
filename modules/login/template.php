@@ -35,7 +35,9 @@
             <button type="submit" class="button pull-right"><i class="fa fa-key"></i> Login</button>
             <p>&nbsp;</p>            
             <p><a href="<?php echo Core::route("index.php?component=user&controller=requestreset"); ?>">Forgotten your password?</a></p>
-            <p><a href="<?php echo $this->route("index.php?component=user&controller=register"); ?>">Don't have an account?</a></p>
+            <?php if (Core::config()->enable_registration) { ?>
+                <p><a href="<?php echo $this->route("index.php?component=user&controller=register"); ?>">Don't have an account?</a></p>
+            <?php } ?>
             <div class="clearfix"></div>
         </form>
     <?php } ?>
