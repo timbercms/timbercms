@@ -15,6 +15,7 @@ button {
     text-align: center;
     width: 100%;
     cursor: pointer;
+    border-radius: 5px;
 }
 button:hover {
     background: rgba(255, 255, 255, .25);   
@@ -48,6 +49,7 @@ input {
     width: 100%;
     border: 1px solid #FFF;
     text-align: center;
+    border-radius: 5px;
 }
 input::placeholder {
     color: #333;   
