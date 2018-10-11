@@ -24,32 +24,11 @@
                 <div class="profile-news-list">
                     <?php foreach ($this->model->articles as $article) { ?>
                         <div class="profile-news-item">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>"><img src="<?php echo $article->image; ?>" class="profile-article-image" /></a>
-                                </div>
-                                <div class="col-md-9">
-                                    <p><a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>"><?php echo $article->title; ?></a></p>
-                                    <?php echo $article->short_content; ?>
-                                    <p><time pubdate><?php echo $this->model->relativeTime($article->publish_time); ?> ago</time></p>
-                                </div>
-                            </div>
+                            <p><a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $article->id); ?>"><?php echo $article->title; ?></a></p>
+                            <?php echo $article->short_content; ?>
                         </div>
                     <?php } ?>
                 </div>
-            </div>
-            <div class="user-information">
-                <h3 style="margin-top: 40px;">Recent Comments by <?php echo explode(" ", $this->model->user->name)[0]; ?></h3>
-                <?php foreach ($this->model->comments as $comment) { ?>
-                    <div class="card">
-                        <div class="card-header">
-                            In: <a href="<?php echo Core::route("index.php?component=content&controller=article&id=". $comment->article_id); ?>"><?php echo $comment->article_title; ?></a>
-                        </div>
-                        <div class="card-body">
-                            <?php echo $comment->content; ?>
-                        </div>
-                    </div>
-                <?php } ?>
             </div>
         </div>
     </div>

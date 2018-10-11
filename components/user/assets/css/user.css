@@ -7,6 +7,7 @@
 .profile-header {
     padding-top: 60px;
     padding-bottom: 60px;
+    border-radius: 5px;
 }
 .user-profile-avatar {
     border: 5px solid #FFF;
