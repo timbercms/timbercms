@@ -66,21 +66,29 @@
         
         public function register()
         {
-            if (Core::config()->enable_recaptcha == 1)
+            if (Core::config()->enable_registration)
             {
-                if ($this->model->checkCaptcha())
+                if (Core::config()->enable_recaptcha == 1)
                 {
-                    $this->processRegister();
+                    if ($this->model->checkCaptcha())
+                    {
+                        $this->processRegister();
+                    }
+                    else
+                    {
+                        $this->model->setMessage("danger", "ReCaptcha verification failed.");
+                        header("Location: ". Core::route("index.php?component=user&controller=register"));
+                    }
                 }
                 else
                 {
-                    $this->model->setMessage("danger", "ReCaptcha verification failed.");
-                    header("Location: ". Core::route("index.php?component=user&controller=register"));
+                    $this->processRegister();
                 }
             }
             else
             {
-                $this->processRegister();
+                $this->model->setMessage("danger", "The administrator has disabled new user registrations on this website.");
+                header("Location: ". Core::route("index.php?component=user&controller=register"));
             }
         }
         
