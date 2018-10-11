@@ -1,21 +1,23 @@
 <?php if ($this->model->id > 0 && $this->model->published && $this->model->category->published) { ?>
     <article class="article-container">
         <header>
-            <?php if ($this->model->image) { ?>
+            <?php if ($this->model->image && $this->model->category->params->show_image) { ?>
                 <img class="article-image" src="<?php echo $this->model->image; ?>" alt="<?php echo $this->model->title; ?>" />
             <?php } ?>
             <h1 class="article-title"><?php echo $this->model->title; ?></h1>
-            <div class="article-author-info">
-                <div class="row align-items-center">
-                    <div class="col-md-1 col-4">
-                        <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $this->model->id); ?>"><img src="<?php echo $this->model->author->avatar; ?>" /></a>
-                    </div>
-                    <div class="col-md-11 col-8">
-                        By <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $this->model->id); ?>"><?php echo $this->model->author->username; ?></a><br />
-                        <time pubdate><?php echo $this->model->relativeTime($this->model->publish_time); ?> ago</time>
+            <?php if ($this->model->category->params->show_author_info) { ?>
+                <div class="article-author-info">
+                    <div class="row align-items-center">
+                        <div class="col-md-1 col-4">
+                            <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $this->model->id); ?>"><img src="<?php echo $this->model->author->avatar; ?>" /></a>
+                        </div>
+                        <div class="col-md-11 col-8">
+                            By <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $this->model->id); ?>"><?php echo $this->model->author->username; ?></a><br />
+                            <time pubdate><?php echo $this->model->relativeTime($this->model->publish_time); ?> ago</time>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php } ?>
         </header>
         <div class="article-content">
             <?php echo $this->model->content; ?>
@@ -40,16 +42,20 @@
             </script>
             <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         <?php } ?>
-        <div class="share-buttons">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["REQUEST_SCHEME"]; ?>://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" class="facebook-button" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://twitter.com/home?status=<?php echo urlencode($_SERVER["REQUEST_SCHEME"]."://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']); ?>" class="twitter-button" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://plus.google.com/share?url=<?php echo $_SERVER["REQUEST_SCHEME"]; ?>://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" class="google-button" target="_blank"><i class="fab fa-google-plus-g"></i></a>
-            <a href="whatsapp://send?text=<?php echo $_SERVER["REQUEST_SCHEME"]; ?>://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" data-action="share/whatsapp/share" data-href="<?php echo $_SERVER["REQUEST_SCHEME"]; ?>://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" class="whatsapp-button"><i class="fab fa-whatsapp"></i></a>
-        </div>
-        <footer class="article-information">
-            <p><strong>Category:</strong> <?php echo $this->model->category->title; ?></p>
-            <p><strong>Views:</strong> <?php echo $this->model->hits; ?> times</p>
-        </footer>
+        <?php if ($this->model->category->params->show_social_icons) { ?>
+            <div class="share-buttons">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $_SERVER["REQUEST_SCHEME"]; ?>://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" class="facebook-button" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/home?status=<?php echo urlencode($_SERVER["REQUEST_SCHEME"]."://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']); ?>" class="twitter-button" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://plus.google.com/share?url=<?php echo $_SERVER["REQUEST_SCHEME"]; ?>://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" class="google-button" target="_blank"><i class="fab fa-google-plus-g"></i></a>
+                <a href="whatsapp://send?text=<?php echo $_SERVER["REQUEST_SCHEME"]; ?>://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" data-action="share/whatsapp/share" data-href="<?php echo $_SERVER["REQUEST_SCHEME"]; ?>://<?php echo $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" class="whatsapp-button"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        <?php } ?>
+        <?php if ($this->model->category->params->show_article_information) { ?>
+            <footer class="article-information">
+                <p><strong>Category:</strong> <?php echo $this->model->category->title; ?></p>
+                <p><strong>Views:</strong> <?php echo $this->model->hits; ?> times</p>
+            </footer>
+        <?php } ?>
         <?php if (Core::componentconfig()->enable_comments == 1 && Core::componentconfig()->comments_type == "internal") { ?>
             <div class="comments-container">
                 <h3><?php echo count($this->model->comments); ?> Comments</h3>
