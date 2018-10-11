@@ -1,6 +1,6 @@
 :root {
-    --link: #283655;
-    --link-accent: #4D648D;
+    --link: #DC5842;
+    --link-accent: #DE3114;
     --base: #1E1F26;
     --accent: #4D648D;
 }
@@ -17,7 +17,10 @@ body {
     line-height: 16px;
     margin: 0px;
     padding: 0px;
-    background: #ebeef2;
+    background: url('../../../../core/assets/autumn-forest.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
     overflow-x: hidden;
 }
 a {
@@ -91,10 +94,9 @@ a:hover {
     padding-bottom: 10px;
 }
 .main-content {
-    max-width: 95vw;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 2.5vw;
+    padding-top: 74.25px;
+    padding-right: 30px;
+    padding-bottom: 30px;
 }
 .menu-container ul {
     list-style-type: none;
@@ -285,23 +287,25 @@ form label {
 .component-filters {
     margin-bottom: 40px;   
 }
-.menu-toggler {
-    display: none;   
-}
 .menu-container {
-    background: var(--link);
-    max-width: var(--site-width);
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
+    background: #FFF;
+    position: fixed;
+    width: 100%;
     z-index: 100;
-    min-height: 44.25px;
+    -webkit-box-shadow: 0px 5px 5px 0px rgba(45,48,51,0.5);
+    -moz-box-shadow: 0px 5px 5px 0px rgba(45,48,51,0.5);
+    box-shadow: 0px 5px 5px 0px rgba(45,48,51,0.5);
 }
 .menu-container .module {
     margin-bottom: 0px;
     border: none;
-    border-radius: 0px;
     overflow: inherit;
+    background: none;
+    box-shadow: none;
+    padding: 0px;
+    max-width: var(--site-width);
+    margin-left: auto;
+    margin-right: auto;
 }
 .menu-container .module-inner {
     padding: 0px;   
@@ -320,12 +324,18 @@ form label {
 .menu-container ul.menu-list > li > a {
     display: inline-block;
     padding: 15px;
-    color: #FFF;
+    color: var(--link);
     text-decoration: none;
     transition: background .25s;
 }
-.menu-container ul.menu-list > li > a:hover, .menu-container ul.menu-list > li.active > a {
-    background: var(--link-accent);   
+.menu-container ul.menu-list > li.active > a {
+    background: var(--link);
+    color: #FFF;
+}
+.menu-container ul.menu-list > li > a:hover {
+    background: var(--link-accent);
+    color: #FFF;
+    cursor: pointer;
 }
 .menu-container .menu-list li.parent > ul {
     display: none;
@@ -333,13 +343,14 @@ form label {
 .menu-container .menu-list li.first-child > a, .menu-container .menu-list li.second-child > a {
     background: var(--link);
     padding: 15px;
-    border-bottom: 1px solid var(--link-accent);
+    border-bottom: 1px solid var(--blueberry);
     color: #FFF;
     display: block;
     min-width: 230px;
 }
 .menu-container .menu-list li.first-child:hover > a, .menu-container .menu-list li.second-child:hover > a {
     background: var(--link-accent);
+    color: #FFF;
 }
 .menu-container .menu-list li.first-child:last-of-type > a, .menu-container .menu-list li.second-child:last-of-type > a {
     border-bottom: none;   
@@ -354,12 +365,16 @@ form label {
     font-size: 32px;
 }
 .menu-container .menu-list li.parent:hover {
-    background: var(--link);   
+    background: var(--link);
+    color: #FFF !important;
+}
+.menu-container .menu-list li.parent:hover > a {
+    color: #FFF;
 }
 .menu-container .menu-list li.parent:hover > ul {
     display: block;
     position: absolute;
-    top: 44.25px;
+    top: 46px;
     left: 0px;
     border-top: 1px solid var(--link);
 }
@@ -368,5 +383,41 @@ form label {
     top: -1px;
 }
 .cms-name a {
-    background: var(--link-accent) !important;   
+    background: var(--link-accent) !important;
+    color: #FFF !important;
+}
+.sidebar-menu {
+    height: 100%;
+    padding-top: 76.25px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+}
+.sidebar-container {
+    background: #FFF;
+    height: 100%;
+    background: #FFF;
+    border-radius: 5px;
+    padding: 20px;
+}
+.comp-container {
+    border-radius: 5px;
+    border: 1px solid #333;
+    margin-bottom: 20px;
+}
+.comp-container:last-of-type {
+    margin-bottom: 0px;   
+}
+.comp-title {
+    color: #FFF;
+    background: #333;
+    padding: 10px;
+}
+.comp-title svg {
+    display: inline-block;
+    width: 25px !important;
+}
+.comp-children a {
+    display: block;
+    color: var(--link);
+    padding: 10px;
 }

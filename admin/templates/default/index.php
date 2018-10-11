@@ -12,7 +12,7 @@
         ]
     ];
     $context = stream_context_create($opts);
-    $web_version = json_decode(file_get_contents("https://api.github.com/repos/Smith0r/bulletin/releases", false, $context))["0"];
+    //$web_version = json_decode(file_get_contents("https://api.github.com/repos/Smith0r/bulletin/releases", false, $context))["0"];
 
 ?>
 <!DOCTYPE html>
@@ -56,76 +56,57 @@
                 <li class="top-level cms-name">
                     <a href="index.php" style="font-weight: bold; letter-spacing: 2px;"><i class="fas fa-tree"></i> Timber CMS</a>
                 </li>
-                <?php 
-                    $comps = Core::db()->loadObjectList("SELECT * FROM #__components WHERE is_core = '1' ORDER BY ordering ASC", array());
-                    foreach ($comps as $comp)
-                    {
-                        $xml = simplexml_load_file(__DIR__ ."/../../components/". $comp->internal_name ."/extension.xml");
-                        if ($comp->enabled && $comp->is_backend)
-                        {
-                            echo '<li class="top-level'.($_GET["component"] == $comp->internal_name ? " active" : "").(count($xml->items) > 0 ? " parent" : "").'">';
-                                echo '<a href="#"><i class="fas fa-'.$xml->name->attributes()->icon.'"></i>&nbsp;&nbsp;&nbsp;'.$xml->name->attributes()->value.(count($xml->items) > 0 ? '&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i>' : '').'</a>';
-                                echo '<ul>';
-                                foreach ($xml->items as $item)
-                                {
-                                    echo '<li class="first-child'.($_GET["component"] == $comp->internal_name && $_GET["controller"] == $item->attributes()->value ? ' active' : '').'">';
-                                        echo '<a href="index.php?component='. $comp->internal_name .'&controller='. $item->attributes()->value .'">'. $item->attributes()->label .'</a>';
-                                    echo '</li>';
-                                }
-                                echo '</ul>';
-                            echo '</li>';
-                        }
-                    }
-                    echo '<li class="top-level parent">';
-                        echo '<a href="#"><i class="fas fa-sitemap"></i>&nbsp;&nbsp;&nbsp;Extensions&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i></a>';
-                        echo '<ul>';
-                            foreach ($dirs as $dir) 
-                            {
-                                if (file_exists(__DIR__ ."/../../components/". $dir ."/extension.xml")) {
-                                    $xml = simplexml_load_file(__DIR__ ."/../../components/". $dir ."/extension.xml");
-                                    $comp = Core::db()->loadObject("SELECT * FROM #__components WHERE internal_name = ? AND is_core = '0'", array($dir));
-                                    if ($comp->enabled && $comp->is_backend)
-                                    {
-                                        echo '<li class="first-child parent">';
-                                            echo '<a href="#"><i class="fas fa-'.$xml->name->attributes()->icon.'"></i>&nbsp;&nbsp;&nbsp;'.$xml->name->attributes()->value.'</a>';
-                                            echo '<ul>';
-                                            foreach ($xml->items as $item)
-                                            {
-                                                echo '<li class="second-child'.($_GET["component"] == $comp->internal_name && $_GET["controller"] == $item->attributes()->value ? ' active' : '').'">';
-                                                    echo '<a href="index.php?component='. $dir .'&controller='. $item->attributes()->value .'">'. $item->attributes()->label .'</a>';
-                                                echo '</li>';
-                                            }
-                                            echo '</ul>';
-                                        echo '</li>';
-                                    }
-                                }
-                            }
-                        echo '</ul>';
-                    echo '</li>';
-                    echo '<li class="top-level parent" style="float: right;">';
-                        echo '<a href="#">'. $this->user()->username .'&nbsp;&nbsp;&nbsp;<i class="fas fa-chevron-down"></i></a>';
-                        echo '<ul>';
-                            echo '<li class="first-child parent">';
-                                echo '<a href="../" target="_blank">Homepage</a>';
-                                echo '<a href="index.php?component=user&controller=user&task=logout">Logout</a>';
-                            echo '</li>';
-                        echo '</ul>';
-                    echo '</li>';
-                ?>
+                <li class="top-level" style="float: right;">
+                    <a href="index.php?component=user&controller=user&task=logout"><i class="fas fa-power-off"></i></a>
+                </li>
+                <li class="top-level" style="float: right;">
+                    <a href="../" target="_blank">Homepage</a>
+                </li>
             </ul>
         </div>
-        <div class="main-content">
-            <div class="system-messages">
-                <?php $this->displaySystemMessages(); ?>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidebar-menu">
+                    <div class="sidebar-container">
+                        <?php 
+                            $comps = Core::db()->loadObjectList("SELECT * FROM #__components ORDER BY ordering ASC", array());
+                            foreach ($comps as $comp)
+                            {
+                                $xml = simplexml_load_file(__DIR__ ."/../../components/". $comp->internal_name ."/extension.xml");
+                                if ($comp->enabled && $comp->is_backend)
+                                {
+                                    echo '<div class="comp-container">';
+                                        echo '<div class="comp-title">';
+                                            echo '<i class="fas fa-'.$xml->name->attributes()->icon.'"></i>&nbsp;&nbsp;&nbsp;'.$xml->name->attributes()->value;
+                                        echo '</div>';
+                                        echo '<div class="comp-children">';
+                                            foreach ($xml->items as $item)
+                                            {
+                                                echo '<a href="index.php?component='. $comp->internal_name .'&controller='. $item->attributes()->value .'">'. $item->attributes()->label .'</a>';
+                                            }
+                                        echo '</div>';
+                                    echo '</div>';
+                                }
+                            }
+                        ?>
+                    </div>
+                </div>
             </div>
-            <?php $this->view->output(); ?>
-            <div class="white-card centre-text">
-                Timber CMS <strong>v<?php echo $version->numerical; ?></strong> 
-                <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>
-                    - <a href="index.php?component=update&controller=update"><span class="badge badge-danger version-label">UPDATE (v<?php echo $web_version->tag_name; ?> Available)</span></a>
-                <?php } else { ?>
-                    - <span class="badge badge-success version-label">UP TO DATE</span>
-                <?php } ?>
+            <div class="col-md-9">
+                <div class="main-content">
+                    <div class="system-messages">
+                        <?php $this->displaySystemMessages(); ?>
+                    </div>
+                    <?php $this->view->output(); ?>
+                    <div class="white-card centre-text">
+                        Timber CMS <strong>v<?php echo $version->numerical; ?></strong> 
+                        <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>
+                            - <a href="index.php?component=update&controller=update"><span class="badge badge-danger version-label">UPDATE (v<?php echo $web_version->tag_name; ?> Available)</span></a>
+                        <?php } else { ?>
+                            - <span class="badge badge-success version-label">UP TO DATE</span>
+                        <?php } ?>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
