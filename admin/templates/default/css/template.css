@@ -214,7 +214,7 @@ form label {
     margin-top: 40px;
 }
 .component-action-bar {
-    border-bottom: 1px solid #DDD;
+    border-bottom: 1px solid #333;
     padding-top: 0px;
     padding-bottom: 10px;
     margin-bottom: 40px;
@@ -388,7 +388,7 @@ form label {
 }
 .sidebar-menu {
     height: 100%;
-    padding-top: 76.25px;
+    padding-top: 74.25px;
     padding-left: 30px;
     padding-bottom: 30px;
 }
