@@ -38,12 +38,11 @@
         <div class="menu-container">
             <?php $this->template->displayModules("main-menu"); ?>
         </div>
-        <div class="header-container">
-            <div class="hero-container">
-                <h1><i class="fas fa-tree"></i> <?php echo Core::config()->site_title; ?></h1>
-                <p><?php echo Core::config()->tagline; ?></p>
+        <?php if ($this->template->hasModules("hero-container")) { ?>
+            <div class="header-container">
+                <?php $this->template->displayModules("hero-container"); ?>
             </div>
-        </div>
+        <?php } ?>
         <div class="body-container">
             <div class="system-messages">
                 <?php $this->displaySystemMessages(); ?>

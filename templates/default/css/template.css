@@ -91,26 +91,11 @@ p {
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
-.hero-container {
-    background: url('../../../core/assets/forest.jpg');
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-    text-align: center;
-    color: #FFF;
-    padding: 15vh 0px;
-    margin-top: 46px;
-}
-.hero-container h1 {
-    font-weight: normal;
-    font-size: 4rem;   
-}
-.hero-container p {
-    margin-top: 20px;
-}
 .body-container {
     max-width: var(--site-width);
     margin: 20px auto;
+    margin-top: 46px;
+    padding-top: 20px;
 }
 pre {
     white-space: pre-wrap;

@@ -1,0 +1,20 @@
+.hero-container {
+    background: url('../../core/assets/forest.jpg');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+    color: #FFF;
+    padding: 15vh 0px;
+    margin-top: 46px;
+}
+.hero-container h1 {
+    font-weight: normal;
+    font-size: 4rem;   
+}
+.hero-container p {
+    margin-top: 20px;
+}
+.header-container .module {
+    padding: 0px;   
+}

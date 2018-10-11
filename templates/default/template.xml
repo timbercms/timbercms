@@ -10,4 +10,5 @@
     <position>footer-col-2</position>
     <position>footer-col-3</position>
     <position>footer-col-4</position>
+    <position>hero-container</position>
 </template>
