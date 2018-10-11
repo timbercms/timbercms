@@ -37,6 +37,10 @@
                 {
                     $this->ordering = $module->ordering + 1;
                 }
+                else
+                {
+                    $this->ordering = 0;
+                }
             }
         }
         
