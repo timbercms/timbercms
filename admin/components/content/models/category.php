@@ -22,8 +22,9 @@
         
         public function processData()
         {
-            $children = $this->database->loadObjectList("SELECT id FROM #__articles_categories WHERE parent_id = ?", array($this->id));
-            foreach ($children as $child)
+            $this->children = array();
+            $child_cats = $this->database->loadObjectList("SELECT id FROM #__articles_categories WHERE parent_id = ?", array($this->id));
+            foreach ($child_cats as $child)
             {
                 $this->children[] = new CategoryModel($child->id, $this->database);
             }
