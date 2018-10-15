@@ -111,6 +111,15 @@
                 $config = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = 'settings' LIMIT 1");
                 $params = (object) unserialize($config->params);
                 ini_set("display_errors", $params->error_reporting);
+                switch ($params->error_reporting_level)
+                {
+                    case "normal":
+                        error_reporting(E_ERROR | E_WARNING | E_PARSE);
+                        break;
+                    case "development":
+                        error_reporting(E_ALL);
+                        break;
+                }
                 self::$config = $params;
                 require_once(__DIR__ ."/template.php");
                 $template = new Template($this->database, $params->default_template);

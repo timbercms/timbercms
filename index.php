@@ -1,7 +1,6 @@
 <?php
 
     session_start();
-    error_reporting(E_ALL & ~E_NOTICE);
     if (file_exists(__DIR__ ."/installer/index.php") && !file_exists(__DIR__ ."/core/installer.lock"))
     {
         header('Location: installer/');

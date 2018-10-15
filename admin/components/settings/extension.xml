@@ -11,16 +11,17 @@
     <name value="Configuration" icon="cog" />
     <items value="settings" label="Site Settings" />
     <items value="database" label="Database Checker" />
-    <fields type="text" name="site_title" label="Site Title" />
-    <fields type="text" name="tagline" label="Tagline" />
-    <fields type="select" name="error_reporting" label="Error Reporting" values="Off|0,On|1" />
-    <fields type="select" name="enable_registration" label="Enable new user registration" values="No|0,Yes|1" default="1" />
-    <fields type="template_picker" name="default_template" label="Default Template" />
-    <fields type="template_picker" name="admin_template" label="Admin Template" />
-    <fields type="text" name="cookie_name" label="Cookie Name" default="bulletin_cookie" />
-    <fields type="text" name="cookie_duration" label="Cookie Session Duration (In days)" default="28" />
-    <fields type="sql" query="SELECT id, title FROM #__usergroups ORDER BY title ASC" key="id" keyvalue="title" name="default_usergroup" label="Default Usergroup" />
-    <fields type="select" name="enable_recaptcha" label="Enable ReCaptcha" values="No|0,Yes|1" default="0" />
-    <fields type="text" name="recaptcha_site" label="ReCaptcha Site Key" />
-    <fields type="text" name="recaptcha_secret" label="ReCaptcha Secret Key" />
+    <fields type="text" name="params[site_title]" label="Site Title" />
+    <fields type="text" name="params[tagline]" label="Tagline" />
+    <fields type="select" name="params[error_reporting]" label="Error Reporting" values="Off|0,On|1" />
+    <fields type="select" name="params[error_reporting_level]" label="Error Reporting Level" values="Normal|normal,Development|development" />
+    <fields type="select" name="params[enable_registration]" label="Enable new user registration" values="No|0,Yes|1" default="1" />
+    <fields type="template_picker" name="params[default_template]" label="Default Template" />
+    <fields type="template_picker" name="params[admin_template]" label="Admin Template" />
+    <fields type="text" name="params[cookie_name]" label="Cookie Name" default="bulletin_cookie" />
+    <fields type="text" name="params[cookie_duration]" label="Cookie Session Duration (In days)" default="28" />
+    <fields type="sql" query="SELECT id, title FROM #__usergroups ORDER BY title ASC" key="id" keyvalue="title" name="params[default_usergroup]" label="Default Usergroup" />
+    <fields type="select" name="params[enable_recaptcha]" label="Enable ReCaptcha" values="No|0,Yes|1" default="0" />
+    <fields type="text" name="params[recaptcha_site]" label="ReCaptcha Site Key" />
+    <fields type="text" name="params[recaptcha_secret]" label="ReCaptcha Secret Key" />
 </settings>
