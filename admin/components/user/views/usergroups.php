@@ -6,9 +6,9 @@
     <form action="index.php?component=user&controller=usergroups&task=delete" method="post" class="admin-form">
         <div class="d-flex admin-header">
             <div class="col-md-1">&nbsp;</div>
-            <div class="col-md-1"><strong>ID</strong></div>
+            <div class="col-md-1 hidden-mobile"><strong>ID</strong></div>
             <div class="col-md-4"><strong>Title</strong></div>
-            <div class="col-md-4"><strong>Colour</strong></div>
+            <div class="col-md-4 hidden-mobile"><strong>Colour</strong></div>
             <div class="col-md-2"><strong>Is Admin?</strong></div>
         </div>
         <?php foreach ($this->model->groups as $group) { ?>
@@ -16,13 +16,13 @@
                 <div class="col-md-1" style="text-align: center;">
                     <input type="checkbox" name="ids[]" value="<?php echo $group->id; ?>" />
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-1 hidden-mobile">
                     <?php echo $group->id; ?>
                 </div>
                 <div class="col-md-4">
                     <a href="index.php?component=user&controller=usergroup&id=<?php echo $group->id; ?>"><?php echo $group->title; ?></a>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 hidden-mobile">
                     <?php echo $group->colour; ?>
                 </div>
                 <div class="col-md-2">

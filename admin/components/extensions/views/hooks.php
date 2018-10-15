@@ -4,15 +4,15 @@
         <?php if (count($this->model->settings->fields) > 0) { ?><a href="index.php?component=settings&controller=settings&extension=extensions" class="button"><i class="fa fa-cog"></i> Settings</a><?php } ?>
     </div>
     <div class="d-flex admin-header">
-        <div class="col-md-1"><strong>ID</strong></div>
+        <div class="col-md-1 hidden-mobile"><strong>ID</strong></div>
         <div class="col-md-5"><strong>Title</strong></div>
         <div class="col-md-1" style="text-align: center;"><strong>Enabled?</strong></div>
-        <div class="col-md-3"><strong>Author</strong></div>
-        <div class="col-md-2"><strong>Version</strong></div>
+        <div class="col-md-3 hidden-mobile"><strong>Author</strong></div>
+        <div class="col-md-2 hidden-mobile"><strong>Version</strong></div>
     </div>
     <?php foreach ($this->model->hooks as $hook) { ?>
         <div class="d-flex admin-list align-items-center">
-            <div class="col-md-1">
+            <div class="col-md-1 hidden-mobile">
                 <?php echo $hook->id; ?>
             </div>
             <div class="col-md-5">
@@ -23,10 +23,10 @@
                     <i class="fa fa-<?php echo ($hook->enabled == 1 ? "check" : "times"); ?>"></i>
                 </a>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 hidden-mobile">
                 <a href="<?php echo $hook->author_url; ?>" target="_blank"><?php echo $hook->author_name; ?></a>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 hidden-mobile">
                 <?php echo $hook->version; ?>
             </div>
         </div>

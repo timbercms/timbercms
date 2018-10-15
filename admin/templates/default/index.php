@@ -24,6 +24,10 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
         <link rel="stylesheet" href="templates/<?php echo $this->template->name; ?>/css/bootstrap.min.css">
         <link rel="stylesheet" href="templates/<?php echo $this->template->name; ?>/css/template.css?v=<?php echo time(); ?>">
+        <?php $detect = new Mobile_Detect; ?>
+        <?php if ($detect->isMobile()) { ?>
+            <link rel="stylesheet" href="templates/<?php echo $this->template->name; ?>/css/template-responsive.css?v=<?php echo time(); ?>">
+        <?php } ?>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <script src="templates/<?php echo $this->template->name; ?>/js/bootstrap.min.js"></script>

@@ -1,0 +1,31 @@
+.sidebar-menu {
+    padding: 10px !important;
+    padding-top: 56px !important;
+}
+.main-content, .white-card, .sidebar-container {
+    padding: 10px !important;   
+}
+input[type="text"], input[type="password"], input[type="email"], select {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+.component-action-bar a, .component-action-bar button {
+    display: block;
+    width: 100%;
+    float: none;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.component-action-bar button:last-of-type {
+    margin-bottom: 0px;   
+}
+.hidden-mobile {
+    display: none !important;
+}
+.component-item {
+    width: 100%;
+}
+.component-item a {
+    display: block;
+    text-align: center;
+}

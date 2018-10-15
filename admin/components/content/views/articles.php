@@ -21,26 +21,26 @@
     <form action="index.php?component=content&controller=articles&task=delete" method="post" class="admin-form">
         <div class="d-flex admin-header">
             <div class="col-md-1">&nbsp;</div>
-            <div class="col-md-1"><strong>ID</strong></div>
+            <div class="col-md-1 hidden-mobile"><strong>ID</strong></div>
             <div class="col-md-3"><strong>Title</strong></div>
-            <div class="col-md-2"><strong>Category</strong></div>
+            <div class="col-md-2 hidden-mobile"><strong>Category</strong></div>
             <div class="col-md-1" style="text-align: center;"><strong>Published</strong></div>
-            <div class="col-md-2"><strong>Publish Date</strong></div>
-            <div class="col-md-1"><strong>Author</strong></div>
-            <div class="col-md-1" style="text-align: center;"><strong>Hits</strong></div>
+            <div class="col-md-2 hidden-mobile"><strong>Publish Date</strong></div>
+            <div class="col-md-1 hidden-mobile"><strong>Author</strong></div>
+            <div class="col-md-1 hidden-mobile" style="text-align: center;"><strong>Hits</strong></div>
         </div>
         <?php foreach ($this->model->articles as $article) { ?>
             <div class="d-flex admin-list align-items-center">
                 <div class="col-md-1" style="text-align: center;">
                     <input type="checkbox" name="ids[]" value="<?php echo $article->id; ?>" />
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-1 hidden-mobile">
                     <?php echo $article->id; ?>
                 </div>
                 <div class="col-md-3">
                     <a href="index.php?component=content&controller=article&id=<?php echo $article->id; ?>"><?php echo $article->title; ?></a>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 hidden-mobile">
                     <?php echo $article->category->title; ?>
                 </div>
                 <div class="col-md-1" style="text-align: center;">
@@ -48,13 +48,13 @@
                         <i class="fa fa-<?php echo ($article->published == 1 ? "check" : "times"); ?>"></i>
                     </a>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 hidden-mobile">
                     <?php echo date("jS M Y", $article->publish_time); ?>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-1 hidden-mobile">
                     <?php echo $article->author->username; ?>
                 </div>
-                <div class="col-md-1" style="text-align: center;">
+                <div class="col-md-1 hidden-mobile" style="text-align: center;">
                     <?php echo $article->hits; ?>
                 </div>
             </div>

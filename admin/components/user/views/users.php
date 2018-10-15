@@ -7,36 +7,36 @@
     <form action="index.php?component=user&controller=users&task=delete" method="post" class="admin-form">
         <div class="d-flex admin-header">
             <div class="col-md-1">&nbsp;</div>
-            <div class="col-md-1"><strong>ID</strong></div>
-            <div class="col-md-2"><strong>Name</strong></div>
+            <div class="col-md-1 hidden-mobile"><strong>ID</strong></div>
+            <div class="col-md-2 hidden-mobile"><strong>Name</strong></div>
             <div class="col-md-2"><strong>Username</strong></div>
-            <div class="col-md-4"><strong>Email</strong></div>
-            <div class="col-md-1" style="text-align: center;"><strong>Activated</strong></div>
-            <div class="col-md-1" style="text-align: center;"><strong>Blocked</strong></div>
+            <div class="col-md-4 hidden-mobile"><strong>Email</strong></div>
+            <div class="col-md-1 hidden-mobile" style="text-align: center;"><strong>Activated</strong></div>
+            <div class="col-md-1 hidden-mobile" style="text-align: center;"><strong>Blocked</strong></div>
         </div>
         <?php foreach ($this->model->users as $user) { ?>
             <div class="d-flex admin-list align-items-center">
                 <div class="col-md-1" style="text-align: center;">
                     <input type="checkbox" name="ids[]" value="<?php echo $user->id; ?>" />
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-1 hidden-mobile">
                     <?php echo $user->id; ?>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 hidden-mobile">
                     <a href="index.php?component=user&controller=user&id=<?php echo $user->id; ?>"><?php echo $user->name; ?></a>
                 </div>
                 <div class="col-md-2">
                     <a href="index.php?component=user&controller=user&id=<?php echo $user->id; ?>"><?php echo $user->username; ?></a>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 hidden-mobile">
                     <?php echo $user->email; ?>
                 </div>
-                <div class="col-md-1" style="text-align: center;">
+                <div class="col-md-1 hidden-mobile" style="text-align: center;">
                     <a href="index.php?component=user&controller=user&task=<?php echo ($user->activated == 1 ? "deactivate" : "activate"); ?>&id=<?php echo $user->id; ?>" class="btn btn-<?php echo ($user->activated == 1 ? "success" : "danger"); ?>">
                         <i class="fa fa-<?php echo ($user->activated == 1 ? "check" : "times"); ?>"></i>
                     </a>
                 </div>
-                <div class="col-md-1" style="text-align: center;">
+                <div class="col-md-1 hidden-mobile" style="text-align: center;">
                     <a href="index.php?component=user&controller=user&task=<?php echo ($user->blocked == 1 ? "unblock" : "block"); ?>&id=<?php echo $user->id; ?>" class="btn btn-<?php echo ($user->blocked == 1 ? "success" : "danger"); ?>">
                         <i class="fa fa-<?php echo ($user->blocked == 0 ? "times" : "check"); ?>"></i>
                     </a>
