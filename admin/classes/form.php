@@ -46,9 +46,17 @@ class Form
             $type = $attributes->type;
             $default = $attributes->default;
             $label = $attributes->label;
-
-            $field_value = $this->data->$name;
-            $field_name = $is_extra_config ? "params[". $name ."]" : $name;
+            
+            if (substr($name, 0, 7) == "params[")
+            {
+                $field_name = rtrim(explode("params[", $name)[1], "]");
+                $field_value = $this->data->params[$field_name];
+            }
+            else
+            {
+                $field_name = $name;
+                $field_value = $this->data->$name;
+            }
             
             if (is_array($field_value))
             {
@@ -67,7 +75,7 @@ class Form
             switch ($type) {
                 case "select":
                 case "sql":
-                    $string .= $this->generateSelectSqlField($field_name, $attributes);
+                    $string .= $this->generateSelectSqlField($field_name, $value, $attributes);
                     break;
                 case "textarea":
                     $string .= $this->generateTextareaField($field_name, $value, $attributes);
@@ -326,24 +334,13 @@ class Form
      * @param string $field_name
      * @param object $attributes
      */
-    protected function generateSelectSqlField($field_name, $attributes)
+    protected function generateSelectSqlField($field_name, $value, $attributes)
     {
         $multiple = $attributes->multiple; // applies to select / sql
         $query = $attributes->query; // applies to sql
         $default_option = $attributes->default_option; // applies to sql
         $values = $attributes->values; // applies to select (, seperated) label|value
         $selectdefault = $attributes->selectdefault; // applies to sql (label|value)
-
-        if (substr($field_name, 0, 7) == "params[")
-        {
-            $name = rtrim(explode("params[", $field_name)[1], "]");
-            $currentValue = $this->data->params[$name];
-        }
-        else
-        {
-            $name = $field_name;
-            $currentValue = $this->data->$name;
-        }
 
         $string = '<select name="'.$field_name;
         if ($multiple == "true")
@@ -387,16 +384,16 @@ class Form
         {
             $option = explode("|", $option);
             $string .= '<option value="'.$option[1].'" ';
-            if (is_array($currentValue))
+            if (is_array($value))
             {
-                if (in_array($option[1], $currentValue) || ($option[1] == $attributes->default && count($currentValue) <= 0))
+                if (in_array($option[1], $value) || ($option[1] == $attributes->default && count($value) <= 0))
                 {
                     $string .= 'selected="selected"';
                 }
             }
             else
             {
-                if ($currentValue == $option[1] || ($option[1] == $attributes->default && strlen($currentValue) <= 0))
+                if ($value == $option[1] || ($option[1] == $attributes->default && strlen($value) <= 0))
                 {
                     $string .= 'selected="selected"';
                 }

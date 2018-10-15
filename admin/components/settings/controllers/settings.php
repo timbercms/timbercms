@@ -14,7 +14,7 @@
         
         public function save()
         {
-            $this->model->extension->params = $_POST["params"];
+            $this->model->extension->params = $_POST;
             if ($this->model->extension->store())
             {
                 $this->model->setMessage("success", "Settings saved");
