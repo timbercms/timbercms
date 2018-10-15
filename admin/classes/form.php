@@ -356,7 +356,7 @@ class Form
 
         if ($attributes->type == "sql")
         {
-            $db = new Database();
+            $db = Core::db();
             $options = $db->loadObjectList($query);
 
             // array[object{id,title}]
