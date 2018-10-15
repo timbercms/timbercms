@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+    <install>
+        <tables>
+            <table>
+                CREATE TABLE `#__logs` (`id` int(11) NOT NULL AUTO_INCREMENT, `label` varchar(500) DEFAULT NULL, `event_author` int(11) DEFAULT NULL, `event_time` int(11) DEFAULT NULL, PRIMARY KEY (`id`))
+            </table>
+        </tables>
+    </install>
+    <tables>
+        <table>
+            <name>logs</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="label" params="varchar(255) DEFAULT NULL" />
+                <column name="event_author" params="int(11) DEFAULT NULL" />
+                <column name="event_time" params="int(11) DEFAULT NULL" />
+            </columns>
+        </table>
+    </tables>
+</database>

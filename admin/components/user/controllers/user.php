@@ -20,9 +20,23 @@
         
         public function save($redirect = true)
         {
+            $admin_groups = $this->model->database->loadObjectList("SELECT id FROM #__usergroups WHERE is_admin = ?", array("1"));
+            $admins = array();
+            foreach ($admin_groups as $group)
+            {
+                $admins[] = $group->id;
+            }
             if ($_POST["id"] > 0)
             {
                 $this->model->load($_POST["id"]);
+                if (in_array($this->model->usergroup_id, $admins) && $_POST["id"] != Core::user()->id)
+                {
+                    Core::log(Core::user()->username ." modified ". $_POST["username"] ."'s administrator account");
+                }
+            }
+            else if ($_POST["id"] <= 0 && in_array($_POST["usergroup_id"], $admins))
+            {
+                Core::log(Core::user()->username ." created a new administrator with the username ". $_POST["username"] ."");
             }
             foreach ($_POST as $key => $value)
             {

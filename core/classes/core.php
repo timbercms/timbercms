@@ -7,6 +7,7 @@
     if (ADMIN)
     {
         require_once(__DIR__ ."/../../admin/components/user/models/user.php");
+        require_once(__DIR__ ."/../../admin/components/logs/models/log.php");
     }
     else
     {
@@ -655,6 +656,15 @@
             $string = rtrim($string, "-");
             $string = strtolower($string);
             return $string;
+        }
+        
+        public static function log($label)
+        {
+            $log = new LogModel(0, self::db());
+            $log->label = $label;
+            $log->event_author = self::user()->id;
+            $log->event_time = time();
+            $log->store();
         }
         
     }
