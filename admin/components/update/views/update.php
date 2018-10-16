@@ -1,33 +1,27 @@
 <?php
 
     $version = simplexml_load_file(__DIR__ ."/../../../version.xml");
-    $opts = [
-        'http' => [
-                'method' => 'GET',
-                'header' => [
-                        'User-Agent: PHP'
-                ]
-        ]
-    ];
-    $context = stream_context_create($opts);
-    $web_version = json_decode(file_get_contents("https://api.github.com/repos/Smith0r/bulletin/releases", false, $context))["0"];
+    $web_version = simplexml_load_file("https://raw.githubusercontent.com/timbercms/timbercms/master/admin/version.xml");
 
 ?>
 <div class="white-card">
-    <h2>Update your Bulletin installation</h2>
+    <h2>Update your Timber CMS installation</h2>
     <div class="component-action-bar">
         <?php if (count($this->model->settings->fields) > 0) { ?><a href="index.php?component=settings&controller=settings&extension=update" class="button"><i class="fa fa-cog"></i> Settings</a><?php } ?>
     </div>
-    <div class="alert alert-<?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>danger<?php } else { ?>success<?php } ?>">You are running Bulletin CMS v<?php echo $version->numerical; ?> <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?> - [OUT OF DATE]<?php } ?></div>
-    <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>
+    <div class="alert alert-info">
+        Current Supported Timber CMS Version: v<?php echo $web_version->numerical; ?>
+    </div>
+    <div class="alert alert-<?php if (version_compare($version->numerical, $web_version->numerical) < 0) { ?>danger<?php } else { ?>success<?php } ?>">You are running Timber CMS v<?php echo $version->numerical; ?> <?php if (version_compare($version->numerical, $web_version->numerical) < 0) { ?> - [OUT OF DATE]<?php } ?></div>
+    <?php if (version_compare($version->numerical, $web_version->numerical) < 0) { ?>
         <p>&nbsp;</p>
-        <h3>Release Information for <?php echo $web_version->name; ?></h3>
+        <h3>Release Information for v<?php echo $web_version->numerical; ?></h3>
         <div class="new-version-notes">
-            <?php echo $web_version->body; ?>
+            <?php echo $web_version->new; ?>
         </div>
         <h4>Update steps</h4>
         <ol>
-            <li><a href="<?php echo $web_version->assets["0"]->browser_download_url; ?>" class="btn btn-primary">Download the v<?php echo $web_version->tag_name; ?> update package</a></li>
+            <li><a href="<?php echo $web_version->packageURL; ?>" class="btn btn-primary">Download the v<?php echo $web_version->numerical; ?> update package</a></li>
             <li>Extract the files using a program like Winrar</li>
             <li>Upload the contents of the UPLOAD folder to the root directory of your website</li>
             <li><a href="index.php?component=update&controller=database" class="btn btn-primary">Run the database updater tool</a></li>

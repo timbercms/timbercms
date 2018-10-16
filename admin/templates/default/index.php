@@ -3,16 +3,7 @@
     $dirs = scandir(__DIR__ ."/../../components");
     unset($dirs["0"], $dirs["1"]);
     $version = simplexml_load_file(__DIR__ ."/../../version.xml");
-    $opts = [
-        'http' => [
-                'method' => 'GET',
-                'header' => [
-                        'User-Agent: PHP'
-                ]
-        ]
-    ];
-    $context = stream_context_create($opts);
-    //$web_version = json_decode(file_get_contents("https://api.github.com/repos/Smith0r/bulletin/releases", false, $context))["0"];
+    $web_version = simplexml_load_file("https://raw.githubusercontent.com/timbercms/timbercms/master/admin/version.xml");
 
 ?>
 <!DOCTYPE html>
@@ -58,7 +49,7 @@
         <div class="menu-container">
             <ul class="menu-list">
                 <li class="top-level cms-name">
-                    <a href="index.php" style="font-weight: bold; letter-spacing: 2px;"><i class="fas fa-tree"></i> Timber CMS</a>
+                    <a href="index.php" style="font-weight: bold; letter-spacing: 2px;"><i class="fas fa-tree"></i> Timber CMS v<?php echo $web_version->numerical; ?></a>
                 </li>
                 <li class="top-level" style="float: right;">
                     <a href="index.php?component=user&controller=user&task=logout"><i class="fas fa-power-off"></i></a>
@@ -104,7 +95,7 @@
                     <?php $this->view->output(); ?>
                     <div class="white-card centre-text">
                         Timber CMS <strong>v<?php echo $version->numerical; ?></strong> 
-                        <?php if (version_compare($version->numerical, $web_version->tag_name) < 0) { ?>
+                        <?php if (version_compare($version->numerical, $web_version->numerical) < 0) { ?>
                             - <a href="index.php?component=update&controller=update"><span class="badge badge-danger version-label">UPDATE (v<?php echo $web_version->tag_name; ?> Available)</span></a>
                         <?php } else { ?>
                             - <span class="badge badge-success version-label">UP TO DATE</span>
