@@ -198,6 +198,7 @@
                     $componentconfig = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = ? LIMIT 1", array($this->component));
                     self::$componentconfig = (object) unserialize($componentconfig->params);
                 }
+                //echo "<pre>"; print_r($this); echo "</pre>"; die();
                 if (strlen($_GET["task"]) > 0 && ($this->component != "system" && $this->controller != "blank"))
                 {
                     $task = $_GET["task"];

@@ -211,13 +211,22 @@
             $new_parts = array();
             if ($parts["1"] == "article")
             {
-                $article = $this->database->loadObject("SELECT id FROM #__articles WHERE alias = ? AND published = 1", array(end($parts)));
-                if ($article->id > 0)
+                if (strlen($_GET["task"]) > 0)
                 {
-                    // We have a match!
                     $new_parts[] = "content";
                     $new_parts[] = "article";
-                    $new_parts[] = $article->id;
+                    $new_parts[] = 0;
+                }
+                else
+                {
+                    $article = $this->database->loadObject("SELECT id FROM #__articles WHERE alias = ? AND published = 1", array(end($parts)));
+                    if ($article->id > 0)
+                    {
+                        // We have a match!
+                        $new_parts[] = "content";
+                        $new_parts[] = "article";
+                        $new_parts[] = $article->id;
+                    }
                 }
                 return $new_parts;
             }
