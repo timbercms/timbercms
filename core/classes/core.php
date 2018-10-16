@@ -1,5 +1,15 @@
 <?php
     
+    /*
+     #=====================================================================================
+     # * Timber CMS
+     # * https://github.com/timbercms/timbercms
+     #-------------------------------------------------------------------------------------
+     # * Class Core
+     # * Provides all core functionality of Timber CMS
+     #=====================================================================================
+    */
+
     define("ADMIN", false);
     require_once(__DIR__ ."/model.php");
     require_once(__DIR__ ."/pagination.php");
@@ -55,6 +65,12 @@
         public static $component_name;
         public static $controller_name;
         
+        /*
+         #=====================================================================================
+         # * __construct
+         # * Sets all the defaults, includes component files, and sets up MVC
+         #=====================================================================================
+        */
         public function __construct()
         {
             if (ADMIN)
@@ -203,6 +219,13 @@
             }
         }
 
+        /*
+         #=====================================================================================
+         # * outputView
+         # * $view = class View
+         # * Output component view if user has access to view the page
+         #=====================================================================================
+        */
         public static function outputView($view)
         {
             if (self::$component_name != "system" && self::$controller_name != "blank")
@@ -225,6 +248,13 @@
             }
         }
         
+        /*
+         #=====================================================================================
+         # * loadOverride
+         # * $template = class Template
+         # * Loads template overrides for component if one exists
+         #=====================================================================================
+        */
         public function loadOverride($template)
         {
             if (file_exists(__DIR__ ."/../../templates/". $this->template->name ."/overrides/components/". $this->component ."/". $template))
@@ -237,6 +267,12 @@
             }
         }
         
+        /*
+         #=====================================================================================
+         # * setDatabase
+         # * Set database information
+         #=====================================================================================
+        */
         public function setDatabase()
         {
             require_once(__DIR__ ."/../../configuration.php");
@@ -246,6 +282,13 @@
             self::$db = $db;
         }
         
+        /*
+         #=====================================================================================
+         # * addStylesheet
+         # * $link = (string) Link to location of CSS file. Can be relative or external
+         # * Adds stylesheet string into array for later processing
+         #=====================================================================================
+        */
         public static function addStylesheet($link)
         {
             if (!in_array($link, self::$stylesheet_links))
@@ -266,6 +309,13 @@
             }
         }
         
+        /*
+         #=====================================================================================
+         # * addScript
+         # * $link = (string) Link to location of JS file. Can be relative or external
+         # * Adds script string into array for later processing
+         #=====================================================================================
+        */
         public static function addScript($link)
         {
             if (!in_array($link, self::$script_links))
@@ -286,6 +336,13 @@
             }
         }
         
+        /*
+         #=====================================================================================
+         # * changeTitle
+         # * $title = (string) New title string
+         # * Changes the <title> tag to desired value
+         #=====================================================================================
+        */
         public static function changeTitle($title)
         {
             if (strlen($title) > 0 && strlen(self::$title) == 0)
@@ -294,6 +351,13 @@
             }
         }
         
+        /*
+         #=====================================================================================
+         # * changeMetaDescription
+         # * $title = (string) New meta description string
+         # * Changes the meta description tag to desired value
+         #=====================================================================================
+        */
         public static function changeMetaDescription($string)
         {
             if (strlen($string) > 0)
