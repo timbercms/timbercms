@@ -25,7 +25,7 @@
                 else
                 {
                     $this->model->setMessage("danger", "ReCaptcha verification failed.");
-                    header("Location: index.php?component=user&controller=requestreset");
+                    header("Location: ". Core::route("index.php?component=user&controller=requestreset"));
                 }
             }
             else
@@ -44,12 +44,12 @@
                 $this->model->database->query("INSERT INTO #__users_recovery (user_id, reset_requested, token) VALUES (?, ?, ?)", array($user->id, time(), $user->id.time().(time() + rand(64726))));
                 Core::hooks()->executeHook("onRequestReset");
                 $this->model->setMessage("success", "We've just sent an email to ". $_POST["email"] ." containing a link that you can use to reset your password");
-                header("Location: index.php?component=user&controller=requestreset");
+                header("Location: ". Core::route("index.php?component=user&controller=requestreset"));
             }
             else
             {
                 $this->model->setMessage("danger", "We couldn't find an account associated with this email address.");
-                header("Location: index.php?component=user&controller=requestreset");
+                header("Location: ". Core::route("index.php?component=user&controller=requestreset"));
             }
         }
         

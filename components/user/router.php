@@ -58,11 +58,19 @@
                 }
                 else if ($controller == "requestreset")
                 {
-                    return BASE_URL .$this->component ."/requestreset";
+                    if (strlen($task) > 0)
+                    {
+                        $task = "/?task=".$task;
+                    }
+                    return BASE_URL .$this->component ."/requestreset".$task;
                 }
                 else if ($controller == "reset")
                 {
-                    return BASE_URL .$this->component ."/reset";
+                    if (strlen($task) > 0)
+                    {
+                        $task = "/?task=".$task;
+                    }
+                    return BASE_URL .$this->component ."/reset".$task;
                 }
                 else if ($controller == "user")
                 {
@@ -109,6 +117,16 @@
             else if ($parts["1"] == "settings")
             {
                 $new_parts = ["user", "settings", 0];
+                return $new_parts;
+            }
+            else if ($parts["1"] == "requestreset")
+            {
+                $new_parts = ["user", "requestreset", 0];
+                return $new_parts;
+            }
+            else if ($parts["1"] == "reset")
+            {
+                $new_parts = ["user", "reset", 0];
                 return $new_parts;
             }
             return false;
