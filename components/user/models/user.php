@@ -26,7 +26,7 @@
         {
             $this->usergroup = new UsergroupModel($this->usergroup_id, $this->database);
             $this->params = (object) $this->params;
-            if (strlen($this->avatar) > 0)
+            if (strlen($this->avatar) > 0 && file_exists(__DIR__ ."/../../../". $this->avatar))
             {
                 if (substr($this->avatar, 0, 5) != "https")
                 {
