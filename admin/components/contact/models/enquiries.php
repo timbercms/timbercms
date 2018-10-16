@@ -7,6 +7,7 @@
         
         public $template = "enquiries.php";
         public $database;
+        public $pagination;
         
         public $enquiries = array();
         
@@ -17,11 +18,14 @@
             $this->database = $database;
             $this->load();
             $this->settings = simplexml_load_file(__DIR__ ."/../extension.xml");
+            $this->pagination = new Pagination();
         }
         
-        public function load()
+        public function load($id = false)
         {
-            $temp = $this->database->loadObjectList("SELECT id FROM #__enquiries");
+            $temp = $this->database->loadObjectList("SELECT id FROM #__enquiries ORDER BY sent_time DESC");
+            $this->max = count($this->database->loadObjectList($query));
+            $query .= " LIMIT ". ($_GET["p"] > 0 ? (($_GET["p"] - 1) * 20) : 0) .", 20";
             foreach ($temp as $temp_enquiry)
             {
                 $enquiry = new EnquiryModel($temp_enquiry->id, $this->database);

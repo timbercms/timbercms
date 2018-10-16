@@ -3,7 +3,7 @@
     <div class="component-action-bar">
         <a href="index.php?component=modules&controller=modules" class="button"><i class="fa fa-chevron-left"></i> Back to List</a>
     </div>
-    <div class="module-type" style="border: none;">
+    <div class="module-type hidden-mobile" style="border: none;">
         <div class="row">
             <div class="col-md-3">
                 <strong>Module Type</strong>

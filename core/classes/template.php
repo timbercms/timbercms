@@ -18,19 +18,27 @@
         
         public function addComponentStylesheet($component = "")
         {
-            $admin = "";
-            if (ADMIN)
-            {
-                $admin = "admin/";
-            }
             if (strlen($component) == 0)
             {
                 $component = $_GET["component"];
             }
-            if (file_exists(__DIR__ ."/../../". $admin ."components/". $component ."/assets/css/". $component .".css"))
+            if (ADMIN)
             {
-                Core::addStylesheet($admin. "components/". $component ."/assets/css/". $component .".css");
+                Core::addStyleSheet("admin/components/". $component ."/assets/css/". $component .".css");
             }
+            else
+            {
+                Core::addStyleSheet("components/". $component ."/assets/css/". $component .".css");
+                if (file_exists("templates/". Core::template_name() ."/overrides/components/". $component ."/". $component .".css"))
+                {
+                    Core::addStyleSheet("templates/". Core::template_name() ."/overrides/components/". $component ."/". $component .".css");
+                }
+            }
+        }
+        
+        public function addCriticalCSS()
+        {
+            Core::addStyleSheet("core/assets/critical.css");
         }
         
         public function addComponentScript($component = "")
@@ -58,7 +66,14 @@
                 foreach ($modules as $mod)
                 {
                     $module = new ModuleModel($mod->id, $this->database);
-                    Core::addStyleSheet("modules/". $module->type ."/". $module->type .".css");
+                    if (file_exists(__DIR__ ."/../../templates/". Core::template_name() ."/overrides/modules/". $module->type ."/". $module->type .".css"))
+                    {
+                        Core::addStyleSheet("templates/". Core::template_name() ."/overrides/modules/". $module->type ."/". $module->type .".css");
+                    }
+                    else
+                    {
+                        Core::addStyleSheet("modules/". $module->type ."/". $module->type .".css");
+                    }
                     require_once(__DIR__ ."/../../modules/". $module->type ."/worker.php");
                     $worker_string = $module->type."Worker";
                     $worker = new $worker_string($module, $this->database);
@@ -68,7 +83,14 @@
                             echo '<h3 class="module-title">'. $module->title .'</h3>';
                         }
                         echo '<div class="module-inner">';
-                            require(__DIR__ ."/../../modules/". $module->type ."/template.php");
+                            if (file_exists(__DIR__ ."/../../templates/". Core::template_name() ."/overrides/modules/". $module->type ."/template.php"))
+                            {
+                                require(__DIR__ ."/../../templates/". Core::template_name() ."/overrides/modules/". $module->type ."/template.php");
+                            }
+                            else
+                            {
+                                require(__DIR__ ."/../../modules/". $module->type ."/template.php");
+                            }
                         echo '</div>';
                     echo '</div>';
                 }

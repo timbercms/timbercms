@@ -7,6 +7,10 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
+                            <label><strong>Name:</strong></label>
+                            <input type="text" class="form-control" name="name" value="<?php echo $this->model->user->name; ?>" />
+                        </div>
+                        <div class="form-group">
                             <label><strong>Email Address:</strong></label>
                             <input type="email" class="form-control" name="email" value="<?php echo $this->model->user->email; ?>" />
                         </div>
@@ -22,7 +26,7 @@
                             <label><strong>Profile Background:</strong></label>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label class="header-preview topography<?php if ($this->model->user->params->header_pattern == "topography") { ?> active<?php } ?>" data-label><input type="radio" name="params[header_pattern]" value="topography"<?php if ($this->model->user->params->header_pattern == "topography") { ?>checked="checked"<?php } ?>></label>
+                                    <label class="header-preview topography<?php if ($this->model->user->params->header_pattern == "topography" || !is_object($this->model->user->params)) { ?> active<?php } ?>" data-label><input type="radio" name="params[header_pattern]" value="topography"<?php if ($this->model->user->params->header_pattern == "topography") { ?>checked="checked"<?php } ?>></label>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="header-preview jupiter<?php if ($this->model->user->params->header_pattern == "jupiter") { ?> active<?php } ?>" data-label><input type="radio" name="params[header_pattern]" value="jupiter"<?php if ($this->model->user->params->header_pattern == "jupiter") { ?>checked="checked"<?php } ?>></label>

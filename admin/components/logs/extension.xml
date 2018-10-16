@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+    <title>Logs</title>
+    <description>Provides administration logging for important events</description>
+    <is_frontend>0</is_frontend>
+    <is_backend>1</is_backend>
+    <is_locked>1</is_locked>
+    <author>Chris Smith</author>
+    <author_url>https://github.com/Smith0r</author_url>
+    <version>2.0.0</version>
+    <name value="Logs" icon="book" />
+    <items value="logs" label="Event List" />
+</settings>

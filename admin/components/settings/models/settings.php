@@ -28,7 +28,7 @@
                 $ext = "settings";
             }
             $this->extension->loadByName($ext);
-            $this->form = new Form(__DIR__ ."/../../". $this->extension->internal_name ."/extension.xml", $this->extension->params, $this->database);
+            $this->form = new Form(__DIR__ ."/../../". $this->extension->internal_name ."/extension.xml", $this->extension, $this->database);
         }
         
     }

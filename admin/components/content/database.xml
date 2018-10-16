@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+    <install>
+        <tables>
+            <table>
+                CREATE TABLE `#__articles` (`id` int(11) NOT NULL AUTO_INCREMENT, `title` varchar(500) DEFAULT NULL, `alias` varchar(500) NOT NULL, `category_id` int(11) NOT NULL DEFAULT '0', `content` text, `published` int(11) NOT NULL DEFAULT '1', `author_id` int(11) DEFAULT NULL, `hits` int(11) DEFAULT NULL, `meta_description` varchar(500) DEFAULT NULL, `image` varchar(1000) DEFAULT NULL, `publish_time` int(11) DEFAULT NULL, PRIMARY KEY (`id`));
+            </table>
+            <table>
+                CREATE TABLE `#__articles_categories` (`id` int(11) NOT NULL AUTO_INCREMENT, `parent_id` int(11) DEFAULT '0', `title` varchar(500) DEFAULT NULL, `alias` varchar(500) NOT NULL, `description` text, `published` int(11) DEFAULT '1', `ordering` varchar(500) DEFAULT NULL, `params` text, PRIMARY KEY (`id`));
+            </table>
+            <table>
+                CREATE TABLE `#__articles_comments` (`id` int(11) NOT NULL AUTO_INCREMENT, `article_id` int(11) NOT NULL, `content` text NOT NULL, `published` int(11) NOT NULL, `publish_time` int(11) NOT NULL, `author_id` int(11) NOT NULL, PRIMARY KEY (`id`));
+            </table>
+        </tables>
+    </install>
+    <tables>
+        <table>
+            <name>articles</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="title" params="varchar(500) DEFAULT NULL" />
+                <column name="alias" params="varchar(500) NOT NULL" />
+                <column name="category_id" params="int(11) NOT NULL DEFAULT '0'" />
+                <column name="content" params="text" />
+                <column name="published" params="int(11) NOT NULL DEFAULT '1'" />
+                <column name="publish_time" params="int(11) DEFAULT NULL" />
+                <column name="author_id" params="int(11) DEFAULT NULL" />
+                <column name="hits" params="int(11) DEFAULT NULL" />
+                <column name="meta_description" params="varchar(500) DEFAULT NULL" />
+                <column name="image" params="varchar(1000) DEFAULT NULL" />
+            </columns>
+        </table>
+        <table>
+            <name>articles_categories</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="parent_id" params="int(11) DEFAULT '0'" />
+                <column name="title" params="varchar(500) DEFAULT NULL" />
+                <column name="alias" params="varchar(500) DEFAULT NULL" />
+                <column name="description" params="text" />
+                <column name="published" params="int(11) DEFAULT '1'" />
+                <column name="ordering" params="varchar(500) DEFAULT NULL" />
+                <column name="params" params="text" />
+            </columns>
+        </table>
+        <table>
+            <name>articles_comments</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="article_id" params="INT(11) NOT NULL" />
+                <column name="content" params="text NOT NULL" />
+                <column name="published" params="INT(11) NOT NULL" />
+                <column name="publish_time" params="INT(11) NOT NULL" />
+                <column name="author_id" params="INT(11) NOT NULL" />
+            </columns>
+        </table>
+    </tables>
+</database>

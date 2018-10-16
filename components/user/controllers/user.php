@@ -66,21 +66,29 @@
         
         public function register()
         {
-            if (Core::config()->enable_recaptcha == 1)
+            if (Core::config()->enable_registration)
             {
-                if ($this->model->checkCaptcha())
+                if (Core::config()->enable_recaptcha == 1)
                 {
-                    $this->processRegister();
+                    if ($this->model->checkCaptcha())
+                    {
+                        $this->processRegister();
+                    }
+                    else
+                    {
+                        $this->model->setMessage("danger", "ReCaptcha verification failed.");
+                        header("Location: ". Core::route("index.php?component=user&controller=register"));
+                    }
                 }
                 else
                 {
-                    $this->model->setMessage("danger", "ReCaptcha verification failed.");
-                    header("Location: ". Core::route("index.php?component=user&controller=register"));
+                    $this->processRegister();
                 }
             }
             else
             {
-                $this->processRegister();
+                $this->model->setMessage("danger", "The administrator has disabled new user registrations on this website.");
+                header("Location: ". Core::route("index.php?component=user&controller=register"));
             }
         }
         
@@ -99,7 +107,7 @@
             else
             {
                 // Register a new account
-                if ($this->model->register($username, $password, $email))
+                if ($this->model->register($username, $password, $email, $_POST["name"]))
                 {
                     $user = $this->model->database->loadObject("SELECT * FROM #__users WHERE username = ?", array($username));
                     $component = $this->model->database->loadObject("SELECT * FROM #__components WHERE internal_name = ?", array("contact"));
@@ -148,6 +156,7 @@
         
         public function updateSettings()
         {
+            $this->model->database->query("UPDATE #__users SET name = ? WHERE id = ?", array($_POST["name"], Core::user()->id));
             $this->model->database->query("UPDATE #__users SET email = ? WHERE id = ?", array($_POST["email"], Core::user()->id));
             $this->model->database->query("UPDATE #__users SET params = ? WHERE id = ?", array(serialize($_POST["params"]), Core::user()->id));
             if (strlen($_FILES["avatar"]["name"]) > 0)

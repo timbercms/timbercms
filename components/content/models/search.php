@@ -16,7 +16,7 @@
             $this->load();
         }
         
-        public function load()
+        public function load($id = false)
         {
             if (strlen($_GET["query"]) > 0)
             {
@@ -30,6 +30,7 @@
             {
                 $this->articles[] = new ArticleModel($temp_article->id, $this->database);
             }
+            Core::hooks()->executeHook("onLoadSearchModel", $this);
         }
         
     }

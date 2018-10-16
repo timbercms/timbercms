@@ -20,7 +20,7 @@
             $this->load();
         }
         
-        public function load()
+        public function load($id = false)
         {
             $t_articles = $this->database->loadObjectList("SELECT id FROM #__articles ORDER BY publish_time DESC LIMIT 5");
             foreach ($t_articles as $t_article)

@@ -3,6 +3,7 @@
     <head>
         <title><!-- PAGE_TITLE --></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>core/assets/favicon.png">
         <!-- META_DESCRIPTION -->
         <!-- META_AUTHOR -->
         <!-- META_PROPERTIES -->
@@ -34,31 +35,29 @@
         <!-- HEADER_SCRIPTS -->
     </head>
     <body>
+        <div class="menu-container">
+            <?php $this->template->displayModules("main-menu"); ?>
+        </div>
+        <?php if ($this->template->hasModules("hero-container")) { ?>
+            <div class="header-container">
+                <?php $this->template->displayModules("hero-container"); ?>
+            </div>
+        <?php } ?>
         <div class="body-container">
-            <div class="branding-container">
-                <div class="website-title">
-                    <?php echo Core::config()->site_title; ?>
-                </div>
+            <div class="system-messages">
+                <?php $this->displaySystemMessages(); ?>
             </div>
-            <div class="menu-container">
-                <?php $this->template->displayModules("main-menu"); ?>
-            </div>
-            <div class="body-content">
-                <div class="system-messages">
-                    <?php $this->displaySystemMessages(); ?>
+            <div class="row">
+                <div class="<?php echo ($this->template->hasModules("sidebar") ? "col-md-9" : "col-md-12"); ?>">
+                    <?php Core::outputView($this->view); ?>
                 </div>
-                <div class="row">
-                    <div class="<?php echo ($this->template->hasModules("sidebar") ? "col-md-9" : "col-md-12"); ?>">
-                        <div class="component-container">
-                            <?php Core::outputView($this->view); ?>
-                        </div>
-                    </div>
-                    <?php if ($this->template->hasModules("sidebar")) { ?>
-                        <div class="col-md-3">
+                <?php if ($this->template->hasModules("sidebar")) { ?>
+                    <div class="col-md-3">
+                        <div class="sidebar-modules">
                             <?php $this->template->displayModules("sidebar"); ?>
                         </div>
-                    <?php } ?>
-                </div>
+                    </div>
+                <?php } ?>
             </div>
         </div>
         <div class="footer-container">

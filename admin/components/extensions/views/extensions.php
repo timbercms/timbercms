@@ -5,26 +5,26 @@
         <?php if (count($this->model->settings->fields) > 0) { ?><a href="index.php?component=settings&controller=settings&extension=extensions" class="button"><i class="fa fa-cog"></i> Settings</a><?php } ?>
     </div>
     <div class="d-flex admin-header">
-        <div class="col-md-1"><strong>ID</strong></div>
+        <div class="col-md-1 hidden-mobile"><strong>ID</strong></div>
         <div class="col-md-3"><strong>Title</strong></div>
-        <div class="col-md-1" style="text-align: center;"><strong>Frontend?</strong></div>
-        <div class="col-md-1" style="text-align: center;"><strong>Backend?</strong></div>
+        <div class="col-md-1 hidden-mobile" style="text-align: center;"><strong>Frontend?</strong></div>
+        <div class="col-md-1 hidden-mobile" style="text-align: center;"><strong>Backend?</strong></div>
         <div class="col-md-1" style="text-align: center;"><strong>Enabled?</strong></div>
-        <div class="col-md-3"><strong>Author</strong></div>
-        <div class="col-md-2"><strong>Version</strong></div>
+        <div class="col-md-3 hidden-mobile"><strong>Author</strong></div>
+        <div class="col-md-2 hidden-mobile"><strong>Version</strong></div>
     </div>
     <?php foreach ($this->model->extensions as $extension) { ?>
         <div class="d-flex admin-list align-items-center">
-            <div class="col-md-1">
+            <div class="col-md-1 hidden-mobile">
                 <?php echo $extension->id; ?>
             </div>
             <div class="col-md-3">
                 <a href="index.php?component=extensions&controller=extension&id=<?php echo $extension->id; ?>"><?php echo $extension->title; ?></a>
             </div>
-            <div class="col-md-1" style="text-align: center;">
+            <div class="col-md-1 hidden-mobile" style="text-align: center;">
                 <i class="fa fa-<?php echo ($extension->is_frontend == 1 ? "check" : "times"); ?>"></i>
             </div>
-            <div class="col-md-1" style="text-align: center;">
+            <div class="col-md-1 hidden-mobile" style="text-align: center;">
                 <i class="fa fa-<?php echo ($extension->is_backend == 1 ? "check" : "times"); ?>"></i>
             </div>
             <?php if ($extension->is_locked == 1) { ?>
@@ -38,10 +38,10 @@
                     </a>
                 </div>
             <?php } ?>
-            <div class="col-md-3">
+            <div class="col-md-3 hidden-mobile">
                 <a href="<?php echo $extension->author_url; ?>" target="_blank"><?php echo $extension->author_name; ?></a>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 hidden-mobile">
                 <?php echo $extension->version; ?>
             </div>
         </div>

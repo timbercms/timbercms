@@ -22,15 +22,16 @@
             </div>
         </form>
     </div>
+    <?php $this->model->pagination->display($this->model->max); ?>
     <form action="index.php?component=modules&controller=modules&task=delete" method="post" class="admin-form">
         <div class="d-flex admin-header">
             <div class="col-md-1">&nbsp;</div>
-            <div class="col-md-1"><strong>ID</strong></div>
+            <div class="col-md-1 hidden-mobile"><strong>ID</strong></div>
             <div class="col-md-4"><strong>Title</strong></div>
-            <div class="col-md-2"><strong>Type</strong></div>
+            <div class="col-md-2 hidden-mobile"><strong>Type</strong></div>
             <div class="col-md-1"><strong>Position</strong></div>
             <div class="col-md-1" style="text-align: center;"><strong>Published</strong></div>
-            <div class="col-md-2"><strong>Ordering</strong></div>
+            <div class="col-md-2 hidden-mobile"><strong>Ordering</strong></div>
         </div>
         <?php $count = count($this->model->modules) - 1; ?>
         <?php foreach ($this->model->modules as $module) { ?>
@@ -38,13 +39,13 @@
                 <div class="col-md-1" style="text-align: center;">
                     <input type="checkbox" name="ids[]" value="<?php echo $module->id; ?>" />
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-1 hidden-mobile">
                     <?php echo $module->id; ?>
                 </div>
                 <div class="col-md-4">
                     <a href="index.php?component=modules&controller=module&id=<?php echo $module->id; ?>"><?php echo $module->title; ?></a>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 hidden-mobile">
                     <?php echo $module->type; ?>
                 </div>
                 <div class="col-md-1">
@@ -55,7 +56,7 @@
                         <i class="fa fa-<?php echo ($module->published == 1 ? "check" : "times"); ?>"></i>
                     </a>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 hidden-mobile">
                     <?php if (strlen($_GET["position"]) > 0) { ?>
                         <div class="btn-group">
                             <a id="order-up order-up-<?php echo $module->id; ?>" class="btn btn-secondary<?php if ($module->ordering == 0) { echo ' disabled'; } ?>" href="index.php?component=modules&controller=modules&task=order&swap=<?php echo $module->ordering; ?>&with=<?php echo ($module->ordering - 1); ?>&position=<?php echo $module->position; ?>"><i class="fa fa-arrow-up"></i></a>
@@ -68,4 +69,5 @@
             </div>
         <?php } ?>
     </form>
+    <?php $this->model->pagination->display($this->model->max); ?>
 </div>

@@ -2,18 +2,24 @@
     display: none;   
 }
 .menu-container {
-    background: var(--charcoal);
-    max-width: var(--site-width);
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
+    background: #FFF;
+    position: fixed;
+    width: 100%;
     z-index: 100;
+    -webkit-box-shadow: 0px 5px 5px 0px rgba(45,48,51,0.5);
+    -moz-box-shadow: 0px 5px 5px 0px rgba(45,48,51,0.5);
+    box-shadow: 0px 5px 5px 0px rgba(45,48,51,0.5);
 }
 .menu-container .module {
     margin-bottom: 0px;
     border: none;
-    border-radius: 0px;
     overflow: inherit;
+    background: none;
+    box-shadow: none;
+    padding: 0px;
+    max-width: var(--site-width);
+    margin-left: auto;
+    margin-right: auto;
 }
 .menu-container .module-inner {
     padding: 0px;   
@@ -35,12 +41,18 @@
 .menu-container ul.menu-list > li > a {
     display: inline-block;
     padding: 15px;
-    color: #FFF;
+    color: var(--link);
     text-decoration: none;
     transition: background .25s;
 }
-.menu-container ul.menu-list > li > a:hover, .menu-container ul.menu-list > li.active > a {
-    background: var(--link-accent);   
+.menu-container ul.menu-list > li.active > a {
+    background: var(--link);
+    color: #FFF;
+}
+.menu-container ul.menu-list > li > a:hover {
+    background: var(--link-accent);
+    color: #FFF;
+    cursor: pointer;
 }
 .menu-container .menu-list li.parent > ul {
     display: none;
@@ -55,6 +67,7 @@
 }
 .menu-container .menu-list li.first-child:hover > a, .menu-container .menu-list li.second-child:hover > a {
     background: var(--link-accent);
+    color: #FFF;
 }
 .menu-container .menu-list li.first-child:last-of-type > a, .menu-container .menu-list li.second-child:last-of-type > a {
     border-bottom: none;   
@@ -69,7 +82,11 @@
     font-size: 32px;
 }
 .menu-container .menu-list li.parent:hover {
-    background: var(--link);   
+    background: var(--link);
+    color: #FFF !important;
+}
+.menu-container .menu-list li.parent:hover > a {
+    color: #FFF;
 }
 .menu-container .menu-list li.parent:hover > ul {
     display: block;

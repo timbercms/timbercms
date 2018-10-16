@@ -4,23 +4,10 @@
 
     class UserModel extends Model
     {
-        
+        public $component_name = "user";
+        public $table = "users";
         public $template = "profile.php";
         public $database;
-        
-        public $id;
-        public $username;
-        public $email;
-        public $password;
-        public $activated;
-        public $blocked;
-        public $blocked_reason;
-        public $register_time;
-        public $last_action_time;
-        public $usergroup;
-        public $verify_token;
-        public $avatar;
-        public $params;
         
         public function __construct($id = 0, $database)
         {
@@ -35,29 +22,22 @@
             }
         }
         
-        public function load($id)
+        public function processData()
         {
-            $temp = $this->database->loadObject("SELECT * FROM #__users WHERE id = ?", array($id));
-            $this->id = $temp->id;
-            $this->username = $temp->username;
-            $this->email = $temp->email;
-            $this->password = $temp->password;
-            $this->activated = $temp->activated;
-            $this->blocked = $temp->blocked;
-            $this->blocked_reason = $temp->blocked_reason;
-            $this->register_time = $temp->register_time;
-            $this->last_action_time = $temp->last_action_time;
-            $this->usergroup = new UsergroupModel($temp->usergroup_id, $this->database);
-            $this->verify_token = $temp->verify_token;
-            $this->params = (object) unserialize($temp->params);
-            if (strlen($temp->avatar) > 0)
+            $this->usergroup = new UsergroupModel($this->usergroup_id, $this->database);
+            $this->params = (object) $this->params;
+            if (strlen($this->avatar) > 0 && file_exists(__DIR__ ."/../../../". $this->avatar))
             {
-                $this->avatar = BASE_URL .$temp->avatar;
+                if (substr($this->avatar, 0, 5) != "https")
+                {
+                    $this->avatar = BASE_URL.$this->avatar;
+                }
             }
             else
             {
                 $this->avatar = "https://www.gravatar.com/avatar/" .md5(strtolower(trim($this->email))) ."?s=200";
             }
+            Core::hooks()->executeHook("onLoadUserModel", $this);
         }
         
         public function loadSession()
@@ -110,40 +90,29 @@
             $this->load($id);
         }
         
-        public function register($username, $password, $email)
+        public function register($username, $password, $email, $name)
         {
-			$data = array();
-			$data[] = array("name" => "id", "value" => 0);
-			$data[] = array("name" => "username", "value" => $username);
-            $data[] = array("name" => "password", "value" => password_hash($password, PASSWORD_DEFAULT));
-            $data[] = array("name" => "email", "value" => $email);
-            $data[] = array("name" => "activated", "value" => 0);
-            $data[] = array("name" => "blocked", "value" => 0);
-            $data[] = array("name" => "blocked_reason", "value" => "");
-            $data[] = array("name" => "register_time", "value" => time());
-            $data[] = array("name" => "usergroup_id", "value" => Core::config()->default_usergroup);
-            $data[] = array("name" => "verify_token", "value" => md5($email).time().(time() + rand(67234)));
-			return parent::store("#__users", $data);
-        }
-        
-        public function updateSettings($table = "", $data = array(), $updatePassword = false)
-		{
-			$data = array();
-			$data[] = array("name" => "id", "value" => $this->id);
-			$data[] = array("name" => "username", "value" => $this->username);
-            $data[] = array("name" => "email", "value" => $this->email);
-            $data[] = array("name" => "activated", "value" => $this->activated);
-            $data[] = array("name" => "blocked", "value" => $this->blocked);
-            $data[] = array("name" => "blocked_reason", "value" => $this->blocked_reason);
-            $data[] = array("name" => "register_time", "value" => $this->register_time);
-            $data[] = array("name" => "usergroup_id", "value" => $this->usergroup_id);
-            $data[] = array("name" => "params", "value" => serialize($this->params));
-            if ($updatePassword)
+            $this->id = 0;
+            $this->name = $name;
+            $this->username = $username;
+            $this->password = password_hash($password, PASSWORD_DEFAULT);
+            $this->email = $email;
+            $this->activated = 0;
+            $this->blocked = 0;
+            $this->blocked_reason = "";
+            $this->register_time = time();
+            $this->usergroup_id = Core::config()->default_usergroup;
+            $this->verify_token = md5($email).time().(time() + rand());
+            $this->params = array();
+			if ($this->store())
             {
-                $data[] = array("name" => "password", "value" => password_hash($this->password, PASSWORD_DEFAULT));
+                return true;
             }
-			return parent::store("#__users", $data);
-		}
+            else
+            {
+                return false;
+            }
+        }
         
     }
 

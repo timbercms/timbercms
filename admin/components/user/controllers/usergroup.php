@@ -12,11 +12,18 @@
             $this->core = $core;
         }
         
-        public function save()
+        public function saveandnew()
         {
-            $this->model->id = $_POST["id"];
-            $this->model->title = $_POST["title"];
-            $this->model->is_admin = $_POST["is_admin"];
+            $this->save(false);
+            header("Location: index.php?component=user&controller=usergroup");
+        }
+        
+        public function save($redirect = true)
+        {
+            foreach ($_POST as $key => $value)
+            {
+                $this->model->$key = $value;
+            }
             if ($this->model->store())
             {
                 $this->model->setMessage("success", "Usergroup saved");
@@ -25,7 +32,10 @@
             {
                 $this->model->setMessage("danger", "Something went wrong during saving");
             }
-            header("Location: index.php?component=user&controller=usergroups");
+            if ($redirect)
+            {
+                header("Location: index.php?component=user&controller=usergroups");
+            }
         }
         
     }

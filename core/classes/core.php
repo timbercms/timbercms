@@ -1,11 +1,23 @@
 <?php
     
+    /*
+     #=====================================================================================
+     # * Timber CMS
+     # * https://github.com/timbercms/timbercms
+     #-------------------------------------------------------------------------------------
+     # * Class Core
+     # * Provides all core functionality of Timber CMS
+     #=====================================================================================
+    */
+
     define("ADMIN", false);
     require_once(__DIR__ ."/model.php");
     require_once(__DIR__ ."/pagination.php");
+    require_once(__DIR__ ."/view.php");
     if (ADMIN)
     {
         require_once(__DIR__ ."/../../admin/components/user/models/user.php");
+        require_once(__DIR__ ."/../../admin/components/logs/models/log.php");
     }
     else
     {
@@ -33,11 +45,11 @@
         public static $script_links = array();
         public static $db;
         public static $title = "";
-        public static $description = '<meta name="description" content="Burgundy CMS">';
-        private $component;
-        private $controller;
-        private $model;
-        private $task;
+        public static $description = '<meta name="description" content="Bulletin. CMS">';
+        public $component;
+        public $controller;
+        public $model;
+        public $task;
         public $content_id;
         public static $content_item_id;
         public static $menu_item_id;
@@ -49,7 +61,16 @@
         public static $meta_author = "";
         public static $hooks;
         public static $cookie_name;
+        public static $template_name;
+        public static $component_name;
+        public static $controller_name;
         
+        /*
+         #=====================================================================================
+         # * __construct
+         # * Sets all the defaults, includes component files, and sets up MVC
+         #=====================================================================================
+        */
         public function __construct()
         {
             if (ADMIN)
@@ -65,15 +86,14 @@
                 $template = new Template($this->database, $params->admin_template);
                 $this->template = $template;
                 self::$user = new UserModel(0, $this->database);
-                if (self::$user->usergroup->is_admin != 1)
+                if (self::$user->usergroup->is_admin != 1 && $_GET["task"] != "login")
                 {
-                    header("Location: ../index.php?component=user&controller=login");
+                    require_once(__DIR__ ."/../../admin/login.php"); die();
                 }
                 $modelname = $this->controller ."Model";
                 $controllername = $this->controller ."Controller";
                 require_once(__DIR__ ."/../../admin/components/". $this->component ."/models/". $this->controller .".php");
                 require_once(__DIR__ ."/../../admin/components/". $this->component ."/controllers/". $this->controller .".php");
-                require_once(__DIR__ ."/../../admin/components/". $this->component ."/view.php");
                 if (strtolower($modelname) == "usermodel")
                 {
                     $model = new $modelname($this->content_id, $this->database, false);
@@ -93,6 +113,7 @@
                     $view = new View($controller, $model, $this);
                     $this->view = $view;
                     require_once(__DIR__ ."/../../admin/templates/". $this->template->name ."/index.php");
+                    $this->template->addCriticalCSS();
                     $this->template->addComponentStylesheet($this->component);
                     $this->template->addComponentScript($this->component);
                     $this->database->close();
@@ -105,10 +126,21 @@
                 self::$hooks = new Hooks($this->database);
                 $config = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = 'settings' LIMIT 1");
                 $params = (object) unserialize($config->params);
+                ini_set("display_errors", $params->error_reporting);
+                switch ($params->error_reporting_level)
+                {
+                    case "normal":
+                        error_reporting(E_ERROR | E_WARNING | E_PARSE);
+                        break;
+                    case "development":
+                        error_reporting(E_ALL);
+                        break;
+                }
                 self::$config = $params;
                 require_once(__DIR__ ."/template.php");
                 $template = new Template($this->database, $params->default_template);
                 $this->template = $template;
+                self::$template_name = $template->name;
                 self::$user = new UserModel(0, $this->database);
                 if (strlen($_GET["task"]) > 0)
                 {
@@ -149,32 +181,38 @@
                 }
                 self::$content_item_id = $this->content_id;
                 // Check if component is disabled
-                $test_comp = $this->database->loadObject("SELECT id, enabled, is_frontend FROM #__components WHERE internal_name = ?", array($this->component));
-                if (!$test_comp->enabled || !$test_comp->is_frontend)
+                if ($this->component != "system" && $this->controller != "blank")
                 {
-                    // Abort! Component is disabled!
-                    header("HTTP/1.0 404 Not Found");
-                    require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                    $test_comp = $this->database->loadObject("SELECT id, enabled, is_frontend FROM #__components WHERE internal_name = ?", array($this->component));
+                    if (!$test_comp->enabled || !$test_comp->is_frontend)
+                    {
+                        // Abort! Component is disabled!
+                        $this->displayErrorPage();
+                    }
+                    $modelname = $this->controller ."Model";
+                    $controllername = $this->controller ."Controller";
+                    require_once(__DIR__ ."/../../components/". $this->component ."/models/". $this->controller .".php");
+                    require_once(__DIR__ ."/../../components/". $this->component ."/controllers/". $this->controller .".php");
+                    $model = new $modelname($this->content_id, $this->database);
+                    $controller = new $controllername($model);
+                    $componentconfig = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = ? LIMIT 1", array($this->component));
+                    self::$componentconfig = (object) unserialize($componentconfig->params);
                 }
-                $modelname = $this->controller ."Model";
-                $controllername = $this->controller ."Controller";
-                require_once(__DIR__ ."/../../components/". $this->component ."/models/". $this->controller .".php");
-                require_once(__DIR__ ."/../../components/". $this->component ."/controllers/". $this->controller .".php");
-                require_once(__DIR__ ."/../../components/". $this->component ."/view.php");
-                $model = new $modelname($this->content_id, $this->database);
-                $controller = new $controllername($model);
-                $componentconfig = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = ? LIMIT 1", array($this->component));
-                self::$componentconfig = (object) unserialize($componentconfig->params);
-                if (strlen($_GET["task"]) > 0)
+                //echo "<pre>"; print_r($this); echo "</pre>"; die();
+                if (strlen($_GET["task"]) > 0 && ($this->component != "system" && $this->controller != "blank"))
                 {
                     $task = $_GET["task"];
                     $controller->$task();
                 }
                 else
                 {
-                    $view = new View($controller, $model, $this);
-                    $this->view = $view;
+                    if ($this->component != "system" && $this->controller != "blank")
+                    {
+                        $view = new View($controller, $model, $this);
+                        $this->view = $view;
+                    }
                     require_once(__DIR__ ."/../../templates/". $this->template->name ."/index.php");
+                    $this->template->addCriticalCSS();
                     $this->template->addComponentStylesheet($this->component);
                     $this->template->addComponentScript($this->component);
                     $this->database->close();
@@ -182,25 +220,42 @@
             }
         }
 
+        /*
+         #=====================================================================================
+         # * outputView
+         # * $view = class View
+         # * Output component view if user has access to view the page
+         #=====================================================================================
+        */
         public static function outputView($view)
         {
-            if (is_array(self::$menu_item->params["access"]))
+            if (self::$component_name != "system" && self::$controller_name != "blank")
             {
-                if (in_array(self::$user->usergroup->id, self::$menu_item->params["access"]) || in_array(0, self::$menu_item->params["access"]))
+                if (is_array(self::$menu_item->params["access"]))
                 {
-                    $view->output();
+                    if (in_array(self::$user->usergroup->id, self::$menu_item->params["access"]) || in_array(0, self::$menu_item->params["access"]))
+                    {
+                        $view->output();
+                    }
+                    else
+                    {
+                        echo '<div class="alert alert-danger">You do not have access to this page</div>';
+                    }
                 }
                 else
                 {
-                    echo '<div class="alert alert-danger">You do not have access to this page</div>';
+                    $view->output();
                 }
-            }
-            else
-            {
-                $view->output();
             }
         }
         
+        /*
+         #=====================================================================================
+         # * loadOverride
+         # * $template = class Template
+         # * Loads template overrides for component if one exists
+         #=====================================================================================
+        */
         public function loadOverride($template)
         {
             if (file_exists(__DIR__ ."/../../templates/". $this->template->name ."/overrides/components/". $this->component ."/". $template))
@@ -213,6 +268,12 @@
             }
         }
         
+        /*
+         #=====================================================================================
+         # * setDatabase
+         # * Set database information
+         #=====================================================================================
+        */
         public function setDatabase()
         {
             require_once(__DIR__ ."/../../configuration.php");
@@ -222,6 +283,13 @@
             self::$db = $db;
         }
         
+        /*
+         #=====================================================================================
+         # * addStylesheet
+         # * $link = (string) Link to location of CSS file. Can be relative or external
+         # * Adds stylesheet string into array for later processing
+         #=====================================================================================
+        */
         public static function addStylesheet($link)
         {
             if (!in_array($link, self::$stylesheet_links))
@@ -242,6 +310,13 @@
             }
         }
         
+        /*
+         #=====================================================================================
+         # * addScript
+         # * $link = (string) Link to location of JS file. Can be relative or external
+         # * Adds script string into array for later processing
+         #=====================================================================================
+        */
         public static function addScript($link)
         {
             if (!in_array($link, self::$script_links))
@@ -262,41 +337,73 @@
             }
         }
         
+        /*
+         #=====================================================================================
+         # * changeTitle
+         # * $title = (string) New title string
+         # * Changes the <title> tag to desired value
+         #=====================================================================================
+        */
         public static function changeTitle($title)
         {
-            self::$title = $title." - ".self::$config->site_title;
+            if (strlen($title) > 0 && strlen(self::$title) == 0)
+            {
+                self::$title = $title;
+            }
         }
         
+        /*
+         #=====================================================================================
+         # * changeMetaDescription
+         # * $title = (string) New meta description string
+         # * Changes the meta description tag to desired value
+         #=====================================================================================
+        */
         public static function changeMetaDescription($string)
         {
-            self::$description = '<meta name="description" content="' .$string .'">';
+            if (strlen($string) > 0)
+            {
+                self::$description = '<meta name="description" content="' .$string .'">';
+            }
         }
         
         public static function addMetaProperty($name, $content)
         {
-            self::$meta_properties[] = '<meta property="'. $name .'" content="'. $content .'" />';
+            if (strlen($content) > 0)
+            {
+                self::$meta_properties[] = '<meta property="'. $name .'" content="'. $content .'" />';
+            }
         }
         
         public static function addMetaItemProp($name, $content)
         {
-            self::$meta_itemprops[] = '<meta itemprop="'. $name .'" content="'. $content .'" />';
+            if (strlen($content) > 0)
+            {
+                self::$meta_itemprops[] = '<meta itemprop="'. $name .'" content="'. $content .'" />';
+            }
         }
         
         public static function addMetaName($name, $content)
         {
-            self::$meta_names[] = '<meta name="'. $name .'" content="'. $content .'" />';
+            if (strlen($content) > 0)
+            {
+                self::$meta_names[] = '<meta name="'. $name .'" content="'. $content .'" />';
+            }
         }
         
         public static function setMetaAuthor($string)
         {
-            self::$meta_author = '<meta name="author" content="'. $string .'">';
+            if (strlen($string) > 0)
+            {
+                self::$meta_author = '<meta name="author" content="'. $string .'">';
+            }
         }
         
         public function finalise($page)
         {
             $page = str_replace("<!-- HEADER_STYLES -->", implode("", self::$stylesheets), $page);
             $page = str_replace("<!-- HEADER_SCRIPTS -->", implode("", self::$scripts), $page);
-            $page = str_replace("<!-- PAGE_TITLE -->", self::$title, $page);
+            $page = str_replace("<!-- PAGE_TITLE -->", self::$title." - ".self::$config->site_title, $page);
             $page = str_replace("<!-- META_DESCRIPTION -->", self::$description, $page);
             $page = str_replace("<!-- META_AUTHOR -->", self::$meta_author, $page);
             $page = str_replace("<!-- META_PROPERTIES -->", implode("", self::$meta_properties), $page);
@@ -347,10 +454,13 @@
                         case "id":
                             $content_id = $part["1"];
                             break;
+                        case "task":
+                            $task = $part["1"];
+                            break;
                     }
                 }
                 $item = self::db()->loadObject("SELECT id, alias, parent_id FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($component, $controller, $content_id));
-                if ($item->id > 0)
+                if (strlen($task) == 0 && $item->id > 0)
                 {
                     $alias = array();
                     $alias[] = $item->alias;
@@ -422,7 +532,18 @@
                 $first = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($parts["0"]));
                 if ($first->id > 0)
                 {
-                    self::$menu_item = new MenuItemModel($first->id, self::db());
+                    if ($first->component == "system" && $first->controller == "blank")
+                    {
+                        $this->component = "system";
+                        self::$component_name = "system";
+                        $this->controller = "blank";
+                        self::$controller_name = "blank";
+                        $this->content_id = 0;
+                        $router_set = true;
+                    }
+                    $menu_item = new MenuItemModel($first->id, self::db());
+                    self::$menu_item = $menu_item;
+                    self::changeTitle($menu_item->title);
                     $alias = end($parts);
                     $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($alias));
                     if ($item->id <= 0)
@@ -443,8 +564,7 @@
                         else
                         {
                             // Nothing. Default to 404.
-                            header("HTTP/1.0 404 Not Found");
-                            require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                            $this->displayErrorPage();
                         }
                     }
                 }
@@ -468,50 +588,72 @@
                 }
                 else
                 {
-                    // Use Custom Router
-                    if (strlen($parts["0"]) > 0)
+                    // Check that we have a valid component
+                    $component = $this->database->loadObject("SELECT id FROM #__components WHERE internal_name = ? AND enabled = '1'", array($parts[0]));
+                    if ($component->id > 0)
                     {
-                        $routername = $parts["0"] ."Router";
-                        require_once(__DIR__ ."/../../components/". $parts["0"] ."/router.php");
-                        self::$router = new $routername($this->database);
-                        if (strlen(self::router()->component) > 0)
+                        // Use Custom Router
+                        if (strlen($parts["0"]) > 0)
                         {
-                            // We have a router!
-                            $new_parts = self::router()->unroute($parts);
-                            $this->component = $new_parts["0"];
-                            $this->controller = $new_parts["1"];
-                            $this->content_id = $new_parts["2"];
+                            $routername = $parts["0"] ."Router";
+                            require_once(__DIR__ ."/../../components/". $parts["0"] ."/router.php");
+                            self::$router = new $routername($this->database);
+                            if (strlen(self::router()->component) > 0)
+                            {
+                                // We have a router!
+                                $new_parts = self::router()->unroute($parts);
+                                $this->component = $new_parts["0"];
+                                $this->controller = $new_parts["1"];
+                                $this->content_id = $new_parts["2"];
+                            }
+                            else
+                            {
+                                // Nothing. Default to 404.
+                                $this->displayErrorPage();
+                            }
                         }
                         else
                         {
-                            // Nothing. Default to 404.
-                            header("HTTP/1.0 404 Not Found");
-                            require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+                            // If no rule from router found, find homepage
+                            $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
+                            self::$menu_item_id = $item->id;
+                            self::$menu_item = new MenuItemModel($item->id, self::db());
+                            if ($item->id <= 0 && strlen($_GET["component"]) == 0)
+                            {
+                                $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
+                                self::$menu_item_id = $item->id;
+                            }
+                            elseif (strlen($_GET["component"]) > 0)
+                            {
+                                $item = new stdClass();
+                                $item->component = $_GET["component"];
+                                $item->controller = $_GET["controller"];
+                                $item->content_id = $_GET["id"];
+                            }
+                            $this->component = $item->component;
+                            $this->controller = $item->controller;
+                            $this->content_id = $item->content_id;
                         }
                     }
                     else
                     {
-                        // If no rule from router found, find homepage
-                        $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE component = ? AND controller = ? AND content_id = ?", array($_GET["component"], $_GET["controller"], $_GET["id"]));
-                        self::$menu_item_id = $item->id;
-                        self::$menu_item = new MenuItemModel($item->id, self::db());
-                        if ($item->id <= 0 && strlen($_GET["component"]) == 0)
-                        {
-                            $item = self::db()->loadObject("SELECT * FROM #__menus_items WHERE is_home = ?", array(1));
-                            self::$menu_item_id = $item->id;
-                        }
-                        elseif (strlen($_GET["component"]) > 0)
-                        {
-                            $item = new stdClass();
-                            $item->component = $_GET["component"];
-                            $item->controller = $_GET["controller"];
-                            $item->content_id = $_GET["id"];
-                        }
-                        $this->component = $item->component;
-                        $this->controller = $item->controller;
-                        $this->content_id = $item->content_id;
+                        // Component not found, default to 404 page
+                        $this->displayErrorPage();
                     }
                 }
+            }
+        }
+        
+        public function displayErrorPage()
+        {
+            header("HTTP/1.0 404 Not Found");
+            if (file_exists(__DIR__ ."/../../templates/". $this->template->name ."/error.php"))
+            {
+                require_once(__DIR__ ."/../../templates/". $this->template->name ."/error.php"); die();
+            }
+            else
+            {
+                require_once(__DIR__ ."/../templates/error.php"); die();
             }
         }
         
@@ -555,6 +697,11 @@
             return self::$menu_item_id;
         }
         
+        public static function template_name()
+        {
+            return self::$template_name;
+        }
+        
         public function cleanSessions()
         {
             Core::db()->query("DELETE FROM #__sessions WHERE access < (UNIX_TIMESTAMP() - 2592000) LIMIT 100", array());
@@ -563,6 +710,8 @@
         
         public function displaySystemMessages()
         {
+            if (!isset($_SESSION["MESSAGES"])) return;
+
             if (count($_SESSION["MESSAGES"]) > 0 && strlen($_GET["task"]) == 0)
             {
                 foreach ($_SESSION["MESSAGES"] as $message)
@@ -571,6 +720,25 @@
                 }
                 unset($_SESSION["MESSAGES"]);
             }
+        }
+        
+        public static function generateAlias($string)
+        {
+            $string = trim($string);
+            $string = str_replace("-", "", $string);
+            $string = preg_replace('/[^A-Za-z0-9-]+/', '-', $string);
+            $string = rtrim($string, "-");
+            $string = strtolower($string);
+            return $string;
+        }
+        
+        public static function log($label)
+        {
+            $log = new LogModel(0, self::db());
+            $log->label = $label;
+            $log->event_author = self::user()->id;
+            $log->event_time = time();
+            $log->store();
         }
         
     }

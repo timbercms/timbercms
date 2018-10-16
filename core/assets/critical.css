@@ -1,0 +1,74 @@
+.system-message {
+    background: #FFF;
+    padding: 20px;
+    color: #333;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    margin-bottom: 20px;
+}
+.system-message.success {
+    background: #b2f2bb;  
+}
+.system-message.danger {
+    background: #ffc9c9;   
+}
+.system-message.warning {
+    background: #ffec99;   
+}
+.system-message.info {
+    background: #a3daff;   
+}
+.branding-container {
+    padding: 40px 0px;
+    max-width: var(--site-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+.website-title {
+    font-size: 52px;
+    line-height: 52px;
+    color: #333;
+}
+.pagination a:not([href]) {
+    color: rgba(255, 255, 255, .5);
+    background: rgba(52, 58, 64, .90);
+}
+.pagination a.current-page {
+    background: #23272b;
+    color: #FFF;
+}
+.share-buttons {
+    margin-top: 40px;   
+}
+.share-buttons a {
+    font-size: 28px;
+    display: inline-block;
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 3px;
+    color: #FFF !important;
+    padding-top: 11px;
+    margin-right: 5px;
+    margin-bottom: 20px;
+    position: relative;
+    transition: top .25s;
+    top: 0px;
+}
+.share-buttons a:hover {
+    top: -5px;
+}
+.share-buttons a:last-of-type {
+    margin-right: 0px;   
+}
+.whatsapp-button {
+    background: #075e54;
+}
+.facebook-button {
+    background: #3b5998; 
+}
+.twitter-button {
+    background: #1da1f2;   
+}
+.google-button {
+    background: #dd4b39;   
+}

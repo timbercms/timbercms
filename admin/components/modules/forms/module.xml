@@ -6,5 +6,5 @@
     <fields type="select" name="published" label="Published" values="No|0,Yes|1" default="1" />
     <fields type="template_position" name="position" label="Template Position" />
     <fields type="text" name="ordering" label="Ordering" placeholder="Leave blank to automatically assign order" />
-    <fields type="sql" multiple="true" name="pages" label="Show on pages" query="SELECT id, title FROM #__menus_items WHERE published = '1'" key="id" keyvalue="title" default_option="0|ALL PAGES" />
+    <fields type="sql" multiple="true" name="pages" label="Show on pages" query="SELECT id, title FROM #__menus_items WHERE published = '1'" key="id" keyvalue="title" default_option="ALL PAGES|0" />
 </settings>

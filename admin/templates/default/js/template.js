@@ -1,6 +1,10 @@
 $(document).on('change', 'select[name="component"], select[name="controller"]', function() {
     $(".admin-form").submit();
 });
+$(document).on('click', '.save-and-new', function() {
+    $(".admin-form").attr("action", $(this).attr("data-action"));
+    $(".admin-form").submit();
+});
 $(document).on('click', '.delete-by-ids', function() {
     swal({
         title: 'Really delete?',

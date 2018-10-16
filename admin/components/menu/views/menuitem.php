@@ -1,13 +1,17 @@
 <div class="white-card">
     <h2>Menuitem Manager</h2>
-    <div class="component-action-bar">
-        <a href="index.php?component=menu&controller=menuitems&id=<?php echo $_GET["menu_id"]; ?>" class="button"><i class="fa fa-chevron-left"></i> Back to List</a>
-    </div>
     <form action="index.php?component=menu&controller=menuitem&task=save" method="post" class="admin-form">
+        <div class="component-action-bar">
+            <a href="index.php?component=menu&controller=menuitems&id=<?php echo $_GET["menu_id"]; ?>" class="button" style="float: left;"><i class="fa fa-chevron-left"></i> Back to List</a>
+            <button type="submit" class="button green-button"><i class="fas fa-save"></i> Save</button>
+            <button type="submit" class="button green-button save-and-new" data-action="index.php?component=menu&controller=menuitem&task=saveandnew&menu_id=<?php echo $_GET["menu_id"]; ?>"><i class="fas fa-save"></i> Save & New</button>
+        </div>
         <h3 style="margin-bottom: 20px;">Change Menu Type</h3>
         <p><strong>Component:</strong> <span style="text-transform: capitalize;"><?php echo $this->model->component; ?></span></p>
-        <p><strong>View:</strong> <?php echo $this->model->controller_query->attributes()->label; ?></p>
-        <p><strong>Overview:</strong> <?php echo $this->model->controller_query->attributes()->description; ?></p>
+        <p><strong>View:</strong> <?php echo ($this->model->controller_query ?  $this->model->controller_query->attributes()->label : ucwords($this->model->controller)); ?></p>
+        <?php if ($this->model->controller_query) { ?>
+            <p><strong>Overview:</strong> <?php echo $this->model->controller_query->attributes()->description; ?></p>
+        <?php } ?>
         <p><a href="index.php?component=menu&controller=newitem&menu_id=<?php echo $_GET["menu_id"]; ?>&id=<?php echo $this->model->id; ?>" class="button">Change</a></p>
         <h3 style="margin-top: 20px; margin-bottom: 20px;">Basic Information</h3>
         <?php $this->model->form->display(false); ?>
@@ -35,9 +39,11 @@
                 <?php } ?>
             </select>
         </div>
-        <?php if (strlen($this->model->controller_query->attributes()->query) > 0) { ?>
-            <h3 style="margin-top: 20px; margin-bottom: 20px;">Item Options</h3>
-            <?php $this->model->form->displaySql($this->model->controller_query, "content_id", $this->model->content_id, $this->model->database, "Content"); ?>
+        <?php if ($this->model->controller_query) { ?>
+            <?php if (strlen($this->model->controller_query->attributes()->query) > 0) { ?>
+                <h3 style="margin-top: 20px; margin-bottom: 20px;">Item Options</h3>
+                <?php $this->model->form->displaySql($this->model->controller_query, "content_id", $this->model->content_id, $this->model->database, "Content"); ?>
+            <?php } ?>
         <?php } ?>
         <input type="hidden" name="component" value="<?php echo (strlen($this->model->component) > 0 && $_GET["overwrite"] != 1 ? $this->model->component : $_GET["comp"]); ?>" />
         <input type="hidden" name="controller" value="<?php echo (strlen($this->model->controller) > 0 && $_GET["overwrite"] != 1 ? $this->model->controller : $_GET["cont"]); ?>" />

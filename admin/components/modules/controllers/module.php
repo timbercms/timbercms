@@ -12,17 +12,19 @@
             $this->core = $core;
         }
         
-        public function save()
+        public function saveandnew()
         {
-            $this->model->id = $_POST["id"];
-            $this->model->title = $_POST["title"];
-            $this->model->type = $_POST["type"];
-            $this->model->show_title = $_POST["show_title"];
-            $this->model->published = $_POST["published"];
-            $this->model->position = $_POST["position"];
-            $this->model->params = $_POST["params"];
-            $this->model->ordering = $_POST["ordering"];
-            $this->model->pages = $_POST["pages"];
+            $this->save(false);
+            header("Location: index.php?component=modules&controller=newmodule");
+        }
+        
+        public function save($redirect = true)
+        {
+            foreach ($_POST as $key => $value)
+            {
+                $this->model->$key = $value;
+            }
+            $this->model->pages = implode(",", $_POST["pages"]);
             if ($this->model->store())
             {
                 $this->model->setMessage("success", "Module saved");
@@ -31,7 +33,10 @@
             {
                 $this->model->setMessage("danger", "Something went wrong during saving");
             }
-            header("Location: index.php?component=modules&controller=modules");
+            if ($redirect)
+            {
+                header("Location: index.php?component=modules&controller=modules");
+            }
         }
         
         public function publish()

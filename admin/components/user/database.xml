@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+    <install>
+        <tables>
+            <table>
+                CREATE TABLE `#__sessions` (`id` int(11) NOT NULL AUTO_INCREMENT, `php_session_id` varchar(255) DEFAULT NULL, `user_id` int(11) DEFAULT NULL, `last_action_time` int(11) DEFAULT NULL, PRIMARY KEY (`id`));
+            </table>
+            <table>
+                CREATE TABLE `#__usergroups` (`id` int(11) NOT NULL AUTO_INCREMENT, `title` varchar(255) DEFAULT NULL, `is_admin` int(11) DEFAULT '0', PRIMARY KEY (`id`));
+            </table>
+            <table>
+                CREATE TABLE `#__users` (`id` int(11) NOT NULL AUTO_INCREMENT, `username` varchar(255) DEFAULT NULL, `name` varchar(255) DEFAULT NULL, `email` varchar(255) DEFAULT NULL, `usergroup_id` int(11) DEFAULT NULL, `password` varchar(255) DEFAULT NULL, `activated` int(11) DEFAULT '0', `blocked` int(11) DEFAULT '0', `register_time` int(11) DEFAULT NULL, `last_action_time` int(11) DEFAULT NULL, `verify_token` varchar(5000) DEFAULT NULL, `avatar` varchar(255) DEFAULT NULL, `blocked_reason` varchar(500) DEFAULT NULL, `params` text, PRIMARY KEY (`id`));
+            </table>
+            <table>
+                CREATE TABLE `#__users_recovery` (`id` int(11) NOT NULL AUTO_INCREMENT, `user_id` int(11) DEFAULT NULL, `token` varchar(5000) DEFAULT NULL, `reset_requested` int(11) DEFAULT NULL, PRIMARY KEY (`id`));
+            </table>
+        </tables>
+    </install>
+    <tables>
+        <table>
+            <name>sessions</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="php_session_id" params="varchar(255) DEFAULT NULL" />
+                <column name="user_id" params="int(11) DEFAULT NULL" />
+                <column name="last_action_time" params="int(11) DEFAULT NULL" />
+            </columns>
+        </table>
+        <table>
+            <name>usergroups</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="title" params="varchar(255) DEFAULT NULL" />
+                <column name="is_admin" params="int(11) DEFAULT '0'" />
+            </columns>
+        </table>
+        <table>
+            <name>users</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="username" params="varchar(255) DEFAULT NULL" />
+                <column name="name" params="varchar(255) DEFAULT NULL" />
+                <column name="email" params="varchar(255) DEFAULT NULL" />
+                <column name="usergroup_id" params="int(11) DEFAULT NULL" />
+                <column name="password" params="varchar(255) DEFAULT NULL" />
+                <column name="activated" params="int(11) DEFAULT '0'" />
+                <column name="blocked" params="int(11) DEFAULT '0'" />
+                <column name="blocked_reason" params="varchar(500) DEFAULT NULL" />
+                <column name="register_time" params="int(11) DEFAULT NULL" />
+                <column name="last_action_time" params="int(11) DEFAULT NULL" />
+                <column name="verify_token" params="varchar(5000) DEFAULT NULL" />
+                <column name="avatar" params="varchar(255) DEFAULT NULL" />
+                <column name="params" params="text" />
+            </columns>
+        </table>
+        <table>
+            <name>users_recovery</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="user_id" params="int(11) DEFAULT NULL" />
+                <column name="reset_requested" params="int(11) DEFAULT NULL" />
+                <column name="token" params="varchar(5000) DEFAULT NULL" />
+            </columns>
+        </table>
+    </tables>
+</database>

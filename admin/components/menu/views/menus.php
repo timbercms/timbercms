@@ -3,6 +3,7 @@
     <div class="component-action-bar">
         <?php if (count($this->model->settings->fields) > 0) { ?><a href="index.php?component=settings&controller=settings&extension=menu" class="button"><i class="fa fa-cog"></i> Settings</a><?php } ?><a href="index.php?component=menu&controller=menu" class="button green-button"><i class="fa fa-plus"></i> New Menu</a><a class="delete-by-ids button red-button"><i class="fa fa-trash"></i> Delete</a>
     </div>
+    <?php $this->model->pagination->display($this->model->max); ?>
     <form action="index.php?component=menu&controller=menus&task=delete" method="post" class="admin-form">
         <div class="d-flex admin-header">
             <div class="col-md-1">&nbsp;</div>
@@ -27,4 +28,5 @@
             </div>
         <?php } ?>
     </form>
+    <?php $this->model->pagination->display($this->model->max); ?>
 </div>

@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <settings>
     <fields type="hidden" name="id" />
+    <fields type="sql" query="SELECT id, title FROM #__articles_categories ORDER BY title ASC" key="id" keyvalue="title" name="parent_id" label="Parent" default_option="-- NO PARENT --|0" />
     <fields type="text" length="255" name="title" label="Title" required="required" />
     <fields type="text" length="255" name="alias" label="Alias" />
     <fields type="textarea" editor="true" name="description" label="Description" />
     <fields type="select" name="params[show_title]" label="Show title in listings?" values="No|0,Yes|1" default="1" />
+    <fields type="select" name="params[show_children]" label="Show child category blocks?" values="No|0,Yes|1" default="1" />
+    <fields type="select" name="params[show_image]" label="Show article image?" values="No|0,Yes|1" default="1" />
+    <fields type="select" name="params[show_author_info]" label="Show author information?" values="No|0,Yes|1" default="1" />
+    <fields type="select" name="params[show_social_icons]" label="Show social icons?" values="No|0,Yes|1" default="1" />
+    <fields type="select" name="params[show_article_information]" label="Show category and hit count?" values="No|0,Yes|1" default="1" />
     <fields type="select" name="published" label="Published" values="No|0,Yes|1" default="1" />
+    <fields type="select" name="ordering" label="Article list ordering" values="Newest First|publish_time DESC,Oldest First|publish_time ASC,Alphabetical A-Z|title ASC,Alphabetical Z-A|title DESC,Hits (Most first)|hits DESC,Hits (Least first)|hits ASC" default="publish_time DESC" />
 </settings>

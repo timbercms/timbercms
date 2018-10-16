@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+    <title>Hero</title>
+    <description>Show website title and tagline in a 'hero' box</description>
+    <author>Chris Smith</author>
+    <author_url>https://github.com/Smith0r</author_url>
+    <version>2.0.0</version>
+</settings>

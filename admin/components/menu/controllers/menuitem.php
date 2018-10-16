@@ -12,21 +12,18 @@
             $this->core = $core;
         }
         
-        public function save()
+        public function saveandnew()
         {
-            $this->model->id = $_POST["id"];
-            $this->model->menu_id = $_POST["menu_id"];
-            $this->model->parent_id = $_POST["parent_id"];
-            $this->model->title = $_POST["title"];
-            $this->model->alias = $_POST["alias"];
-            $this->model->published = $_POST["published"];
-            $this->model->access_group = $_POST["access_group"];
-            $this->model->component = $_POST["component"];
-            $this->model->controller = $_POST["controller"];
-            $this->model->content_id = $_POST["content_id"];
-            $this->model->params = $_POST["params"];
-            $this->model->is_home = $_POST["is_home"];
-            $this->model->ordering = $_POST["ordering"];
+            $this->save(false);
+            header("Location: index.php?component=menu&controller=newitem&menu_id=". $_GET["menu_id"]);
+        }
+        
+        public function save($redirect = true)
+        {
+            foreach ($_POST as $key => $value)
+            {
+                $this->model->$key = $value;
+            }
             if ($this->model->store())
             {
                 $this->model->setMessage("success", "Menu item saved");
@@ -43,7 +40,10 @@
             {
                 $id = $this->model->database->lastInsertId();
             }
-            header("Location: index.php?component=menu&controller=menuitem&id=". $id ."&menu_id=". $_POST["menu_id"]);
+            if ($redirect)
+            {
+                header("Location: index.php?component=menu&controller=menuitem&id=". $id ."&menu_id=". $_POST["menu_id"]);
+            }
         }
         
         public function publish()

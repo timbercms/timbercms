@@ -4,8 +4,8 @@
         <?php if (count($this->model->broken_tables) > 0) { ?><a href="index.php?component=settings&controller=database&task=fix" class="btn btn-primary"><i class="fas fa-wrench"></i> Repair Issues</a><?php } ?>
     </div>
     <div>
-        <h4 style="margin-bottom: 10px;"><?php echo count($this->model->broken_tables); ?> Core Table<?php if (count($this->model->broken_tables) != 1) { ?>s have<?php } else { ?> has<?php } ?> missing fields</h4>
-        <h4 style="margin-bottom: 40px;"><?php echo count($this->model->extra_tables); ?> Core Table<?php if (count($this->model->extra_tables) != 1) { ?>s have<?php } else { ?> has<?php } ?> extra fields</h4>
+        <h4 style="margin-bottom: 10px;"><?php echo count($this->model->broken_tables); ?> Table<?php if (count($this->model->broken_tables) != 1) { ?>s have<?php } else { ?> has<?php } ?> missing fields</h4>
+        <h4 style="margin-bottom: 40px;"><?php echo count($this->model->extra_tables); ?> Table<?php if (count($this->model->extra_tables) != 1) { ?>s have<?php } else { ?> has<?php } ?> extra fields</h4>
         <?php foreach ($this->model->current_tables as $key => $table) { ?>
             <div class="system-message <?php if (in_array($key, $this->model->broken_tables)) { ?>danger<?php } else if (in_array($key, $this->model->extra_tables)) { ?>warning<?php } else { ?>success<?php } ?>">
                 <?php if (in_array($key, $this->model->broken_tables)) { ?>

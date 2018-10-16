@@ -5,22 +5,10 @@
 
     class ArticleModel extends Model
     {
-        
+        public $component_name = "content";
+        public $table = "articles";
         public $template = "article.php";
         public $database;
-        
-        public $id;
-        public $title;
-        public $alias;
-        public $category;
-        public $content;
-        public $short_content;
-        public $published;
-        public $publish_time;
-        public $author;
-        public $hits;
-        public $meta_description;
-        public $image;
         public $comments = array();
         
         public function __construct($id = 0, $database)
@@ -32,27 +20,14 @@
             }
         }
         
-        public function load($id)
+        public function processData()
         {
-            $temp = $this->database->loadObject("SELECT * FROM #__articles WHERE id = ?", array($id));
-            $this->id = $temp->id;
-            $this->title = $temp->title;
-            $this->alias = $temp->alias;
-            $this->content = $temp->content;
             $this->short_content = strip_tags(explode("<!-- pagebreak -->", $this->content)["0"], "<p></p>");
-            $this->published = $temp->published;
-            $this->publish_time = $temp->publish_time;
-            $this->hits = $temp->hits;
-            $this->meta_description = $temp->meta_description;
-            $this->category = new CategoryModel($temp->category_id, $this->database, false);
-            $this->author = new UserModel($temp->author_id, $this->database);
-            if (strlen($temp->image) > 0)
+            $this->category = new CategoryModel($this->category_id, $this->database, false);
+            $this->author = new UserModel($this->author_id, $this->database);
+            if (strlen($this->image) > 0)
             {
-                $this->image = (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/").$temp->image;
-            }
-            else
-            {
-                $this->image = (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/")."images/articles/placeholder.jpg";
+                $this->image = (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/").$this->image;
             }
             if (Core::user()->usergroup->is_admin == 1)
             {
@@ -66,6 +41,7 @@
             {
                 $this->comments[] = new CommentModel($temp_comment->id, $this->database);
             }
+            Core::hooks()->executeHook("onLoadArticleModel", $this);
         }
         
         public function addHit()

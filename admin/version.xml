@@ -1,8 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <version>
-    <numerical>1.4.0</numerical>
-    <releaseDate>30th July 2018</releaseDate>
+    <numerical>2.0.0</numerical>
+    <releaseDate>16th October 2018</releaseDate>
     <packageURL>https://github.com/Smith0r/bulletin/archive/master.zip</packageURL>
     <new>
+        <![CDATA[
+            <p>109 Commits</p>
+            <p>72 Issues closed</p>
+            <p>2 Contributors</p>
+            <p>&nbsp;</p>
+            <ul>
+                <li>Module CSS / Template Overrides. Fixes #149</li>
+                <li>Admin - Highlight brand</li>
+                <li>Database Checker Changes. Fixes #152</li>
+                <li>Better Database Install on discovery. Fixes #153</li>
+                <li>Database Checker Changes</li>
+                <li>Fix MenuItem Bug. Fixes #150</li>
+                <li>Article ordering. Fixes #151</li>
+                <li>Add category ordering to installer</li>
+                <li>Add fields to frontend models using hooks</li>
+                <li>Fixes #155</li>
+                <li>Simpler category article design</li>
+                <li>Fix category article link. Fixes #158</li>
+                <li>Update Version</li>
+                <li>Update FontAwesome to 5.3.1</li>
+                <li>Lowercase db prefix. Fixes #159</li>
+                <li>Default option fix. Fixes #160</li>
+                <li>XML Fix</li>
+                <li>Article category nesting</li>
+                <li>Pagination. Fixes #156</li>
+                <li>Missed bracket...</li>
+                <li>Remove duplicate view.php. Fixes #157</li>
+                <li>Component css overrides. Fixes #168</li>
+                <li>Order backend items. Fixes #167</li>
+                <li>Centralised alias generation. Fixes #162</li>
+                <li>Frontend Pagination. Fixes #166</li>
+                <li>Remove legacy code</li>
+                <li>Pagination styling. Fixes #169</li>
+                <li>Fix content router. Fixes #165</li>
+                <li>Critical CSS. Fixes #171</li>
+                <li>Add share buttons to critical.</li>
+                <li>Fix Pagination URL duplication issue.</li>
+                <li>Fix menuitem error</li>
+                <li>Fix 404 detection</li>
+                <li>Basic new 404 page. Fixes #170</li>
+                <li>Remove legacy code</li>
+                <li>Only set Meta info if string > 0</li>
+                <li>Menu Separators. Fixes #173</li>
+                <li>Fix branding colour</li>
+                <li>Save & New. Fixes #163</li>
+                <li>Reuseable model code. Fixes #140</li>
+                <li>Remove redundant field. Fixes #188</li>
+                <li>Remove disable button if locked. Fixes #186</li>
+                <li>Reinstate user "Name". Fixes #187</li>
+                <li>Add name to profile view</li>
+                <li>New frontend theme. Fixes #148</li>
+                <li>Fix comment bug. Fixes #189</li>
+                <li>Fix passwords being overwritten. Fixes #191</li>
+                <li>Stop BASE_URL being applied to Gravatars. Fixes #193</li>
+                <li>Stop avatar overriding. Fixes #194</li>
+                <li>Fix comment hiding. Fixes #192</li>
+                <li>Fix registration errors. Fixes #190</li>
+                <li>Login module layout change</li>
+                <li>Update readme</li>
+                <li>Fix typo</li>
+                <li>Change footer colour</li>
+                <li>Fix conflict with adding new menu items</li>
+                <li>New menu item type for blank pages</li>
+                <li>Fixes #197</li>
+                <li>Update README.md</li>
+                <li>Use new name. Fixes #198</li>
+                <li>Add logo to template.</li>
+                <li>Better 404 page. #170</li>
+                <li>Default favicon. Fixes #201</li>
+                <li>Dedicated admin login. Fixes #200</li>
+                <li>Text update for #200</li>
+                <li>Frontend theme changes. #148</li>
+                <li>Fix sitemap. Fixes #203</li>
+                <li>Fix undefined variable warnings + installer database SQL bugs</li>
+                <li>Merge pull request #205 from rbertram90/2.0.0</li>
+                <li>Frontend styling work</li>
+                <li>Installer fixes. closes #154, closes #179</li>
+                <li>Menuitem titles. Fixes #208</li>
+                <li>Add name field. Closes #195</li>
+                <li>Fix params form bug</li>
+                <li>Error reporting switch. Closes #172</li>
+                <li>Add error_reporting to installer</li>
+                <li>Registration switch. Closes #204</li>
+                <li>Admin critical CSS. Closes #174</li>
+                <li>Only show register link if enabled</li>
+                <li>Extra category config. Closes #207</li>
+                <li>Fix params[] bug</li>
+                <li>Admin panel theme. Closes #177</li>
+                <li>Border colour change.</li>
+                <li>Tagline setting</li>
+                <li>Turn hero box into a module</li>
+                <li>Add Hero to installer</li>
+                <li>New menuitem ordering. Fixes #209</li>
+                <li>Cleaned up profile view. Closes #183</li>
+                <li>Small dashboard changes. Closes #176</li>
+                <li>Border radius on admin login fields</li>
+                <li>Fixes #210</li>
+                <li>Admin Logging. Closes #175</li>
+                <li>Error reporting levels. Closes #211</li>
+                <li>Fix params issue.</li>
+                <li>Responsive admin panel. Closes #131</li>
+                <li>Use same database object</li>
+                <li>Admin avatar uploads. Closes #184</li>
+                <li>Remove my avatar...</li>
+                <li>Fall back to Gravatar if avatar file deleted</li>
+                <li>Go back to old update way. Closes #164</li>
+                <li>Some comments. #129</li>
+            </ul>
+        ]]>
     </new>
 </version>

@@ -12,14 +12,18 @@
             $this->core = $core;
         }
         
-        public function save()
+        public function saveandnew()
         {
-            $this->model->id = $_POST["id"];
-            $this->model->title = $_POST["title"];
-            $this->model->alias = $_POST["alias"];
-            $this->model->description = $_POST["description"];
-            $this->model->published = $_POST["published"];
-            $this->model->params = $_POST["params"];
+            $this->save(false);
+            header("Location: index.php?component=content&controller=category");
+        }
+        
+        public function save($redirect = true)
+        {
+            foreach ($_POST as $key => $value)
+            {
+                $this->model->$key = $value;
+            }
             if ($this->model->store())
             {
                 $this->model->setMessage("success", "Category saved");
@@ -28,7 +32,10 @@
             {
                 $this->model->setMessage("danger", "Something went wrong during saving");
             }
-            header("Location: index.php?component=content&controller=categories");
+            if ($redirect)
+            {
+                header("Location: index.php?component=content&controller=categories");
+            }
         }
         
         public function publish()

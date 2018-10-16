@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+    <install>
+        <tables>
+            <table>
+                CREATE TABLE `#__enquiries` (`id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(255) DEFAULT NULL, `email` varchar(255) DEFAULT NULL, `content` text, `sent_time` int(11) DEFAULT NULL, PRIMARY KEY (`id`));
+            </table>
+        </tables>
+    </install>
+    <tables>
+        <table>
+            <name>enquiries</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="name" params="varchar(255) DEFAULT NULL" />
+                <column name="email" params="varchar(255) DEFAULT NULL" />
+                <column name="content" params="text" />
+                <column name="sent_time" params="int(11) DEFAULT NULL" />
+            </columns>
+        </table>
+    </tables>
+</database>

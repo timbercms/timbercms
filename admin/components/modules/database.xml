@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+    <install>
+        <tables>
+            <table>
+                CREATE TABLE `#__modules` (`id` int(11) NOT NULL AUTO_INCREMENT, `title` varchar(255) DEFAULT NULL, `type` varchar(255) DEFAULT NULL, `show_title` int(11) DEFAULT NULL, `published` int(11) DEFAULT NULL, `position` varchar(255) DEFAULT NULL, `params` varchar(10000) DEFAULT NULL, `pages` varchar(255) DEFAULT NULL, `ordering` varchar(255) DEFAULT '0', PRIMARY KEY (`id`));
+            </table>
+        </tables>
+    </install>
+    <tables>
+        <table>
+            <name>modules</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="title" params="varchar(255) DEFAULT NULL" />
+                <column name="type" params="varchar(255) DEFAULT NULL" />
+                <column name="show_title" params="int(11) DEFAULT NULL" />
+                <column name="published" params="int(11) DEFAULT NULL" />
+                <column name="position" params="varchar(255) DEFAULT NULL" />
+                <column name="params" params="varchar(10000) DEFAULT NULL" />
+                <column name="pages" params="varchar(255) DEFAULT '0'" />
+                <column name="ordering" params="varchar(255) DEFAULT '0'" />
+            </columns>
+        </table>
+    </tables>
+</database>
