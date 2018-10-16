@@ -6,6 +6,6 @@
             <button type="submit" class="button green-button"><i class="fas fa-save"></i> Save</button>
             <button type="submit" class="button green-button save-and-new" data-action="index.php?component=content&controller=category&task=saveandnew"><i class="fas fa-save"></i> Save & New</button>
         </div>
-        <?php $this->model->form->display(false); ?>
+        <?php $this->model->form->display(); ?>
     </form>
 </div>

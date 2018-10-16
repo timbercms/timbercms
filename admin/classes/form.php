@@ -47,14 +47,14 @@ class Form
             $default = $attributes->default;
             $label = $attributes->label;
             
+            $field_name = $name;
             if (substr($name, 0, 7) == "params[")
             {
-                $field_name = rtrim(explode("params[", $name)[1], "]");
-                $field_value = $this->data->params[$field_name];
+                $temp_name = rtrim(explode("params[", $name)[1], "]");
+                $field_value = $this->data->params[$temp_name];
             }
             else
             {
-                $field_name = $name;
                 $field_value = $this->data->$name;
             }
             
