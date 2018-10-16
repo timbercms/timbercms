@@ -52,6 +52,24 @@
                 }
                 $this->model->$key = $value;
             }
+            if (strlen($_FILES["avatar"]["name"]) > 0)
+            {
+                foreach ($_FILES as $key => $file)
+                {
+                    if ($file["size"] <= 1048576)
+                    {
+                        $name = explode(".", $file["name"])["0"]."-".time().".jpg";
+                        $tmp = $file["tmp_name"];
+                        move_uploaded_file($tmp, __DIR__ ."/../../../../images/avatars/". $name);
+                        $this->model->avatar = "images/avatars/". $name;
+                        break;
+                    }
+                    else
+                    {
+                        $this->model->setMessage("danger", "Your avatar must be below 1MB in filesize.");
+                    }
+                }
+            }
             $this->model->register_time = ($_POST["register_time"] > 0 ? $_POST["register_time"] : time());
             if ($this->model->store())
             {
