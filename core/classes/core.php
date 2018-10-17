@@ -537,6 +537,7 @@
                 $first = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($parts["0"]));
                 if ($first->id > 0)
                 {
+                    self::$menu_item_id = $first->id;
                     if ($first->component == "system" && $first->controller == "blank")
                     {
                         $this->component = "system";
