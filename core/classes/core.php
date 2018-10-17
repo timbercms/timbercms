@@ -211,6 +211,11 @@
                         $view = new View($controller, $model, $this);
                         $this->view = $view;
                     }
+                    else
+                    {
+                        self::$component_name = $this->component;
+                        self::$controller_name = $this->controller;
+                    }
                     require_once(__DIR__ ."/../../templates/". $this->template->name ."/index.php");
                     $this->template->addCriticalCSS();
                     $this->template->addComponentStylesheet($this->component);
