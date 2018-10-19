@@ -352,7 +352,12 @@ class Form
             $string .= '" class="form-control';
         }
         $string .= $this->addClassAttr($attributes->class);
-        $string .= '">';
+        $string .= '"';
+        if ($attributes->required == "required")
+        {
+            $string .= ' required';
+        }
+        $string .= '>';
 
         if ($attributes->type == "sql")
         {

@@ -3,7 +3,7 @@
     <fields type="hidden" name="id" />
     <fields type="text" length="255" name="title" label="Title" required="required" />
     <fields type="text" length="500" name="alias" label="Alias" />
-    <fields type="sql" query="SELECT id, title FROM #__articles_categories ORDER BY title ASC" key="id" keyvalue="title" name="category_id" label="Category" default_option="-- PLEASE SELECT --|0" />
+    <fields type="sql" query="SELECT id, title FROM #__articles_categories ORDER BY title ASC" key="id" keyvalue="title" name="category_id" label="Category" default_option="-- PLEASE SELECT --|" required="required" />
     <fields type="file" folder="articles" name="image" label="Article Image" image="true" />
     <fields type="hidden" name="image" />
     <fields type="textarea" editor="true" name="content" label="Content" />
