@@ -5,5 +5,5 @@
     <author>Chris Smith</author>
     <author_url>https://github.com/Smith0r</author_url>
     <version>1.2.0</version>
-    <fields type="textarea" name="content" label="Module Content" />
+    <fields type="textarea" name="params[content]" label="Module Content" />
 </settings>
