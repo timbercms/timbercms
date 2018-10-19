@@ -56,7 +56,7 @@
                         {
                             if (strlen($title) > 0 && strlen($this->$name) == 0)
                             {
-                                $this->$name = Core::generateAlias($title);   
+                                $this->$name = Core::generateAlias($title, $table->name);   
                             }
                         }
                         if (is_array($this->$name))
