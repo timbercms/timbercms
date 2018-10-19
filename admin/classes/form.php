@@ -50,6 +50,7 @@ class Form
             $field_name = $name;
             if (substr($name, 0, 7) == "params[")
             {
+                if (!is_array($this->data->params)) $this->data->params = (array) $this->data->params;
                 $temp_name = rtrim(explode("params[", $name)[1], "]");
                 $field_value = $this->data->params[$temp_name];
             }

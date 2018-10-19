@@ -19,7 +19,7 @@
                 $this->load($id);
             }
             $this->form = new Form(__DIR__ ."/../forms/module.xml", $this, $this->database);
-            $this->getParams();
+            $this->params_form = new Form(__DIR__ ."/../../../../modules/". (strlen($this->type) > 0 ? $this->type : $_GET["type"]) ."/module.xml", $this, $this->database);
         }
         
         public function processData()
@@ -42,11 +42,6 @@
                     $this->ordering = 0;
                 }
             }
-        }
-        
-        public function getParams()
-        {
-            $this->params_form = new Form(__DIR__ ."/../../../../modules/". (strlen($this->type) > 0 ? $this->type : $_GET["type"]) ."/module.xml", $this->params, $this->database);
         }
         
         public function delete($id)
