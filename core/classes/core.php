@@ -728,14 +728,48 @@
             }
         }
         
-        public static function generateAlias($string)
+        public static function generateAlias($string, $table)
         {
+            $banned = array("admin");
+            // TODO - unique aliases
             $string = trim($string);
             $string = str_replace("-", "", $string);
             $string = preg_replace('/[^A-Za-z0-9-]+/', '-', $string);
             $string = rtrim($string, "-");
             $string = strtolower($string);
-            return $string;
+            if (in_array($string, $banned))
+            {
+                // This alias is a banned alias! Notify the user that their alias has been modified.
+                $_SESSION["MESSAGES"][] = '<div class="system-message danger">This alias has been modified because it contains one of the following aliases, which could disrupt website functionality: ('. implode(", ", $banned) .')</div>';
+                return $string."-banned";
+            }
+            else
+            {
+                // Check for duplicates in menu items, if none, check in the table.
+                // If a duplicate is found, set a message to notify the user that their alias has been modified.
+                $duplicates = Core::db()->loadObjectList("SELECT id FROM #__menus_items WHERE alias = ?", array($string));
+                if (count($duplicates) > 0)
+                {
+                    // Duplicate found! Change the alias to have a suffix of "-duplicatecount"
+                    // Also notify the user.
+                    $_SESSION["MESSAGES"][] = '<div class="system-message danger">A menu item with this alias already exists. To keep everything working, a number has been added to the end of your alias. It is recommended that you change your alias to be unique.</div>';
+                    return $string."-".count($duplicates);
+                }
+                else
+                {
+                    // No menu item duplicates found, check in the table.
+                    $duplicates = Core::db()->loadObjectList("SELECT id FROM #__". $table ." WHERE alias = ?", array($string));
+                    if (count($duplicates) > 0)
+                    {
+                        $_SESSION["MESSAGES"][] = '<div class="system-message danger">An entity with this alias already exists. To keep everything working, a number has been added to the end of your alias. It is recommended that you change your alias to be unique.</div>';
+                        return $string."-".count($duplicates);
+                    }
+                    else
+                    {
+                        return $string;
+                    }
+                }
+            }
         }
         
         public static function log($label)
