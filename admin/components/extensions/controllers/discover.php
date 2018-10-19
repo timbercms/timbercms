@@ -21,8 +21,8 @@
                 $this->model->database->query("INSERT INTO #__components (title, description, internal_name, is_frontend, is_backend, is_locked, author_name, author_url, version, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", array($xml->title, $xml->description, $extension, $xml->is_frontend, $xml->is_backend, $xml->is_locked, $xml->author, $xml->author_url, $xml->version, 1));
                 if (file_exists(__DIR__ ."/../../". $extension ."/database.xml"))
                 {
-                    $xml = simplexml_load_file(__DIR__ ."/../../". $extension ."/database.xml");
-                    foreach ($xml->install->tables->table as $table)
+                    $dbxml = simplexml_load_file(__DIR__ ."/../../". $extension ."/database.xml");
+                    foreach ($dbxml->install->tables->table as $table)
                     {
                         $this->model->database->query(str_replace("#__", DATABASE_PREFIX, $table));
                     }
