@@ -1,7 +1,7 @@
 <?php $version = simplexml_load_file(__DIR__ ."/../../../version.xml"); ?>
 <div class="white-card">
-    <h2>About Bulletin CMS.</h2>
-    <p>Bulletin CMS uses a few external packages, and segments of code to make everything possible. Big thanks to the maintainers of these packages!</p>
+    <h2>About Timber CMS.</h2>
+    <p>Timber CMS uses a few external packages, and segments of code to make everything possible. Big thanks to the maintainers of these packages!</p>
     <h3 style="margin-top: 40px;">Installed Version</h3>
     <p>v<?php echo $version->numerical; ?></p>
     <h3 style="margin-top: 40px;">External Packages</h3>

@@ -14,7 +14,7 @@
 ?>
 <div class="white-card">
     <h2>Contributors</h2>
-    <p>Bulletin CMS is an Open Source community project. Anyone can propose a change to the codebase. Below are the users who have contributed to the project so far.</p>
+    <p>Timber CMS is an Open Source community project. Anyone can propose a change to the codebase. Below are the users who have contributed to the project so far.</p>
     <h3 style="margin-top: 40px; margin-bottom: 20px;">Contributing Users</h3>
     <div class="row">
         <?php foreach ($contributors as $contrib) { ?>
