@@ -10,8 +10,8 @@
     <version>1.2.0</version>
     <name value="Contact Form" icon="comment-alt" />
     <items value="enquiries" label="Enquiry List" />
-    <fields type="text" name="admin_email" label="Admin Email" />
-    <fields type="text" name="complete_title" label="Completion Page Title" default="Thanks for your message" />
-    <fields type="textarea" editor="true" name="complete_message" label="Completion Page Message" />
+    <fields type="text" name="params[admin_email]" label="Admin Email" />
+    <fields type="text" name="params[complete_title]" label="Completion Page Title" default="Thanks for your message" />
+    <fields type="textarea" editor="true" name="params[complete_message]" label="Completion Page Message" />
     <controller label="Contact Form" internal_name="enquiry" description="Display the Contact form." />
 </settings>

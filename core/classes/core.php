@@ -371,7 +371,7 @@
                 self::$description = '<meta name="description" content="' .$string .'">';
             }
         }
-        
+       
         public static function addMetaProperty($name, $content)
         {
             if (strlen($content) > 0)
