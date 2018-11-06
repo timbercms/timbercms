@@ -18,7 +18,12 @@
         
         public function fetchItems()
         {
-            $temp = $this->database->loadObjectList("SELECT id FROM #__articles WHERE category_id = ? ORDER BY publish_time LIMIT 5", array($this->module->params->category_id));
+            $category_id = $this->module->params->category_id;
+            $limit = intval($this->module->params->limit);
+            $query = sprintf("SELECT id FROM #__articles WHERE category_id = ? ORDER BY publish_time DESC LIMIT %d", $limit);
+
+            $temp = $this->database->loadObjectList($query, array($category_id));
+
             foreach ($temp as $a)
             {
                 $this->items[] = new ArticleModel($a->id, $this->database);

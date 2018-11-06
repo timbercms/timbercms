@@ -6,4 +6,5 @@
     <author_url>https://github.com/Smith0r</author_url>
     <version>1.2.0</version>
     <fields type="sql" query="SELECT id, title FROM #__articles_categories WHERE published = '1' ORDER BY title ASC" key="id" keyvalue="title" name="params[category_id]" label="Show Items from category" />
+    <fields type="text" name="params[limit]" label="Number of items to show" default="5" />
 </settings>
