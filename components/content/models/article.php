@@ -22,7 +22,14 @@
         
         public function processData()
         {
-            $this->short_content = strip_tags(explode("<!-- pagebreak -->", $this->content)["0"], "<p></p>");
+            if (strpos($this->content, "<!-- pagebreak -->"))
+            {
+                $this->short_content = strip_tags(explode("<!-- pagebreak -->", $this->content)["0"], "<p></p>");
+            }
+            else
+            {
+                $this->short_content = explode(".", strip_tags($this->content))["0"].".";
+            }
             $this->category = new CategoryModel($this->category_id, $this->database, false);
             $this->author = new UserModel($this->author_id, $this->database);
             if (strlen($this->image) > 0)
