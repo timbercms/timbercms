@@ -48,7 +48,7 @@
             $children = $this->database->loadObjectList("SELECT id FROM #__articles_categories WHERE parent_id = ?", array($id));
             foreach ($children as $child)
             {
-                $this->children[] = new CategoryModel($child->id, $this->database);
+                $this->children[] = new CategoryModel($child->id, $this->database, false);
             }
             Core::hooks()->executeHook("onLoadCategoryModel", $this);
         }
