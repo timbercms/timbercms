@@ -64,6 +64,7 @@
         public static $template_name;
         public static $component_name;
         public static $controller_name;
+        public static $template_class;
         
         /*
          #=====================================================================================
@@ -140,6 +141,7 @@
                 require_once(__DIR__ ."/template.php");
                 $template = new Template($this->database, $params->default_template);
                 $this->template = $template;
+                self::$template_class = $template;
                 self::$template_name = $template->name;
                 self::$user = new UserModel(0, $this->database);
                 if (strlen($_GET["task"]) > 0)
@@ -371,7 +373,7 @@
                 self::$description = '<meta name="description" content="' .$string .'">';
             }
         }
-       
+        
         public static function addMetaProperty($name, $content)
         {
             if (strlen($content) > 0)
@@ -706,6 +708,11 @@
         public static function template_name()
         {
             return self::$template_name;
+        }
+        
+        public static function template_class()
+        {
+            return self::$template_class;
         }
         
         public function cleanSessions()
