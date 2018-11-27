@@ -11,13 +11,20 @@
         <div class="child-categories">
             <?php foreach ($this->model->children as $child) { ?>
                 <div class="child-category">
-                    <h4 class="child-category-title">
-                        <a href="<?php echo Core::route("index.php?component=content&controller=category&id=". $child->id); ?>"><?php echo $child->title; ?></a>
-                    </h4>
-                    <div class="child-category-description">
-                        <?php echo $child->description; ?>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="<?php echo $child->image; ?>" class="child-category-image" />
+                        </div>
+                        <div class="col-md-9">
+                            <h4 class="child-category-title">
+                                <a href="<?php echo Core::route("index.php?component=content&controller=category&id=". $child->id); ?>"><?php echo $child->title; ?></a>
+                            </h4>
+                            <div class="child-category-description">
+                                <?php echo $child->description; ?>
+                            </div>
+                            <p><a href="<?php echo Core::route("index.php?component=content&controller=category&id=". $child->id); ?>" class="button">View items</a></p>
+                        </div>
                     </div>
-                    <p><a href="<?php echo Core::route("index.php?component=content&controller=category&id=". $child->id); ?>" class="button">View items</a></p>
                 </div>
             <?php } ?>
         </div>

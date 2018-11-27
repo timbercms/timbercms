@@ -24,6 +24,10 @@
             {
                 $this->model->$key = $value;
             }
+            if (strlen($_FILES["image"]["name"]) > 0)
+            {
+                $this->model->image = $this->uploadFile();
+            }
             if ($this->model->store())
             {
                 $this->model->setMessage("success", "Category saved");
@@ -50,6 +54,32 @@
             $this->model->database->query("UPDATE #__articles_categories SET published = '0' WHERE id = ?", array($_GET["id"]));
             $this->model->setMessage("success", "category unpublished");
             header("Location: index.php?component=content&controller=categories");
+        }
+        
+        public function uploadFile()
+        {
+            if (strlen($_FILES["image"]["name"]) > 0)
+            {
+                foreach ($_FILES as $key => $file)
+                {
+                    if (strlen($file["name"]) > 0)
+                    {
+                        $name = ($this->model->id > 0 ? $this->model->id : Core::user()->id)."-".time().".".explode(".", $_FILES["image"]["name"])[1];
+                        $tmp = $file["tmp_name"];
+                        move_uploaded_file($tmp, __DIR__ ."/../../../../images/categories/". $name);
+                        return "images/categories/". $name;
+                        break;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
         
     }

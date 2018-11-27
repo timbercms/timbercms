@@ -5,6 +5,8 @@
     <fields type="text" length="255" name="title" label="Title" required="required" />
     <fields type="text" length="255" name="alias" label="Alias" />
     <fields type="textarea" editor="true" name="description" label="Description" />
+    <fields type="file" folder="categories" name="image" label="Category Image" image="true" />
+    <fields type="hidden" name="image" />
     <fields type="select" name="params[show_title]" label="Show title in listings?" values="No|0,Yes|1" default="1" />
     <fields type="select" name="params[show_children]" label="Show child category blocks?" values="No|0,Yes|1" default="1" />
     <fields type="select" name="params[show_image]" label="Show article image?" values="No|0,Yes|1" default="1" />

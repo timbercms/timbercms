@@ -34,6 +34,14 @@
             $this->ordering = $temp->ordering;
             $this->params = (object) unserialize($temp->params);
             $this->parent = $this->database->loadObject("SELECT id, alias, parent_id FROM #__articles_categories WHERE id = ?", array($this->parent_id));
+            if (strlen($temp->image) > 0)
+            {
+                $this->image = (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/").$temp->image;
+            }
+            else
+            {
+                $this->image = (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/")."/images/categories/placeholder.jpg";
+            }
             if ($load_articles)
             {
                 $query = "SELECT id FROM #__articles WHERE category_id = ? AND published = '1' ORDER BY ". $this->ordering;
