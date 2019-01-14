@@ -4,10 +4,14 @@
     {
         
         private $model;
+        private $comp_params;
         
         public function __construct($model)
         {
             $this->model = $model;
+            $config = $this->model->database->loadObject("SELECT params FROM #__components WHERE internal_name = 'user' LIMIT 1");
+            $params = (object) unserialize($config->params);
+            $this->comp_params = $params;
         }
         
         public function login()
@@ -27,7 +31,22 @@
                             // Login as details are correct
                             $this->model->login($temp->id, $_POST["remember"]);
                             Core::hooks()->executeHook("onUserLogin");
-                            header("Location: ". Core::route("index.php?component=user&controller=profile&id=". $temp->id));
+                            if (isset($this->comp_params->login_link))
+                            {
+                                $item = $this->model->database->loadObject("SELECT * FROM #__menus_items WHERE id = ?", array($this->comp_params->login_link));
+                                if ($item->id > 0)
+                                {
+                                    header("Location: ". Core::route("index.php?component=". $item->component ."&controller=". $item->controller . ($item->content_id > 0 ? "&id=". $item->content_id : "")));
+                                }
+                                else
+                                {
+                                    header("Location: ". Core::route("index.php?component=user&controller=profile&id=". $temp->id));
+                                }
+                            }
+                            else
+                            {
+                                header("Location: ". Core::route("index.php?component=user&controller=profile&id=". $temp->id));
+                            }
                         }
                         else
                         {
@@ -61,7 +80,22 @@
             $this->model->logout();
             Core::hooks()->executeHook("onUserLogout");
             $this->model->setMessage("success", "Come back soon!");
-            header("Location: ". Core::route("index.php"));
+            if (isset($this->comp_params->logout_link))
+            {
+                $item = $this->model->database->loadObject("SELECT * FROM #__menus_items WHERE id = ?", array($this->comp_params->logout_link));
+                if ($item->id > 0)
+                {
+                    header("Location: ". Core::route("index.php?component=". $item->component ."&controller=". $item->controller . ($item->content_id > 0 ? "&id=". $item->content_id : "")));
+                }
+                else
+                {
+                    header("Location: ". Core::route("index.php"));
+                }
+            }
+            else
+            {
+                header("Location: ". Core::route("index.php"));
+            }
         }
         
         public function register()
