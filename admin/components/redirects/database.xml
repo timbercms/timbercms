@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+    <install>
+        <tables>
+            <table>
+                CREATE TABLE `#__redirects` (`id` int(11) NOT NULL AUTO_INCREMENT, `from_url` varchar(500) DEFAULT NULL, `to_url` varchar(500) DEFAULT NULL, `published` int(11) NOT NULL DEFAULT '0', PRIMARY KEY (`id`));
+            </table>
+        </tables>
+    </install>
+    <tables>
+        <table>
+            <name>redirects</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="from_url" params="varchar(500) DEFAULT NULL" />
+                <column name="to_url" params="varchar(500) DEFAULT NULL" />
+                <column name="published" params="varchar(500) DEFAULT '0'" />
+            </columns>
+        </table>
+    </tables>
+</database>

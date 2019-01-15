@@ -123,6 +123,7 @@
             else
             {
                 $this->setDatabase();
+                $this->checkRedirects();
                 $this->cleanSessions();
                 self::$hooks = new Hooks($this->database);
                 $config = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = 'settings' LIMIT 1");
@@ -288,6 +289,17 @@
             $db = new Database();
             $this->database = $db;
             self::$db = $db;
+        }
+        
+        public function checkRedirects()
+        {
+            $redirect = $this->database->loadObject("SELECT * FROM #__redirects WHERE from_url = ? AND published = '1'", array(str_replace(SUBFOLDER, "", $_SERVER["REQUEST_URI"])));
+            if (is_object($redirect) && $redirect->id > 0)
+            {
+                header("HTTP/1.1 301 Moved Permanently");
+                header("Location: ". BASE_URL.$redirect->to_url);
+                exit();
+            }
         }
         
         /*

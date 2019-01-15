@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+    <fields type="hidden" name="id" />
+    <fields type="text" name="from_url" label="From URL" required="required" />
+    <fields type="text" name="to_url" label="To URL" required="required" />
+    <fields type="select" name="published" label="Published" values="No|0,Yes|1" default="1" />
+</settings>
