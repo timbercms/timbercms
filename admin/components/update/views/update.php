@@ -28,6 +28,6 @@
         </ol>
     <?php } else { ?>
         <p>&nbsp;</p>
-        <p>Looks like your Bulletin installation (v<?php echo $version->numerical; ?>) is up to date. You don't need to do anything!</p>
+        <p>Looks like your Timber CMS installation (v<?php echo $version->numerical; ?>) is up to date. You don't need to do anything!</p>
     <?php } ?>
 </div>

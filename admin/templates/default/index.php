@@ -49,7 +49,7 @@
         <div class="menu-container">
             <ul class="menu-list">
                 <li class="top-level cms-name">
-                    <a href="index.php" style="font-weight: bold; letter-spacing: 2px;"><i class="fas fa-tree"></i> Timber CMS v<?php echo $web_version->numerical; ?></a>
+                    <a href="index.php" style="font-weight: bold; letter-spacing: 2px;"><i class="fas fa-tree"></i> Timber CMS v<?php echo $version->numerical; ?></a>
                 </li>
                 <li class="top-level" style="float: right;">
                     <a href="index.php?component=user&controller=user&task=logout"><i class="fas fa-power-off"></i></a>

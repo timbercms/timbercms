@@ -365,10 +365,7 @@
         */
         public static function changeTitle($title)
         {
-            if (strlen($title) > 0 && strlen(self::$title) == 0)
-            {
-                self::$title = $title;
-            }
+            self::$title = $title;
         }
         
         /*
