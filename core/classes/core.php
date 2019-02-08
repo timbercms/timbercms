@@ -45,7 +45,7 @@
         public static $script_links = array();
         public static $db;
         public static $title = "";
-        public static $description = '<meta name="description" content="Bulletin. CMS">';
+        public static $description = '<meta name="description" content="Timber CMS">';
         public $component;
         public $controller;
         public $model;

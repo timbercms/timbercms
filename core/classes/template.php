@@ -74,6 +74,14 @@
                     {
                         Core::addStyleSheet("modules/". $module->type ."/". $module->type .".css");
                     }
+                    if (file_exists(__DIR__ ."/../../templates/". Core::template_name() ."/overrides/modules/". $module->type ."/". $module->type .".js"))
+                    {
+                        Core::addScript("templates/". Core::template_name() ."/overrides/modules/". $module->type ."/". $module->type .".js");
+                    }
+                    else
+                    {
+                        Core::addScript("modules/". $module->type ."/". $module->type .".js");
+                    }
                     require_once(__DIR__ ."/../../modules/". $module->type ."/worker.php");
                     $worker_string = $module->type."Worker";
                     $worker = new $worker_string($module, $this->database);
