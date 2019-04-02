@@ -20,6 +20,7 @@
             {
                 $this->loadSession();
             }
+            Core::hooks()->executeHook("onUserModelConstruct", $this);
         }
         
         public function processData()

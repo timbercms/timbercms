@@ -49,6 +49,7 @@
         <div class="menu-container">
             <ul class="menu-list">
                 <li class="top-level cms-name">
+                    <span class="toggle-admin-menu"><i class="fas fa-bars"></i></span>
                     <a href="index.php" style="font-weight: bold; letter-spacing: 2px;"><i class="fas fa-tree"></i> Timber CMS v<?php echo $version->numerical; ?></a>
                 </li>
                 <li class="top-level" style="float: right;">
@@ -59,48 +60,44 @@
                 </li>
             </ul>
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="sidebar-menu">
-                    <div class="sidebar-container">
-                        <?php 
-                            $comps = Core::db()->loadObjectList("SELECT * FROM #__components ORDER BY ordering ASC", array());
-                            foreach ($comps as $comp)
+        <div class="admin-template">
+            <div class="sidebar-menu">
+                <div class="sidebar-container">
+                    <?php 
+                        $comps = Core::db()->loadObjectList("SELECT * FROM #__components ORDER BY ordering ASC", array());
+                        foreach ($comps as $comp)
+                        {
+                            $xml = simplexml_load_file(__DIR__ ."/../../components/". $comp->internal_name ."/extension.xml");
+                            if ($comp->enabled && $comp->is_backend)
                             {
-                                $xml = simplexml_load_file(__DIR__ ."/../../components/". $comp->internal_name ."/extension.xml");
-                                if ($comp->enabled && $comp->is_backend)
-                                {
-                                    echo '<div class="comp-container">';
-                                        echo '<div class="comp-title">';
-                                            echo '<i class="fas fa-'.$xml->name->attributes()->icon.'"></i>&nbsp;&nbsp;&nbsp;'.$xml->name->attributes()->value;
-                                        echo '</div>';
-                                        echo '<div class="comp-children">';
-                                            foreach ($xml->items as $item)
-                                            {
-                                                echo '<a href="index.php?component='. $comp->internal_name .'&controller='. $item->attributes()->value .'">'. $item->attributes()->label .'</a>';
-                                            }
-                                        echo '</div>';
+                                echo '<div class="comp-container">';
+                                    echo '<div class="comp-title">';
+                                        echo '<i class="fas fa-'.$xml->name->attributes()->icon.'"></i>&nbsp;&nbsp;&nbsp;'.$xml->name->attributes()->value;
                                     echo '</div>';
-                                }
+                                    echo '<div class="comp-children">';
+                                        foreach ($xml->items as $item)
+                                        {
+                                            echo '<a href="index.php?component='. $comp->internal_name .'&controller='. $item->attributes()->value .'">'. $item->attributes()->label .'</a>';
+                                        }
+                                    echo '</div>';
+                                echo '</div>';
                             }
-                        ?>
-                    </div>
+                        }
+                    ?>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="main-content">
-                    <div class="system-messages">
-                        <?php $this->displaySystemMessages(); ?>
-                    </div>
-                    <?php $this->view->output(); ?>
-                    <div class="white-card centre-text">
-                        Timber CMS <strong>v<?php echo $version->numerical; ?></strong> 
-                        <?php if (version_compare($version->numerical, $web_version->numerical) < 0) { ?>
-                            - <a href="index.php?component=update&controller=update"><span class="badge badge-danger version-label">UPDATE (v<?php echo $web_version->tag_name; ?> Available)</span></a>
-                        <?php } else { ?>
-                            - <span class="badge badge-success version-label">UP TO DATE</span>
-                        <?php } ?>
-                    </div>
+            <div class="main-content">
+                <div class="system-messages">
+                    <?php $this->displaySystemMessages(); ?>
+                </div>
+                <?php $this->view->output(); ?>
+                <div class="white-card centre-text">
+                    Timber CMS <strong>v<?php echo $version->numerical; ?></strong> 
+                    <?php if (version_compare($version->numerical, $web_version->numerical) < 0) { ?>
+                        - <a href="index.php?component=update&controller=update"><span class="badge badge-danger version-label">UPDATE (v<?php echo $web_version->tag_name; ?> Available)</span></a>
+                    <?php } else { ?>
+                        - <span class="badge badge-success version-label">UP TO DATE</span>
+                    <?php } ?>
                 </div>
             </div>
         </div>
