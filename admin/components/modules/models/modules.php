@@ -30,7 +30,7 @@
                 $query .= " WHERE position = ? ORDER BY ordering";
                 $args[] = $_GET["position"];
             }
-            $this->max = count($this->database->loadObjectList($query));
+            $this->max = count($this->database->loadObjectList($query, $args));
             $query .= " LIMIT ". ($_GET["p"] > 0 ? (($_GET["p"] - 1) * 20) : 0) .", 20";
             $temp = $this->database->loadObjectList($query, $args);
             foreach ($temp as $temp_module)
