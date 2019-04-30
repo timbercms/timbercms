@@ -101,7 +101,7 @@
                                                         echo '<li>';
                                                             echo '<a class="comp-dropdown" data-component="'. $user_comp->internal_name .'">'. $user_xml->name->attributes()->value .'<i class="fas fa-chevron-down '. $user_comp->internal_name .'-icon" style="float: right;"></i></a>';
                                                             echo '<ul class="'. $user_comp->internal_name .'-dropdown">';
-                                                                foreach ($user_xml as $item)
+                                                                foreach ($user_xml->items as $item)
                                                                 {
                                                                     echo '<li><a href="index.php?component='. $comp->internal_name .'&controller='. $item->attributes()->value .'">'. $item->attributes()->label .'</a></li>';
                                                                 }
