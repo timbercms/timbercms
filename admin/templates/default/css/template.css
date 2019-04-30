@@ -403,7 +403,7 @@ form label {
 .comp-children a {
     display: block;
     color: #ADB7BF !important;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 .admin-template {
     display: flex;
