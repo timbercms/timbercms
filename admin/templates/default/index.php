@@ -24,8 +24,8 @@
         <script src="templates/<?php echo $this->template->name; ?>/js/bootstrap.min.js"></script>
         <script src="templates/<?php echo $this->template->name; ?>/js/sweetalert.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+        <script src="templates/<?php echo $this->template->name; ?>/js/fontawesome-all.min.js?v=<?php echo time(); ?>"></script>
         <script src="templates/<?php echo $this->template->name; ?>/js/template.js?v=<?php echo time(); ?>"></script>
-        <script src="templates/<?php echo $this->template->name; ?>/js/all.min.js?v=<?php echo time(); ?>"></script>
         <script src="../tinymce/tinymce.min.js"></script>
         <script>tinymce.init({ selector:'textarea',height:500,theme: 'modern',
               plugins: [
@@ -63,16 +63,17 @@
         <div class="admin-template">
             <div class="sidebar-menu">
                 <div class="sidebar-container">
-                    <?php 
-                        $comps = Core::db()->loadObjectList("SELECT * FROM #__components ORDER BY ordering ASC", array());
-                        foreach ($comps as $comp)
+                    <?php
+                    
+                        $core_comps = Core::db()->loadObjectList("SELECT * FROM #__components WHERE is_core = ? ORDER BY title ASC", array(1));
+                        foreach ($core_comps as $index => $comp)
                         {
                             $xml = simplexml_load_file(__DIR__ ."/../../components/". $comp->internal_name ."/extension.xml");
                             if ($comp->enabled && $comp->is_backend)
                             {
                                 echo '<div class="comp-container">';
                                     echo '<div class="comp-title">';
-                                        echo '<i class="fas fa-'.$xml->name->attributes()->icon.'"></i>&nbsp;&nbsp;&nbsp;'.$xml->name->attributes()->value;
+                                        echo '<i class="fas fa-'.$xml->name->attributes()->icon.'"></i>&nbsp;'.$xml->name->attributes()->value;
                                     echo '</div>';
                                     echo '<div class="comp-children">';
                                         foreach ($xml->items as $item)
@@ -81,8 +82,41 @@
                                         }
                                     echo '</div>';
                                 echo '</div>';
+                                if ($index == 0)
+                                {
+                                    $user_comps = Core::db()->loadObjectList("SELECT * FROM #__components WHERE is_core = ?", array(0));
+                                    if (count($user_comps) > 0)
+                                    {
+                                        echo '<div class="comp-container">';
+                                            echo '<div class="comp-title">';
+                                                echo '<i class="fas fa-box"></i>&nbsp;Components';
+                                            echo '</div>';
+                                            echo '<div class="comp-children">';
+                                                echo '<ul>';
+                                                foreach ($user_comps as $user_comp)
+                                                {
+                                                    $user_xml = simplexml_load_file(__DIR__ ."/../../components/". $user_comp->internal_name ."/extension.xml");
+                                                    if ($user_comp->enabled && $user_comp->is_backend)
+                                                    {
+                                                        echo '<li>';
+                                                            echo '<a class="comp-dropdown" data-component="'. $user_comp->internal_name .'">'. $user_xml->name->attributes()->value .'<i class="fas fa-chevron-down '. $user_comp->internal_name .'-icon" style="float: right;"></i></a>';
+                                                            echo '<ul class="'. $user_comp->internal_name .'-dropdown">';
+                                                                foreach ($user_xml as $item)
+                                                                {
+                                                                    echo '<li><a href="index.php?component='. $comp->internal_name .'&controller='. $item->attributes()->value .'">'. $item->attributes()->label .'</a></li>';
+                                                                }
+                                                            echo '</ul>';
+                                                        echo '</li>';
+                                                    }
+                                                }
+                                                echo '</ul>';
+                                            echo '</div>';
+                                        echo '</div>';
+                                    }
+                                }
                             }
                         }
+                    
                     ?>
                 </div>
             </div>

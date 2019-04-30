@@ -24,3 +24,8 @@ $(document).on('click', '.delete-by-ids', function() {
         }
     })
 });
+document.addEventListener('DOMContentLoaded', function () {
+    $('.comp-dropdown').on('click', function () {
+        $("." + $(this).attr("data-component") + "-dropdown").toggleClass("active");
+    });
+});

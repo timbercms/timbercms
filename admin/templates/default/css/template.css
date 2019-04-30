@@ -13,8 +13,8 @@ html {
 body {
     color: #333;
     font-family: 'Open Sans', 'Arial', sans-serif;
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 14px;
     margin: 0px;
     padding: 0px;
     background: url('../../../../core/assets/autumn-forest.jpg');
@@ -26,6 +26,7 @@ body {
 a {
     color: var(--link);
     text-decoration: none;
+    cursor: pointer;
 }
 a:hover {
     color: var(--link-accent);  
@@ -378,7 +379,7 @@ form label {
     top: -1px;
 }
 .cms-name {
-    width: 20% !important;
+    width: 15% !important;
 }
 .cms-name a {
     background: var(--link-accent) !important;
@@ -386,17 +387,14 @@ form label {
     display: block !important;
 }
 .comp-container {
-    border-radius: 5px;
-    border: 1px solid #333;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 .comp-container:last-of-type {
     margin-bottom: 0px;   
 }
 .comp-title {
     color: #FFF;
-    background: #333;
-    padding: 10px;
+    margin-bottom: 10px;
 }
 .comp-title svg {
     display: inline-block;
@@ -404,8 +402,8 @@ form label {
 }
 .comp-children a {
     display: block;
-    color: var(--link);
-    padding: 10px;
+    color: #ADB7BF !important;
+    margin-bottom: 5px;
 }
 .admin-template {
     display: flex;
@@ -421,9 +419,10 @@ form label {
     width: calc(100% - 20px);
 }
 .sidebar-menu {
-    background: #FFF;
-    width: 20%;
+    background: #2e3d49;
+    width: 15%;
     transition: width .25s;
+    min-height: calc(100vh - 44.25px);
 }
 .sidebar-container {
     padding: 20px;
@@ -431,7 +430,7 @@ form label {
     transition: .25s;
 }
 .main-content {
-    width: 80%;
+    width: 85%;
     padding: 20px;
     transition: width .25s;
 }
@@ -445,4 +444,18 @@ form label {
     cursor: pointer;
     margin-top: 4px;
     margin-right: 5px;
+}
+.comp-children ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+.comp-children ul ul {
+    margin-left: 20px;
+    margin-bottom: 0px;
+    display: none;
+}
+.comp-children ul ul.active {
+    margin-bottom: 15px;
+    display: block;
 }

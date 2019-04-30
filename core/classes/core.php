@@ -371,7 +371,7 @@
         /*
          #=====================================================================================
          # * changeMetaDescription
-         # * $title = (string) New meta description string
+         # * $string = (string) New meta description string
          # * Changes the meta description tag to desired value
          #=====================================================================================
         */
@@ -383,6 +383,14 @@
             }
         }
         
+        /*
+         #=====================================================================================
+         # * addMetaProperty
+         # * $name = (string) Meta property name
+         # * $content = (string) Meta property content
+         # * Adds a Meta property tag to the head of the document
+         #=====================================================================================
+        */
         public static function addMetaProperty($name, $content)
         {
             if (strlen($content) > 0)
