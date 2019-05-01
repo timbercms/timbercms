@@ -103,7 +103,7 @@
                                                             echo '<ul class="'. $user_comp->internal_name .'-dropdown">';
                                                                 foreach ($user_xml->items as $item)
                                                                 {
-                                                                    echo '<li><a href="index.php?component='. $comp->internal_name .'&controller='. $item->attributes()->value .'">'. $item->attributes()->label .'</a></li>';
+                                                                    echo '<li><a href="index.php?component='. $user_comp->internal_name .'&controller='. $item->attributes()->value .'">'. $item->attributes()->label .'</a></li>';
                                                                 }
                                                             echo '</ul>';
                                                         echo '</li>';
