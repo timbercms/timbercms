@@ -65,6 +65,7 @@
         public static $component_name;
         public static $controller_name;
         public static $template_class;
+        public static $comp_model;
         
         /*
          #=====================================================================================
@@ -197,9 +198,12 @@
                     require_once(__DIR__ ."/../../components/". $this->component ."/models/". $this->controller .".php");
                     require_once(__DIR__ ."/../../components/". $this->component ."/controllers/". $this->controller .".php");
                     $model = new $modelname($this->content_id, $this->database);
+                    self::$comp_model = $model;
                     $controller = new $controllername($model);
                     $componentconfig = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = ? LIMIT 1", array($this->component));
                     self::$componentconfig = (object) unserialize($componentconfig->params);
+                    self::$component_name = $this->component;
+                    self::$controller_name = $this->controller;
                 }
                 //echo "<pre>"; print_r($this); echo "</pre>"; die();
                 if (strlen($_GET["task"]) > 0 && ($this->component != "system" && $this->controller != "blank"))
@@ -730,6 +734,21 @@
         public static function template_class()
         {
             return self::$template_class;
+        }
+        
+        public static function comp_model()
+        {
+            return self::$comp_model;
+        }
+        
+        public static function component_name()
+        {
+            return self::$component_name;
+        }
+        
+        public static function controller_name()
+        {
+            return self::$controller_name;
         }
         
         public function cleanSessions()
