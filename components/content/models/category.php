@@ -42,21 +42,31 @@
             {
                 $this->image = (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/")."/images/categories/placeholder.jpg";
             }
+            $children = $this->database->loadObjectList("SELECT id FROM #__articles_categories WHERE parent_id = ?", array($id));
+            $child_array = array();
+            foreach ($children as $child)
+            {
+                $child_array[] = $child->id;
+                $this->children[] = new CategoryModel($child->id, $this->database, false);
+            }
+            $child_string = implode(",", $child_array);
             if ($load_articles)
             {
-                $query = "SELECT id FROM #__articles WHERE category_id = ? AND published = '1' ORDER BY ". $this->ordering;
+                if (strlen($child_string) > 0)
+                {
+                    $query = "SELECT id FROM #__articles WHERE (category_id = ? OR FIND_IN_SET(category_id, '". $child_string ."')) AND published = '1' ORDER BY ". $this->ordering;
+                }
+                else
+                {
+                    $query = "SELECT id FROM #__articles WHERE category_id = ? AND published = '1' ORDER BY ". $this->ordering;
+                }
                 $this->max = count($this->database->loadObjectList($query, array($id)));
-                $query .= " LIMIT ". ($_GET["p"] > 0 ? (($_GET["p"] - 1) * 10) : 0) .", 10";
+                $query .= " LIMIT ". ($_GET["p"] > 0 ? (($_GET["p"] - 1) * 9) : 0) .", 9";
                 $ta = $this->database->loadObjectList($query, array($id));
                 foreach ($ta as $a)
                 {
                     $this->articles[] = new ArticleModel($a->id, $this->database);
                 }
-            }
-            $children = $this->database->loadObjectList("SELECT id FROM #__articles_categories WHERE parent_id = ?", array($id));
-            foreach ($children as $child)
-            {
-                $this->children[] = new CategoryModel($child->id, $this->database, false);
             }
             Core::hooks()->executeHook("onLoadCategoryModel", $this);
         }

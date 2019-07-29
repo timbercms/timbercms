@@ -295,7 +295,7 @@ class Form
         }
         elseif ($value > 0)
         {
-            $value = date("Y-m-d", $value);
+            $value = date("Y-m-d", strtotime($value));
         }
         $string .= '" value="' . $value . '"';
 
