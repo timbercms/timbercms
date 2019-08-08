@@ -42,7 +42,7 @@
             {
                 $this->image = (strlen(SUBFOLDER) > 0 ? SUBFOLDER : "/")."/images/categories/placeholder.jpg";
             }
-            $children = $this->database->loadObjectList("SELECT id FROM #__articles_categories WHERE parent_id = ?", array($id));
+            $children = $this->database->loadObjectList("SELECT id FROM #__articles_categories WHERE parent_id = ? ORDER BY title ASC", array($id));
             $child_array = array();
             foreach ($children as $child)
             {
