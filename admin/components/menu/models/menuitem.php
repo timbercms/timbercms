@@ -25,7 +25,7 @@
                     $parent = $this->database->loadObject("SELECT * FROM #__menus_items WHERE id = ?", array($alias_item->parent_id));
                     if ($parent->parent_id > 0)
                     {
-                        $gp = $this->daatabase->loadObject("SELECT * FROM #__menus_items WHERE id = ?", array($parent->parent_id));
+                        $gp = $this->database->loadObject("SELECT * FROM #__menus_items WHERE id = ?", array($parent->parent_id));
                         $this->alias = $gp->alias."/".$parent->alias."/".$alias_item->alias;
                     }
                     else
