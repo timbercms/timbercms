@@ -16,6 +16,32 @@
             {
                 $this->load($id);
             }
+            if (strlen($this->params["alias"]) > 0)
+            {
+                $alias_item = $this->database->loadObject("SELECT * FROM #__menus_items WHERE id = ?", array($this->params["alias"]));
+                if ($alias_item->parent_id > 0)
+                {
+                    // Parent Exists, let's get their alias
+                    $parent = $this->database->loadObject("SELECT * FROM #__menus_items WHERE id = ?", array($alias_item->parent_id));
+                    if ($parent->parent_id > 0)
+                    {
+                        $gp = $this->daatabase->loadObject("SELECT * FROM #__menus_items WHERE id = ?", array($parent->parent_id));
+                        $this->alias = $gp->alias."/".$parent->alias."/".$alias_item->alias;
+                    }
+                    else
+                    {
+                        $this->alias = $parent->alias."/".$alias_item->alias;
+                    }
+                }
+                else
+                {
+                    $this->alias = $alias_item->alias;
+                }
+                $this->component = $alias_item->component;
+                $this->controller = $alias_item->controller;
+                $this->content_id = $alias_item->content_id;
+                $this->params = unserialize($alias_item->params);
+            }
             $this->getControllers();
             $this->form = new Form(__DIR__ ."/../forms/menuitem.xml", $this, $this->database);
         }
