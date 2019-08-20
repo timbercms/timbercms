@@ -35,6 +35,10 @@
                 {
                     return true;
                 }
+                else
+                {
+                    echo "<pre>"; print_r($query->errorInfo()); echo "</pre>"; die();
+                }
 			} catch (PDOException $e) {
 				echo "<pre>"; print_r($e->getMessage()); echo "</pre>"; die();
 			}
