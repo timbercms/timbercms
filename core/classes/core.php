@@ -753,8 +753,8 @@
         
         public function cleanSessions()
         {
-            Core::db()->query("DELETE FROM #__sessions WHERE access < (UNIX_TIMESTAMP() - 2592000) LIMIT 100", array());
-            Core::db()->query("DELETE FROM #__sessions WHERE access < (UNIX_TIMESTAMP() - 86400) AND user_id = 0 LIMIT 100", array());
+            Core::db()->query("DELETE FROM #__sessions WHERE last_action_time < (UNIX_TIMESTAMP() - 2592000) LIMIT 100", array());
+            Core::db()->query("DELETE FROM #__sessions WHERE last_action_time < (UNIX_TIMESTAMP() - 86400) AND user_id = 0 LIMIT 100", array());
         }
         
         public function displaySystemMessages()
