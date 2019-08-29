@@ -2,6 +2,14 @@
     <h2>Discover Extensions</h2>
     <div class="component-action-bar">
     </div>
+    <div class="upload-new" style="background: #DDD; padding: 20px; border-radius: 5px; margin-bottom: 40px;">
+        <h4 style="margin-bottom: 20px;">Upload Installation Package</h4>
+        <form action="index.php?component=extensions&controller=discover&task=uploadAndInstall" method="post" enctype="multipart/form-data" class="admin-form">
+            <input type="file" name="package" accept="application/x-zip-compressed">
+            <br />
+            <button type="submit" class="button" style="margin-top: 20px;">Upload Extension .zip file & Install</button>
+        </form>
+    </div>
     <?php if (count($this->model->new_components) > 0) { ?>
         <h3>Components</h3>
         <div class="d-flex admin-header">

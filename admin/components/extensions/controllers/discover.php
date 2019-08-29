@@ -12,9 +12,53 @@
             $this->core = $core;
         }
         
-        public function installComponent()
+        public function uploadAndInstall()
         {
-            $extension = $_GET["extension"];
+            $filepath = __DIR__."../../../../../".basename($_FILES["package"]["name"]);
+            $file_ext = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
+            if ($file_ext == "zip")
+            {
+                if (move_uploaded_file($_FILES["package"]["tmp_name"], $filepath))
+                {
+                    $zip = new ZipArchive;
+                    if ($zip->open($filepath))
+                    {
+                        $zip->extractTo(__DIR__."../../../../../");
+                        $zip->close();
+                        $xml = simplexml_load_file(__DIR__."../../../../../manifest.xml");
+                        unlink(__DIR__."../../../../../manifest.xml");
+                        unlink($filepath);
+                        $this->installComponent($xml->component);
+                    }
+                    else
+                    {
+                        $this->model->setMessage("danger", "Failed to open uploaded .zip archive");
+                        header("Location: index.php?component=extensions&controller=discover");
+                    }
+                }
+                else
+                {
+                    $this->model->setMessage("danger", "Could not move the uploaded file into the base directory.");
+                    header("Location: index.php?component=extensions&controller=discover");
+                }
+            }
+            else
+            {
+                $this->model->setMessage("danger", "You did not upload a .zip archive");
+                header("Location: index.php?component=extensions&controller=discover");
+            }
+        }
+        
+        public function installComponent($component = "")
+        {
+            if (strlen($component) > 0)
+            {
+                $extension = $component;
+            }
+            else
+            {
+                $extension = $_GET["extension"];
+            }
             $xml = simplexml_load_file(__DIR__ ."/../../". $extension ."/extension.xml");
             if (strlen($xml) > 0)
             {

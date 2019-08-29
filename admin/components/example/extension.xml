@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+    <title>Example</title>
+    <description>Example component to show structure.</description>
+    <is_frontend>1</is_frontend>
+    <is_backend>1</is_backend>
+    <is_locked>0</is_locked>
+    <author>Chris Smith</author>
+    <author_url>https://github.com/Smith0r</author_url>
+    <version>1.0.0</version>
+    <name value="Example" icon="box" />
+    <items value="categories" label="Categories" />
+    <controller label="Category View" internal_name="category" query="SELECT id, title FROM #__example_categories ORDER BY id ASC" key="id" keyvalue="title" description="View a list of articles from a specific category." />
+</settings>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database>
+    <install>
+        <tables>
+            <table>
+                CREATE TABLE `#__example_categories` (`id` int(11) NOT NULL AUTO_INCREMENT, `parent_id` int(11) DEFAULT '0', `title` varchar(500) DEFAULT NULL, `alias` varchar(500) NOT NULL, `description` text, `published` int(11) DEFAULT '1', `params` text, PRIMARY KEY (`id`));
+            </table>
+        </tables>
+    </install>
+    <tables>
+        <table>
+            <name>example_categories</name>
+            <columns>
+                <column name="id" params="int(11) NOT NULL AUTO_INCREMENT" />
+                <column name="parent_id" params="int(11) DEFAULT '0'" />
+                <column name="title" params="varchar(500) DEFAULT NULL" />
+                <column name="alias" params="varchar(500) DEFAULT NULL" />
+                <column name="description" params="text" />
+                <column name="published" params="int(11) DEFAULT '1'" />
+                <column name="params" params="text" />
+            </columns>
+        </table>
+    </tables>
+</database>
