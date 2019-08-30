@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<settings>
-    <fields type="hidden" name="id" />
-    <fields type="sql" query="SELECT id, title FROM #__example_categories ORDER BY title ASC" key="id" keyvalue="title" name="parent_id" label="Parent" default_option="-- NO PARENT --|0" />
-    <fields type="text" length="255" name="title" label="Title" required="required" />
-    <fields type="text" length="255" name="alias" label="Alias" />
-    <fields type="textarea" editor="true" name="description" label="Description" />
-    <fields type="select" name="published" label="Published" values="No|0,Yes|1" default="1" />
-</settings>
