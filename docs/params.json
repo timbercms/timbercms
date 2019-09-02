@@ -1,6 +1,6 @@
 {
-  "name": "Burgundy CMS",
-  "tagline": "Lightweight CMS in progress. Written in PHP.",
+  "name": "Timber CMS",
+  "tagline": "Free, Open Source Content Management System. Currently in development.",
   "body": "### Lightweight. Fast. User Friendly.\r\nBurgundy CMS is being written from scratch in PHP to be lightweight, fast and user friendly.\r\nStay tuned for updates. This project is still in the **very** early stages of development.",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
