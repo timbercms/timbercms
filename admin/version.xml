@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <version>
-    <numerical>2.0.1</numerical>
-    <releaseDate>19th October 2018</releaseDate>
-    <packageURL>https://github.com/timbercms/timbercms/releases/download/2.0.1/timbercms-v2.0.1-update.zip</packageURL>
+    <numerical>2.1.0</numerical>
+    <releaseDate>2nd September 2019</releaseDate>
+    <packageURL>https://github.com/timbercms/timbercms/releases/download/2.1.0/timbercms-v2.1.0-update.zip</packageURL>
     <new>
         <![CDATA[
-            <p>Minor Bug Fix release.</p>
+            <p>Bugfixes & Features</p>
             <ul>
-                <li>Fix modules not showing on "Blank" system menu item pages</li>
-                <li>Ensure articles are always assigned to categories</li>
-                <li>Unique & Protected alias generation</li>
-                <li>Fix extension install log entry</li>
+                <li>Unique article image filenames</li>
+                <li>Fix contact forms parameter issues</li>
+                <li>Latest news module article ordering</li>
+                <li>Better short article content creation. If a pagebreak element exists, will use that. Otherwise, splits from the first full stop.</li>
+                <li>Categories can now have images</li>
+                <li>Comment authoring now shows the correct author</li>
+                <li>Enable setting login and logout destinations</li>
+                <li>New redirect component</li>
+                <li>Modules can now automatically load their own javascript files</li>
+                <li>Better admin panel menu</li>
+                <li>Remove Google plus links</li>
+                <li>Child categories are now fully supported</li>
+                <li>New user creation in Admin now hashes the password properly</li>
+                <li>New menu item types. External links and Aliases</li>
+                <li>Better error information on SQL fails</li>
+                <li>Fixed a bug in which no old sessions were being removed</li>
+                <li>Allow installation of Components, Modules and Hooks via zip file upload</li>
             </ul>
         ]]>
     </new>
