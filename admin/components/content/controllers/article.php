@@ -66,7 +66,7 @@
                 {
                     if (strlen($file["name"]) > 0)
                     {
-                        $name = $file["name"];
+                        $name = ($this->model->id > 0 ? $this->model->id : Core::user()->id)."-".time().".".explode(".", $_FILES["image"]["name"])[1];
                         $tmp = $file["tmp_name"];
                         move_uploaded_file($tmp, __DIR__ ."/../../../../images/articles/". $name);
                         return "images/articles/". $name;

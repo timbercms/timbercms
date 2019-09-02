@@ -23,8 +23,8 @@
         
         public function processData()
         {
-            $this->category = new CategoryModel($temp->category_id, $this->database, false);
-            $this->author = new UserModel($temp->author_id, $this->database);
+            $this->category = new CategoryModel($this->category_id, $this->database, false);
+            $this->author = new UserModel($this->author_id, $this->database);
         }
         
         public function delete($id)

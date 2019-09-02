@@ -45,7 +45,7 @@
         public static $script_links = array();
         public static $db;
         public static $title = "";
-        public static $description = '<meta name="description" content="Bulletin. CMS">';
+        public static $description = '<meta name="description" content="Timber CMS">';
         public $component;
         public $controller;
         public $model;
@@ -64,6 +64,8 @@
         public static $template_name;
         public static $component_name;
         public static $controller_name;
+        public static $template_class;
+        public static $comp_model;
         
         /*
          #=====================================================================================
@@ -122,6 +124,7 @@
             else
             {
                 $this->setDatabase();
+                $this->checkRedirects();
                 $this->cleanSessions();
                 self::$hooks = new Hooks($this->database);
                 $config = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = 'settings' LIMIT 1");
@@ -140,6 +143,7 @@
                 require_once(__DIR__ ."/template.php");
                 $template = new Template($this->database, $params->default_template);
                 $this->template = $template;
+                self::$template_class = $template;
                 self::$template_name = $template->name;
                 self::$user = new UserModel(0, $this->database);
                 if (strlen($_GET["task"]) > 0)
@@ -194,9 +198,12 @@
                     require_once(__DIR__ ."/../../components/". $this->component ."/models/". $this->controller .".php");
                     require_once(__DIR__ ."/../../components/". $this->component ."/controllers/". $this->controller .".php");
                     $model = new $modelname($this->content_id, $this->database);
+                    self::$comp_model = $model;
                     $controller = new $controllername($model);
                     $componentconfig = $this->database->loadObject("SELECT params FROM #__components WHERE internal_name = ? LIMIT 1", array($this->component));
                     self::$componentconfig = (object) unserialize($componentconfig->params);
+                    self::$component_name = $this->component;
+                    self::$controller_name = $this->controller;
                 }
                 //echo "<pre>"; print_r($this); echo "</pre>"; die();
                 if (strlen($_GET["task"]) > 0 && ($this->component != "system" && $this->controller != "blank"))
@@ -288,6 +295,17 @@
             self::$db = $db;
         }
         
+        public function checkRedirects()
+        {
+            $redirect = $this->database->loadObject("SELECT * FROM #__redirects WHERE from_url = ? AND published = '1'", array(str_replace(SUBFOLDER, "", $_SERVER["REQUEST_URI"])));
+            if (is_object($redirect) && $redirect->id > 0)
+            {
+                header("HTTP/1.1 301 Moved Permanently");
+                header("Location: ". BASE_URL.$redirect->to_url);
+                exit();
+            }
+        }
+        
         /*
          #=====================================================================================
          # * addStylesheet
@@ -351,16 +369,13 @@
         */
         public static function changeTitle($title)
         {
-            if (strlen($title) > 0 && strlen(self::$title) == 0)
-            {
-                self::$title = $title;
-            }
+            self::$title = $title;
         }
         
         /*
          #=====================================================================================
          # * changeMetaDescription
-         # * $title = (string) New meta description string
+         # * $string = (string) New meta description string
          # * Changes the meta description tag to desired value
          #=====================================================================================
         */
@@ -372,6 +387,14 @@
             }
         }
         
+        /*
+         #=====================================================================================
+         # * addMetaProperty
+         # * $name = (string) Meta property name
+         # * $content = (string) Meta property content
+         # * Adds a Meta property tag to the head of the document
+         #=====================================================================================
+        */
         public static function addMetaProperty($name, $content)
         {
             if (strlen($content) > 0)
@@ -708,10 +731,30 @@
             return self::$template_name;
         }
         
+        public static function template_class()
+        {
+            return self::$template_class;
+        }
+        
+        public static function comp_model()
+        {
+            return self::$comp_model;
+        }
+        
+        public static function component_name()
+        {
+            return self::$component_name;
+        }
+        
+        public static function controller_name()
+        {
+            return self::$controller_name;
+        }
+        
         public function cleanSessions()
         {
-            Core::db()->query("DELETE FROM #__sessions WHERE access < (UNIX_TIMESTAMP() - 2592000) LIMIT 100", array());
-            Core::db()->query("DELETE FROM #__sessions WHERE access < (UNIX_TIMESTAMP() - 86400) AND user_id = 0 LIMIT 100", array());
+            Core::db()->query("DELETE FROM #__sessions WHERE last_action_time < (UNIX_TIMESTAMP() - 2592000) LIMIT 100", array());
+            Core::db()->query("DELETE FROM #__sessions WHERE last_action_time < (UNIX_TIMESTAMP() - 86400) AND user_id = 0 LIMIT 100", array());
         }
         
         public function displaySystemMessages()

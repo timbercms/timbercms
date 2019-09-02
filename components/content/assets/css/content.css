@@ -189,3 +189,7 @@
 .child-category > p:last-of-type {
     margin-bottom: 0px;   
 }
+.child-category-image {
+    width: 100%;
+    border-radius: 5px;
+}

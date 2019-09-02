@@ -6,7 +6,7 @@
                 CREATE TABLE `#__articles` (`id` int(11) NOT NULL AUTO_INCREMENT, `title` varchar(500) DEFAULT NULL, `alias` varchar(500) NOT NULL, `category_id` int(11) NOT NULL DEFAULT '0', `content` text, `published` int(11) NOT NULL DEFAULT '1', `author_id` int(11) DEFAULT NULL, `hits` int(11) DEFAULT NULL, `meta_description` varchar(500) DEFAULT NULL, `image` varchar(1000) DEFAULT NULL, `publish_time` int(11) DEFAULT NULL, PRIMARY KEY (`id`));
             </table>
             <table>
-                CREATE TABLE `#__articles_categories` (`id` int(11) NOT NULL AUTO_INCREMENT, `parent_id` int(11) DEFAULT '0', `title` varchar(500) DEFAULT NULL, `alias` varchar(500) NOT NULL, `description` text, `published` int(11) DEFAULT '1', `ordering` varchar(500) DEFAULT NULL, `params` text, PRIMARY KEY (`id`));
+                CREATE TABLE `#__articles_categories` (`id` int(11) NOT NULL AUTO_INCREMENT, `parent_id` int(11) DEFAULT '0', `title` varchar(500) DEFAULT NULL, `alias` varchar(500) NOT NULL, `description` text, `published` int(11) DEFAULT '1', `ordering` varchar(500) DEFAULT NULL, `image` varchar(500) DEFAULT NULL, `params` text, PRIMARY KEY (`id`));
             </table>
             <table>
                 CREATE TABLE `#__articles_comments` (`id` int(11) NOT NULL AUTO_INCREMENT, `article_id` int(11) NOT NULL, `content` text NOT NULL, `published` int(11) NOT NULL, `publish_time` int(11) NOT NULL, `author_id` int(11) NOT NULL, PRIMARY KEY (`id`));
@@ -40,6 +40,7 @@
                 <column name="description" params="text" />
                 <column name="published" params="int(11) DEFAULT '1'" />
                 <column name="ordering" params="varchar(500) DEFAULT NULL" />
+                <column name="image" params="varchar(500) DEFAULT NULL" />
                 <column name="params" params="text" />
             </columns>
         </table>

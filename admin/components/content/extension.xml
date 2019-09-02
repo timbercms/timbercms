@@ -15,5 +15,5 @@
     <fields type="select" name="params[comments_type]" label="Comment Supplier" values="Internal (Timber CMS)|internal,Disqus|Disqus" default="internal" />
     <fields type="text" name="params[disqus_shortname]" label="Disqus Shortname" />
     <controller label="Category View" internal_name="category" query="SELECT id, title FROM #__articles_categories ORDER BY id ASC" key="id" keyvalue="title" description="View a list of articles from a specific category." />
-    <controller label="Single Article" internal_name="article" query="SELECT id, title FROM #__articles ORDER BY publish_time DESC" key="id" keyvalue="title" description="Show a specific article." />
+    <controller label="Single Article" internal_name="article" query="SELECT id, title FROM #__articles ORDER BY title" key="id" keyvalue="title" description="Show a specific article." />
 </settings>

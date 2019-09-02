@@ -17,7 +17,7 @@
         
         public function processData()
         {
-            $this->author = new UserModel($temp->author_id, $this->database);
+            $this->author = new UserModel($this->author_id, $this->database);
             $this->article_title = $this->database->loadObject("SELECT title FROM #__articles WHERE id = ?", array($this->article_id))->title;
             Core::hooks()->executeHook("onLoadCategoryModel", $this);
         }

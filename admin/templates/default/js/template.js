@@ -5,6 +5,9 @@ $(document).on('click', '.save-and-new', function() {
     $(".admin-form").attr("action", $(this).attr("data-action"));
     $(".admin-form").submit();
 });
+$(document).on('click', '.toggle-admin-menu', function() {
+    $(".admin-template").toggleClass("collapsed");
+});
 $(document).on('click', '.delete-by-ids', function() {
     swal({
         title: 'Really delete?',
@@ -20,4 +23,9 @@ $(document).on('click', '.delete-by-ids', function() {
             $(".admin-form").submit();
         }
     })
+});
+document.addEventListener('DOMContentLoaded', function () {
+    $('.comp-dropdown').on('click', function () {
+        $("." + $(this).attr("data-component") + "-dropdown").toggleClass("active");
+    });
 });

@@ -12,9 +12,127 @@
             $this->core = $core;
         }
         
-        public function installComponent()
+        public function uploadAndInstall()
         {
-            $extension = $_GET["extension"];
+            $filepath = __DIR__."../../../../../".basename($_FILES["package"]["name"]);
+            $file_ext = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
+            if ($file_ext == "zip")
+            {
+                if (move_uploaded_file($_FILES["package"]["tmp_name"], $filepath))
+                {
+                    $zip = new ZipArchive;
+                    if ($zip->open($filepath))
+                    {
+                        $zip->extractTo(__DIR__."../../../../../");
+                        $zip->close();
+                        $xml = simplexml_load_file(__DIR__."../../../../../manifest.xml");
+                        unlink(__DIR__."../../../../../manifest.xml");
+                        unlink($filepath);
+                        $this->installComponent($xml->component);
+                    }
+                    else
+                    {
+                        $this->model->setMessage("danger", "Failed to open uploaded .zip archive");
+                        header("Location: index.php?component=extensions&controller=discover");
+                    }
+                }
+                else
+                {
+                    $this->model->setMessage("danger", "Could not move the uploaded file into the base directory.");
+                    header("Location: index.php?component=extensions&controller=discover");
+                }
+            }
+            else
+            {
+                $this->model->setMessage("danger", "You did not upload a .zip archive");
+                header("Location: index.php?component=extensions&controller=discover");
+            }
+        }
+        
+        public function uploadAndInstallModule()
+        {
+            $filepath = __DIR__."../../../../../".basename($_FILES["package"]["name"]);
+            $file_ext = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
+            if ($file_ext == "zip")
+            {
+                if (move_uploaded_file($_FILES["package"]["tmp_name"], $filepath))
+                {
+                    $zip = new ZipArchive;
+                    if ($zip->open($filepath))
+                    {
+                        $zip->extractTo(__DIR__."../../../../../");
+                        $zip->close();
+                        $xml = simplexml_load_file(__DIR__."../../../../../manifest.xml");
+                        unlink(__DIR__."../../../../../manifest.xml");
+                        unlink($filepath);
+                        $this->installModule($xml->module);
+                    }
+                    else
+                    {
+                        $this->model->setMessage("danger", "Failed to open uploaded .zip archive");
+                        header("Location: index.php?component=extensions&controller=discover");
+                    }
+                }
+                else
+                {
+                    $this->model->setMessage("danger", "Could not move the uploaded file into the base directory.");
+                    header("Location: index.php?component=extensions&controller=discover");
+                }
+            }
+            else
+            {
+                $this->model->setMessage("danger", "You did not upload a .zip archive");
+                header("Location: index.php?component=extensions&controller=discover");
+            }
+        }
+        
+        public function uploadAndInstallHook()
+        {
+            $filepath = __DIR__."../../../../../".basename($_FILES["package"]["name"]);
+            $file_ext = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
+            if ($file_ext == "zip")
+            {
+                if (move_uploaded_file($_FILES["package"]["tmp_name"], $filepath))
+                {
+                    $zip = new ZipArchive;
+                    if ($zip->open($filepath))
+                    {
+                        $zip->extractTo(__DIR__."../../../../../");
+                        $zip->close();
+                        $xml = simplexml_load_file(__DIR__."../../../../../manifest.xml");
+                        unlink(__DIR__."../../../../../manifest.xml");
+                        unlink($filepath);
+                        $this->installHook($xml->hook);
+                    }
+                    else
+                    {
+                        $this->model->setMessage("danger", "Failed to open uploaded .zip archive");
+                        header("Location: index.php?component=extensions&controller=discover");
+                    }
+                }
+                else
+                {
+                    $this->model->setMessage("danger", "Could not move the uploaded file into the base directory.");
+                    header("Location: index.php?component=extensions&controller=discover");
+                }
+            }
+            else
+            {
+                $this->model->setMessage("danger", "You did not upload a .zip archive");
+                header("Location: index.php?component=extensions&controller=discover");
+            }
+        }
+        
+        public function installComponent($component = "")
+        {
+            if (strlen($component) > 0)
+            {
+                $extension = $component;
+            }
+            else
+            {
+                $extension = $_GET["extension"];
+            }
             $xml = simplexml_load_file(__DIR__ ."/../../". $extension ."/extension.xml");
             if (strlen($xml) > 0)
             {
@@ -38,9 +156,12 @@
             }
         }
         
-        public function installHook()
+        public function installHook($hook = "")
         {
-            $hook = $_GET["hook"];
+            if (strlen($hook) <= 0)
+            {
+                $hook = $_GET["hook"];
+            }
             $xml = simplexml_load_file(__DIR__ ."/../../../../hooks/". $hook .".xml");
             if (strlen($xml) > 0)
             {
@@ -56,9 +177,12 @@
             }
         }
         
-        public function installModule()
+        public function installModule($module = "")
         {
-            $module = $_GET["module"];
+            if (strlen($module) <= 0)
+            {
+                $module = $_GET["module"];
+            }
             $xml = simplexml_load_file(__DIR__ ."/../../../../modules/". $module ."/module.xml");
             if (strlen($xml) > 0)
             {

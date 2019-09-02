@@ -50,6 +50,13 @@
                         }
                     }
                 }
+                else
+                {
+                    if ($key == "password")
+                    {
+                        $value = password_hash($_POST["password"], PASSWORD_DEFAULT);
+                    }
+                }
                 $this->model->$key = $value;
             }
             if (strlen($_FILES["avatar"]["name"]) > 0)

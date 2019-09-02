@@ -13,8 +13,8 @@ html {
 body {
     color: #333;
     font-family: 'Open Sans', 'Arial', sans-serif;
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 14px;
     margin: 0px;
     padding: 0px;
     background: url('../../../../core/assets/autumn-forest.jpg');
@@ -26,6 +26,7 @@ body {
 a {
     color: var(--link);
     text-decoration: none;
+    cursor: pointer;
 }
 a:hover {
     color: var(--link-accent);  
@@ -92,11 +93,6 @@ a:hover {
 .white-card > h2 {
     border-bottom: 1px solid #333;
     padding-bottom: 10px;
-}
-.main-content {
-    padding-top: 74.25px;
-    padding-right: 30px;
-    padding-bottom: 30px;
 }
 .menu-container ul {
     list-style-type: none;
@@ -382,33 +378,23 @@ form label {
     left: 230px;
     top: -1px;
 }
+.cms-name {
+    width: 15% !important;
+}
 .cms-name a {
     background: var(--link-accent) !important;
     color: #FFF !important;
-}
-.sidebar-menu {
-    padding-top: 74.25px;
-    padding-left: 30px;
-    padding-bottom: 30px;
-}
-.sidebar-container {
-    background: #FFF;
-    background: #FFF;
-    border-radius: 5px;
-    padding: 20px;
+    display: block !important;
 }
 .comp-container {
-    border-radius: 5px;
-    border: 1px solid #333;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 .comp-container:last-of-type {
     margin-bottom: 0px;   
 }
 .comp-title {
     color: #FFF;
-    background: #333;
-    padding: 10px;
+    margin-bottom: 10px;
 }
 .comp-title svg {
     display: inline-block;
@@ -416,6 +402,60 @@ form label {
 }
 .comp-children a {
     display: block;
-    color: var(--link);
+    color: #ADB7BF !important;
+    margin-bottom: 10px;
+}
+.admin-template {
+    display: flex;
+    padding-top: 44px;
+}
+.admin-template.collapsed .sidebar-menu {
+    width: 20px;
+}
+.admin-template.collapsed .sidebar-container {
+    opacity: 0;
+}
+.admin-template.collapsed .main-content {
+    width: calc(100% - 20px);
+}
+.sidebar-menu {
+    background: #2e3d49;
+    width: 15%;
+    transition: width .25s;
+    min-height: calc(100vh - 44.25px);
+}
+.sidebar-container {
+    padding: 20px;
+    opacity: 1;
+    transition: .25s;
+}
+.main-content {
+    width: 85%;
+    padding: 20px;
+    transition: width .25s;
+}
+.toggle-admin-menu {
+    display: block;
     padding: 10px;
+    float: right;
+    color: var(--link);
+    background: #FFF;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 4px;
+    margin-right: 5px;
+}
+.comp-children ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+.comp-children ul ul {
+    margin-left: 20px;
+    margin-bottom: 0px;
+    display: none;
+}
+.comp-children ul ul.active {
+    margin-bottom: 15px;
+    display: block;
 }

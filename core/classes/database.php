@@ -35,6 +35,13 @@
                 {
                     return true;
                 }
+                else
+                {
+                    echo "<h1>Error Information</h1>";
+                    echo "<pre>"; echo $string; echo "</pre>";
+                    echo "<pre>"; print_r($data); echo "</pre>";
+                    echo "<pre>"; print_r($query->errorInfo()); echo "</pre>"; die();
+                }
 			} catch (PDOException $e) {
 				echo "<pre>"; print_r($e->getMessage()); echo "</pre>"; die();
 			}

@@ -30,6 +30,37 @@
                 <?php } ?>
             </select>
         </div>
+        <?php if ($this->model->component == "system" && ($this->model->controller == "alias" || $this->model->controller == "external")) { ?>
+            <?php if ($this->model->controller == "alias") { ?>
+                <div class="form-group">
+                    <label class="col-form-label">Menu Item Alias</label>
+                    <select name="params[alias]" class="form-control">
+                        <?php $menus = $this->model->database->loadObjectList("SELECT id, title FROM #__menus ORDER BY title"); ?>
+                        <?php foreach ($menus as $menu) { ?>
+                            <optgroup label="<?php echo $menu->title; ?>">
+                                <?php $items = $this->model->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND parent_id = 0 ORDER BY title", array($menu->id)); ?>
+                                <?php foreach ($items as $item) { ?>
+                                    <option value="<?php echo $item->id; ?>"<?php if ($this->model->params["alias"] == $item->id) { ?> selected="selected"<?php } ?>>-- <?php echo $item->title; ?></option>
+                                    <?php $children = $this->model->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND parent_id = ? ORDER BY title", array($menu->id, $item->id)); ?>
+                                    <?php foreach ($children as $child) { ?>
+                                        <option value="<?php echo $child->id; ?>"<?php if ($this->model->params["alias"] == $child->id) { ?> selected="selected"<?php } ?>>---- <?php echo $child->title; ?></option>
+                                        <?php $grandchildren = $this->model->database->loadObjectList("SELECT id, title FROM #__menus_items WHERE menu_id = ? AND parent_id = ? ORDER BY title", array($menu->id, $child->id)); ?>
+                                        <?php foreach ($grandchildren as $grandchild) { ?>
+                                            <option value="<?php echo $grandchild->id; ?>"<?php if ($this->model->params["alias"] == $grandchild->id) { ?> selected="selected"<?php } ?>>------ <?php echo $grandchild->title; ?></option>
+                                        <?php } ?>
+                                    <?php } ?>
+                                <?php } ?>
+                            </optgroup>
+                        <?php } ?>
+                    </select>
+                </div>
+            <?php } else if ($this->model->controller == "external") { ?>
+                <div class="form-group">
+                    <label class="col-form-label">External Link</label>
+                    <input type="text" name="params[external_link]" class="form-control" value="<?php echo $this->model->params["external_link"]; ?>">
+                </div>
+            <?php } ?>
+        <?php } ?>
         <div class="form-group">
             <label class="col-form-label">Access Control</label>
             <select name="params[access][]" multiple class="form-control">
