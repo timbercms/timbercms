@@ -9,6 +9,7 @@
     <fields type="textarea" editor="true" name="content" label="Content" />
     <fields type="select" name="published" label="Published" values="No|0,Yes|1" default="1" />
     <fields type="text" name="meta_description" label="Meta Description" />
+    <fields type="select" name="meta_robots" label="Meta Robots" values="Default|default,No Index|noindex,No Follow|nofollow" default="default" />
     <fields type="hidden" name="author_id" />
     <fields type="hidden" name="posted_at" />
     <fields type="hidden" name="hits" />

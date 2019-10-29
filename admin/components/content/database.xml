@@ -3,7 +3,7 @@
     <install>
         <tables>
             <table>
-                CREATE TABLE `#__articles` (`id` int(11) NOT NULL AUTO_INCREMENT, `title` varchar(500) DEFAULT NULL, `alias` varchar(500) NOT NULL, `category_id` int(11) NOT NULL DEFAULT '0', `content` text, `published` int(11) NOT NULL DEFAULT '1', `author_id` int(11) DEFAULT NULL, `hits` int(11) DEFAULT NULL, `meta_description` varchar(500) DEFAULT NULL, `image` varchar(1000) DEFAULT NULL, `publish_time` int(11) DEFAULT NULL, PRIMARY KEY (`id`));
+                CREATE TABLE `#__articles` (`id` int(11) NOT NULL AUTO_INCREMENT, `title` varchar(500) DEFAULT NULL, `alias` varchar(500) NOT NULL, `category_id` int(11) NOT NULL DEFAULT '0', `content` text, `published` int(11) NOT NULL DEFAULT '1', `author_id` int(11) DEFAULT NULL, `hits` int(11) DEFAULT NULL, `meta_description` varchar(500) DEFAULT NULL, `image` varchar(1000) DEFAULT NULL, `publish_time` int(11) DEFAULT NULL, `meta_robots` varchar(500) DEFAULT NULL, PRIMARY KEY (`id`));
             </table>
             <table>
                 CREATE TABLE `#__articles_categories` (`id` int(11) NOT NULL AUTO_INCREMENT, `parent_id` int(11) DEFAULT '0', `title` varchar(500) DEFAULT NULL, `alias` varchar(500) NOT NULL, `description` text, `published` int(11) DEFAULT '1', `ordering` varchar(500) DEFAULT NULL, `image` varchar(500) DEFAULT NULL, `params` text, PRIMARY KEY (`id`));
@@ -28,6 +28,7 @@
                 <column name="hits" params="int(11) DEFAULT NULL" />
                 <column name="meta_description" params="varchar(500) DEFAULT NULL" />
                 <column name="image" params="varchar(1000) DEFAULT NULL" />
+                <column name="meta_robots" params="varchar(500) DEFAULT NULL" />
             </columns>
         </table>
         <table>

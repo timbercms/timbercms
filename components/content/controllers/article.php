@@ -24,6 +24,10 @@
             Core::addMetaName("twitter:title", $this->model->title ." - ". Core::config()->site_title);
             Core::addMetaName("twitter:description", $this->model->meta_description);
             Core::addMetaName("twitter:image", BASE_URL.$this->model->image);
+            if (strlen($this->model->meta_robots) > 0 && $this->model->meta_robots != "default")
+            {
+                Core::addMetaName("robots", "noindex");
+            }
             Core::hooks()->executeHook("onLoadContent");
         }
         
