@@ -11,7 +11,7 @@
             $this->model = $model;
             Core::changeTitle($this->model->title);
             Core::changeMetaDescription($this->model->meta_description);
-            Core::setMetaAuthor($this->model->author->username);
+            Core::setMetaAuthor($this->model->author->name);
             Core::addMetaItemProp("name", $this->model->title ." - ". Core::config()->site_title);
             Core::addMetaItemProp("description", $this->model->meta_description);
             Core::addMetaItemProp("image", BASE_URL.$this->model->image);
