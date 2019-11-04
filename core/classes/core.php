@@ -557,7 +557,15 @@
                 $task_split = explode("?", $string);
                 $parts = explode("/", $task_split["0"]);
                 if (strlen($parts[0]) == 0) array_shift($parts);
-                $first = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($parts["0"]));
+                $first = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($parts[0]));
+                if ($first->component == "system")
+                {
+                    $first = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($parts[1]));
+                    if ($first->component == "system")
+                    {
+                        $first = self::db()->loadObject("SELECT * FROM #__menus_items WHERE alias = ? AND published = 1", array($parts[2]));
+                    }
+                }
                 if ($first->id > 0)
                 {
                     self::$menu_item_id = $first->id;
