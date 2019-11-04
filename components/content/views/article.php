@@ -9,10 +9,10 @@
                 <div class="article-author-info">
                     <div class="row align-items-center">
                         <div class="col-md-1 col-4">
-                            <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $this->model->id); ?>"><img src="<?php echo $this->model->author->avatar; ?>" /></a>
+                            <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $this->model->author->id); ?>"><img src="<?php echo $this->model->author->avatar; ?>" /></a>
                         </div>
                         <div class="col-md-11 col-8">
-                            By <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $this->model->id); ?>"><?php echo $this->model->author->username; ?></a><br />
+                            By <a href="<?php echo Core::route("index.php?component=user&controller=profile&id=". $this->model->author->id); ?>"><?php echo $this->model->author->username; ?></a><br />
                             <time pubdate><?php echo $this->model->relativeTime($this->model->publish_time); ?> ago</time>
                         </div>
                     </div>
