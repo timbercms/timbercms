@@ -12,6 +12,12 @@
             $this->core = $core;
         }
         
+        public function saveandnew()
+        {
+            $this->save(false);
+            header("Location: index.php?component=redirects&controller=redirect");
+        }
+        
         public function save($redirect = true)
         {
             foreach ($_POST as $key => $value)
