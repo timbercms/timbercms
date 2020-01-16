@@ -85,7 +85,7 @@
                     require_once(__DIR__ ."/../../modules/". $module->type ."/worker.php");
                     $worker_string = $module->type."Worker";
                     $worker = new $worker_string($module, $this->database);
-                    echo '<div class="module module-'. $module->id .'">';
+                    echo '<div class="module module-'. $module->id . (strlen($module->suffix) > 0 ? " ".$module->suffix : "") .'">';
                         if ($module->show_title)
                         {
                             echo '<h3 class="module-title">'. $module->title .'</h3>';
