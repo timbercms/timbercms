@@ -3,6 +3,20 @@
     <div class="component-action-bar">
         <?php if (count($this->model->settings->fields) > 0) { ?><a href="index.php?component=settings&controller=settings&extension=user" class="button"><i class="fa fa-cog"></i> Settings</a><?php } ?><a href="index.php?component=user&controller=user" class="button green-button"><i class="fa fa-plus"></i> New User</a><a class="delete-by-ids button red-button"><i class="fa fa-trash"></i> Delete</a>
     </div>
+    <div class="component-filters">
+        <form action="index.php?component=user&controller=users" method="get">
+            <input type="hidden" name="component" value="user" />
+            <input type="hidden" name="controller" value="users" />
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="text" name="q" placeholder="Search username, name or email" class="form-control" value="<?php echo $_GET["q"]; ?>" />
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="button">Filter</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <?php $this->model->pagination->display($this->model->max); ?>
     <form action="index.php?component=user&controller=users&task=delete" method="post" class="admin-form">
         <div class="d-flex admin-header">

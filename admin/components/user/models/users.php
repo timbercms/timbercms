@@ -20,7 +20,12 @@
         
         public function load($id = false)
         {
-            $query = "SELECT id FROM #__users ORDER BY register_time DESC";
+            $query = "SELECT id FROM #__users";
+            if (strlen($_GET["q"]) > 0)
+            {
+                $query .= " WHERE (username LIKE '%". $_GET["q"] ."%' OR name LIKE '%". $_GET["q"] ."%' OR email LIKE '%". $_GET["q"] ."%')";
+            }
+            $query .= " ORDER BY register_time DESC";
             $this->max = count($this->database->loadObjectList($query));
             $query .= " LIMIT ". ($_GET["p"] > 0 ? (($_GET["p"] - 1) * 20) : 0) .", 20";
             $temp_users = $this->database->loadObjectList($query);

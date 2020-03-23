@@ -14,12 +14,6 @@
         require_once(__DIR__ ."/../configuration.php");
     }
 
-    if (!defined('DATABASE_HOST')) define('DATABASE_HOST', '');
-    if (!defined('DATABASE_NAME')) define('DATABASE_NAME', '');
-    if (!defined('DATABASE_USER')) define('DATABASE_USER', '');
-    if (!defined('DATABASE_PASSWORD')) define('DATABASE_PASSWORD', '');
-    if (!defined('DATABASE_PREFIX')) define('DATABASE_PREFIX', '');
-
     require_once(__DIR__ ."/../core/classes/database.php");
     $db = new Database();
 
